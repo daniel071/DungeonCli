@@ -52,11 +52,11 @@ def main():
 	command = input(Fore.CYAN + "Action> " + Style.RESET_ALL)
 	if command in ("check money", "check coins", "coins", "c"):
 		checkCoins()
-    elif command in ("h", "help"):
-        print("Help menu")
-    elif command in ("e", "exit"):
-        global mainLoop
-        mainLoop = 0
+	elif command in ("h", "help"):
+		print("Help menu")
+	elif command in ("e", "exit"):
+		global mainLoop
+		mainLoop = 0
 
 # Run those functions here:
 while mainLoop == 1:
