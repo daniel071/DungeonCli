@@ -1,12 +1,12 @@
 #include <stdio.h>
+#include <string>
+#include <iostream>
 
 
 int main() {
-	char input[64];
-	while(1) {
-		printf("input> ");
-		fgets(input, 64, stdin);
-		printf("you entered %s\n", input);
-	}
+	// This is a comment
+	// I have no idea what I am doing - Daniel who uses Python
+	printf("input>");
+	std::string str;
+	std::getline(std::cin, str);
 }
-
