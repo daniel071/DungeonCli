@@ -5,26 +5,20 @@ print("Hello World")
 coins = 0 # fucking poor cunt lmao.
 
 
-
-def checkCoins():
-	print("you have $" + str(coins) + "!")
-
-def main():
-	x = input("cunk?: ")
-	if x in ("check money", "check coins"):
-		checkCoins()
-
-while True:
-	main()
-
-
-
 # Import Libraries here:
 
 
 
 # Define functions here:
 
+def checkCoins():
+	print("you have $" + str(coins) + "!")
 
+def main():
+	x = input("Action> ")
+	if x in ("check money", "check coins"):
+		checkCoins()
 
 # Run those functions here:
+while True:
+	main()
