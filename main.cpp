@@ -4,7 +4,7 @@
 
 
 int main() {
-	printf("input>")
+	printf("input>");
 	std::string str;
 	std::getline(std::cin, str);
 }
