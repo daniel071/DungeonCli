@@ -4,9 +4,19 @@ print("Hello World")
 
 coins = 0 # fucking poor cunt lmao.
 
+
+
+def checkCoins():
+	print("you have $" + str(coins) + "!")
+
 def main():
 	x = input("cunk?: ")
-main()
+	if x in ("check money", "check coins"):
+		checkCoins()
+
+while True:
+	main()
+
 
 
 # Import Libraries here:
