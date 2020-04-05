@@ -6,5 +6,5 @@ int main() {
 	// I have no idea what I am doing - Daniel who uses Python
 	printf("input> ");
 	fgets(input, 64, stdin);
-	printf("entered %s! \n", input);
+	printf("you entered %s\n", input);
 }
