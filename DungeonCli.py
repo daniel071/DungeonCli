@@ -16,19 +16,27 @@ rip = Style.BRIGHT + Fore.RED + "==> "
 
 # Define functions here:
 
+
+def addCoins(add):
+	coins = coins + add
+	print(success + str(add) + (" coins have been added to your account. \n")
+
+
 def checkCoins():
     global coins
     print("You have $" + str(coins) + "!")
     if coins == 0:
         print("You have 0 coins? I feel bad, here take 10 coins!")
-        coins = coins + 10
-        print(success + "10 coins have been added to your account. \n")
+        addCoins(10)
+
 
 
 def main():
 	command = input(Fore.CYAN + "Action> " + Style.RESET_ALL)
 	if command in ("check money", "check coins", "coins", "c"):
 		checkCoins()
+
+
 
 # Run those functions here:
 while True:
