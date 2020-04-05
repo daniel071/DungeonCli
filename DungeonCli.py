@@ -2,6 +2,7 @@
 # earn coins. You can spend those coins on various items, have fun!
 print("Hello World")
 
+coins = 0 # fucking poor cunt lmao.
 
 def main():
 	x = input("cunk?: ")
