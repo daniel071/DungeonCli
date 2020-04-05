@@ -19,17 +19,14 @@ rip = Style.BRIGHT + Fore.RED + "==> "
 
 def addCoins(add):
 	coins = coins + add
-	print(success + str(add) + (" coins have been added to your account. \n")
-
+	print(success + str(add) + (" coins have been added to your account. \n"))
 
 def checkCoins():
-    global coins
-    print("You have $" + str(coins) + "!")
-    if coins == 0:
-        print("You have 0 coins? I feel bad, here take 10 coins!")
-        addCoins(10)
-
-
+	global coins
+	print("You have $" + str(coins) + "!")
+	if coins == 0:
+		print("You have 0 coins? I feel bad, here take 10 coins!")
+		addCoins(10)
 
 def main():
 	command = input(Fore.CYAN + "Action> " + Style.RESET_ALL)
