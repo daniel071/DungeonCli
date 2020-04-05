@@ -13,6 +13,16 @@ mainLoop = 1
 coins = 0 # fucking poor cunt lmao.
 hp = 100
 
+Matches = 1
+Sticks = 3
+Sword = 0
+# 1 x Matches.
+# 3 x Sticks.
+# (no sword)
+
+surroundingsLit = False
+
+
 success = Style.BRIGHT + Fore.GREEN + "==> "
 rip = Style.BRIGHT + Fore.RED + "==> "
 question = Style.BRIGHT + Fore.YELLOW + "[?] "
@@ -46,13 +56,39 @@ def checkCoins():
         print("You have 0 coins? I feel bad, here take 10 coins!")
         removeCoins(10)
         addCoins(69)
+def openInventory():
+	print(success + "Inventory:")
+	count = 0
+	if Matches != 0:
+		print(str(Matches) + " x Matches")
 
+	if Sticks != 0:
+		print(str(Sticks) + " x Sticks")
+
+	if Sword != 0:
+		print("Basic Sword")
+
+def useMatch():
+	global Matches
+	global surroundingsLit
+	if Matches == 0:
+		print("You don't have any matches!")
+	elif surroundingsLit == True:
+		Matches = Matches - 1
+		print("You Light a match. it begins to burn away.")
+	elif surroundingsLit == False:
+		Matches = Matches - 1
+		surroundingsLit = True
+		print("You Light a match, your surroundings fill up with light. you can now see!")
 
 def main():
 	command = input(Fore.CYAN + "[Action] " + Style.RESET_ALL)
 	if command in ("check money", "check coins", "coins", "c"):
 		checkCoins()
-
+	elif command in ("open inventory", "open inv" ,"inventory", "inv", "i"):
+		openInventory()
+	elif command in ("use match", "strike match", "match", "light match", "use matches", "matches", "m"):
+		useMatch()
 	elif command in ("h", "help"):
 		print("Help menu \n")
 
