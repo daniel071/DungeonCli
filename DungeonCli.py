@@ -8,14 +8,19 @@ init()
 from colorama import Fore, Back, Style
 
 # Define variables here:
-# TODO: Add saving mechanic for these coins
+## TODO: Add saving mechanic for these coins
+mainLoop = 1
 coins = 0 # fucking poor cunt lmao.
+hp = 100
+
 success = Style.BRIGHT + Fore.GREEN + "==> "
 rip = Style.BRIGHT + Fore.RED + "==> "
-
+question = Style.BRIGHT + Fore.YELLOW + "[?] "
+error = Style.BRIGHT + Fore.RED + "[!] "
 
 # Define functions here:
 
+## Some useful stuff
 
 def addCoins(add):
     global coins
@@ -32,6 +37,7 @@ def removeCoins(value):
 def spendCoins(value):
     print(success + ("You spent " + str(value) + " coins! \n"))
 
+## Commands used
 
 def checkCoins():
     global coins
@@ -46,8 +52,12 @@ def main():
 	command = input(Fore.CYAN + "Action> " + Style.RESET_ALL)
 	if command in ("check money", "check coins", "coins", "c"):
 		checkCoins()
-
+    elif command in ("h", "help"):
+        print("Help menu")
+    elif command in ("e", "exit"):
+        global mainLoop
+        mainLoop = 0
 
 # Run those functions here:
-while True:
+while mainLoop == 1:
 	main()
