@@ -1,1 +1,1 @@
-g++ ./main.cpp -o ./main_linux && ./main_linux
+gcc ./main.c -o ./main_linux && ./main_linux
