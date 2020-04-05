@@ -19,8 +19,18 @@ rip = Style.BRIGHT + Fore.RED + "==> "
 
 def addCoins(add):
     global coins
-	coins = coins + add
-	print(success + str(add) + (" coins have been added to your account. \n"))
+    coins = coins + add
+    print(success + ("You pocketed " + str(add) + " coins! \n"))
+
+
+def removeCoins(value):
+    global coins
+    coins = coins - value
+    print(rip + ("You dropped " + str(value) + " coins! \n"))
+
+
+def spendCoins(value):
+    print(success + ("You spent " + str(value) + " coins! \n"))
 
 
 def checkCoins():
@@ -28,14 +38,14 @@ def checkCoins():
     print("You have $" + str(coins) + "!")
     if coins == 0:
         print("You have 0 coins? I feel bad, here take 10 coins!")
-        addCoins(10)
+        removeCoins(10)
+        addCoins(69)
 
 
 def main():
 	command = input(Fore.CYAN + "Action> " + Style.RESET_ALL)
 	if command in ("check money", "check coins", "coins", "c"):
 		checkCoins()
-
 
 
 # Run those functions here:
