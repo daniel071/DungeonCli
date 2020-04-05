@@ -11,6 +11,7 @@ from colorama import Fore, Back, Style
 # TODO: Add saving mechanic for these coins
 coins = 0 # fucking poor cunt lmao.
 success = Style.BRIGHT + Fore.GREEN + "==> "
+rip = Style.BRIGHT + Fore.RED + "==> "
 
 
 # Define functions here:
@@ -21,7 +22,7 @@ def checkCoins():
     if coins == 0:
         print("You have 0 coins? I feel bad, here take 10 coins!")
         coins = coins + 10
-        print(success + "10 coins have been added to your account.")
+        print(success + "10 coins have been added to your account. \n")
 
 
 def main():
