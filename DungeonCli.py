@@ -18,10 +18,23 @@ Sticks = 3
 Sword = 0
 # This lad should heal about 20 HP
 basicHealingPotion = 0
+
+# Armour absorbs a percentage of damage, for example having copper armour
+# absorbs 10% damage, so if you get 50 damage, you only get 45
+
+# 0 = No Armour = 0% Absorbtion
+# 1 = Copper Armour = 10% Absorbtion
+# 2 = Iron Armour = 20% Absorbtion
+# 3 = Platinum Armour = 30% Absorbtion
+# 4 = Diamond Armour = 40% Absorbtion
+
+armour = 0
+
 # 1 x Matches.
 # 3 x Sticks.
 # (no sword)
 # No healing potions
+# No Armour
 
 surroundingsLit = False
 
@@ -173,6 +186,7 @@ def start():
 
 		print(success + "You recieved a basic sword.")
 		print(success + "You recieved a basic healing potion\n")
+		addCoins(50)
 		global Sword
 		global basicHealingPotion
 
