@@ -80,11 +80,10 @@ def ask(funcQuestion, answer1, answer2):
 
 def checkCoins():
     global coins
-    print("You have $" + str(coins) + "!")
+    print(success + "You have $" + str(coins) + "!")
     if coins == 0:
         print("You have 0 coins? I feel bad, here take 10 coins!")
-        removeCoins(10)
-        addCoins(69)
+        addCoins(10)
 
 
 def openInventory():
@@ -166,7 +165,7 @@ def start():
 		time.sleep(0.7)
 
 		print(quote + "I see, this is a dangerous place, so tread"
-		' carefully..."') # ITS DANGEROUS TO GO ALONE. 
+		' carefully..."') # ITS DANGEROUS TO GO ALONE.
 		time.sleep(2)
 
 		print(quote + 'Here, take this, it will help you defend yourself."')
@@ -185,7 +184,7 @@ def hpCheck():
 	if hp != 100:
 		print(success + "You have {hp} out of {max} HP! \n".format(hp=hp, max=100))
 	elif hp == 100:
-		rint(success + "Your HP is maxed out!")
+		print(success + "Your HP is maxed out!")
 
 
 def main():
