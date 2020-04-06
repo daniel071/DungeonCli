@@ -122,8 +122,11 @@ def useMatch():
 def start():
 	if surroundingsLit == False:
 		print("You find yourself in an odd, dark place... \nWhat could this"
-		" possibbly be?")
-        print("check your inventory, you might have something to \n improve your vision...")
+		" possibbly be?\n")
+		time.sleep(2)
+
+		print("Check your inventory, you might have something to \nimprove your vision...\n")
+		time.sleep(2)
 		#print("Maybe I should use a match to light this place up...") # too straight forward.
 
 		#print(hint + "type 'm' to use a match)\n" + Style.RESET_ALL) # too straight forward.
@@ -151,7 +154,7 @@ def start():
 			print(quote + 'Here, take this, it will help you defend yourself."')
 			time.sleep(3)
 
-			print(success + "You recieved a basic sword.")
+			print(success + "You recieved a basic sword.\n")
 			global Sword
 			Sword = 1
 
