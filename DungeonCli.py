@@ -2,6 +2,7 @@
 # earn coins. You can spend those coins on various items, have fun!
 
 # Import Libraries here:
+import time
 from colorama import init
 init()
 from colorama import Fore, Back, Style
@@ -129,7 +130,6 @@ def start():
 		print(action + "An odd creature begins to walk up to you... \n")
 		answer = ask("Should you hide or comfront them?", "h", "c")
 		if answer == "c":
-			# TODO: Add sleep function so it doesn't show up all at once!
 			# User selected comfront
 			print(action + "The odd figure got close enough until you"
 			"could see it.")
@@ -137,10 +137,16 @@ def start():
 
 			input(quote + 'Greetings, it seems you are new here,'
 			' is that true?"\n')
-			print(action + "You said yes.")
+			print(action + "You said yes. \n")
+			time.sleep(0.7)
+
 			print(quote + "I see, this is a dangerous place, so tread"
 			' carefully..."')
+			time.sleep(2)
+
 			print(quote + 'Here, take this, it will help you defend yourself."')
+			time.sleep(3)
+
 			print(success + "You recieved a basic sword.")
 			global Sword
 			Sword = 1
