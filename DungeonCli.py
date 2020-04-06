@@ -56,6 +56,8 @@ def checkCoins():
         print("You have 0 coins? I feel bad, here take 10 coins!")
         removeCoins(10)
         addCoins(69)
+
+
 def openInventory():
 	print(success + "Inventory:")
 	count = 0
@@ -66,28 +68,42 @@ def openInventory():
 		print(str(Sticks) + " x Sticks")
 
 	if Sword != 0:
+		# TODO: Implement more then just a basic sword.
 		print("Basic Sword")
+
+	# This print just adds some white space
+	print(" ")
+
 
 def useMatch():
 	global Matches
 	global surroundingsLit
 	if Matches == 0:
-		print("You don't have any matches!")
+		print(error + "You don't have any matches!\n")
 	elif surroundingsLit == True:
 		Matches = Matches - 1
 		print("You Light a match. it begins to burn away.")
+		print(rip + "You used up one match \n")
+
 	elif surroundingsLit == False:
 		Matches = Matches - 1
 		surroundingsLit = True
-		print("You Light a match, your surroundings fill up with light. you can now see!")
+		print("You Light a match, your surroundings fill up with light. "
+		"you can now see!")
+		print(rip + "You used up one match \n")
+
+
+def hpCheck():
+	print(success + "You have {hp} out of {max} hp! \n".format(hp=hp, max=100))
 
 def main():
-	command = input(Fore.CYAN + "[Action] " + Style.RESET_ALL)
+	command = input(Style.BRIGHT + Fore.CYAN + "[Action] " + Style.RESET_ALL)
 	if command in ("check money", "check coins", "coins", "c"):
 		checkCoins()
 	elif command in ("open inventory", "open inv" ,"inventory", "inv", "i"):
 		openInventory()
-	elif command in ("use match", "strike match", "match", "light match", "use matches", "matches", "m"):
+	elif command in ("use match", "strike match", "match", "light match",
+                    "use matches", "matches", "m"):
 		useMatch()
 	elif command in ("h", "help"):
 		print("Help menu \n")
@@ -95,6 +111,9 @@ def main():
 	elif command in ("e", "exit"):
 		global mainLoop
 		mainLoop = 0
+
+	elif command in ("h", "hp"):
+		hpCheck()
 
 
 # Run those functions here:
