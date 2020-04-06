@@ -153,7 +153,7 @@ def main():
 	elif command in ("hp", "health"):
 		hpCheck()
 
-	elif command in ("s", "start"):
+	elif command in ("s", "start", "observe"):
 		start()
 
 # Introduce the user:
