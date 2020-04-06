@@ -1,6 +1,5 @@
 # DungeonCli is a terminal based program where you get to explore places and
 # earn coins. You can spend those coins on various items, have fun!
-print("Welcome to DungeonCli!")
 
 # Import Libraries here:
 from colorama import init
@@ -27,6 +26,8 @@ success = Style.BRIGHT + Fore.GREEN + "==> "
 rip = Style.BRIGHT + Fore.RED + "==> "
 question = Style.BRIGHT + Fore.YELLOW + "[?] "
 error = Style.BRIGHT + Fore.RED + "[!] "
+hint = Style.DIM + Fore.WHITE + "(hint: "
+action = Style.BRIGHT + Fore.YELLOW + "==> "
 
 # Define functions here:
 
@@ -46,6 +47,29 @@ def removeCoins(value):
 
 def spendCoins(value):
     print(success + ("You spent " + str(value) + " coins! \n"))
+
+
+def ask(funcQuestion, answer1, answer2):
+	askLoop = 1
+	while askLoop == 1:
+		# Asks the user a question
+		userInput = input(question + "{funcQuestion} [{answer1}/{answer2}] "
+		.format(funcQuestion=funcQuestion, answer1=answer1, answer2=answer2)
+		 + Style.RESET_ALL)
+
+		# Checks if it's correct
+		if userInput == answer1:
+			askLoop = 0
+			print("")
+			return answer1
+		elif userInput == answer2:
+			askLoop = 0
+			print("")
+			return answer2
+		else:
+			print(error + "Answer must be either "
+			"{answer1} or {answer2}!\n".format(answer1=answer1, answer2=answer2))
+
 
 ## Commands used
 
@@ -82,7 +106,7 @@ def useMatch():
 		print(error + "You don't have any matches!\n")
 	elif surroundingsLit == True:
 		Matches = Matches - 1
-		print("You Light a match. it begins to burn away.")
+		print("You light a match. it begins to burn away.")
 		print(rip + "You used up one match \n")
 
 	elif surroundingsLit == False:
@@ -90,11 +114,25 @@ def useMatch():
 		surroundingsLit = True
 		print("You Light a match, your surroundings fill up with light. "
 		"you can now see!")
-		print(rip + "You used up one match \n")
+		print(rip + "You used up one match. \n")
+
+
+def start():
+	if surroundingsLit == False:
+		print("You find yourself in an odd, dark place... \nWhat could this"
+		" possibbly be?")
+		print("Maybe I should use a match to light this place up...")
+		print(hint + "type 'm' to use a match)\n" + Style.RESET_ALL)
+	else:
+		print("Wow, this place looks like it's been abandoned decades ago...")
+		print(action + "An odd creature begins to walk up to you... \n")
+		answer = ask("Should you hide or comfront them?", "h", "c")
+		print(answer)
 
 
 def hpCheck():
 	print(success + "You have {hp} out of {max} hp! \n".format(hp=hp, max=100))
+
 
 def main():
 	command = input(Style.BRIGHT + Fore.CYAN + "[Action] " + Style.RESET_ALL)
@@ -112,9 +150,15 @@ def main():
 		global mainLoop
 		mainLoop = 0
 
-	elif command in ("h", "hp"):
+	elif command in ("hp", "health"):
 		hpCheck()
 
+	elif command in ("s", "start"):
+		start()
+
+# Introduce the user:
+print("Welcome to " + Fore.GREEN + "DungeonCli!" + Style.RESET_ALL)
+print("Type 'h' for help, 's' to start! \n")
 
 # Run those functions here:
 while mainLoop == 1:
