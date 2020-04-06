@@ -28,6 +28,7 @@ question = Style.BRIGHT + Fore.YELLOW + "[?] "
 error = Style.BRIGHT + Fore.RED + "[!] "
 hint = Style.DIM + Fore.WHITE + "(hint: "
 action = Style.BRIGHT + Fore.YELLOW + "==> "
+quote = Style.BRIGHT + Fore.WHITE + '"'
 
 # Define functions here:
 
@@ -127,7 +128,22 @@ def start():
 		print("Wow, this place looks like it's been abandoned decades ago...")
 		print(action + "An odd creature begins to walk up to you... \n")
 		answer = ask("Should you hide or comfront them?", "h", "c")
-		print(answer)
+		if answer == "c":
+			# TODO: Add sleep function so it doesn't show up all at once!
+			# User selected comfront
+			print(action + "The odd figure got close enough until you"
+			"could see it.")
+			print(action + "The figure looked like an ancient wizard. \n")
+
+			input(quote + 'Greetings, it seems you are new here,'
+			' is that true?"\n')
+			print(action + "You said yes.")
+			print(quote + "I see, this is a dangerous place, so tread"
+			' carefully..."')
+			print(quote + 'Here, take this, it will help you defend yourself."')
+			print(success + "You recieved a basic sword.")
+			global Sword
+			Sword = 1
 
 
 def hpCheck():
