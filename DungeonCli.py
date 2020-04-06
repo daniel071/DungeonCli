@@ -123,8 +123,10 @@ def start():
 	if surroundingsLit == False:
 		print("You find yourself in an odd, dark place... \nWhat could this"
 		" possibbly be?")
-		print("Maybe I should use a match to light this place up...")
-		print(hint + "type 'm' to use a match)\n" + Style.RESET_ALL)
+        print("check your inventory, you might have something to \n improve your vision...")
+		#print("Maybe I should use a match to light this place up...") # too straight forward.
+
+		#print(hint + "type 'm' to use a match)\n" + Style.RESET_ALL) # too straight forward.
 	else:
 		print("Wow, this place looks like it's been abandoned decades ago...")
 		print(action + "An odd creature begins to walk up to you... \n")
@@ -137,6 +139,8 @@ def start():
 
 			input(quote + 'Greetings, it seems you are new here,'
 			' is that true?"\n')
+
+			# NOTE: maybe. give the user a choice to say something.
 			print(action + "You said yes. \n")
 			time.sleep(0.7)
 
