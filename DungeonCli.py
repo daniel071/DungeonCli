@@ -16,6 +16,7 @@ hp = 100
 Matches = 1
 Sticks = 3
 Sword = 0
+# This lad should heal about 20 HP
 basicHealingPotion = 0
 # 1 x Matches.
 # 3 x Sticks.
