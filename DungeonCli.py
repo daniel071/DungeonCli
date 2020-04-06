@@ -97,7 +97,7 @@ def openInventory():
 		print(str(Sticks) + " x Sticks")
 
 	if basicHealingPotion != 0:
-		print(str(basicHealingPotion) + " x Basic healing potion")
+		print(str(basicHealingPotion) + " x Basic Healing Potion")
 
 	if Sword != 0:
 		# TODO: Implement more then just a basic sword.
@@ -115,7 +115,7 @@ def useMatch():
 	elif surroundingsLit == True:
 		Matches = Matches - 1
 		print("You light a match. it begins to burn away.")
-		print(rip + "You used up one match \n")
+		print(rip + "You used up one match. \n")
 
 	elif surroundingsLit == False:
 		Matches = Matches - 1
@@ -127,8 +127,8 @@ def useMatch():
 
 def start():
 	if surroundingsLit == False:
-		print("You find yourself in an odd, dark place... \nWhat could this"
-		" possibbly be?\n")
+		print("You find yourself in an odd and dark place... \nWhat could this"
+		" possibly be?\n")
 		time.sleep(2)
 
 		print("Check your inventory, you might have something to \nimprove your vision...\n")
@@ -137,8 +137,8 @@ def start():
 
 		#print(hint + "type 'm' to use a match)\n" + Style.RESET_ALL) # too straight forward.
 	else:
-		print("Wow, this place looks like it's been abandoned decades ago...")
-		print(action + "An odd creature begins to walk up to you... \n")
+		print("This place looks like it's been abandoned decades ago...") # NOTE: describe this 'place'!
+		print(action + "An odd creature begins to walk up to you... \n") # NOTE: describe this 'creature'! e.g. this oddly hunched over creature
 		answer = ask("Should you hide or comfront them?", "h", "c")
 		if answer == "c":
 			# User selected comfront
@@ -152,11 +152,11 @@ def start():
 			time.sleep(3)
 
 		print(action + "The odd figure got close enough until you "
-		"could see it.")
+		"could see it.") # NOTE: so is this a creature or figure
 		time.sleep(2)
 
 		print(action + "The figure looked like an ancient wizard. \n")
-		time.sleep(2)
+		time.sleep(2) #
 
 		input(quote + 'Greetings, it seems you are new here,'
 		' is that true?"\n')
@@ -166,11 +166,11 @@ def start():
 		time.sleep(0.7)
 
 		print(quote + "I see, this is a dangerous place, so tread"
-		' carefully..."')
+		' carefully..."') # ITS DANGEROUS TO GO ALONE. 
 		time.sleep(2)
 
 		print(quote + 'Here, take this, it will help you defend yourself."')
-		time.sleep(3)
+		time.sleep(3) # TAKE THIS.
 
 		print(success + "You recieved a basic sword.")
 		print(success + "You recieved a basic healing potion\n")
@@ -182,34 +182,37 @@ def start():
 
 
 def hpCheck():
-	print(success + "You have {hp} out of {max} hp! \n".format(hp=hp, max=100))
+	if hp != 100:
+		print(success + "You have {hp} out of {max} HP! \n".format(hp=hp, max=100))
+	elif hp == 100:
+		rint(success + "Your HP is maxed out!")
 
 
 def main():
 	command = input(Style.BRIGHT + Fore.CYAN + "[Action] " + Style.RESET_ALL)
 	if command in ("check money", "check coins", "coins", "c"):
 		checkCoins()
-	elif command in ("open inventory", "open inv" ,"inventory", "inv", "i"):
+	elif command in ("open inventory", "open inv" ,"inventory", "inv", "i","check inventory", "check inv"):
 		openInventory()
 	elif command in ("use match", "strike match", "match", "light match",
                     "use matches", "matches", "m"):
 		useMatch()
-	elif command in ("h", "help"):
+	elif command in ("h", "help", "umm", "asdfghjkl", "qwertyuiop"):
 		print("Help menu \n")
 
-	elif command in ("e", "exit"):
+	elif command in ("e", "exit", "close", "alt-f4"):
 		global mainLoop
 		mainLoop = 0
 
-	elif command in ("hp", "health"):
+	elif command in ("hp", "health", "health points"):
 		hpCheck()
 
-	elif command in ("s", "start", "observe"):
+	elif command in ("s", "start", "observe","look around"):
 		start()
 
 # Introduce the user:
 print("Welcome to " + Fore.GREEN + "DungeonCli!" + Style.RESET_ALL)
-print("Type 'h' for help, 's' to start! \n")
+print("Type 'h' for help or 's' to start! \n")
 
 # Run those functions here:
 while mainLoop == 1:
