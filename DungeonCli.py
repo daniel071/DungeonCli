@@ -16,9 +16,11 @@ hp = 100
 Matches = 1
 Sticks = 3
 Sword = 0
+basicHealingPotion = 0
 # 1 x Matches.
 # 3 x Sticks.
 # (no sword)
+# No healing potions
 
 surroundingsLit = False
 
@@ -93,6 +95,9 @@ def openInventory():
 	if Sticks != 0:
 		print(str(Sticks) + " x Sticks")
 
+	if basicHealingPotion != 0:
+		print(str(basicHealingPotion) + " x Basic healing potion")
+
 	if Sword != 0:
 		# TODO: Implement more then just a basic sword.
 		print("Basic Sword")
@@ -136,27 +141,43 @@ def start():
 		answer = ask("Should you hide or comfront them?", "h", "c")
 		if answer == "c":
 			# User selected comfront
-			print(action + "The odd figure got close enough until you"
-			"could see it.")
-			print(action + "The figure looked like an ancient wizard. \n")
+			# Nothing special happens, it is passed on to the next part
+			pass
 
-			input(quote + 'Greetings, it seems you are new here,'
-			' is that true?"\n')
-
-			# NOTE: maybe. give the user a choice to say something.
-			print(action + "You said yes. \n")
-			time.sleep(0.7)
-
-			print(quote + "I see, this is a dangerous place, so tread"
-			' carefully..."')
-			time.sleep(2)
-
-			print(quote + 'Here, take this, it will help you defend yourself."')
+		elif answer == "h":
+			# User selected hide
+			print(action + "You tried to hide, but there was nowhere to go, "
+			"the figure began to comfront you.")
 			time.sleep(3)
 
-			print(success + "You recieved a basic sword.\n")
-			global Sword
-			Sword = 1
+		print(action + "The odd figure got close enough until you "
+		"could see it.")
+		time.sleep(2)
+
+		print(action + "The figure looked like an ancient wizard. \n")
+		time.sleep(2)
+
+		input(quote + 'Greetings, it seems you are new here,'
+		' is that true?"\n')
+
+		# NOTE: maybe. give the user a choice to say something.
+		print(action + "You said yes. \n")
+		time.sleep(0.7)
+
+		print(quote + "I see, this is a dangerous place, so tread"
+		' carefully..."')
+		time.sleep(2)
+
+		print(quote + 'Here, take this, it will help you defend yourself."')
+		time.sleep(3)
+
+		print(success + "You recieved a basic sword.")
+		print(success + "You recieved a basic healing potion\n")
+		global Sword
+		global basicHealingPotion
+
+		basicHealingPotion = basicHealingPotion + 1
+		Sword = 1
 
 
 def hpCheck():
