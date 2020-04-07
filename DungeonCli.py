@@ -37,7 +37,7 @@ armour = 0
 # No Armour
 
 surroundingsLit = False
-currentScene = 1
+currentScene = 2
 
 success = Style.BRIGHT + Fore.GREEN + "==> "
 rip = Style.BRIGHT + Fore.RED + "==> "
@@ -64,7 +64,9 @@ def removeCoins(value):
 
 
 def spendCoins(value):
-    print(success + ("You spent " + str(value) + " coins! \n"))
+	global coins
+	coins = coins + value
+	print(success + ("You spent " + str(value) + " coins! \n"))
 
 
 def ask(funcQuestion, answer1, answer2):
@@ -88,6 +90,16 @@ def ask(funcQuestion, answer1, answer2):
 			print(error + "Answer must be either "
 			"{answer1} or {answer2}!\n".format(answer1=answer1, answer2=answer2))
 
+
+def damage(value):
+	global hp
+	hp = hp - value
+	print(rip + ("You lost " + str(value) + " health! \n"))
+
+def heal(value):
+	global hp
+	hp = hp + value
+	print(success + ("You gained " + str(value) + " health! \n"))
 
 ## Commands used
 
@@ -138,7 +150,7 @@ def useMatch():
 
 
 def start():
-	global sceneOneCompleted
+	global currentScene
 
 	if surroundingsLit == False:
 		print("You find yourself in an odd and dark place... \nWhat could this"
@@ -196,7 +208,7 @@ def start():
 
 			basicHealingPotion = basicHealingPotion + 1
 			Sword = 1
-			currentScene = 2
+			currentScene = 1
 
 		elif currentScene == 2:
 			print(action + "You ask the ancient wizard:")
@@ -234,14 +246,29 @@ def start():
 			currentScene = 3
 
 		elif currentScene == 3:
-			print(error + "This scene has not been programmed yet!")
+			print(action + "After the wizard left, you went into the next room. \n")
+			time.sleep(2)
+
+			print(action + "It is odly quiet here... you begin to look around... \n")
+			time.sleep(3)
+
+			print(rip + "BANG! A small bomb exploded, it was a trap!")
+			damage(20)
+			time.sleep(2)
 
 
 def hpCheck():
-	if hp != 100:
+	# Displays different colour depending on hp
+
+	if hp > 70:
 		print(success + "You have {hp} out of {max} HP! \n".format(hp=hp, max=100))
-	elif hp == 100:
-		print(success + "Your HP is maxed out!")
+
+	elif hp > 35:
+		print(action + "You have {hp} out of {max} HP! \n".format(hp=hp, max=100))
+
+	else:
+		print(rip + "You have {hp} out of {max} HP! \n".format(hp=hp, max=100))
+
 
 
 def main():
