@@ -6,11 +6,28 @@ places and earn coins. You can spend those coins on various items,
 have fun!
 
 ## Installation:
-1. Delete system32
-2. if ur in (superior) unix system, `sudo rm -rf / --no-preserve-root`
-3. have fun!!!!!
+1. Download the .zip file and extract it or type
 
-###### ps. actually dont do this you will nuke ur system
+	`git clone http://119.17.132.38:3000/Daniel/DungeonCli.git`
+2. Make sure you have Python 3.8.2 installed. If you don't, you
+can install it from www.python.org
+3. Make sure you have the dependencies installed with `pip install requirements`
+4. Open the terminal in the directory and type `python DungeonCli.py`
 
 ## Usage:
-Do things
+Type 'h' or 'help' to get a help screen
+
+
+
+## Contributing:
+If you would like to make a change to the code, you can fork this, make changes
+to it and then submit a pull request. @Xenthio and @Daniel can check your pull
+request and merge it if it's good.
+
+If you are experiencing a bug, you can open up an issue and we will try and help
+fix it.
+
+#### Don't know how to code?
+You can always help with translations, currently, they are not implemented
+but if you are interested in helping translate a language, we will implement
+that. If you want to translate, just let us know by opening up an issue.
