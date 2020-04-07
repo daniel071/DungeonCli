@@ -37,7 +37,7 @@ armour = 0
 # No Armour
 
 surroundingsLit = False
-sceneOneCompleted = False
+currentScene = 1
 
 success = Style.BRIGHT + Fore.GREEN + "==> "
 rip = Style.BRIGHT + Fore.RED + "==> "
@@ -151,7 +151,7 @@ def start():
 
 		#print(hint + "type 'm' to use a match)\n" + Style.RESET_ALL) # too straight forward.
 	else:
-		if sceneOneCompleted == False:
+		if currentScene == 1:
 			print("This place looks like it's been abandoned decades ago...") # NOTE: describe this 'place'!
 			print(action + "An odd creature begins to walk up to you... \n") # NOTE: describe this 'creature'! e.g. this oddly hunched over creature
 			answer = ask("Should you hide or comfront them?", "h", "c")
@@ -196,9 +196,9 @@ def start():
 
 			basicHealingPotion = basicHealingPotion + 1
 			Sword = 1
-			sceneOneCompleted = True
+			currentScene = 2
 
-		else:
+		elif currentScene == 2:
 			print(action + "You ask the ancient wizard:")
 			time.sleep(1.7)
 
@@ -231,7 +231,10 @@ def start():
 			time.sleep(2)
 
 			print(action + "He leaves the room and now, you're on your own. \n")
+			currentScene = 3
 
+		elif currentScene == 3:
+			print(error + "This scene has not been programmed yet!")
 
 
 def hpCheck():
