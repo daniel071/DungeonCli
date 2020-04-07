@@ -37,7 +37,7 @@ armour = 0
 # No Armour
 
 surroundingsLit = False
-
+sceneOneCompleted = False
 
 success = Style.BRIGHT + Fore.GREEN + "==> "
 rip = Style.BRIGHT + Fore.RED + "==> "
@@ -138,6 +138,8 @@ def useMatch():
 
 
 def start():
+	global sceneOneCompleted
+
 	if surroundingsLit == False:
 		print("You find yourself in an odd and dark place... \nWhat could this"
 		" possibly be?\n")
@@ -149,49 +151,87 @@ def start():
 
 		#print(hint + "type 'm' to use a match)\n" + Style.RESET_ALL) # too straight forward.
 	else:
-		print("This place looks like it's been abandoned decades ago...") # NOTE: describe this 'place'!
-		print(action + "An odd creature begins to walk up to you... \n") # NOTE: describe this 'creature'! e.g. this oddly hunched over creature
-		answer = ask("Should you hide or comfront them?", "h", "c")
-		if answer == "c":
-			# User selected comfront
-			# Nothing special happens, it is passed on to the next part
-			pass
+		if sceneOneCompleted == False:
+			print("This place looks like it's been abandoned decades ago...") # NOTE: describe this 'place'!
+			print(action + "An odd creature begins to walk up to you... \n") # NOTE: describe this 'creature'! e.g. this oddly hunched over creature
+			answer = ask("Should you hide or comfront them?", "h", "c")
+			if answer == "c":
+				# User selected comfront
+				# Nothing special happens, it is passed on to the next part
+				pass
 
-		elif answer == "h":
-			# User selected hide
-			print(action + "You tried to hide, but there was nowhere to go, "
-			"the figure began to comfront you.")
-			time.sleep(3)
+			elif answer == "h":
+				# User selected hide
+				print(action + "You tried to hide, but there was nowhere to go, "
+				"the figure began to comfront you.")
+				time.sleep(3)
 
-		print(action + "The odd figure got close enough until you "
-		"could see it.") # NOTE: so is this a creature or figure
-		time.sleep(2)
+			print(action + "The odd figure got close enough until you "
+			"could see it.") # NOTE: so is this a creature or figure
+			time.sleep(2)
 
-		print(action + "The figure looked like an ancient wizard. \n")
-		time.sleep(2) #
+			print(action + "The figure looked like an ancient wizard. \n")
+			time.sleep(2) #
 
-		input(quote + 'Greetings, it seems you are new here,'
-		' is that true?"\n')
+			input(quote + 'Greetings, it seems you are new here,'
+			' is that true?"\n' + Style.RESET_ALL)
 
-		# NOTE: maybe. give the user a choice to say something.
-		print(action + "You said yes. \n")
-		time.sleep(0.7)
+			# NOTE: maybe. give the user a choice to say something.
+			print(action + "You said yes. \n")
+			time.sleep(0.7)
 
-		print(quote + "I see, this is a dangerous place, so tread"
-		' carefully..."') # ITS DANGEROUS TO GO ALONE.
-		time.sleep(2)
+			print(quote + "I see, this is a dangerous place, so tread"
+			' carefully..."') # ITS DANGEROUS TO GO ALONE.
+			time.sleep(2)
 
-		print(quote + 'Here, take this, it will help you defend yourself."')
-		time.sleep(3) # TAKE THIS.
+			print(quote + 'Here, take this, it will help you defend yourself."')
+			time.sleep(3) # TAKE THIS.
 
-		print(success + "You recieved a basic sword.")
-		print(success + "You recieved a basic healing potion\n")
-		addCoins(50)
-		global Sword
-		global basicHealingPotion
+			print(success + "You recieved a basic sword.")
+			print(success + "You recieved a basic healing potion.")
+			addCoins(50)
 
-		basicHealingPotion = basicHealingPotion + 1
-		Sword = 1
+			global Sword
+			global basicHealingPotion
+
+			basicHealingPotion = basicHealingPotion + 1
+			Sword = 1
+			sceneOneCompleted = True
+
+		else:
+			print(action + "You ask the ancient wizard:")
+			time.sleep(1.7)
+
+			print(Style.RESET_ALL + "Who are you?")
+			time.sleep(1.2)
+			print("What is this place? \n")
+			time.sleep(1.2)
+
+			print(action + "The wizard responds \n")
+			time.sleep(1.7)
+
+			print(quote + 'This place is an underground town, it used to be'
+			' thriving, there were plenty of stores, lots of jobs, it was'
+			' a great place to be...\n But then, the rebellion came in'
+			' and wiped this place out, everybody either escaped or died.\n'
+			' And me, I was the founder of this town." \n')
+			time.sleep(10)
+
+			input(quote + 'Would you like to recieve a quest?" \n'
+			+ Style.RESET_ALL)
+			print(action + "You said yes. \n")
+			time.sleep(0.8)
+
+			print(quote + 'Try and recover the Great Stone of Knowledge,'
+			' it is located in the north-east room, however it is guarded'
+			' by very powerful Almogates." \n')
+			time.sleep(5)
+
+			print(quote + 'Good luck." \n')
+			time.sleep(2)
+
+			print(action + "He leaves the room and now, you're on your own. \n")
+
 
 
 def hpCheck():
@@ -203,7 +243,7 @@ def hpCheck():
 
 def main():
 	command = input(Style.BRIGHT + Fore.CYAN + "[Action] " + Style.RESET_ALL)
-	if command in ("check money", "check coins", "coins", "c"):
+	if command in ("check money", "check coins", "coins", "money", "c"):
 		checkCoins()
 	elif command in ("open inventory", "open inv" ,"inventory", "inv", "i","check inventory", "check inv"):
 		openInventory()
