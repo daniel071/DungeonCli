@@ -4,6 +4,9 @@
 # Import Libraries here:
 import time
 import random
+import os
+from sys import platform
+
 from colorama import init
 init()
 from colorama import Fore, Back, Style
@@ -53,6 +56,43 @@ quote = Style.BRIGHT + Fore.WHITE + '"'
 # Define functions here:
 
 ## Some useful stuff
+def detect_system():
+    global operatingsystem
+    if platform == "linux" or platform == "linux2" or platform == "darwin":
+        operatingsystem = "unix"
+
+
+def clear():
+    if operatingsystem == "unix":
+        _= os.system('clear')
+    else:
+        _= os.system('cls')
+
+
+def isDead():
+	if hp < 0:
+		gameover()
+
+
+def gameover():
+	clear()
+	print(rip + "Your body is torn into shreads...")
+	time.sleep(4)
+	print(Style.BRIGHT + Fore.YELLOW + ".")
+	time.sleep(1.5)
+	print("..")
+	time.sleep(1.5)
+	print("...\n")
+	time.sleep(1.5)
+
+	print(Style.BRIGHT + Fore.RED + "Game Over!")
+	time.sleep(2)
+
+	print(Style.BRIGHT + Fore.WHITE + "Maybe next time, you might be lucky...\n")
+	time.sleep(5)
+	clear()
+	exit()
+
 
 def addCoins(add):
     global coins
@@ -98,6 +138,7 @@ def damage(value):
 	global hp
 	hp = hp - value
 	print(rip + ("You lost " + str(value) + " health! \n"))
+	isDead()
 
 def heal(value):
 	global hp
@@ -107,7 +148,7 @@ def heal(value):
 
 def combat(enemy, enemyHP):
 	global hp
-
+	hp = 10
 	print(rip + "You get in a battle with {enemy}!\n".format(enemy=enemy))
 	time.sleep(1)
 
@@ -129,21 +170,24 @@ def combat(enemy, enemyHP):
 			print(success + "You deal {damage} damage!".format(damage=damage))
 			print(rip + "{name} deals {damage} damage!\n".format(damage=enemyDamage, name=enemy))
 			time.sleep(1)
+			isDead()
 
 		elif userInput == "flee":
 			chance = random.randint(1, 2)
 			if chance == 1:
 				print(action + "You run away before {name} could catch you.".format(name=enemy))
 				combatLoop = 0
+				time.sleep(1)
 
 			elif chance == 2:
 				print(action + "You tried to flee, but {name} caught you. \n".format(name=enemy))
 				time.sleep(1.5)
 
-				enemyDamage = random.randint(5, 10)
-				enemyHP = enemyHP - damage
+				enemyDamage = random.randint(10, 20)
+				hp = hp - enemyDamage
 				print(rip + "{name} deals {damage} damage!\n".format(damage=enemyDamage, name=enemy))
 				time.sleep(1)
+				isDead()
 
 
 ## Commands used
@@ -318,6 +362,8 @@ def hpCheck():
 
 
 def main():
+	detect_system()
+
 	command = input(Style.BRIGHT + Fore.CYAN + "[Action] " + Style.RESET_ALL)
 	if command in ("check money", "check coins", "coins", "money", "c"):
 		checkCoins()
