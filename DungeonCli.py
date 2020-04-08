@@ -3,6 +3,7 @@
 
 # Import Libraries here:
 import time
+import random
 from colorama import init
 init()
 from colorama import Fore, Back, Style
@@ -29,6 +30,8 @@ basicHealingPotion = 0
 # 4 = Diamond Armour = 40% Absorbtion
 
 armour = 0
+absorbtion = 0 # Out of 100%
+damageMultiplyer = 1
 
 # 1 x Matches.
 # 3 x Sticks.
@@ -101,6 +104,48 @@ def heal(value):
 	hp = hp + value
 	print(success + ("You gained " + str(value) + " health! \n"))
 
+
+def combat(enemy, enemyHP):
+	global hp
+
+	print(rip + "You get in a battle with {enemy}!\n".format(enemy=enemy))
+	time.sleep(1)
+
+	combatLoop = True
+	while combatLoop:
+		time.sleep(1)
+
+		userInput = ask("Fight or Flee?", "fight", "flee")
+		if userInput == "fight":
+			# Calculates damage
+			damage = random.randint(5, 10) * damageMultiplyer
+			enemyDamage = random.randint(5, 10)
+
+			# Applies damage
+			hp = hp - enemyDamage
+			enemyHP = enemyHP - damage
+
+			# Displays to user
+			print(success + "You deal {damage} damage!".format(damage=damage))
+			print(rip + "{name} deals {damage} damage!\n".format(damage=enemyDamage, name=enemy))
+			time.sleep(1)
+
+		elif userInput == "flee":
+			chance = random.randint(1, 2)
+			if chance == 1:
+				print(action + "You run away before {name} could catch you.".format(name=enemy))
+				combatLoop = 0
+
+			elif chance == 2:
+				print(action + "You tried to flee, but {name} caught you. \n".format(name=enemy))
+				time.sleep(1.5)
+
+				enemyDamage = random.randint(5, 10)
+				enemyHP = enemyHP - damage
+				print(rip + "{name} deals {damage} damage!\n".format(damage=enemyDamage, name=enemy))
+				time.sleep(1)
+
+
 ## Commands used
 
 def checkCoins():
@@ -159,6 +204,7 @@ def start():
 
 		print("Check your inventory, you might have something to \nimprove your vision...\n")
 		time.sleep(2)
+		# combat("Bob", 69)
 		#print("Maybe I should use a match to light this place up...") # too straight forward.
 
 		#print(hint + "type 'm' to use a match)\n" + Style.RESET_ALL) # too straight forward.
@@ -290,7 +336,7 @@ def main():
 	elif command in ("hp", "health", "health points"):
 		hpCheck()
 
-	elif command in ("s", "start", "observe","look around"):
+	elif command in ("s", "start", "observe", "next"):
 		start()
 
 # Introduce the user:
