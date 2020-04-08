@@ -423,6 +423,8 @@ def hpCheck():
 
 
 def randomEvent():
+	print("This is a randomly generated event! The stories in here have not been completed yet.")
+
 	global events
 	randomLoop = True
 
