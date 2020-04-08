@@ -47,7 +47,7 @@ damageMultiplyer = 1
 # No Armour
 
 surroundingsLit = False
-currentScene = 5
+currentScene = 1
 
 success = Style.BRIGHT + Fore.GREEN + "==> "
 rip = Style.BRIGHT + Fore.RED + "==> "
@@ -435,7 +435,7 @@ def randomEvent():
 			print("randomFight selected")
 
 		events = removeFromList(events, selection)
-		
+
 	else:
 		print("There are no more unvisited events left!")
 
