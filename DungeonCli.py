@@ -327,6 +327,7 @@ def main():
                     "use matches", "matches", "m"):
 		useMatch()
 	elif command in ("h", "help", "umm", "asdfghjkl", "qwertyuiop"):
+		combat("Bob", 69) # TEMPORARY!
 		print("Help menu \n")
 
 	elif command in ("e", "exit", "close", "alt-f4"):
