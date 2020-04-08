@@ -37,7 +37,7 @@ armour = 0
 # No Armour
 
 surroundingsLit = False
-currentScene = 2
+currentScene = 1
 
 success = Style.BRIGHT + Fore.GREEN + "==> "
 rip = Style.BRIGHT + Fore.RED + "==> "
@@ -208,7 +208,7 @@ def start():
 
 			basicHealingPotion = basicHealingPotion + 1
 			Sword = 1
-			currentScene = 1
+			currentScene = 2
 
 		elif currentScene == 2:
 			print(action + "You ask the ancient wizard:")
