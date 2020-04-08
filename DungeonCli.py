@@ -12,11 +12,15 @@ init()
 from colorama import Fore, Back, Style
 
 # Define variables here:
+
 ## TODO: Add saving mechanic for these coins
 mainLoop = 1
 coins = 0 # fucking poor cunt lmao.
 hp = 100
+# Events used for random stuff:
+events = ["store", "randomFight"]
 
+# Inventory
 Matches = 1
 Sticks = 3
 Sword = 0
@@ -43,7 +47,7 @@ damageMultiplyer = 1
 # No Armour
 
 surroundingsLit = False
-currentScene = 1
+currentScene = 5
 
 success = Style.BRIGHT + Fore.GREEN + "==> "
 rip = Style.BRIGHT + Fore.RED + "==> "
@@ -56,6 +60,22 @@ quote = Style.BRIGHT + Fore.WHITE + '"'
 # Define functions here:
 
 ## Some useful stuff
+def removeFromList(list, removal):
+	index = 0
+	listLoop = True
+	while listLoop:
+		if list[index] == removal:
+			modifiedList = list
+			modifiedList.pop(index)
+
+			return modifiedList
+			listLoop = False
+
+		else:
+			index = index + 1
+
+
+
 def detect_system():
     global operatingsystem
     if platform == "linux" or platform == "linux2" or platform == "darwin":
@@ -385,7 +405,8 @@ def start():
 			# TODO: This is where the randomly generated scenes should be
 			# Get a list of different scenes, randomly pick them with
 			# random.randint() and then play the scene.
-			return
+			# It is done bois!
+			randomEvent()
 
 
 def hpCheck():
@@ -400,6 +421,23 @@ def hpCheck():
 	else:
 		print(rip + "You have {hp} out of {max} HP! \n".format(hp=hp, max=100))
 
+
+def randomEvent():
+	global events
+	randomLoop = True
+
+	if len(events) > 0:
+		selection = random.choice(events)
+		if selection == "store":
+			print("Store selected")
+
+		elif selection == "randomFight":
+			print("randomFight selected")
+
+		events = removeFromList(events, selection)
+		
+	else:
+		print("There are no more unvisited events left!")
 
 
 def main():
