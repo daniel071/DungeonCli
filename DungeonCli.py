@@ -148,7 +148,6 @@ def heal(value):
 
 def combat(enemy, enemyHP):
 	global hp
-	hp = 10
 	print(rip + "You get in a battle with {enemy}!\n".format(enemy=enemy))
 	time.sleep(1)
 
@@ -172,12 +171,23 @@ def combat(enemy, enemyHP):
 			time.sleep(1)
 			isDead()
 
+			if enemyHP < 0:
+				print(success + "You successfully killed {name}\n".format(name=enemy))
+				time.sleep(1)
+				extraCoins = random.randint(10, 25)
+				addCoins(extraCoins)
+				combatLoop = False
+				return "kill"
+
+
 		elif userInput == "flee":
 			chance = random.randint(1, 2)
 			if chance == 1:
-				print(action + "You run away before {name} could catch you.".format(name=enemy))
+				print(action + "You run away before {name} could catch you.\n".format(name=enemy))
 				combatLoop = 0
 				time.sleep(1)
+
+				return "flee"
 
 			elif chance == 2:
 				print(action + "You tried to flee, but {name} caught you. \n".format(name=enemy))
@@ -345,6 +355,37 @@ def start():
 			print(rip + "BANG! A small bomb exploded, it was a trap!")
 			damage(20)
 			time.sleep(2)
+			currentScene = 4
+
+		elif currentScene == 4:
+			print(action + "You proceed to the next room, being very careful where you step.")
+			time.sleep(2)
+
+			print(action + "You quickly hear a movement and freeze...\n")
+			time.sleep(2)
+
+			print(quote + 'IT WAS YOU WHO DID IT! Y-YOU WERE THE ONE WHO KILLED ALL M'
+			'-MY F-F-FRIENDS!"\n')
+			time.sleep(3)
+			print(action + "You try to explain that they were mistaken but"
+			" it was too late. \n")
+			time.sleep(2)
+
+
+			theResult = combat("Unidentified", 25)
+			if theResult == "kill":
+				print(action + "You killed the unknown person however, you can't stop feeling bad.")
+
+			elif theResult == "flee":
+				print(action + "You quickly ran away, you're safe now.")
+
+			currentScene = 5
+
+		elif currentScene == 5:
+			# TODO: This is where the randomly generated scenes should be
+			# Get a list of different scenes, randomly pick them with
+			# random.randint() and then play the scene.
+			return
 
 
 def hpCheck():
@@ -372,8 +413,8 @@ def main():
 	elif command in ("use match", "strike match", "match", "light match",
                     "use matches", "matches", "m"):
 		useMatch()
+
 	elif command in ("h", "help", "umm", "asdfghjkl", "qwertyuiop"):
-		combat("Bob", 69) # TEMPORARY!
 		print("Help menu \n")
 
 	elif command in ("e", "exit", "close", "alt-f4"):
