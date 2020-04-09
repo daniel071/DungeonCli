@@ -39,6 +39,7 @@ basicHealingPotion = 0
 armour = 0
 absorbtion = 0 # Out of 100%
 damageMultiplyer = 1
+CSDescription = "You haven't started yet!" # description of current room, called by observe and look around
 
 # 1 x Matches.
 # 3 x Sticks.
@@ -56,6 +57,9 @@ error = Style.BRIGHT + Fore.RED + "[!] "
 hint = Style.DIM + Fore.WHITE + "(hint: "
 action = Style.BRIGHT + Fore.YELLOW + "==> "
 quote = Style.BRIGHT + Fore.WHITE + '"'
+
+
+coinsInScene5 = False
 
 # Define functions here:
 
@@ -274,6 +278,7 @@ def start():
 	if surroundingsLit == False:
 		print("You find yourself in an odd and dark place... \nWhat could this"
 		" possibly be?\n")
+		CSDescription = "This place is extremely dark, you can't see anything..."
 		time.sleep(2)
 
 		print("Check your inventory, you might have something to \nimprove your vision...\n")
@@ -285,6 +290,7 @@ def start():
 	else:
 		if currentScene == 1:
 			print("This place looks like it's been abandoned decades ago...") # NOTE: describe this 'place'!
+			CSDescription = "This place is in ruins, possibly for decades."
 			print(action + "An odd creature begins to walk up to you... \n") # NOTE: describe this 'creature'! e.g. this oddly hunched over creature
 			answer = ask("Should you hide or comfront them?", "h", "c")
 			if answer == "c":
@@ -348,6 +354,7 @@ def start():
 			' and wiped this place out, everybody either escaped or died.\n'
 			' And me, I was the founder of this town." \n')
 			time.sleep(10)
+			CSDescription = "This place is in ruins, apparently it's supposed to be a town..."
 
 			input(quote + 'Would you like to recieve a quest?" \n'
 			+ Style.RESET_ALL)
@@ -379,6 +386,8 @@ def start():
 
 		elif currentScene == 4:
 			print(action + "You proceed to the next room, being very careful where you step.")
+
+			CSDescription = "This room is rather empty, but an old and dried up fountain lays ahead.\n a few coins lay scattered across the bottem, maybe you can pick them up..."
 			time.sleep(2)
 
 			print(action + "You quickly hear a movement and freeze...\n")
@@ -441,6 +450,8 @@ def randomEvent():
 	else:
 		print("There are no more unvisited events left!")
 
+def lookAround():
+	print(CSDescription)
 
 def main():
 	detect_system()
@@ -464,8 +475,17 @@ def main():
 	elif command in ("hp", "health", "health points"):
 		hpCheck()
 
-	elif command in ("s", "start", "observe", "next"):
+	elif command in ("s", "start", "next", "proceed", "next room", "forth"):
 		start()
+
+	elif command in ("look around", "look", "observe"):
+		lookAround()
+
+	if currentScene == 5:
+		if coinsInScene5 == False:
+			if command in ("pickup coins", "pick up coins"):
+				coinsInScene5 = True
+
 
 # Introduce the user:
 print("Welcome to " + Fore.GREEN + "DungeonCli!" + Style.RESET_ALL)
