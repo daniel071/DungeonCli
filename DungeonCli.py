@@ -48,7 +48,7 @@ CSDescription = "You haven't started yet!" # description of current room, called
 # No Armour
 
 surroundingsLit = False
-currentScene = 1
+currentScene = 4
 
 success = Style.BRIGHT + Fore.GREEN + "==> "
 rip = Style.BRIGHT + Fore.RED + "==> "
@@ -59,7 +59,7 @@ action = Style.BRIGHT + Fore.YELLOW + "==> "
 quote = Style.BRIGHT + Fore.WHITE + '"'
 
 
-coinsInScene5 = False
+coinsInScene = False
 
 # Define functions here:
 
@@ -228,7 +228,7 @@ def combat(enemy, enemyHP):
 
 def checkCoins():
     global coins
-    print(success + "You have $" + str(coins) + "!")
+    print(success + "You have $" + str(coins) + "!\n")
     if coins == 0:
         print("You have 0 coins? I feel bad, here take 10 coins!")
         addCoins(10)
@@ -257,6 +257,8 @@ def openInventory():
 def useMatch():
 	global Matches
 	global surroundingsLit
+	global CSDescription
+
 	if Matches == 0:
 		print(error + "You don't have any matches!\n")
 	elif surroundingsLit == True:
@@ -265,6 +267,8 @@ def useMatch():
 		print(rip + "You used up one match. \n")
 
 	elif surroundingsLit == False:
+		CSDescription = "This place is in ruins, possibly for decades."
+
 		Matches = Matches - 1
 		surroundingsLit = True
 		print("You Light a match, your surroundings fill up with light. "
@@ -274,6 +278,7 @@ def useMatch():
 
 def start():
 	global CSDescription
+	global coinsInScene
 	global currentScene
 
 	if surroundingsLit == False:
@@ -291,7 +296,6 @@ def start():
 	else:
 		if currentScene == 1:
 			print("This place looks like it's been abandoned decades ago...") # NOTE: describe this 'place'!
-			CSDescription = "This place is in ruins, possibly for decades."
 			print(action + "An odd creature begins to walk up to you... \n") # NOTE: describe this 'creature'! e.g. this oddly hunched over creature
 			answer = ask("Should you hide or comfront them?", "h", "c")
 			if answer == "c":
@@ -355,7 +359,7 @@ def start():
 			' and wiped this place out, everybody either escaped or died.\n'
 			' And me, I was the founder of this town." \n')
 			time.sleep(10)
-			CSDescription = "This place is in ruins, apparently it's supposed to be a town...\n There is a door to the next room, something seems to be strung across it."
+			CSDescription = "This place is in ruins, apparently it's supposed to be a town...\nThere is a door to the next room, something seems to be strung across it."
 
 			input(quote + 'Would you like to recieve a quest?" \n'
 			+ Style.RESET_ALL)
@@ -371,10 +375,11 @@ def start():
 			time.sleep(2)
 
 			print(action + "He leaves the room and now, you're on your own. \n")
-			CSDescription = "T"
 			currentScene = 3
 
 		elif currentScene == 3:
+			CSDescription = "The room looked very charred after the explosion."
+
 			print(action + "After the wizard left, you went into the next room. \n")
 			time.sleep(2)
 
@@ -389,7 +394,8 @@ def start():
 		elif currentScene == 4:
 			print(action + "You proceed to the next room, being very careful where you step.")
 
-			CSDescription = "This room is rather empty, but an old and dried up fountain lays ahead.\n a few coins lay scattered across the bottem, maybe you can pick them up..."
+			CSDescription = "This room is rather empty, but an old and dried up fountain lays ahead.\na few coins lay scattered across the bottom, maybe you can pick them up..."
+			coinsInScene = True
 			time.sleep(2)
 
 			print(action + "You quickly hear a movement and freeze...\n")
@@ -405,17 +411,14 @@ def start():
 
 			theResult = combat("Unidentified", 25)
 			if theResult == "kill":
-				print(action + "You killed the unknown person however, you can't stop feeling bad.")
+				print(action + "You killed the unknown person however, you can't stop feeling bad. \n")
 
 			elif theResult == "flee":
-				print(action + "You quickly ran away, you're safe now.")
+				print(action + "You quickly ran away, you're safe now. \n")
 
 			currentScene = 5
 
 		elif currentScene == 5:
-			# TODO: This is where the randomly generated scenes should be
-			# Get a list of different scenes, randomly pick them with
-			# random.randint() and then play the scene.
 			# It is done bois!
 			randomEvent()
 
@@ -453,7 +456,24 @@ def randomEvent():
 		print("There are no more unvisited events left!")
 
 def lookAround():
-	print(CSDescription)
+	print(CSDescription + "\n")
+
+
+def pickCoins():
+	global coinsInScene
+
+	if coinsInScene == True:
+		amount = random.randint(4, 6)
+		print(action + "You reach down and pick up all the coins from the floor.")
+		time.sleep(1)
+
+		addCoins(amount)
+		coinsInScene = False
+
+
+	else:
+		print(error + "There are no coins to pick up! \n")
+
 
 def main():
 	detect_system()
@@ -480,13 +500,12 @@ def main():
 	elif command in ("s", "start", "next", "proceed", "next room", "forth"):
 		start()
 
-	elif command in ("look around", "look", "observe"):
+	elif command in ("l", "look around", "look", "observe"):
 		lookAround()
 
-	if currentScene == 5:
-		if coinsInScene5 == False:
-			if command in ("pickup coins", "pick up coins"):
-				coinsInScene5 = True
+
+	if command in ("pickup coins", "pick up coins", "pick coins"):
+		pickCoins()
 
 
 # Introduce the user:
