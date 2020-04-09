@@ -48,7 +48,7 @@ CSDescription = "You haven't started yet!" # description of current room, called
 # No Armour
 
 surroundingsLit = False
-currentScene = 4
+currentScene = 1
 
 success = Style.BRIGHT + Fore.GREEN + "==> "
 rip = Style.BRIGHT + Fore.RED + "==> "
