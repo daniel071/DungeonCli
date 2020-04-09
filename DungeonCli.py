@@ -273,6 +273,7 @@ def useMatch():
 
 
 def start():
+	global CSDescription
 	global currentScene
 
 	if surroundingsLit == False:
@@ -354,7 +355,7 @@ def start():
 			' and wiped this place out, everybody either escaped or died.\n'
 			' And me, I was the founder of this town." \n')
 			time.sleep(10)
-			CSDescription = "This place is in ruins, apparently it's supposed to be a town..."
+			CSDescription = "This place is in ruins, apparently it's supposed to be a town...\n There is a door to the next room, something seems to be strung across it."
 
 			input(quote + 'Would you like to recieve a quest?" \n'
 			+ Style.RESET_ALL)
@@ -370,6 +371,7 @@ def start():
 			time.sleep(2)
 
 			print(action + "He leaves the room and now, you're on your own. \n")
+			CSDescription = "T"
 			currentScene = 3
 
 		elif currentScene == 3:
