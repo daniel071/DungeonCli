@@ -227,11 +227,15 @@ def combat(enemy, enemyHP):
 ## Commands used
 
 def checkCoins():
-    global coins
-    print(success + "You have $" + str(coins) + "!\n")
-    if coins == 0:
-        print("You have 0 coins? I feel bad, here take 10 coins!")
-        addCoins(10)
+	global coins
+	print(success + "You have $" + str(coins) + "!\n")
+	if coins == 0:
+		time.sleep(1)
+		print(Style.BRIGHT + Fore.WHITE + "You have 0 coins? I feel bad, here"
+		" take 10 coins!")
+		time.sleep(2)
+		addCoins(10)
+		time.sleep(1)
 
 
 def openInventory():
