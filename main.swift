@@ -60,7 +60,8 @@ var BLUE = "\u{001B}[0;34m"
 var MAGENTA = "\u{001B}[0;35m"
 var CYAN = "\u{001B}[0;36m"
 var WHITE = "\u{001B}[0;37m"
-var GRAY = "\u{001B}[1;37m"
+var GRAY = "\u{001B}[2;37m"
+var RESETCLR = "\u{001B}[0;00m"
 
 
 var success = GREEN + "==> "
