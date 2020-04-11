@@ -133,10 +133,10 @@ func gameover() {
 
 
 
-//def addCoins(add):
-//    global coins
-//    coins = coins + add
-//    print(success + ("You pocketed " + str(add) + " coins! \n"))
+func addCoins(add: Int) {
+    coins = coins + add
+    print(success + ("You pocketed " + String(add) + " coins! \n"))
+}
 //
 //
 //def removeCoins(value):
