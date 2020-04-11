@@ -132,8 +132,6 @@ func gameover() {
 }
 
 
-
-<<<<<<< HEAD
 func addCoins(value: Int) {
     coins = coins + value
     print(success + ("You pocketed " + String(value) + " coins! \n"))
@@ -222,151 +220,40 @@ func combat(enemy: String, enemyHP: Int) -> String {
                 combatLoop = false
                 return "kill"
             }
-        }
-
-        elif userInput == "flee":
-            chance = random.randint(1, 2)
+        } else if userInput == "flee" {
+            let chance = Int.random(in: 1..<2)
             if chance == 1 {
-                print(action + "You run away before {name} could catch you.\n".format(name=enemy))
+                print(action + "You run away before " + enemy + " could catch you"}
                 combatLoop = 0
                 time.sleep(1)
 
                 return "flee"
 
             } else if chance == 2 {
-                print(action + "You tried to flee, but {name} caught you. \n".format(name=enemy))
-                time.sleep(1.5)
+                print(action + "You tried to flee, but " + enemy + " caught you.")
+                sleep(1.5)
 
-                enemyDamage = random.randint(10, 20)
+                let enemyDamage = Int.random(in: 10..<20)
                 hp = hp - enemyDamage
-                print(rip + "{name} deals {damage} damage!\n".format(damage=enemyDamage, name=enemy))
-                time.sleep(1)
+                print(rip + enemy + " deals " + enemyDamage + " damage!")
+                sleep(1)
                 isDead()
             }
         }
     }
 }
-//
-=======
-func addCoins(add: Int) {
-    coins = coins + add
-    print(success + ("You pocketed " + String(add) + " coins! \n"))
+/// Commands used
+
+func checkCoins() {
+    print(success + "You have $" + String(coins) + "!")
+    if coins == 0:
+        sleep(1)
+        print(WHITE + "You have 0 coins? I feel bad, here"
+        " take 10 coins!")
+        sleep(2)
+        addCoins(10)
+        sleep(1)
 }
-//
-//
-//def removeCoins(value):
-//    global coins
-//    coins = coins - value
-//    print(rip + ("You dropped " + str(value) + " coins! \n"))
-//
-//
-//def spendCoins(value):
-//    global coins
-//    coins = coins + value
-//    print(success + ("You spent " + str(value) + " coins! \n"))
-//
-//
-//def ask(funcQuestion, answer1, answer2):
-//    askLoop = 1
-//    while askLoop == 1:
-//        // Asks the user a question
-//        userInput = input(question + "{funcQuestion} [{answer1}/{answer2}] "
-//        .format(funcQuestion=funcQuestion, answer1=answer1, answer2=answer2)
-//         + Style.RESET_ALL)
-//
-//        // Checks if it's correct
-//        if userInput == answer1:
-//            askLoop = 0
-//            print("")
-//            return answer1
-//        elif userInput == answer2:
-//            askLoop = 0
-//            print("")
-//            return answer2
-//        else:
-//            print(error + "Answer must be either "
-//            "{answer1} or {answer2}!\n".format(answer1=answer1, answer2=answer2))
-//
-//
-//def damage(value):
-//    global hp
-//    hp = hp - value
-//    print(rip + ("You lost " + str(value) + " health! \n"))
-//    isDead()
-//
-//def heal(value):
-//    global hp
-//    hp = hp + value
-//    print(success + ("You gained " + str(value) + " health! \n"))
-//
-//
-//def combat(enemy, enemyHP):
-//    global hp
-//    print(rip + "You get in a battle with {enemy}!\n".format(enemy=enemy))
-//    time.sleep(1)
-//
-//    combatLoop = True
-//    while combatLoop:
-//        time.sleep(1)
-//
-//        userInput = ask("Fight or Flee?", "fight", "flee")
-//        if userInput == "fight":
-//            // Calculates damage
-//            damage = random.randint(5, 10) * damageMultiplyer
-//            enemyDamage = random.randint(5, 10)
-//
-//            // Applies damage
-//            hp = hp - enemyDamage
-//            enemyHP = enemyHP - damage
-//
-//            // Displays to user
-//            print(success + "You deal {damage} damage!".format(damage=damage))
-//            print(rip + "{name} deals {damage} damage!\n".format(damage=enemyDamage, name=enemy))
-//            time.sleep(1)
-//            isDead()
-//
-//            if enemyHP < 0:
-//                print(success + "You successfully killed {name}\n".format(name=enemy))
-//                time.sleep(1)
-//                extraCoins = random.randint(10, 25)
-//                addCoins(extraCoins)
-//                combatLoop = False
-//                return "kill"
-//
-//
-//        elif userInput == "flee":
-//            chance = random.randint(1, 2)
-//            if chance == 1:
-//                print(action + "You run away before {name} could catch you.\n".format(name=enemy))
-//                combatLoop = 0
-//                time.sleep(1)
-//
-//                return "flee"
-//
-//            elif chance == 2:
-//                print(action + "You tried to flee, but {name} caught you. \n".format(name=enemy))
-//                time.sleep(1.5)
-//
-//                enemyDamage = random.randint(10, 20)
-//                hp = hp - enemyDamage
-//                print(rip + "{name} deals {damage} damage!\n".format(damage=enemyDamage, name=enemy))
-//                time.sleep(1)
-//                isDead()
-//
-//
->>>>>>> 016d16ddfd91ef5db7787afbb96e687600d56966
-////// Commands used
-//
-//def checkCoins():
-//    global coins
-//    print(success + "You have $" + str(coins) + "!\n")
-//    if coins == 0:
-//        time.sleep(1)
-//        print(Style.BRIGHT + Fore.WHITE + "You have 0 coins? I feel bad, here"
-//        " take 10 coins!")
-//        time.sleep(2)
-//        addCoins(10)
-//        time.sleep(1)
 //
 //
 //def openInventory():
