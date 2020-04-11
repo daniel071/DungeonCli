@@ -79,221 +79,220 @@ var coinsInScene = false
 
 /*
 func removeFromList(list, removal) {
-    index = 0
-    listLoop = True
-    while listLoop {
-        if list[index] == removal {
-            modifiedList = list
-            modifiedList.pop(index)
+index = 0
+listLoop = True
+while listLoop {
+if list[index] == removal {
+modifiedList = list
+modifiedList.pop(index)
 
-            return modifiedList
-            listLoop = False
+return modifiedList
+listLoop = False
 
-        } else {
-            index = index + 1
-        }
-    }
+} else {
+index = index + 1
+}
+}
 }
 */
 
 /*
 def detect_system():
-    global operatingsystem
-    if platform == "linux" or platform == "linux2" or platform == "darwin":
-        operatingsystem = "unix"
+global operatingsystem
+if platform == "linux" or platform == "linux2" or platform == "darwin":
+operatingsystem = "unix"
 */
 
 
 
 func isDead() {
-    if hp < 0 {
-        gameover()
-    }
+	if hp < 0 {
+		gameover()
+	}
 }
 
 func gameover() {
-    print(rip + "Your body is torn into shreads...")
-    sleep(4)
-    print(YELLOW + ".")
-    sleep(1)
-    print("..")
-    sleep(1)
-    print("...\n")
-    sleep(1)
-
-    print(RED + "Game Over!")
-    sleep(2)
-
-    print(WHITE + "Maybe next time, you might be lucky...\n")
-    sleep(5)
-    //clear()
-    //exit()
-
+	print(rip + "Your body is torn into shreads...")
+	sleep(4)
+	print(YELLOW + ".")
+	sleep(1)
+	print("..")
+	sleep(1)
+	print("...\n")
+	sleep(1)
+	
+	print(RED + "Game Over!")
+	sleep(2)
+	
+	print(WHITE + "Maybe next time, you might be lucky...\n")
+	sleep(5)
+	//clear()
+	//exit()
+	
 }
 
 
 func addCoins(value: Int) {
-    coins = coins + value
-    print(success + ("You pocketed " + String(value) + " coins! \n"))
+	coins = coins + value
+	print(success + ("You pocketed " + String(value) + " coins! \n"))
 }
 
 
 func removeCoins(value: Int) {
-    coins = coins - value
-    print(rip + ("You dropped " + String(value) + " coins! \n"))
+	coins = coins - value
+	print(rip + ("You dropped " + String(value) + " coins! \n"))
 }
 
 
 func spendCoins(value: Int) {
-    coins = coins + value
-    print(success + ("You spent " + String(value) + " coins! \n"))
+	coins = coins + value
+	print(success + ("You spent " + String(value) + " coins! \n"))
 }
 
 
 func ask(funcQuestion: String, answer1: String, answer2: String) -> String {
-    var askLoop = 1
-    while askLoop == 1 {
-        // Asks the user a question
-        print (question + funcQuestion + " [" + answer1 + "/" + answer2 + "]", terminator:"")
-        let userInput = readLine()
-
-        // Checks if it's correct
-
-        if userInput == answer1 {
-            askLoop = 0
-            print("")
-            return answer1
-        } else if userInput == answer2{
-            askLoop = 0
-            print("")
-            return answer2
-        } else {
-            print(error + "Answer must be either " + answer1 + " or " + answer2 + "!")
-        }
-    }
+	var askLoop = 1
+	while askLoop == 1 {
+		// Asks the user a question
+		print (question + funcQuestion + " [" + answer1 + "/" + answer2 + "]", terminator:"")
+		let userInput = readLine()
+		
+		// Checks if it's correct
+		
+		if userInput == answer1 {
+			askLoop = 0
+			print("")
+			return answer1
+		} else if userInput == answer2{
+			askLoop = 0
+			print("")
+			return answer2
+		} else {
+			print(error + "Answer must be either " + answer1 + " or " + answer2 + "!")
+		}
+	}
 }
 
 
 
 func damage(value: Int) {
-    hp = hp - value
-    print(rip + ("You lost " + String(value) + " health!"))
-    isDead()
+	hp = hp - value
+	print(rip + ("You lost " + String(value) + " health!"))
+	isDead()
 }
 
 func heal(value: Int) {
-    hp = hp + value
-    print(success + ("You gained " + String(value) + " health!"))
+	hp = hp + value
+	print(success + ("You gained " + String(value) + " health!"))
 }
 
 func combat(enemy: String, enemyHP: Int) -> String {
-
-    var currentEnemyHP = enemyHP
-    print(rip + "You get in a battle with " + enemy + "!")
-    sleep(1)
-
-    var combatLoop = true
-    repeat {
-        sleep(1)
-
-        let userInput = ask(funcQuestion: "Fight or Flee?", answer1: "fight", answer2: "flee")
-        if userInput == "fight" {
-            // Calculates damage
-            let selfDamage = Int.random(in: 5..<10) * damageMultiplyer
-            let enemyDamage = Int.random(in: 5..<10)
-
-            // Applies damage
-            hp = hp - enemyDamage
-            currentEnemyHP = currentEnemyHP - selfDamage
-
-            // Displays to user
-            print(success + "You deal " + String(selfDamage) + " damage!")
-            print(rip + enemy + " deals " + enemyDamage + " damage!\n")
-            sleep(1)
-            isDead()
-
-            if enemyHP < 0 {
-                print(success + "You successfully killed " + enemy)
-                sleep(1)
-                let extraCoins = Int.random(in: 10..<25)
-                addCoins(value: extraCoins)
-                combatLoop = false
-                return "kill"
-            }
-        
-        } else if userInput == "flee" {
-            let chance = Int.random(in: 1..<2)
-            if chance == 1 {
-                print(action + "You run away before " + enemy + " could catch you")
-                combatLoop = false
-                sleep(1)
-
-                return "flee"
-
-            } else if chance == 2 {
-                print(action + "You tried to flee, but " + enemy + " caught you.")
-                sleep(1)
-
-                let enemyDamage = Int.random(in: 10..<20)
-                hp = hp - enemyDamage
-                print(rip + enemy + " deals " + enemyDamage + " damage!")
-                sleep(1)
-                isDead()
-            }
-        }
-    } while combatLoop
+	
+	var currentEnemyHP = enemyHP
+	print(rip + "You get in a battle with " + enemy + "!")
+	sleep(1)
+	
+	var combatLoop = true
+	repeat {
+		sleep(1)
+		
+		let userInput = ask(funcQuestion: "Fight or Flee?", answer1: "fight", answer2: "flee")
+		if userInput == "fight" {
+			// Calculates damage
+			let selfDamage = Int.random(in: 5..<10) * damageMultiplyer
+			let enemyDamage = Int.random(in: 5..<10)
+			
+			// Applies damage
+			hp = hp - enemyDamage
+			currentEnemyHP = currentEnemyHP - selfDamage
+			
+			// Displays to user
+			print(success + "You deal " + String(selfDamage) + " damage!")
+			print(rip + enemy + " deals " + String(enemyDamage) + " damage!")
+			sleep(1)
+			isDead()
+			
+			if enemyHP < 0 {
+				print(success + "You successfully killed " + enemy)
+				sleep(1)
+				let extraCoins = Int.random(in: 10..<25)
+				addCoins(value: extraCoins)
+				combatLoop = false
+				return "kill"
+			}
+			
+		} else if userInput == "flee" {
+			let chance = Int.random(in: 1..<2)
+			if chance == 1 {
+				print(action + "You run away before " + enemy + " could catch you")
+				combatLoop = false
+				sleep(1)
+				
+				return "flee"
+				
+			} else if chance == 2 {
+				print(action + "You tried to flee, but " + enemy + " caught you.")
+				sleep(1)
+				
+				let enemyDamage = Int.random(in: 10..<20)
+				hp = hp - enemyDamage
+				print(rip + enemy + " deals " + String(enemyDamage) + " damage!")
+				sleep(1)
+				isDead()
+			}
+		}
+	} while combatLoop
 }
 /// Commands used
 
 func checkCoins() {
-    print(success + "You have $" + String(coins) + "!")
-    if coins == 0 {
-        sleep(1)
-        print(WHITE + "You have 0 coins? I feel bad, here take 10 coins!")
-        sleep(2)
-        addCoins(value: 10)
-        sleep(1)
-    }
+	print(success + "You have $" + String(coins) + "!")
+	if coins == 0 {
+		sleep(1)
+		print(WHITE + "You have 0 coins? I feel bad, here take 10 coins!")
+		sleep(2)
+		addCoins(value: 10)
+		sleep(1)
+	}
 }
 //
 //
 func openInventory() {
-    print(success + "Inventory:")
-    var count = 0
-    if Matches != 0 {
-       print(String(Matches) + " x Matches")
-    }
-    if Sticks != 0 {
-       print(String(Sticks) + " x Sticks")
-    }
-    if basicHealingPotion != 0 {
-       print(String(basicHealingPotion) + " x Basic Healing Potion")
-    }
-    if Sword != 0 {
-       // TODO: Implement more then just a basic sword.
-       print("Basic Sword")
-    }
-   // This print just adds some white space
-   print(" ")
+	print(success + "Inventory:")
+	if Matches != 0 {
+		print(String(Matches) + " x Matches")
+	}
+	if Sticks != 0 {
+		print(String(Sticks) + " x Sticks")
+	}
+	if basicHealingPotion != 0 {
+		print(String(basicHealingPotion) + " x Basic Healing Potion")
+	}
+	if Sword != 0 {
+		// TODO: Implement more then just a basic sword.
+		print("Basic Sword")
+	}
+	// This print just adds some white space
+	print(" ")
 }
 
 
 func useMatch() {
-    if Matches == 0 {
-        print(error + "You don't have any matches!\n")
-
-    } else if surroundingsLit == true {
-        Matches = Matches - 1
-        print("You light a match. it begins to burn away.")
-        print(rip + "You used up one match. \n")
-    } else if surroundingsLit == false {
-        CSDescription = "This place is in ruins, possibly for decades."
-    }
-
-    Matches = Matches - 1
-    surroundingsLit = true
-    print("You Light a match, your surroundings fill up with light. \n you can now see!")
-    print(rip + "You used up one match.")
+	if Matches == 0 {
+		print(error + "You don't have any matches!\n")
+		
+	} else if surroundingsLit == true {
+		Matches = Matches - 1
+		print("You light a match. it begins to burn away.")
+		print(rip + "You used up one match. \n")
+	} else if surroundingsLit == false {
+		CSDescription = "This place is in ruins, possibly for decades."
+	}
+	
+	Matches = Matches - 1
+	surroundingsLit = true
+	print("You Light a match, your surroundings fill up with light. \n you can now see!")
+	print(rip + "You used up one match.")
 }
 
 
@@ -539,7 +538,7 @@ func useMatch() {
 
 print("poop")
 repeat {
-    useMatch()
+	useMatch()
 }    while true
 
 gameover()
