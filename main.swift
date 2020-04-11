@@ -246,7 +246,7 @@ func combat(enemy: String, enemyHP: Int) -> String {
 /// Commands used
 
 func checkCoins() {
-	print(success + "You have $" + String(coins) + "!")
+	print(success + "You have $" + String(coins) + "!\n")
 	if coins == 0 {
 		sleep(1)
 		print(WHITE + "You have 0 coins? I feel bad, here take 10 coins!")
