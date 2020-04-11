@@ -67,7 +67,7 @@ var GRAY = "\u{001B}[2;37m"
 var RESETCLR = "\u{001B}[0;00m"
 
 
-var success = BOLD + GREEN + "==> "
+var success = GREEN + BOLD + "==> "
 var rip = BOLD + RED + "==> "
 var question = BOLD + YELLOW + "[?] "
 var error = BOLD + RED + "[!] "

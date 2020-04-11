@@ -34,3 +34,10 @@ fix it.
 You can always help with translations, currently, they are not implemented
 but if you are interested in helping translate a language, we will implement
 that. If you want to translate, just let us know by opening up an issue.
+
+
+
+## Known Issues:
+- We have an issue where the bold text is not working, we have found a swift package
+called `Rainbow` which can colour and bold text however, we're having trouble
+installing it with the Swift Package Manager
