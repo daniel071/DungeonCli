@@ -220,7 +220,7 @@ func combat(enemy: String, enemyHP: Int) -> String {
                 combatLoop = false
                 return "kill"
             }
-        
+
         } else if userInput == "flee" {
             let chance = Int.random(in: 1..<2)
             if chance == 1 {
@@ -249,7 +249,7 @@ func checkCoins() {
     print(success + "You have $" + String(coins) + "!")
     if coins == 0 {
         sleep(1)
-        print(WHITE + "You have 0 coins? I feel bad, here"
+        print(WHITE + "You have 0 coins? I feel bad, here",
         " take 10 coins!")
         sleep(2)
         addCoins(10)
@@ -266,16 +266,16 @@ func openInventory() {
     if Sticks != 0 {
        print(str(Sticks) + " x Sticks")
     }
-    if basicHealingPotion != 0:
+    if basicHealingPotion != 0 {
        print(str(basicHealingPotion) + " x Basic Healing Potion")
     }
-    if Sword != 0:
+    if Sword != 0 {
        // TODO: Implement more then just a basic sword.
        print("Basic Sword")
     }
    // This print just adds some white space
    print(" ")
-
+}
 
 func useMatch() {
 	if Matches == 0 {
