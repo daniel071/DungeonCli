@@ -207,13 +207,13 @@ func combat(enemy: String, enemyHP: Int) -> String {
 			currentEnemyHP = currentEnemyHP - selfDamage
 			
 			// Displays to user
-			print(success + "You deal " + String(selfDamage) + " damage!")
-			print(rip + enemy + " deals " + String(enemyDamage) + " damage!")
+			print(success + "You deal " + String(selfDamage) + " damage!" + WHITE)
+			print(rip + enemy + " deals " + String(enemyDamage) + " damage!" + WHITE)
 			sleep(1)
 			isDead()
 			
 			if enemyHP < 0 {
-				print(success + "You successfully killed " + enemy)
+				print(success + "You successfully killed " + enemy + WHITE)
 				sleep(1)
 				let extraCoins = Int.random(in: 10..<25)
 				addCoins(value: extraCoins)
@@ -224,19 +224,19 @@ func combat(enemy: String, enemyHP: Int) -> String {
 		} else if userInput == "flee" {
 			let chance = Int.random(in: 1..<2)
 			if chance == 1 {
-				print(action + "You run away before " + enemy + " could catch you")
+				print(action + "You run away before " + enemy + " could catch you" + WHITE)
 				combatLoop = false
 				sleep(1)
 				
 				return "flee"
 				
 			} else if chance == 2 {
-				print(action + "You tried to flee, but " + enemy + " caught you.")
+				print(action + "You tried to flee, but " + enemy + " caught you." + WHITE)
 				sleep(1)
 				
 				let enemyDamage = Int.random(in: 10..<20)
 				hp = hp - enemyDamage
-				print(rip + enemy + " deals " + String(enemyDamage) + " damage!")
+				print(rip + enemy + " deals " + String(enemyDamage) + " damage!" + WHITE)
 				sleep(1)
 				isDead()
 			}
@@ -273,18 +273,36 @@ func openInventory() {
 		print("Basic Sword")
 	}
 	// This print just adds some white space
-	print(" ")
+	
+	print(" " + WHITE)
 }
 
+func randomEvent() {
+    print("This is a randomly generated event! The stories in here have not been completed yet.")
+
+    let randomLoop = true
+
+	if events.count > 0 {
+		let selection = events.randomElement()!
+		if selection == "store" {
+            print("Store selected")
+		} else if selection == "randomFight" {
+            print("randomFight selected")
+		}
+		events.removeFirst()
+	} else {
+        print("There are no more unvisited events left!")
+	}
+}
 
 func useMatch() {
 	if Matches == 0 {
-		print(error + "You don't have any matches!\n")
+		print(error + "You don't have any matches!\n" + WHITE)
 		
 	} else if surroundingsLit == true {
 		Matches = Matches - 1
 		print("You light a match. it begins to burn away.")
-		print(rip + "You used up one match. \n")
+		print(rip + "You used up one match. \n" + WHITE)
 	} else if surroundingsLit == false {
 		CSDescription = "This place is in ruins, possibly for decades."
 	}
@@ -292,253 +310,231 @@ func useMatch() {
 	Matches = Matches - 1
 	surroundingsLit = true
 	print("You Light a match, your surroundings fill up with light. \n you can now see!")
-	print(rip + "You used up one match.")
+	print(rip + "You used up one match." + WHITE)
 }
 
 
-//def start():
-//    global CSDescription
-//    global coinsInScene
-//    global currentScene
-//
-//    if surroundingsLit == False:
-//        print("You find yourself in an odd and dark place... \nWhat could this"
-//        " possibly be?\n")
-//        CSDescription = "This place is extremely dark, you can't see anything..."
-//        time.sleep(2)
-//
-//        print("Check your inventory, you might have something to \nimprove your vision...\n")
-//        time.sleep(2)
-//        // combat("Bob", 69)
-//        //print("Maybe I should use a match to light this place up...") // too straight forward.
-//
-//        //print(hint + "type 'm' to use a match)\n" + Style.RESET_ALL) // too straight forward.
-//    else:
-//        if currentScene == 1:
-//            print("This place looks like it's been abandoned decades ago...") // NOTE: describe this 'place'!
-//            print(action + "An odd creature begins to walk up to you... \n") // NOTE: describe this 'creature'! e.g. this oddly hunched over creature
-//            answer = ask("Should you hide or comfront them?", "h", "c")
-//            if answer == "c":
-//                // User selected comfront
-//                // Nothing special happens, it is passed on to the next part
-//                pass
-//
-//            elif answer == "h":
-//                // User selected hide
-//                print(action + "You tried to hide, but there was nowhere to go, "
-//                "the figure began to comfront you.")
-//                time.sleep(3)
-//
-//            print(action + "The odd figure got close enough until you "
-//            "could see it.") // NOTE: so is this a creature or figure
-//            time.sleep(2)
-//
-//            print(action + "The figure looked like an ancient wizard. \n")
-//            time.sleep(2) //
-//
-//            input(quote + 'Greetings, it seems you are new here,'
-//            ' is that true?"\n' + Style.RESET_ALL)
-//
-//            // NOTE: maybe. give the user a choice to say something.
-//            print(action + "You said yes. \n")
-//            time.sleep(0.7)
-//
-//            print(quote + "I see, this is a dangerous place, so tread"
-//            ' carefully..."') // ITS DANGEROUS TO GO ALONE.
-//            time.sleep(2)
-//
-//            print(quote + 'Here, take this, it will help you defend yourself."')
-//            time.sleep(3) // TAKE THIS.
-//
-//            print(success + "You recieved a basic sword.")
-//            print(success + "You recieved a basic healing potion.")
-//            addCoins(50)
-//
-//            global Sword
-//            global basicHealingPotion
-//
-//            basicHealingPotion = basicHealingPotion + 1
-//            Sword = 1
-//            currentScene = 2
-//
-//        elif currentScene == 2:
-//            print(action + "You ask the ancient wizard:")
-//            time.sleep(1.7)
-//
-//            print(Style.RESET_ALL + "Who are you?")
-//            time.sleep(1.2)
-//            print("What is this place? \n")
-//            time.sleep(1.2)
-//
-//            print(action + "The wizard responds \n")
-//            time.sleep(1.7)
-//
-//            print(quote + 'This place is an underground town, it used to be'
-//            ' thriving, there were plenty of stores, lots of jobs, it was'
-//            ' a great place to be...\n But then, the rebellion came in'
-//            ' and wiped this place out, everybody either escaped or died.\n'
-//            ' And me, I was the founder of this town." \n')
-//            time.sleep(10)
-//            CSDescription = "This place is in ruins, apparently it's supposed to be a town...\nThere is a door to the next room, something seems to be strung across it."
-//
-//            input(quote + 'Would you like to recieve a quest?" \n'
-//            + Style.RESET_ALL)
-//            print(action + "You said yes. \n")
-//            time.sleep(0.8)
-//
-//            print(quote + 'Try and recover the Great Stone of Knowledge,'
-//            ' it is located in the north-east room, however it is guarded'
-//            ' by very powerful Almogates." \n')
-//            time.sleep(5)
-//
-//            print(quote + 'Good luck." \n')
-//            time.sleep(2)
-//
-//            print(action + "He leaves the room and now, you're on your own. \n")
-//            currentScene = 3
-//
-//        elif currentScene == 3:
-//            CSDescription = "The room looked very charred after the explosion."
-//
-//            print(action + "After the wizard left, you went into the next room. \n")
-//            time.sleep(2)
-//
-//            print(action + "It is odly quiet here... you begin to look around... \n")
-//            time.sleep(3)
-//
-//            print(rip + "BANG! A small bomb exploded, it was a trap!")
-//            damage(20)
-//            time.sleep(2)
-//            currentScene = 4
-//
-//        elif currentScene == 4:
-//            print(action + "You proceed to the next room, being very careful where you step.")
-//
-//            CSDescription = "This room is rather empty, but an old and dried up fountain lays ahead.\na few coins lay scattered across the bottom, maybe you can pick them up..."
-//            coinsInScene = True
-//            time.sleep(2)
-//
-//            print(action + "You quickly hear a movement and freeze...\n")
-//            time.sleep(2)
-//
-//            print(quote + 'IT WAS YOU WHO DID IT! Y-YOU WERE THE ONE WHO KILLED ALL M'
-//            '-MY F-F-FRIENDS!"\n')
-//            time.sleep(3)
-//            print(action + "You try to explain that they were mistaken but"
-//            " it was too late. \n")
-//            time.sleep(2)
-//
-//
-//            theResult = combat("Unidentified", 25)
-//            if theResult == "kill":
-//                print(action + "You killed the unknown person however, you can't stop feeling bad. \n")
-//
-//            elif theResult == "flee":
-//                print(action + "You quickly ran away, you're safe now. \n")
-//
-//            currentScene = 5
-//
-//        elif currentScene == 5:
-//            // It is done bois!
-//            randomEvent()
-//
-//
-//def hpCheck():
-//    // Displays different colour depending on hp
-//
-//    if hp > 70:
-//        print(success + "You have {hp} out of {max} HP! \n".format(hp=hp, max=100))
-//
-//    elif hp > 35:
-//        print(action + "You have {hp} out of {max} HP! \n".format(hp=hp, max=100))
-//
-//    else:
-//        print(rip + "You have {hp} out of {max} HP! \n".format(hp=hp, max=100))
-//
-//
-//def randomEvent():
-//    print("This is a randomly generated event! The stories in here have not been completed yet.")
-//
-//    global events
-//    randomLoop = True
-//
-//    if len(events) > 0:
-//        selection = random.choice(events)
-//        if selection == "store":
-//            print("Store selected")
-//
-//        elif selection == "randomFight":
-//            print("randomFight selected")
-//
-//        events = removeFromList(events, selection)
-//
-//    else:
-//        print("There are no more unvisited events left!")
-//
-//def lookAround():
-//    print(CSDescription + "\n")
-//
-//
-//def pickCoins():
-//    global coinsInScene
-//
-//    if coinsInScene == True:
-//        amount = random.randint(4, 6)
-//        print(action + "You reach down and pick up all the coins from the floor.")
-//        time.sleep(1)
-//
-//        addCoins(amount)
-//        coinsInScene = False
-//
-//
-//    else:
-//        print(error + "There are no coins to pick up! \n")
-//
-//
-//def main():
-//    detect_system()
-//
-//    command = input(Style.BRIGHT + Fore.CYAN + "[Action] " + Style.RESET_ALL)
-//    if command in ("check money", "check coins", "coins", "money", "c"):
-//        checkCoins()
-//    elif command in ("open inventory", "open inv" ,"inventory", "inv", "i","check inventory", "check inv"):
-//        openInventory()
-//    elif command in ("use match", "strike match", "match", "light match",
-//                    "use matches", "matches", "m"):
-//        useMatch()
-//
-//    elif command in ("h", "help", "umm", "asdfghjkl", "qwertyuiop"):
-//        print("Help menu \n")
-//
-//    elif command in ("e", "exit", "close", "alt-f4"):
-//        global mainLoop
-//        mainLoop = 0
-//
-//    elif command in ("hp", "health", "health points"):
-//        hpCheck()
-//
-//    elif command in ("s", "start", "next", "proceed", "next room", "forth"):
-//        start()
-//
-//    elif command in ("l", "look around", "look", "observe"):
-//        lookAround()
-//
-//
-//    if command in ("pickup coins", "pick up coins", "pick coins"):
-//        pickCoins()
-//
-//
+func start() {
+	if surroundingsLit == false {
+        print("You find yourself in an odd and dark place... \nWhat could this possibly be?\n")
+        CSDescription = "This place is extremely dark, you can't see anything..."
+        sleep(2)
+
+        print("Check your inventory, you might have something to \nimprove your vision...\n")
+        sleep(2)
+        // combat("Bob", 69)
+        //print("Maybe I should use a match to light this place up...") // too straight forward.
+
+        //print(hint + "type 'm' to use a match)\n" + Style.RESET_ALL) // too straight forward.
+	} else {
+		if currentScene == 1 {
+            print("This place looks like it's been abandoned decades ago...") // NOTE: describe this 'place'!
+            print(action + "An odd creature begins to walk up to you... \n") // NOTE: describe this 'creature'! e.g. this oddly hunched over creature
+			let answer = ask(funcQuestion: "Should you hide or comfront them?", answer1: "h", answer2: "c")
+			if answer == "c" {
+                // User selected comfront
+                // Nothing special happens, it is passed on to the next part
+			} else if answer == "h" {
+                // User selected hide
+                print(action + "You tried to hide, but there was nowhere to go, the figure began to confront you.")
+                sleep(3)
+			}
+            print(action + "The odd figure got close enough until you could see it.") // NOTE: so is this a creature or figure?
+            sleep(2)
+
+            print(action + "The figure looked like an ancient wizard. \n")
+            sleep(2) //
+
+			print(quote + "Greetings, it seems you are new here,  is that true?" + WHITE, terminator:"")
+			_ = readLine()
+
+            // NOTE: maybe. give the user a choice to say something.
+            print(action + "You said yes. \n")
+            sleep(1)
+
+            print(quote + "I see, this is a dangerous place, so tread carefully..." + WHITE) // ITS DANGEROUS TO GO ALONE.
+            sleep(2)
+
+            print(quote + "Here, take this, it will help you defend yourself." + WHITE)
+            sleep(3) // TAKE THIS.
+
+            print(success + "You recieved a basic sword.")
+            print(success + "You recieved a basic healing potion.")
+			addCoins(value: 50)
+
+
+            basicHealingPotion = basicHealingPotion + 1
+            Sword = 1
+            currentScene = 2
+
+		} else if currentScene == 2 {
+            print(action + "You ask the ancient wizard:")
+            sleep(1)
+
+            print(WHITE + "Who are you?")
+            sleep(1)
+            print("What is this place? \n")
+            sleep(1)
+
+            print(action + "The wizard responds \n")
+            sleep(1)
+
+            print(quote + """
+			This place is an underground town, it used to be
+             thriving, there were plenty of stores, lots of jobs, it was
+             a great place to be...\n But then, the rebellion came in
+             and wiped this place out, everybody either escaped or died. \n
+             And me, I was the founder of this town.
+"""  + WHITE)
+            sleep(8)
+            CSDescription = "This place is in ruins, apparently it's supposed to be a town...\nThere is a door to the next room, something seems to be strung across it."
+
+			print(quote + "Would you like to recieve a quest?" + WHITE, terminator:"")
+			_ = readLine()
+            print(action + "You said yes. \n")
+            sleep(1)
+
+            print(quote + """
+			Try and recover the Great Stone of Knowledge,
+			it is located in the north-east room, however it is guarded
+			by very powerful Almogates.
+			""" + WHITE)
+            sleep(5)
+
+            print(quote + "Good luck." + WHITE)
+            sleep(2)
+
+            print(action + "He leaves the room and now, you're on your own. \n")
+            currentScene = 3
+
+		} else if currentScene == 3 {
+            CSDescription = "The room looked very charred after the explosion."
+
+            print(action + "After the wizard left, you went into the next room. \n")
+            sleep(2)
+
+            print(action + "It is odly quiet here... you begin to look around... \n")
+            sleep(3)
+
+            print(rip + "BANG! A small bomb exploded, it was a trap!")
+			damage(value: 20)
+            sleep(2)
+            currentScene = 4
+
+		} else if currentScene == 4 {
+            print(action + "You proceed to the next room, being very careful where you step.")
+
+            CSDescription = "This room is rather empty, but an old and dried up fountain lays ahead.\na few coins lay scattered across the bottom, maybe you can pick them up..."
+            coinsInScene = true
+            sleep(2)
+
+            print(action + "You quickly hear a movement and freeze...\n")
+			sleep(2)
+
+            print(quote + "IT WAS YOU WHO DID IT! Y-YOU WERE THE ONE WHO KILLED ALL M -MY F-F-FRIENDS!"  + WHITE)
+            sleep(3)
+            print(action + "You try to explain that they were mistaken but it was too late. \n")
+            sleep(2)
+
+
+			let theResult = combat(enemy: "Unidentified", enemyHP: 25)
+			if theResult == "kill" {
+                print(action + "You killed the unknown person however, you can't stop feeling bad. \n")
+			} else if theResult == "flee" {
+                print(action + "You quickly ran away, you're safe now. \n")
+			}
+            currentScene = 5
+
+		} else if currentScene == 5{
+            // It is done bois!
+            randomEvent()
+		}
+	}
+}
+
+
+func hpCheck() {
+    // Displays different colour depending on hp
+
+	if hp > 70 {
+        print(success + "You have " + String(hp) + " out of 100 HP!")
+	}
+	else if hp > 35 {
+        print(action + "You have " + String(hp) + " out of 100 HP!")
+
+	} else {
+        print(rip + "You have " + String(hp) + " out of 100 HP!")
+	}
+}
+
+
+	
+func lookAround() {
+    print(CSDescription)
+}
+
+func pickCoins(){
+
+	if coinsInScene == true {
+        let amount = Int.random(in: 4..<6)
+        print(action + "You reach down and pick up all the coins from the floor.")
+        sleep(1)
+
+		addCoins(value: amount)
+        coinsInScene = false
+
+
+	} else {
+        print(error + "There are no coins to pick up! \n")
+	}
+}
+	
+
+func main() {
+	print(CYAN + "[Action] " + WHITE, terminator:"")
+    let command = readLine()
+	
+	let chkMoney = ["check money", "check coins", "coins", "money", "c"]
+	let opnInvnt = ["open inventory", "open inv" ,"inventory", "inv", "i","check inventory", "check inv"]
+	let cmdMatch = ["use match", "strike match", "match", "light match",
+	"use matches", "matches", "m"]
+	let helpMenu = ["h", "help", "umm", "asdfghjkl", "qwertyuiop"]
+	let exitComd = ["e", "exit", "close", "alt-f4"]
+	let showHlth = ["hp", "health", "health points"]
+	let startCmd = ["s", "start", "next", "proceed", "next room", "forth"]
+	let lookArnd = ["l", "look around", "look", "observe"]
+	
+	if chkMoney.contains(command!) {
+        checkCoins()
+	} else if opnInvnt.contains(command!) {
+        openInventory()
+	} else if cmdMatch.contains(command!) {
+        useMatch()
+	} else if helpMenu.contains(command!) {
+		print("help")
+	} else if exitComd.contains(command!) {
+        mainLoop = 0
+	} else if showHlth.contains(command!) {
+        hpCheck()
+	} else if startCmd.contains(command!) {
+        start()
+	} else if lookArnd.contains(command!) {
+        lookAround()
+	}
+
+	let Pickupcoins = ["pickup coins", "pick up coins", "pick coins"]
+
+	if Pickupcoins.contains(command!) {
+        pickCoins()
+	}
+}
+
 //// Introduce the user:
-//print("Welcome to " + Fore.GREEN + "DungeonCli!" + Style.RESET_ALL)
-//print("Type 'h' for help or 's' to start! \n")
+print("Welcome to " + GREEN + "DungeonCli!" + WHITE)
+print("Type 'h' for help or 's' to start! \n")
 //
 //// Run those functions here:
-//while mainLoop == 1:
-//    main()
-
-print("poop")
 repeat {
-	useMatch()
-}    while true
+    main()
+} while mainLoop == 1
 
-gameover()
