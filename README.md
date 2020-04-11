@@ -6,7 +6,7 @@ places and earn coins. You can spend those coins on various items,
 have fun!
 
 ### **Note: This version of DungeonCli is no longer in development, an up-to-date rewrite in Swift is in progress and is in the branch `swift-rewrite`**
-We will still accept bug reports, fixes and pull requests however, new features will only be done in the `swift-rewrite` branch.
+We will still accept bug reports, fixes and pull requests however, new features will only be done in the `master` branch.
 
 ## Installation:
 1. Download the .zip file and extract it or type
