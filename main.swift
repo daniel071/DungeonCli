@@ -51,7 +51,7 @@ var currentScene = 1
 // cyan    36
 // white   37
 
-var BOLD = "\u{001B}[2;0m"
+var BOLD = "\u{001B}[1m"
 var BLACK = "\u{001B}[0;30m"
 var RED = "\u{001B}[0;31m"
 var GREEN = "\u{001B}[0;32m"
