@@ -207,7 +207,7 @@ func combat(enemy: String, enemyHP: Int) -> String {
             currentEnemyHP = currentEnemyHP - selfDamage
 
             // Displays to user
-            print(success + "You deal " + selfDamage + " damage!")
+            print(success + "You deal " + String(selfDamage) + " damage!")
             print(rip + enemy + " deals " + enemyDamage + " damage!\n")
             sleep(1)
             isDead()
@@ -216,23 +216,23 @@ func combat(enemy: String, enemyHP: Int) -> String {
                 print(success + "You successfully killed " + enemy)
                 sleep(1)
                 let extraCoins = Int.random(in: 10..<25)
-                addCoins(extraCoins)
+                addCoins(value: extraCoins)
                 combatLoop = false
                 return "kill"
             }
-
+        
         } else if userInput == "flee" {
             let chance = Int.random(in: 1..<2)
             if chance == 1 {
                 print(action + "You run away before " + enemy + " could catch you")
-                combatLoop = 0
-                time.sleep(1)
+                combatLoop = false
+                sleep(1)
 
                 return "flee"
 
             } else if chance == 2 {
                 print(action + "You tried to flee, but " + enemy + " caught you.")
-                sleep(1.5)
+                sleep(1)
 
                 let enemyDamage = Int.random(in: 10..<20)
                 hp = hp - enemyDamage
@@ -249,25 +249,25 @@ func checkCoins() {
     print(success + "You have $" + String(coins) + "!")
     if coins == 0 {
         sleep(1)
-        print(WHITE + "You have 0 coins? I feel bad, here",
-        " take 10 coins!")
+        print(WHITE + "You have 0 coins? I feel bad, here take 10 coins!")
         sleep(2)
-        addCoins(10)
+        addCoins(value: 10)
         sleep(1)
+    }
 }
 //
 //
 func openInventory() {
     print(success + "Inventory:")
-    count = 0
+    var count = 0
     if Matches != 0 {
-       print(str(Matches) + " x Matches")
+       print(String(Matches) + " x Matches")
     }
     if Sticks != 0 {
-       print(str(Sticks) + " x Sticks")
+       print(String(Sticks) + " x Sticks")
     }
     if basicHealingPotion != 0 {
-       print(str(basicHealingPotion) + " x Basic Healing Potion")
+       print(String(basicHealingPotion) + " x Basic Healing Potion")
     }
     if Sword != 0 {
        // TODO: Implement more then just a basic sword.
@@ -277,22 +277,23 @@ func openInventory() {
    print(" ")
 }
 
-func useMatch() {
-	if Matches == 0 {
-		print(error + "You don't have any matches!\n")
 
-	} else if surroundingsLit == true {
-		Matches = Matches - 1
-		print("You light a match. it begins to burn away.")
-		print(rip + "You used up one match. \n")
+func useMatch() {
+    if Matches == 0 {
+        print(error + "You don't have any matches!\n")
+
+    } else if surroundingsLit == true {
+        Matches = Matches - 1
+        print("You light a match. it begins to burn away.")
+        print(rip + "You used up one match. \n")
     } else if surroundingsLit == false {
-		CSDescription = "This place is in ruins, possibly for decades."
+        CSDescription = "This place is in ruins, possibly for decades."
     }
 
-	Matches = Matches - 1
-	surroundingsLit = true
-	print("You Light a match, your surroundings fill up with light. \n you can now see!")
-	print(rip + "You used up one match.")
+    Matches = Matches - 1
+    surroundingsLit = true
+    print("You Light a match, your surroundings fill up with light. \n you can now see!")
+    print(rip + "You used up one match.")
 }
 
 
@@ -538,7 +539,7 @@ func useMatch() {
 
 print("poop")
 repeat {
-	useMatch()
-}	while true
+    useMatch()
+}    while true
 
 gameover()
