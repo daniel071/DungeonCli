@@ -383,11 +383,11 @@ func start() {
             sleep(1)
 
             print(quote + """
-			This place is an underground town, it used to be
-             thriving, there were plenty of stores, lots of jobs, it was
-             a great place to be...\n But then, the rebellion came in
-             and wiped this place out, everybody either escaped or died. \n
-             And me, I was the founder of this town.
+This place is an underground town, it used to be
+thriving, there were plenty of stores, lots of jobs, it was
+a great place to be...\n But then, the rebellion came in
+and wiped this place out, everybody either escaped or died.
+And me, I was the founder of this town.
 """  + WHITE)
             sleep(8)
             CSDescription = "This place is in ruins, apparently it's supposed to be a town...\nThere is a door to the next room, something seems to be strung across it."
