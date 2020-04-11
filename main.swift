@@ -1,4 +1,5 @@
 import Foundation
+import Rainbow
 // Define variables here:
 
 //TODO: Add saving mechanic for these coins
@@ -537,7 +538,7 @@ func main() {
 }
 
 //// Introduce the user:
-print("Welcome to " + GREEN + "DungeonCli!" + WHITE)
+print(BOLD + "Welcome to " + GREEN + "DungeonCli!" + WHITE)
 print(BOLD + "Type 'h' for help or 's' to start! \n")
 //
 //// Run those functions here:
