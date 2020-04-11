@@ -67,13 +67,13 @@ var GRAY = "\u{001B}[2;37m"
 var RESETCLR = "\u{001B}[0;00m"
 
 
-var success = GREEN + BOLD + "==> "
-var rip = BOLD + RED + "==> "
-var question = BOLD + YELLOW + "[?] "
-var error = BOLD + RED + "[!] "
+var success = GREEN + "==> ".bold
+var rip = RED + "==> ".bold
+var question = YELLOW + "[?] ".bold
+var error = RED + "[!] ".bold
 var hint = DIM + GRAY + "(hint: "
-var action = BOLD + YELLOW + "==> "
-var quote = BOLD + WHITE + "\""
+var action = YELLOW + "==> ".bold
+var quote = WHITE + "\"".bold
 
 
 var coinsInScene = false
