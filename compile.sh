@@ -1,2 +1,2 @@
-swiftc ./DungeonCliSwift.swift -o a.Out
+swiftc ./main.swift -o a.out
 ./a.out
