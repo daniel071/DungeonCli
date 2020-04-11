@@ -51,6 +51,7 @@ var currentScene = 1
 // cyan    36
 // white   37
 
+var DIM = "\u{001B}[2m"
 var BOLD = "\u{001B}[1m"
 var BLACK = "\u{001B}[0;30m"
 var RED = "\u{001B}[0;31m"
@@ -63,13 +64,13 @@ var WHITE = "\u{001B}[0;37m"
 var GRAY = "\u{001B}[1;37m"
 
 
-var success = GREEN + "==> "
-var rip = RED + "==> "
-var question = YELLOW + "[?] "
-var error = RED + "[!] "
-var hint = GRAY + "(hint: "
-var action = YELLOW + "==> "
-var quote = WHITE + "\""
+var success = BOLD + GREEN + "==> "
+var rip = BOLD + RED + "==> "
+var question = BOLD + YELLOW + "[?] "
+var error = BOLD + RED + "[!] "
+var hint = DIM + GRAY + "(hint: "
+var action = BOLD + YELLOW + "==> "
+var quote = BOLD + WHITE + "\""
 
 
 var coinsInScene = false
@@ -534,7 +535,6 @@ func main() {
 }
 
 //// Introduce the user:
-print("Welcome to " + GREEN + "DungeonCli!" + WHITE)
 print(BOLD + "Type 'h' for help or 's' to start! \n")
 print("Type 'h' for help or 's' to start! \n")
 //
