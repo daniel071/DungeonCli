@@ -121,15 +121,15 @@ func gameover() {
 	sleep(1)
 	print("...\n")
 	sleep(1)
-	
+
 	print(RED + "Game Over!")
 	sleep(2)
-	
+
 	print(WHITE + "Maybe next time, you might be lucky...\n")
 	sleep(5)
 	//clear()
 	//exit()
-	
+
 }
 
 
@@ -157,14 +157,14 @@ func ask(funcQuestion: String, answer1: String, answer2: String) -> String {
 		// Asks the user a question
 		print (question + funcQuestion + " [" + answer1 + "/" + answer2 + "]", terminator:"")
 		let userInput = readLine()
-		
+
 		// Checks if it's correct
-		
+
 		if userInput == answer1 {
 			askLoop = 0
 			print("")
 			return answer1
-		} else if userInput == answer2{
+		} else if userInput == answer2 {
 			askLoop = 0
 			print("")
 			return answer2
@@ -188,31 +188,31 @@ func heal(value: Int) {
 }
 
 func combat(enemy: String, enemyHP: Int) -> String {
-	
+
 	var currentEnemyHP = enemyHP
-	print(rip + "You get in a battle with " + enemy + "!")
+	print(rip + "You get in a battle with " + enemy + "!\n")
 	sleep(1)
-	
+
 	var combatLoop = true
 	repeat {
 		sleep(1)
-		
+
 		let userInput = ask(funcQuestion: "Fight or Flee?", answer1: "fight", answer2: "flee")
 		if userInput == "fight" {
 			// Calculates damage
 			let selfDamage = Int.random(in: 5..<10) * damageMultiplyer
 			let enemyDamage = Int.random(in: 5..<10)
-			
+
 			// Applies damage
 			hp = hp - enemyDamage
 			currentEnemyHP = currentEnemyHP - selfDamage
-			
+
 			// Displays to user
 			print(success + "You deal " + String(selfDamage) + " damage!" + WHITE)
 			print(rip + enemy + " deals " + String(enemyDamage) + " damage!" + WHITE)
 			sleep(1)
 			isDead()
-			
+
 			if enemyHP < 0 {
 				print(success + "You successfully killed " + enemy + WHITE)
 				sleep(1)
@@ -221,20 +221,20 @@ func combat(enemy: String, enemyHP: Int) -> String {
 				combatLoop = false
 				return "kill"
 			}
-			
+
 		} else if userInput == "flee" {
 			let chance = Int.random(in: 1..<2)
 			if chance == 1 {
 				print(action + "You run away before " + enemy + " could catch you" + WHITE)
 				combatLoop = false
 				sleep(1)
-				
+
 				return "flee"
-				
+
 			} else if chance == 2 {
 				print(action + "You tried to flee, but " + enemy + " caught you." + WHITE)
 				sleep(1)
-				
+
 				let enemyDamage = Int.random(in: 10..<20)
 				hp = hp - enemyDamage
 				print(rip + enemy + " deals " + String(enemyDamage) + " damage!" + WHITE)
@@ -274,44 +274,47 @@ func openInventory() {
 		print("Basic Sword")
 	}
 	// This print just adds some white space
-	
+
 	print(" " + WHITE)
 }
 
 func randomEvent() {
-    print("This is a randomly generated event! The stories in here have not been completed yet.")
+    print("This is a randomly generated event! The stories in here have not been completed yet.\n")
 
     let randomLoop = true
 
 	if events.count > 0 {
 		let selection = events.randomElement()!
 		if selection == "store" {
-            print("Store selected")
+            print("Store selected\n")
 		} else if selection == "randomFight" {
-            print("randomFight selected")
+            print("randomFight selected\n")
 		}
 		events.removeFirst()
 	} else {
-        print("There are no more unvisited events left!")
+        print("There are no more unvisited events left!\n")
 	}
 }
 
 func useMatch() {
 	if Matches == 0 {
 		print(error + "You don't have any matches!\n" + WHITE)
-		
+
 	} else if surroundingsLit == true {
 		Matches = Matches - 1
+		CSDescription = "This place is in ruins, possibly for decades."
 		print("You light a match. it begins to burn away.")
 		print(rip + "You used up one match. \n" + WHITE)
 	} else if surroundingsLit == false {
+
 		CSDescription = "This place is in ruins, possibly for decades."
+		Matches = Matches - 1
+		surroundingsLit = true
+		print("You Light a match, your surroundings fill up with light.",
+		"You can now see!")
+		print(rip + "You used up one match. \n")
+
 	}
-	
-	Matches = Matches - 1
-	surroundingsLit = true
-	print("You Light a match, your surroundings fill up with light. \n you can now see!")
-	print(rip + "You used up one match." + WHITE)
 }
 
 
@@ -469,7 +472,7 @@ func hpCheck() {
 }
 
 
-	
+
 func lookAround() {
     print(CSDescription)
 }
@@ -489,12 +492,12 @@ func pickCoins(){
         print(error + "There are no coins to pick up! \n")
 	}
 }
-	
+
 
 func main() {
 	print(CYAN + "[Action] " + WHITE, terminator:"")
     let command = readLine()
-	
+
 	let chkMoney = ["check money", "check coins", "coins", "money", "c"]
 	let opnInvnt = ["open inventory", "open inv" ,"inventory", "inv", "i","check inventory", "check inv"]
 	let cmdMatch = ["use match", "strike match", "match", "light match",
@@ -504,7 +507,7 @@ func main() {
 	let showHlth = ["hp", "health", "health points"]
 	let startCmd = ["s", "start", "next", "proceed", "next room", "forth"]
 	let lookArnd = ["l", "look around", "look", "observe"]
-	
+
 	if chkMoney.contains(command!) {
         checkCoins()
 	} else if opnInvnt.contains(command!) {
@@ -539,4 +542,3 @@ print("Type 'h' for help or 's' to start! \n")
 repeat {
     main()
 } while mainLoop == 1
-
