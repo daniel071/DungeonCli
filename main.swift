@@ -51,6 +51,7 @@ var currentScene = 1
 // cyan    36
 // white   37
 
+var BOLD = "\u{001B}[2;0m"
 var BLACK = "\u{001B}[0;30m"
 var RED = "\u{001B}[0;31m"
 var GREEN = "\u{001B}[0;32m"
@@ -534,6 +535,7 @@ func main() {
 
 //// Introduce the user:
 print("Welcome to " + GREEN + "DungeonCli!" + WHITE)
+print(BOLD + "Type 'h' for help or 's' to start! \n")
 print("Type 'h' for help or 's' to start! \n")
 //
 //// Run those functions here:
