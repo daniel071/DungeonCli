@@ -128,7 +128,7 @@ func gameover() {
 	sleep(5)
 	//clear()
     //exit()
-    
+
 }
 
 
