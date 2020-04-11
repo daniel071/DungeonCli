@@ -51,23 +51,17 @@ var currentScene = 1
 // cyan    36
 // white   37
 
-
+var DIM = "\u{001B}[2m"
+var BOLD = "\u{001B}[1m"
 var BLACK = "\u{001B}[0;30m"
-var BOLDBLACK = "\u{001B}[1;30m"
+var BOLDBLACK = "\u{001B}[0;30m"
 var RED = "\u{001B}[0;31m"
-var BOLDRED = "\u{001B}[1;31m"
 var GREEN = "\u{001B}[0;32m"
-var BOLDGREEN = "\u{001B}[1;32m"
 var YELLOW = "\u{001B}[0;33m"
-var BOLDYELLOW = "\u{001B}[1;33m"
 var BLUE = "\u{001B}[0;34m"
-var BOLDBLUE = "\u{001B}[1;34m"
 var MAGENTA = "\u{001B}[0;35m"
-var BOLDMAGENTA = "\u{001B}[0;35m"
 var CYAN = "\u{001B}[0;36m"
-var BOLDCYAN = "\u{001B}[1;36m"
 var WHITE = "\u{001B}[0;37m"
-var BOLDWHITE = "\u{001B}[1;37m"
 var GRAY = "\u{001B}[2;37m"
 var RESETCLR = "\u{001B}[0;00m"
 
