@@ -158,7 +158,7 @@ func ask(funcQuestion: String, answer1: String, answer2: String) -> String {
         let userInput = readLine()
 
         // Checks if it's correct
-        
+
         if userInput == answer1 {
             askLoop = 0
             print("")
@@ -187,7 +187,7 @@ func heal(value: Int) {
 }
 
 func combat(enemy: String, enemyHP: Int) -> String {
-    
+
     var currentEnemyHP = enemyHP
     print(rip + "You get in a battle with " + enemy + "!")
     sleep(1)
@@ -256,47 +256,44 @@ func checkCoins() {
 }
 //
 //
-//def openInventory():
-//    print(success + "Inventory:")
-//    count = 0
-//    if Matches != 0:
-//        print(str(Matches) + " x Matches")
-//
-//    if Sticks != 0:
-//        print(str(Sticks) + " x Sticks")
-//
-//    if basicHealingPotion != 0:
-//        print(str(basicHealingPotion) + " x Basic Healing Potion")
-//
-//    if Sword != 0:
-//        // TODO: Implement more then just a basic sword.
-//        print("Basic Sword")
-//
-//    // This print just adds some white space
-//    print(" ")
-//
-//
-//def useMatch():
-//    global Matches
-//    global surroundingsLit
-//    global CSDescription
-//
-//    if Matches == 0:
-//        print(error + "You don't have any matches!\n")
-//    elif surroundingsLit == True:
-//        Matches = Matches - 1
-//        print("You light a match. it begins to burn away.")
-//        print(rip + "You used up one match. \n")
-//
-//    elif surroundingsLit == False:
-//        CSDescription = "This place is in ruins, possibly for decades."
-//
-//        Matches = Matches - 1
-//        surroundingsLit = True
-//        print("You Light a match, your surroundings fill up with light. "
-//        "you can now see!")
-//        print(rip + "You used up one match. \n")
-//
+func openInventory():
+   print(success + "Inventory:")
+   count = 0
+   if Matches != 0:
+       print(str(Matches) + " x Matches")
+
+   if Sticks != 0:
+       print(str(Sticks) + " x Sticks")
+
+   if basicHealingPotion != 0:
+       print(str(basicHealingPotion) + " x Basic Healing Potion")
+
+   if Sword != 0:
+       // TODO: Implement more then just a basic sword.
+       print("Basic Sword")
+
+   // This print just adds some white space
+   print(" ")
+
+
+func useMatch():
+	if Matches == 0 {
+		print(error + "You don't have any matches!\n")
+
+	} else if surroundingsLit == true: {
+		Matches = Matches - 1
+		print("You light a match. it begins to burn away.")
+		print(rip + "You used up one match. \n")
+	} else if surroundingsLit == false:
+		CSDescription = "This place is in ruins, possibly for decades."
+	}
+
+	Matches = Matches - 1
+	surroundingsLit = true
+	print("You Light a match, your surroundings fill up with light. "
+	"you can now see!")
+	print(rip + "You used up one match. \n")
+
 //
 //def start():
 //    global CSDescription
@@ -539,4 +536,8 @@ func checkCoins() {
 //    main()
 
 print("poop")
+repeat {
+	useMatch()
+}	while true
+
 gameover()
