@@ -18,6 +18,17 @@ can install it from www.python.org
 3. Make sure you have the dependencies installed with `pip install requirements`
 4. Open the terminal in the directory and type `python DungeonCli.py`
 
+
+## Compiling:
+1. Download the .zip file and extract it or type
+
+	`git clone http://119.17.132.38:3000/Daniel/DungeonCli.git`
+2. Make sure you have Python 3.8.2 installed. If you don't, you
+can install it from www.python.org
+3. Make sure you have Nuitka installed. If you don't, you
+can install it from www.nuitka.net
+4. Linux / Unix (macOS) users should run the compile.sh, however Windows users should run compilewindows.bat
+
 ## Usage:
 Type 'h' or 'help' to get a help screen
 
