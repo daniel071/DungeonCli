@@ -7,7 +7,7 @@ import random
 import os
 from sys import platform
 
-from colorama import init
+from colorama import init # type: ignore
 init()
 from colorama import Fore, Back, Style
 
