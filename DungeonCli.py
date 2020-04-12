@@ -467,7 +467,7 @@ def pickCoins():
 
 	if coinsInScene == True:
 		amount = random.randint(4, 6)
-		print(action + "You reach down and pick up all the coins from the floor.")
+		print(action + "You reach out and grab all the coins")
 		time.sleep(1)
 
 		addCoins(amount)
