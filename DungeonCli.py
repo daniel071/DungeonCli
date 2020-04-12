@@ -511,11 +511,14 @@ def main():
 		pickCoins()
 
 
+detect_system()
+clear()
 # Introduce the user:
 print(Style.BRIGHT + "Welcome to " + Fore.GREEN + "DungeonCli!" + Style.RESET_ALL)
-print(Style.DIM + Fore.WHITE + "==> Development Version 0.1.5\n")
+print(Style.DIM + Fore.WHITE + "==> Development Version 0.1.6\n")
 print(Style.RESET_ALL + "Type 'h' for help or 's' to start! \n")
 
 # Run those functions here:
+
 while mainLoop == 1:
 	main()
