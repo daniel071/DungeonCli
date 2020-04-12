@@ -450,8 +450,14 @@ def randomEvent():
 		if selection == "store":
 			print("Store selected")
 
+
+
 		elif selection == "randomFight":
 			print("randomFight selected")
+
+
+
+		elif selection == ""
 
 		events = removeFromList(events, selection)
 
@@ -515,7 +521,7 @@ detect_system()
 clear()
 # Introduce the user:
 print(Style.BRIGHT + "Welcome to " + Fore.GREEN + "DungeonCli!" + Style.RESET_ALL)
-print(Style.DIM + Fore.WHITE + "==> Development Version 0.1.6\n")
+print(Style.DIM + Fore.WHITE + "==> Development Version 0.1.7\n")
 print(Style.RESET_ALL + "Type 'h' for help or 's' to start! \n")
 
 # Run those functions here:
