@@ -18,6 +18,7 @@ mainLoop = 1
 coins = 0 # fucking poor cunt lmao.
 hp = 100
 # Events used for random stuff:
+
 events = ["store", "randomFight"]
 
 # Inventory
@@ -169,7 +170,7 @@ def heal(value):
 	print(success + ("You gained " + str(value) + " health! \n"))
 
 
-def combat(enemy, enemyHP):
+def combat(enemy, enemyHP, enemyDamageMultiplyer):
 	global hp
 	print(rip + "You get in a battle with {enemy}!\n".format(enemy=enemy))
 	time.sleep(1)
@@ -182,7 +183,7 @@ def combat(enemy, enemyHP):
 		if userInput == "fight":
 			# Calculates damage
 			damage = random.randint(5, 10) * damageMultiplyer
-			enemyDamage = random.randint(5, 10)
+			enemyDamage = random.randint(5, 10) * enemyDamageMultiplyer
 
 			# Applies damage
 			hp = hp - enemyDamage
@@ -216,7 +217,7 @@ def combat(enemy, enemyHP):
 				print(action + "You tried to flee, but {name} caught you. \n".format(name=enemy))
 				time.sleep(1.5)
 
-				enemyDamage = random.randint(10, 20)
+				enemyDamage = random.randint(10, 20) * enemyDamageMultiplyer
 				hp = hp - enemyDamage
 				print(rip + "{name} deals {damage} damage!\n".format(damage=enemyDamage, name=enemy))
 				time.sleep(1)
@@ -412,7 +413,7 @@ def start():
 			time.sleep(2)
 
 
-			theResult = combat("Unidentified", 25)
+			theResult = combat("Unidentified", 25, 0.5)
 			if theResult == "kill":
 				print(action + "You killed the unknown person however, you can't stop feeling bad. \n")
 
@@ -428,6 +429,8 @@ def start():
 
 def hpCheck():
 	# Displays different colour depending on hp
+	global hp
+	hp = round(hp)
 
 	if hp > 70:
 		print(success + "You have {hp} out of {max} HP! \n".format(hp=hp, max=100))
@@ -453,7 +456,13 @@ def randomEvent():
 
 
 		elif selection == "randomFight":
-			print("randomFight selected")
+			randomEnemy()
+
+		elif selection == "wizardThatWantsToKillYou":
+			print(quote + 'You. You have the information you need.\n'
+			'')
+			pass
+
 
 
 
@@ -463,6 +472,18 @@ def randomEvent():
 
 	else:
 		print("There are no more unvisited events left!")
+
+def randomEnemy():
+	#names = ["Unidentified", "Wizard", "Giant Spider", ""]
+	currentEnemy = random.randint(1, 3)
+	if currentEnemy == 1:
+		enemyName = "Unidentified"
+		enemyHealth = 25
+		enemyDamage = 0
+	elif currentEnemy == 2:
+		enemyName = "Wizard"
+	elif currentEnemy == 3:
+		enemyName = "Giant Spider"
 
 def lookAround():
 	print(CSDescription + "\n")
