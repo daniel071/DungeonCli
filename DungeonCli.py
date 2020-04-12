@@ -170,7 +170,7 @@ def heal(value):
 	print(success + ("You gained " + str(value) + " health! \n"))
 
 
-def combat(enemy, enemyHP, enemyDamageMultiplyer):
+def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 	global hp
 	print(rip + "You get in a battle with {enemy}!\n".format(enemy=enemy))
 	time.sleep(1)
@@ -182,8 +182,8 @@ def combat(enemy, enemyHP, enemyDamageMultiplyer):
 		userInput = ask("Fight or Flee?", "fight", "flee")
 		if userInput == "fight":
 			# Calculates damage
-			damage = random.randint(5, 10) * damageMultiplyer
-			enemyDamage = random.randint(5, 10) * enemyDamageMultiplyer
+			damage = random.randint(5, 10)
+			enemyDamage = random.randint(enemyMinDamage, enemyMaxDamage)
 
 			# Applies damage
 			hp = hp - enemyDamage
@@ -217,7 +217,7 @@ def combat(enemy, enemyHP, enemyDamageMultiplyer):
 				print(action + "You tried to flee, but {name} caught you. \n".format(name=enemy))
 				time.sleep(1.5)
 
-				enemyDamage = random.randint(10, 20) * enemyDamageMultiplyer
+				enemyDamage = random.randint(enemyMinDamage, enemyMaxDamage)
 				hp = hp - enemyDamage
 				print(rip + "{name} deals {damage} damage!\n".format(damage=enemyDamage, name=enemy))
 				time.sleep(1)
@@ -413,7 +413,7 @@ def start():
 			time.sleep(2)
 
 
-			theResult = combat("Unidentified", 25, 0.5)
+			theResult = combat("Unidentified", 25, 5 ,10)
 			if theResult == "kill":
 				print(action + "You killed the unknown person however, you can't stop feeling bad. \n")
 
@@ -463,11 +463,6 @@ def randomEvent():
 			'')
 			pass
 
-
-
-
-		elif selection == ""
-
 		events = removeFromList(events, selection)
 
 	else:
@@ -479,11 +474,21 @@ def randomEnemy():
 	if currentEnemy == 1:
 		enemyName = "Unidentified"
 		enemyHealth = 25
-		enemyDamage = 0
+		enemyMinDamage = 5
+		enemyMaxDamage = 10
+		combat(enemyName, enemyHealth, enemyMinDamage, enemyMaxDamage)
 	elif currentEnemy == 2:
 		enemyName = "Wizard"
+		enemyHealth = 40
+		enemyMinDamage = 10
+		enemyMaxDamage = 20
+		combat(enemyName, enemyHealth, enemyMinDamage, enemyMaxDamage)
 	elif currentEnemy == 3:
 		enemyName = "Giant Spider"
+		enemyHealth = 25
+		enemyMinDamage = 5
+		enemyMaxDamage = 15
+		combat(enemyName, enemyHealth, enemyMinDamage, enemyMaxDamage)
 
 def lookAround():
 	print(CSDescription + "\n")
@@ -532,8 +537,10 @@ def main():
 
 	elif command in ("l", "look around", "look", "observe"):
 		lookAround()
-
-
+	elif command in ("randomEventTest"):
+		randomEvent()
+	elif command in ("forceBattle"):
+		randomEnemy()
 	if command in ("pickup coins", "pick up coins", "pick coins"):
 		pickCoins()
 
