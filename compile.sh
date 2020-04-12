@@ -7,5 +7,5 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 elif [[ "$OSTYPE" == "linux-gnu" ]]; then
 	mv ./DungeonCli.bin ./.Builds/DungeonCli_linux
 else
-	mv ./DungeonCli.exe ./.Builds/DungeonCli.exe
+	mv ./DungeonCli.bin ./.Builds/DungeonCli
 fi
