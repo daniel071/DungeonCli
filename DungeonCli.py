@@ -88,9 +88,9 @@ def removeFromList(list, removal):
 
 
 def detect_system():
-    global operatingsystem
-    if platform == "linux" or platform == "linux2" or platform == "darwin":
-        operatingsystem = "unix"
+	global operatingsystem
+	if platform == "linux" or platform == "linux2" or platform == "darwin":
+		operatingsystem = "unix"
 	else:
 		operatingsystem = "windows"
 
