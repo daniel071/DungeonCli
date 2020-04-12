@@ -1,3 +1,6 @@
 *.out
 .DS_Store
-.build
+builds
+*.bin
+*.build
+*.dist
