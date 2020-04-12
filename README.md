@@ -22,6 +22,7 @@ can install it from www.python.org
 ### From binaries
 ###### Note: This method only works only on Linux / Unix systems!
 If you're on Windows, you'll must install using Python or compile yourself.
+
 1. Go to the releases page and download the binary for your operating system
 2. Give the binary executable permissions and run it
 
@@ -65,10 +66,3 @@ fix it.
 You can always help with translations, currently, they are not implemented
 but if you are interested in helping translate a language, we will implement
 that. If you want to translate, just let us know by opening up an issue.
-
-
-
-## Known Issues:
-- We have an issue where the bold text is not working, we have found a swift package
-called `Rainbow` which can colour and bold text however, we're having trouble
-installing it with the Swift Package Manager
