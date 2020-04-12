@@ -91,6 +91,8 @@ def detect_system():
     global operatingsystem
     if platform == "linux" or platform == "linux2" or platform == "darwin":
         operatingsystem = "unix"
+	else:
+		operatingsystem = "windows"
 
 
 def clear():
