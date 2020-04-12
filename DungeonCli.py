@@ -14,7 +14,7 @@ from colorama import Fore, Back, Style
 # --------------------------
 # |        Version!        |
 # --------------------------
-version = Style.DIM + Fore.WHITE + "==> Development Version 0.1.9 \n" + Style.RESET_ALL
+version = Style.DIM + Fore.WHITE + "==> Release Version 0.2.0 \n" + Style.RESET_ALL
 # --------------------------
 
 
