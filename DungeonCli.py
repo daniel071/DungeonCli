@@ -1,9 +1,3 @@
-# --------------------------
-# |        Version!        |
-# --------------------------
-version = Style.DIM + Fore.WHITE + "==> Development Version 0.1.9 \n" + Style.RESET_ALL
-# --------------------------
-
 # DungeonCli is a terminal based program where you get to explore places and
 # earn coins. You can spend those coins on various items, have fun!
 
@@ -16,6 +10,13 @@ from sys import platform
 from colorama import init # type: ignore
 init()
 from colorama import Fore, Back, Style
+
+# --------------------------
+# |        Version!        |
+# --------------------------
+version = Style.DIM + Fore.WHITE + "==> Development Version 0.1.9 \n" + Style.RESET_ALL
+# --------------------------
+
 
 # Define variables here:
 
@@ -506,11 +507,28 @@ def pickCoins():
 
 
 def healingPotion():
-	print(success = "[1] You have {amount} basic healing potions"
-	.format(amount=basicHealingPotioneal))
-	userInput = input(question + "Which potion would you like to use?")
-	if userInput == "1":
-		print("You have selected ")
+	global basicHealingPotion
+	if basicHealingPotion > 0:
+		askLoop = 1
+		print(success + "[1] You have {amount} basic healing potions\n"
+		.format(amount=basicHealingPotion))
+
+		while askLoop:
+			userInput = input(question + "Which potion would you like to use? ")
+			if userInput == "1":
+				# Displays to user
+				print("You have selected the basic healing potion\n")
+				time.sleep(1)
+				print(rip + "You used up 1 basic healing potion")
+				# Applies the changes
+				heal(20)
+				time.sleep(2)
+				basicHealingPotion = basicHealingPotion - 1
+				askLoop = 0
+			else:
+				print(error + "Answer must be either 1, 1 or 1!\n")
+	else:
+		print(error + "You don't have any potions!\n")
 
 
 
