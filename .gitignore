@@ -4,3 +4,4 @@ builds
 *.bin
 *.build
 *.dist
+.Builds/DungeonCli_osx
