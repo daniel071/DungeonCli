@@ -1,3 +1,9 @@
+# --------------------------
+# |        Version!        |
+# --------------------------
+version = Style.DIM + Fore.WHITE + "==> Development Version 0.1.9 \n" + Style.RESET_ALL
+# --------------------------
+
 # DungeonCli is a terminal based program where you get to explore places and
 # earn coins. You can spend those coins on various items, have fun!
 
@@ -468,27 +474,16 @@ def randomEvent():
 	else:
 		print("There are no more unvisited events left!")
 
+
 def randomEnemy():
-	#names = ["Unidentified", "Wizard", "Giant Spider", ""]
-	currentEnemy = random.randint(1, 3)
-	if currentEnemy == 1:
-		enemyName = "Unidentified"
-		enemyHealth = 25
-		enemyMinDamage = 5
-		enemyMaxDamage = 10
-		combat(enemyName, enemyHealth, enemyMinDamage, enemyMaxDamage)
-	elif currentEnemy == 2:
-		enemyName = "Wizard"
-		enemyHealth = 40
-		enemyMinDamage = 10
-		enemyMaxDamage = 20
-		combat(enemyName, enemyHealth, enemyMinDamage, enemyMaxDamage)
-	elif currentEnemy == 3:
-		enemyName = "Giant Spider"
-		enemyHealth = 25
-		enemyMinDamage = 5
-		enemyMaxDamage = 15
-		combat(enemyName, enemyHealth, enemyMinDamage, enemyMaxDamage)
+	# [Name, Health, Enemy Minimum Damage, Enemy Maximum Damage]
+	# enemyName, enemyHealth, enemyMinDamage, enemyMaxDamage
+	names = [["Unidentified", 25, 5, 10], ["Wizard", 40, 10, 20],
+	["Giant Spider", 25, 5, 15], ["Bob", 100, 1, 1]]
+
+	decision = random.choice(names)
+	combat(decision[0], decision[1], decision[2], decision[3])
+
 
 def lookAround():
 	print(CSDescription + "\n")
@@ -509,14 +504,16 @@ def pickCoins():
 	else:
 		print(error + "There are no coins to pick up! \n")
 
-# --------------------------
-# |        Version!        |
-# --------------------------
 
-version = Style.DIM + Fore.WHITE + "==> Development Version 0.1.8 \n" + Style.RESET_ALL
+def healingPotion():
+	print(success = "[1] You have {amount} basic healing potions"
+	.format(amount=basicHealingPotioneal))
+	userInput = input(question + "Which potion would you like to use?")
+	if userInput == "1":
+		print("You have selected ")
 
 
-# --------------------------
+
 def main():
 	detect_system()
 
@@ -550,8 +547,11 @@ def main():
 		randomEnemy()
 	elif command in ("version", "ver"):
 		print(version)
-	if command in ("pickup coins", "pick up coins", "pick coins"):
+	elif command in ("pickup coins", "pick up coins", "pick coins"):
 		pickCoins()
+
+	elif command in ("heal"):
+		healingPotion()
 
 
 detect_system()
