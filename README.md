@@ -5,8 +5,8 @@ DungeonCli is a terminal based program where you get to explore
 places and earn coins. You can spend those coins on various items,
 have fun!
 
-### Note: This version is still in development and may have a lot of bugs
-There is also a (depreciated, but currently more stable) version, made with python at the `python` branch
+#### Note: There is also a swift rewrite
+There is also a depreciated	version, made with swift at the `swift-rewrite` branch
 
 ## Installation:
 1. Download the .zip file and extract it or type
