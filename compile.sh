@@ -1,11 +1,11 @@
 # Add to compile executables for each OS, so that Python isn't required
 # python DungeonCli.py
-mkdir .Builds
+mkdir bin.build
 python3 -m nuitka --follow-imports DungeonCli.py
 if [[ "$OSTYPE" == "darwin"* ]]; then
-	mv ./DungeonCli.bin ./.Builds/DungeonCli_osx
+	mv ./DungeonCli.bin ./.build/DungeonCli_osx
 elif [[ "$OSTYPE" == "linux-gnu" ]]; then
-	mv ./DungeonCli.bin ./.Builds/DungeonCli_linux
+	mv ./DungeonCli.bin ./bin.build/DungeonCli_linux
 else
-	mv ./DungeonCli.bin ./.Builds/DungeonCli
+	mv ./DungeonCli.bin ./bin.build/DungeonCli
 fi
