@@ -509,7 +509,14 @@ def pickCoins():
 	else:
 		print(error + "There are no coins to pick up! \n")
 
+# --------------------------
+# |        Version!        |
+# --------------------------
 
+version = Style.DIM + Fore.WHITE + "==> Development Version 0.1.8 \n" + Style.RESET_ALL
+
+
+# --------------------------
 def main():
 	detect_system()
 
@@ -541,6 +548,8 @@ def main():
 		randomEvent()
 	elif command in ("forceBattle"):
 		randomEnemy()
+	elif command in ("version", "ver"):
+		print(version)
 	if command in ("pickup coins", "pick up coins", "pick coins"):
 		pickCoins()
 
@@ -549,7 +558,8 @@ detect_system()
 clear()
 # Introduce the user:
 print(Style.BRIGHT + "Welcome to " + Fore.GREEN + "DungeonCli!" + Style.RESET_ALL)
-print(Style.DIM + Fore.WHITE + "==> Development Version 0.1.7\n")
+
+print(version)
 print(Style.RESET_ALL + "Type 'h' for help or 's' to start! \n")
 
 # Run those functions here:
