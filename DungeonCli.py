@@ -14,7 +14,7 @@ from colorama import Fore, Back, Style
 # --------------------------
 # |        Version!        |
 # --------------------------
-version = Style.DIM + Fore.WHITE + "==> Release Version 0.2.0 \n" + Style.RESET_ALL
+version = Style.DIM + Fore.WHITE + "==> Development Version 0.2.2 \n" + Style.RESET_ALL
 # --------------------------
 
 
@@ -48,6 +48,7 @@ armour = 0
 absorbtion = 0 # Out of 100%
 damageMultiplyer = 1
 CSDescription = "You haven't started yet!" # description of current room, called by observe and look around
+CSSOptions = [["Matches", 10], ["Basic Healing Potion", 20], ["Copper Armour", 100], ["Stone Sword", 80]]
 
 # 1 x Matches.
 # 3 x Sticks.
@@ -167,6 +168,34 @@ def ask(funcQuestion, answer1, answer2):
 			"{answer1} or {answer2}!\n".format(answer1=answer1, answer2=answer2))
 
 
+def ask3(funcQuestion, answer1, answer2, answer3):
+		askLoop = 1
+		while askLoop == 1:
+			# Asks the user a question
+			userInput = input(question + "{funcQuestion} [{answer1}/{answer2}/{answer3}] "
+			.format(funcQuestion=funcQuestion, answer1=answer1, answer2=answer2, answer3=answer3)
+			 + Style.RESET_ALL)
+
+			# Checks if it's correct
+			if userInput == answer1:
+				askLoop = 0
+				print("")
+				return answer1
+			elif userInput == answer2:
+				askLoop = 0
+				print("")
+				return answer2
+			elif userInput == answer3:
+				askLoop = 0
+				print("")
+				return answer3
+
+			else:
+				print(error + "Answer must be either "
+				"{answer1}, {answer2} or {answer3}!\n".format(answer1=answer1,
+				answer2=answer2, answer3=answer3))
+
+
 def damage(value):
 	global hp
 	hp = hp - value
@@ -177,6 +206,8 @@ def heal(value):
 	global hp
 	hp = hp + value
 	print(success + ("You gained " + str(value) + " health! \n"))
+	if hp > 100:
+		hp = 100
 
 
 def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
@@ -265,6 +296,32 @@ def openInventory():
 
 	# This print just adds some white space
 	print(" ")
+
+def openStore():
+	global CSSOptions
+	print("------------------")
+	print("      STORE       ")
+	print("------------------")
+	print(success + "You have $", str(coins))
+
+	storeOptions = CSSOptions
+	storeSelected = []
+	i = 0
+	while i < 3:
+		i += 1
+		theChosenOne = random.choice(storeOptions)
+		print(Fore.WHITE + "{i}: {name} -- {price}"
+		.format(i=i, name=theChosenOne[0], price=theChosenOne[1]))
+		storeSelected.append(theChosenOne)
+		storeOptions = removeFromList(storeOptions, theChosenOne)
+		#print(storeSelected)
+
+
+	print("")
+
+
+	print(ask3("Select an item you would like to purchase:", "1",
+	"2", "3"))
 
 
 def useMatch():
@@ -439,6 +496,9 @@ def start():
 def hpCheck():
 	# Displays different colour depending on hp
 	global hp
+	if hp > 100:
+		hp = 100
+
 	hp = round(hp)
 
 	if hp > 70:
@@ -460,8 +520,7 @@ def randomEvent():
 	if len(events) > 0:
 		selection = random.choice(events)
 		if selection == "store":
-			print("Store selected")
-
+			openStore()
 
 
 		elif selection == "randomFight":
@@ -572,6 +631,9 @@ def main():
 
 	elif command in ("heal"):
 		healingPotion()
+	elif command in ("store"):
+		# NOTE: This is for only debugging!
+		openStore()
 
 
 detect_system()

@@ -6,7 +6,7 @@ places and earn coins. You can spend those coins on various items,
 have fun!
 
 ##### Note: There is also a swift rewrite (depreciated)
-This is a depreciated	version, made with swift at the `swift-rewrite` branch
+There is another depreciated version, made with swift at the `swift-rewrite` branch
 
 
 ## Installation:
