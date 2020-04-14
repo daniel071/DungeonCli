@@ -48,6 +48,7 @@ armour = 0
 absorbtion = 0 # Out of 100%
 damageMultiplyer = 1
 CSDescription = "You haven't started yet!" # description of current room, called by observe and look around
+StoreOptions = [["Matches", 10], ["Basic Healing Potion", 20], ["Copper Armour", 100], ["Stone Sword", 80]]
 
 # 1 x Matches.
 # 3 x Sticks.
@@ -177,6 +178,8 @@ def heal(value):
 	global hp
 	hp = hp + value
 	print(success + ("You gained " + str(value) + " health! \n"))
+	if hp > 100:
+		hp = 100
 
 
 def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
@@ -265,6 +268,14 @@ def openInventory():
 
 	# This print just adds some white space
 	print(" ")
+
+def openStore():
+	print("------------------")
+	print("      STORE       ")
+	print("------------------")
+	print("you have $" + coins)
+
+
 
 
 def useMatch():
@@ -439,6 +450,9 @@ def start():
 def hpCheck():
 	# Displays different colour depending on hp
 	global hp
+	if hp > 100:
+		hp = 100
+
 	hp = round(hp)
 
 	if hp > 70:
