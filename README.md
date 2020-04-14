@@ -53,12 +53,16 @@ If you're on Windows, run `compilewindows.bat`
 ## Screenshots:
 **The start screen**
 ![The start screen](http://119.17.132.38:3000/Daniel/DungeonCli/raw/branch/master/Screenshots/v0.3.1%20Start%20Screen.png)
+
 **Common commands**
 ![Common commands](http://119.17.132.38:3000/Daniel/DungeonCli/raw/branch/master/Screenshots/v0.3.1%20common%20commands.png)
+
 **Healing**
 ![Healing](http://119.17.132.38:3000/Daniel/DungeonCli/raw/branch/master/Screenshots/v0.3.1%20healing.png)
+
 **The combat system**
 ![The combat system](http://119.17.132.38:3000/Daniel/DungeonCli/raw/branch/master/Screenshots/combat%20system%20v0.3.1.png)
+
 **The Store**
 ![The Store](http://119.17.132.38:3000/Daniel/DungeonCli/raw/branch/master/Screenshots/v0.3.0%20store.png)
 
