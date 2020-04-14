@@ -16,7 +16,7 @@ There is another depreciated version, made with swift at the `swift-rewrite` bra
 	`git clone http://119.17.132.38:3000/Daniel/DungeonCli.git`
 2. Make sure you have Python 3.8.2 installed. If you don't, you
 can install it from www.python.org
-3. Make sure you have the dependencies installed with `pip install requirements`
+3. Make sure you have the dependencies installed with `pip install -r requirements.txt`
 4. Open the terminal in the directory and type `python DungeonCli.py`
 
 ### From binaries
