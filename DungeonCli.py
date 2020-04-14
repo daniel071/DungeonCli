@@ -14,7 +14,7 @@ from colorama import Fore, Back, Style
 # --------------------------
 # |        Version!        |
 # --------------------------
-version = Style.DIM + Fore.WHITE + "==> Release Version 0.2.0 \n" + Style.RESET_ALL
+version = Style.DIM + Fore.WHITE + "==> Development Version 0.2.2 \n" + Style.RESET_ALL
 # --------------------------
 
 
@@ -285,7 +285,7 @@ def openStore():
 		print(theChosenOne[0] + " -- $" + str(theChosenOne[1]))
 		storeSelected.append(theChosenOne)
 		storeOptions = removeFromList(storeOptions, theChosenOne)
-		print(storeSelected)
+		#print(storeSelected)
 
 
 	print("Final result: " + str(storeSelected))
