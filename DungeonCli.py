@@ -310,7 +310,6 @@ def openStore():
 	while i < 3:
 		i += 1
 		theChosenOne = random.choice(storeOptions)
-		theChosenOne[2] = i
 		print(Fore.WHITE + "{i}: {name} -- {price}"
 		.format(i=i, name=theChosenOne[0], price=theChosenOne[1]))
 		storeSelected.append(theChosenOne)
