@@ -48,7 +48,7 @@ armour = 0
 absorbtion = 0 # Out of 100%
 damageMultiplyer = 1
 CSDescription = "You haven't started yet!" # description of current room, called by observe and look around
-StoreOptions = [["Matches", 10], ["Basic Healing Potion", 20], ["Copper Armour", 100], ["Stone Sword", 80]]
+CSSOptions = [["Matches", 10], ["Basic Healing Potion", 20], ["Copper Armour", 100], ["Stone Sword", 80]]
 
 # 1 x Matches.
 # 3 x Sticks.
@@ -270,11 +270,44 @@ def openInventory():
 	print(" ")
 
 def openStore():
+	global CSSOptions
 	print("------------------")
 	print("      STORE       ")
 	print("------------------")
-	print("you have $" + coins)
+	print(success + "You have $", str(coins))
 
+	storeOptions = CSSOptions
+	storeSelected = []
+	i = 0
+	while i < 3:
+		i += 1
+		theChosenOne = random.choice(storeOptions)
+		print(theChosenOne[0] + " -- $" + str(theChosenOne[1]))
+		storeSelected.append(theChosenOne)
+		storeOptions = removeFromList(storeOptions, theChosenOne)
+		print(storeSelected)
+
+
+	print("Final result: " + str(storeSelected))
+
+
+	if basicHealingPotion > 0:
+		askLoop = 1
+		print(success + "[1] You have {amount} basic healing potions\n"
+		.format(amount=basicHealingPotion))
+
+		while askLoop:
+			userInput = input(question + "Which potion would you like to use? ")
+			if userInput == "1":
+				pass
+				# Displays to user
+
+				# Applies the changes
+
+			else:
+				print(error + "Answer must be either 1, 1 or 1!\n")
+	else:
+		print(error + "You don't have any potions!\n")
 
 
 
@@ -586,6 +619,9 @@ def main():
 
 	elif command in ("heal"):
 		healingPotion()
+	elif command in ("store"):
+		# NOTE: This is for only debugging!
+		openStore()
 
 
 detect_system()
