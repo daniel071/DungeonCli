@@ -621,20 +621,24 @@ def main():
 
 	elif command in ("l", "look around", "look", "observe"):
 		lookAround()
-	elif command in ("randomEventTest"):
+	elif command in ("randomEventTest", "randomeventpls"):
+		# NOTE: This is for only debugging!
 		randomEvent()
-	elif command in ("forceBattle"):
+	elif command in ("forceBattle", "battlepls"):
+		# NOTE: This is for only debugging!
 		randomEnemy()
 	elif command in ("version", "ver"):
 		print(version)
 	elif command in ("pickup coins", "pick up coins", "pick coins"):
 		pickCoins()
 
-	elif command in ("heal"):
+	elif command in ("heal", "potion"):
 		healingPotion()
-	elif command in ("store"):
+	elif command in ("store", "store"):
 		# NOTE: This is for only debugging!
 		openStore()
+	else:
+		print(error + "Invalid command! \n")
 
 
 detect_system()
