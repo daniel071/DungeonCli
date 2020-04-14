@@ -340,6 +340,16 @@ def openStore():
 		if userInput == "Exit":
 			askLoop = 0
 			print(action + "You left the store.\n")
+		elif userInput == storeSelected[0][0]:
+			item = storeSelected[0][0]
+			price = storeSelected[0][1]
+			if coins > price:
+				print(action + "You purchased {item} for {price} coins!"
+				.format(item=item, price=price))
+				coins = coins - price
+
+			else:
+				print(error + "You do not have enough coins to purchase this item!\n")
 
 
 def useMatch():
