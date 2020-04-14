@@ -154,7 +154,16 @@ def gameover():
 	print("...\n")
 	time.sleep(1.5)
 
-	print(Style.BRIGHT + Fore.RED + "Game Over!")
+	print(Style.BRIGHT + Fore.WHITE +
+
+	"   _____                                            _\n"
+	" / ____|                                          | |\n"
+	"| |  __  __ _ _ __ ___   ___    _____   _____ _ __| |\n"
+	"| | |_ |/ _` | '_ ` _ \ / _ \  / _ \ \ / / _ \ '__| |\n"
+	"| |__| | (_| | | | | | |  __/ | (_) \ V /  __/ |  |_|\n"
+	" \_____|\__,_|_| |_| |_|\___|  \___/ \_/ \___|_|  (_)\n"
+	)
+
 	time.sleep(2)
 
 	print(Style.BRIGHT + Fore.WHITE + "Maybe next time, you might be lucky...\n")
@@ -763,7 +772,7 @@ def main():
 detect_system()
 clear()
 # Introduce the user:
-print(Style.BRIGHT + "Welcome to " + Fore.GREEN + "DungeonCli!" + Style.RESET_ALL)
+print(Style.BRIGHT + "Welcome to " + Fore.BLUE + "DungeonCli!" + Style.RESET_ALL)
 
 print(version)
 print(Style.RESET_ALL + "Type 'h' for help or 's' to start! \n")
