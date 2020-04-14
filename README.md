@@ -61,7 +61,7 @@ If you're on Windows, run `compilewindows.bat`
 
 **Healing**
 
-![Healing](http://192.168.20.16:3000/Daniel/DungeonCli/raw/branch/master/Screenshots/v0.3.1%20healing.png)
+![Healing](http://119.17.132.38:3000/Daniel/DungeonCli/raw/branch/master/Screenshots/v0.3.1%20healing.png)
 
 **The combat system**
 
