@@ -17,7 +17,7 @@ from colorama import Fore, Back, Style
 # --------------------------
 # |        Version!        |
 # --------------------------
-version = Style.DIM + Fore.WHITE + "==> Release Version 0.3.0 \n" + Style.RESET_ALL
+version = Style.DIM + Fore.WHITE + "==> Development Version 0.3.1 \n" + Style.RESET_ALL
 # --------------------------
 
 
@@ -54,13 +54,13 @@ damageMultiplyer = 1
 # Armour absorbs a percentage of damage, for example having copper armour
 # absorbs 10% damage, so if you get 50 damage, you only get 45
 
-# 0 = No Armour = 0% Absorbtion
-# 1 = Copper Armour = 10% Absorbtion
-# 2 = Iron Armour = 20% Absorbtion
-# 3 = Platinum Armour = 30% Absorbtion
-# 4 = Diamond Armour = 40% Absorbtion
+# 0 = No Armour = 1 x Damage taken
+# 1 = Copper Armour = 0.9 x Damage taken
+# 2 = Iron Armour = 0.8 x Damage taken
+# 3 = Platinum Armour = 0.7 x Damage taken
+# 4 = Diamond Armour = 0.6 x Damage taken
 armour = 0
-absorbtion = 0 # Out of 100%
+absorbtion = 1 # Out of 1
 
 CSDescription = "You haven't started yet!" # description of current room, called by observe and look around
 CSSOptions = [["Matches", 10], ["Basic Healing Potion", 20], ["Copper Armour", 100], ["Stone Sword", 80]]
@@ -257,16 +257,16 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 		userInput = ask("Fight or Flee?", "fight", "flee")
 		if userInput == "fight":
 			# Calculates damage
-			damage = random.randint(5, 10)
-			enemyDamage = random.randint(enemyMinDamage, enemyMaxDamage)
+			damage = random.randint(5, 10) * damageMultiplyer
+			enemyDamage = random.randint(enemyMinDamage, enemyMaxDamage) * absorbtion
 
 			# Applies damage
 			hp = hp - enemyDamage
 			enemyHP = enemyHP - damage
 
 			# Displays to user
-			print(success + "You deal {damage} damage!".format(damage=damage))
-			print(rip + "{name} deals {damage} damage!\n".format(damage=enemyDamage, name=enemy))
+			print(success + "You deal {damage} damage!".format(damage=round(damage)))
+			print(rip + "{name} deals {damage} damage!\n".format(damage=round(enemyDamage), name=enemy))
 			time.sleep(1)
 			isDead()
 
@@ -292,7 +292,7 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 				print(action + "You tried to flee, but {name} caught you. \n".format(name=enemy))
 				time.sleep(1.5)
 
-				enemyDamage = random.randint(enemyMinDamage, enemyMaxDamage)
+				enemyDamage = random.randint(enemyMinDamage, enemyMaxDamage) * 2 * absorbtion
 				hp = hp - enemyDamage
 				print(rip + "{name} deals {damage} damage!\n".format(damage=enemyDamage, name=enemy))
 				time.sleep(1)
@@ -359,7 +359,7 @@ def purchase(storeSelected, id):
 				return "bruh"
 			else:
 				armour = 1
-				absorbtion = 10
+				absorbtion = 0.9
 		elif item == "Stone Sword":
 			if Sword == 2:
 				print(error + "You already have this item!\n")
@@ -750,6 +750,11 @@ def main():
 		# NOTE: This is for only debugging!
 		if passwordPrompt() == "granted":
 			openStore()
+
+	elif command in ("giveCoins", "addcoins"):
+		if passwordPrompt() == "granted":
+			addCoins(200)
+
 	else:
 		print(error + "Invalid command! \n")
 
