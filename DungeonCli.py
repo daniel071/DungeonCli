@@ -326,21 +326,28 @@ def purchase(storeSelected, id):
 	item = storeSelected[id][0]
 	price = storeSelected[id][1]
 	if coins >= price:
-		print(action + "You purchased {item} for {price} coins!\n"
-		.format(item=item, price=price))
-		coins = coins - price
 		if item == "Matches":
 			Matches = Matches + 1
 		elif item == "Basic Healing Potion":
 			basicHealingPotion = basicHealingPotion + 1
 		elif item == "Copper Armour":
-			armour = 1
-			absorbtion = 10
+			if armour == 1:
+				print(error + "You already have this item!\n")
+				return "bruh"
+			else:
+				armour = 1
+				absorbtion = 10
 		elif item == "Stone Sword":
-			Sword = 2
-			damageMultiplyer = 1.1
+			if Sword == 2:
+				print(error + "You already have this item!\n")
+				return "bruh"
+			else:
+				Sword = 2
+				damageMultiplyer = 1.1
 
-
+		print(action + "You purchased {item} for {price} coins!\n"
+		.format(item=item, price=price))
+		coins = coins - price
 	else:
 		print(error + "You do not have enough coins to purchase this item!\n")
 
