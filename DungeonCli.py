@@ -294,7 +294,8 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 
 				enemyDamage = random.randint(enemyMinDamage, enemyMaxDamage) * 2 * absorbtion
 				hp = hp - enemyDamage
-				print(rip + "{name} deals {damage} damage!\n".format(damage=enemyDamage, name=enemy))
+				print(rip + "{name} deals {damage} damage!\n"
+				.format(damage=round(enemyDamage), name=enemy))
 				time.sleep(1)
 				isDead()
 
