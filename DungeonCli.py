@@ -25,7 +25,7 @@ version = Style.DIM + Fore.WHITE + "==> Development Version 0.2.2 \n" + Style.RE
 
 ## TODO: Add saving mechanic for these coins
 mainLoop = 1
-coins = 0 # fucking poor cunt lmao.
+coins = 1000 # fucking poor cunt lmao.
 hp = 100
 # Events used for random stuff:
 
@@ -38,6 +38,16 @@ Sword = 0
 # This lad should heal about 20 HP
 basicHealingPotion = 0
 
+# You deal more damage with the better sword you have, for example,
+# having a stone sword deals 10% more damage then no sword.
+# 0 = No Sword = 0% Extra damage
+# 1 = Wooden Sword = 5% Extra damage
+# 2 = Stone Sword = 10% Extra damage
+# 3 = Iron Sword = 20% Extra damage
+# 4 = Diamond Sword = 35% Extra damgage
+Sword = 0
+damageMultiplyer = 1
+
 # Armour absorbs a percentage of damage, for example having copper armour
 # absorbs 10% damage, so if you get 50 damage, you only get 45
 
@@ -46,10 +56,9 @@ basicHealingPotion = 0
 # 2 = Iron Armour = 20% Absorbtion
 # 3 = Platinum Armour = 30% Absorbtion
 # 4 = Diamond Armour = 40% Absorbtion
-
 armour = 0
 absorbtion = 0 # Out of 100%
-damageMultiplyer = 1
+
 CSDescription = "You haven't started yet!" # description of current room, called by observe and look around
 CSSOptions = [["Matches", 10], ["Basic Healing Potion", 20], ["Copper Armour", 100], ["Stone Sword", 80]]
 
@@ -293,12 +302,48 @@ def openInventory():
 	if basicHealingPotion != 0:
 		print(str(basicHealingPotion) + " x Basic Healing Potion")
 
-	if Sword != 0:
-		# TODO: Implement more then just a basic sword.
-		print("Basic Sword")
+	if Sword == 1:
+		print("Wooden Sword")
+	elif Sword == 2:
+		print("Stone Sword")
+
+	if armour == 1:
+		print("Copper Armour")
 
 	# This print just adds some white space
 	print(" ")
+
+
+def purchase(storeSelected, id):
+	global coins
+	global Matches
+	global armour
+	global absorbtion
+	global Sword
+	global damageMultiplyer
+	global basicHealingPotion
+
+	item = storeSelected[id][0]
+	price = storeSelected[id][1]
+	if coins >= price:
+		print(action + "You purchased {item} for {price} coins!\n"
+		.format(item=item, price=price))
+		coins = coins - price
+		if item == "Matches":
+			Matches = Matches + 1
+		elif item == "Basic Healing Potion":
+			basicHealingPotion = basicHealingPotion + 1
+		elif item == "Copper Armour":
+			armour = 1
+			absorbtion = 10
+		elif item == "Stone Sword":
+			Sword = 2
+			damageMultiplyer = 1.1
+
+
+	else:
+		print(error + "You do not have enough coins to purchase this item!\n")
+
 
 def openStore():
 	global CSSOptions
@@ -343,36 +388,13 @@ def openStore():
 			print(action + "You left the store.\n")
 
 		elif userInput == storeSelected[0][0]:
-			item = storeSelected[0][0]
-			price = storeSelected[0][1]
-			if coins >= price:
-				print(action + "You purchased {item} for {price} coins!\n"
-				.format(item=item, price=price))
-				coins = coins - price
+			purchase(storeSelected, 0)
 
-			else:
-				print(error + "You do not have enough coins to purchase this item!\n") # FUCKING POOR FCUNT ∆¨˙¨˙¨´∂¨¨¨¨
 		elif userInput == storeSelected[1][0]:
-			item = storeSelected[1][0]
-			price = storeSelected[1][1]
-			if coins >= price:
-				print(action + "You purchased {item} for {price} coins!\n"
-				.format(item=item, price=price))
-				coins = coins - price
-
-			else:
-				print(error + "You do not have enough coins to purchase this item!\n")
+			purchase(storeSelected, 1)
 
 		elif userInput == storeSelected[2][0]:
-			item = storeSelected[2][0]
-			price = storeSelected[2][1]
-			if coins >= price:
-				print(action + "You purchased {item} for {price} coins!\n"
-				.format(item=item, price=price))
-				coins = coins - price
-
-			else:
-				print(error + "You do not have enough coins to purchase this item!\n")
+			purchase(storeSelected, 2)
 
 
 def useMatch():
@@ -459,6 +481,7 @@ def start():
 			global basicHealingPotion
 
 			basicHealingPotion = basicHealingPotion + 1
+			damageMultiplyer = 1.05
 			Sword = 1
 			currentScene = 2
 
