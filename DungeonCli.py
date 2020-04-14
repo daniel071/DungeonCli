@@ -17,15 +17,18 @@ from colorama import Fore, Back, Style
 # --------------------------
 # |        Version!        |
 # --------------------------
-version = Style.DIM + Fore.WHITE + "==> Development Version 0.2.2 \n" + Style.RESET_ALL
+version = Style.DIM + Fore.WHITE + "==> Release Version 0.3.0 \n" + Style.RESET_ALL
 # --------------------------
 
 
 # Define variables here:
 
+# Used to prevent cheating:
+devPassword = "hackerman"
+
 ## TODO: Add saving mechanic for these coins
 mainLoop = 1
-coins = 1000 # fucking poor cunt lmao.
+coins = 0 # fucking poor cunt lmao.
 hp = 100
 # Events used for random stuff:
 
@@ -84,6 +87,26 @@ coinsInScene = False
 # Define functions here:
 
 ## Some useful stuff
+def passwordPrompt():
+	print(Style.BRIGHT + Fore.YELLOW + "This is a developer command!"
+	" Please input the developer password!" + Style.RESET_ALL)
+	questions = [
+    {
+        'type': 'password',
+        'message': 'Enter the Developer password',
+        'name': 'password'
+    }
+	]
+	answers = prompt(questions)
+	userInput = answers['password']
+	if userInput == devPassword:
+		print(success + "Access granted!\n" + Style.RESET_ALL)
+		return "granted"
+	else:
+		print(rip + "Incorrect password!\n")
+		return "denied"
+
+
 def removeFromList(list, removal):
 	index = 0
 	listLoop = True
@@ -680,8 +703,10 @@ def main():
 	command = input(Style.BRIGHT + Fore.CYAN + "[Action] " + Style.RESET_ALL)
 	if command in ("check money", "check coins", "coins", "money", "c"):
 		checkCoins()
+
 	elif command in ("open inventory", "open inv" ,"inventory", "inv", "i","check inventory", "check inv"):
 		openInventory()
+
 	elif command in ("use match", "strike match", "match", "light match",
                     "use matches", "matches", "m"):
 		useMatch()
@@ -701,22 +726,30 @@ def main():
 
 	elif command in ("l", "look around", "look", "observe"):
 		lookAround()
+
 	elif command in ("randomEventTest", "randomeventpls"):
 		# NOTE: This is for only debugging!
-		randomEvent()
+		if passwordPrompt() == "granted":
+			randomEvent()
+
 	elif command in ("forceBattle", "battlepls"):
 		# NOTE: This is for only debugging!
-		randomEnemy()
+		if passwordPrompt() == "granted":
+			randomEnemy()
+
 	elif command in ("version", "ver"):
 		print(version)
+
 	elif command in ("pickup coins", "pick up coins", "pick coins"):
 		pickCoins()
 
 	elif command in ("heal", "potion"):
 		healingPotion()
+
 	elif command in ("store", "store"):
 		# NOTE: This is for only debugging!
-		openStore()
+		if passwordPrompt() == "granted":
+			openStore()
 	else:
 		print(error + "Invalid command! \n")
 
