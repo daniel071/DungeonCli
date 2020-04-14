@@ -1,7 +1,10 @@
+
 # DungeonCli is a terminal based program where you get to explore places and
 # earn coins. You can spend those coins on various items, have fun!
 
 # Import Libraries here:
+from __future__ import print_function, unicode_literals
+from PyInquirer import prompt, print_json # type: ignore
 import time
 import random
 import os
@@ -304,7 +307,7 @@ def openStore():
 	print("------------------")
 	print(success + "You have $", str(coins))
 
-	storeOptions = CSSOptions
+	storeOptions = CSSOptions.copy()
 	storeSelected = []
 	i = 0
 	while i < 3:
@@ -314,15 +317,29 @@ def openStore():
 		.format(i=i, name=theChosenOne[0], price=theChosenOne[1]))
 		storeSelected.append(theChosenOne)
 		storeOptions = removeFromList(storeOptions, theChosenOne)
-		#print(storeSelected)
-
 
 	print("")
 
+	questions = [
+	    {
+	        'type': 'list',
+	        'name': 'itemChoice',
+			'choices': [(storeSelected[0])[0],
+			(storeSelected[1])[0],
+			(storeSelected[2])[0], 'Exit'],
+	        'message': 'Which item would you like to purchase?',
+	    }
+	]
 
-	userInput = ask3("Select an item you would like to purchase:", "1",
-	"2", "3")
-	print(userInput)
+	askLoop = 1
+	while askLoop == 1:
+		answers = prompt(questions)
+		# print_json(answers)
+		userInput = answers['itemChoice']
+		# print(action + "You selected:" + userInput)
+		if userInput == "Exit":
+			askLoop = 0
+			print(action + "You left the store.\n")
 
 
 def useMatch():
@@ -653,3 +670,12 @@ print(Style.RESET_ALL + "Type 'h' for help or 's' to start! \n")
 
 while mainLoop == 1:
 	main()
+
+# FUCK YOU WHORE, WE LIKE FORTNITE, WE LIKE FORTNIE
+# FUCK YOU WHORE, WE LIKE FORTNITE, WE LIKE FORTNIE
+# FUCK YOU WHORE, WE LIKE FORTNITE, WE LIKE FORTNIE
+# FUCK YOU WHORE, WE LIKE FORTNITE, WE LIKE FORTNIE
+# FUCK YOU WHORE, WE LIKE FORTNITE, WE LIKE FORTNIE
+# FUCK YOU WHORE, WE LIKE FORTNITE, WE LIKE FORTNIE
+# FUCK YOU WHORE, WE LIKE FORTNITE, WE LIKE FORTNIE
+# https://www.youtube.com/watch?v=GGmuA7PK-cc
