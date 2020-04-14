@@ -1,4 +1,4 @@
-# DungeonCli!
+# DungeonCli
 **What is it?**
 
 DungeonCli is a terminal based program where you get to explore
