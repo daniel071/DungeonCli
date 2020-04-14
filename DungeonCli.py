@@ -168,7 +168,7 @@ def ask(funcQuestion, answer1, answer2):
 			"{answer1} or {answer2}!\n".format(answer1=answer1, answer2=answer2))
 
 
-def ask3(funcQuestion, answer1, answer2):
+def ask3(funcQuestion, answer1, answer2, answer3):
 		askLoop = 1
 		while askLoop == 1:
 			# Asks the user a question
@@ -310,33 +310,18 @@ def openStore():
 	while i < 3:
 		i += 1
 		theChosenOne = random.choice(storeOptions)
-		print(theChosenOne[0] + " -- $" + str(theChosenOne[1]))
+		print(Fore.WHITE + "{i}: {name} -- {price}"
+		.format(i=i, name=theChosenOne[0], price=theChosenOne[1]))
 		storeSelected.append(theChosenOne)
 		storeOptions = removeFromList(storeOptions, theChosenOne)
 		#print(storeSelected)
 
 
-	print("Final result: " + str(storeSelected))
+	print("")
 
 
-	if basicHealingPotion > 0:
-		askLoop = 1
-		print(success + "[1] You have {amount} basic healing potions\n"
-		.format(amount=basicHealingPotion))
-
-		while askLoop:
-			userInput = input(question + "Which potion would you like to use? ")
-			if userInput == "1":
-				pass
-				# Displays to user
-
-				# Applies the changes
-
-			else:
-				print(error + "Answer must be either 1, 1 or 1!\n")
-	else:
-		print(error + "You don't have any potions!\n")
-
+	print(ask3("Select an item you would like to purchase:", "1",
+	"2", "3"))
 
 
 def useMatch():
@@ -535,8 +520,7 @@ def randomEvent():
 	if len(events) > 0:
 		selection = random.choice(events)
 		if selection == "store":
-			print("Store selected")
-
+			openStore()
 
 
 		elif selection == "randomFight":
