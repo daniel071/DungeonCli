@@ -302,6 +302,7 @@ def openInventory():
 
 def openStore():
 	global CSSOptions
+	global coins
 	print("------------------")
 	print("      STORE       ")
 	print("------------------")
@@ -340,11 +341,33 @@ def openStore():
 		if userInput == "Exit":
 			askLoop = 0
 			print(action + "You left the store.\n")
+
 		elif userInput == storeSelected[0][0]:
 			item = storeSelected[0][0]
 			price = storeSelected[0][1]
-			if coins > price:
-				print(action + "You purchased {item} for {price} coins!"
+			if coins >= price:
+				print(action + "You purchased {item} for {price} coins!\n"
+				.format(item=item, price=price))
+				coins = coins - price
+
+			else:
+				print(error + "You do not have enough coins to purchase this item!\n") # FUCKING POOR FCUNT ∆¨˙¨˙¨´∂¨¨¨¨
+		elif userInput == storeSelected[1][0]:
+			item = storeSelected[1][0]
+			price = storeSelected[1][1]
+			if coins >= price:
+				print(action + "You purchased {item} for {price} coins!\n"
+				.format(item=item, price=price))
+				coins = coins - price
+
+			else:
+				print(error + "You do not have enough coins to purchase this item!\n")
+
+		elif userInput == storeSelected[2][0]:
+			item = storeSelected[2][0]
+			price = storeSelected[2][1]
+			if coins >= price:
+				print(action + "You purchased {item} for {price} coins!\n"
 				.format(item=item, price=price))
 				coins = coins - price
 
