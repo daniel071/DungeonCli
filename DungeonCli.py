@@ -5,6 +5,7 @@
 # Import Libraries here:
 from __future__ import print_function, unicode_literals
 from PyInquirer import prompt, print_json # type: ignore
+import json
 import time
 import random
 import os
@@ -310,6 +311,39 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 
 
 ## Commands used
+def save_game():
+	directory = input(question + "What is the directory that you would "
+	"like to save in? ")
+	saveFile = {
+    "inventory": {
+        "Sticks": Sticks,
+        "Matches": Matches,
+		"Sword": Sword,
+		"Armour": armour,
+    },
+	"other": {
+		"damageMultiplyer": damageMultiplyer,
+		"absorbtion": absorbtion,
+		"events": events,
+		"currentScene": currentScene,
+		"CSDescription": CSDescription,
+		"surroundingsLit": surroundingsLit,
+		"coinsInScene": coinsInScene,
+	}
+	}
+
+
+	with open(directory, 'w', encoding='utf-8') as f:
+		json.dump(saveFile, f, ensure_ascii=False, indent=4)
+
+	print(success + "Successfully saved to {dir}!\n".format(dir=directory))
+
+def load_game():
+	pass
+
+
+
+
 
 def checkCoins():
 	global coins
@@ -764,6 +798,9 @@ def main():
 	elif command in ("giveCoins", "addcoins"):
 		if passwordPrompt() == "granted":
 			addCoins(200)
+	elif command in ("save", "save game"):
+		save_game()
+
 
 	else:
 		print(error + "Invalid command! \n")

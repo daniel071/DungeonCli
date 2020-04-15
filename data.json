@@ -1,0 +1,20 @@
+{
+    "inventory": {
+        "Sticks": 3,
+        "Matches": 1,
+        "Sword": 0,
+        "Armour": 0
+    },
+    "other": {
+        "damageMultiplyer": 1,
+        "absorbtion": 1,
+        "events": [
+            "store",
+            "randomFight"
+        ],
+        "currentScene": 1,
+        "CSDescription": "You haven't started yet!",
+        "surroundingsLit": false,
+        "coinsInScene": false
+    }
+}
