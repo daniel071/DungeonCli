@@ -338,10 +338,39 @@ def save_game():
 
 	print(success + "Successfully saved to {dir}!\n".format(dir=directory))
 
+
 def load_game():
-	pass
+	global Sticks
+	global Matches
+	global Sword
+	global armour
+	global damageMultiplyer
+	global absorbtion
+	global events
+	global currentScene
+	global CSDescription
+	global surroundingsLit
+	global coinsInScene
 
+	directory = input(question + "What is the directory the save is in? ")
 
+	with open(directory, 'r', encoding='utf-8') as f:
+		saveFile = json.load(f)
+
+	Sticks = saveFile['inventory']['Sticks']
+	Matches = saveFile['inventory']['Matches']
+	Sword = saveFile['inventory']['Sword']
+	armour = saveFile['inventory']['Armour']
+
+	damageMultiplyer = saveFile['other']['damageMultiplyer']
+	absorbtion = saveFile['other']['absorbtion']
+	events = saveFile['other']['events']
+	currentScene = saveFile['other']['currentScene']
+	CSDescription = saveFile['other']['CSDescription']
+	surroundingsLit = saveFile['other']['surroundingsLit']
+	coinsInScene = saveFile['other']['coinsInScene']
+
+	print(success + "Successfully loaded save file!\n")
 
 
 
@@ -798,9 +827,12 @@ def main():
 	elif command in ("giveCoins", "addcoins"):
 		if passwordPrompt() == "granted":
 			addCoins(200)
+
 	elif command in ("save", "save game"):
 		save_game()
 
+	elif command in ("load", "load game"):
+		load_game()
 
 	else:
 		print(error + "Invalid command! \n")

@@ -1,9 +1,9 @@
 {
     "inventory": {
-        "Sticks": 3,
-        "Matches": 1,
-        "Sword": 0,
-        "Armour": 0
+        "Sticks": 69,
+        "Matches": 96,
+        "Sword": 2,
+        "Armour": 1
     },
     "other": {
         "damageMultiplyer": 1,
