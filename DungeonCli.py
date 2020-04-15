@@ -18,7 +18,7 @@ from colorama import Fore, Back, Style
 # --------------------------
 # |        Version!        |
 # --------------------------
-version = Style.DIM + Fore.WHITE + "==> Development Version 0.3.3 \n" + Style.RESET_ALL
+version = Style.DIM + Fore.WHITE + "==> Development Version 0.3.5 \n" + Style.RESET_ALL
 # --------------------------
 
 
@@ -312,6 +312,9 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 
 ## Commands used
 def save_game():
+	# NOTE: If you want to add your own variable, transferred
+	# across saves, please add it in the saveFile place.
+
 	directory = input(question + "What is the directory that you would "
 	"like to save in? ")
 	saveFile = {
@@ -341,6 +344,9 @@ def save_game():
 
 
 def load_game():
+	# NOTE: If you want to add your own variable, transferred
+	# across saves, please add it to the global and then...
+
 	global coins
 	global Sticks
 	global Matches
@@ -359,6 +365,7 @@ def load_game():
 	with open(directory, 'r', encoding='utf-8') as f:
 		saveFile = json.load(f)
 
+	# ... add it here:
 	coins = saveFile['inventory']['Coins']
 	Sticks = saveFile['inventory']['Sticks']
 	Matches = saveFile['inventory']['Matches']
