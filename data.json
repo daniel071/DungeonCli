@@ -1,7 +1,8 @@
 {
     "inventory": {
-        "Sticks": 69,
-        "Matches": 96,
+        "Coins": 20,
+        "Sticks": 4,
+        "Matches": 2,
         "Sword": 2,
         "Armour": 1
     },
@@ -13,7 +14,7 @@
             "randomFight"
         ],
         "currentScene": 1,
-        "CSDescription": "You haven't started yet!",
+        "CSDescription": "hello",
         "surroundingsLit": false,
         "coinsInScene": false
     }

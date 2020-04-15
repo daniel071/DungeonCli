@@ -18,7 +18,7 @@ from colorama import Fore, Back, Style
 # --------------------------
 # |        Version!        |
 # --------------------------
-version = Style.DIM + Fore.WHITE + "==> Development Version 0.3.2 \n" + Style.RESET_ALL
+version = Style.DIM + Fore.WHITE + "==> Development Version 0.3.3 \n" + Style.RESET_ALL
 # --------------------------
 
 
@@ -316,6 +316,7 @@ def save_game():
 	"like to save in? ")
 	saveFile = {
     "inventory": {
+		"Coins": coins,
         "Sticks": Sticks,
         "Matches": Matches,
 		"Sword": Sword,
@@ -340,6 +341,7 @@ def save_game():
 
 
 def load_game():
+	global coins
 	global Sticks
 	global Matches
 	global Sword
@@ -357,6 +359,7 @@ def load_game():
 	with open(directory, 'r', encoding='utf-8') as f:
 		saveFile = json.load(f)
 
+	coins = saveFile['inventory']['Coins']
 	Sticks = saveFile['inventory']['Sticks']
 	Matches = saveFile['inventory']['Matches']
 	Sword = saveFile['inventory']['Sword']
@@ -698,7 +701,6 @@ def randomEvent():
 		selection = random.choice(events)
 		if selection == "store":
 			openStore()
-
 
 		elif selection == "randomFight":
 			randomEnemy()
