@@ -98,7 +98,7 @@ def useBrick(): #temp function called when in a specific room
 	if currentScene == 5:
 		print("you pull out the brick, however quickly drop it as a massive spider lay on it.")
 		time.sleep(0.2)
-		print("you hear a latch *click!* and a massive door way is now visible")
+		print("you hear a latch go *click!* and the sound of Bricks on Bricks filles the room... A massive door lays upon your sight.")
 		progressDoor = True
 	else:
 		print("There are no bricks nearby...")
