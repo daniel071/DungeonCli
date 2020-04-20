@@ -33,6 +33,7 @@ coins = 0 # fucking poor cunt lmao.
 hp = 100
 # Events used for random stuff:
 
+progressDoor = True
 events = ["store", "randomFight"]
 
 # Inventory
@@ -88,6 +89,18 @@ coinsInScene = False
 # Define functions here:
 
 ## Some useful stuff
+def invalidCommand():
+	print(error + "Invalid command! \n")
+
+def useBrick(): #temp function called when in a specific room
+	if currentScene == 5:
+		print("you pull out the brick, however quickly drop it as a massive spider lay on it.")
+		time.wait(0.5)
+		print("you hear a latch *click!* and a massive door way is now visible")
+		progressDoor = True:
+	else:
+		print("There are no bricks nearby...")
+
 def passwordPrompt():
 	print(Style.BRIGHT + Fore.YELLOW + "This is a developer command!"
 	" Please input the developer password!" + Style.RESET_ALL)
@@ -651,7 +664,11 @@ def start():
 		elif currentScene == 4:
 			print(action + "You proceed to the next room, being very careful where you step.")
 
-			CSDescription = "This room is rather empty, but an old and dried up fountain lays ahead.\na few coins lay scattered across the bottom, maybe you can pick them up..."
+			CSDescription = "This room is rather empty, but an old and dried up fountain lays ahead.\na few coins lay scattered across the bottom, maybe you can pick them up? however a single loose brick in a wall catches your eye..."
+			progressDoor = False
+
+
+
 			coinsInScene = True
 			time.sleep(2)
 
@@ -676,8 +693,7 @@ def start():
 			currentScene = 5
 
 		elif currentScene == 5:
-			# It is done bois!
-			randomEvent()
+
 
 
 def hpCheck():
@@ -803,12 +819,16 @@ def main():
 	elif command in ("hp", "health", "health points"):
 		hpCheck()
 
-	elif command in ("s", "start", "next", "proceed", "next room", "forth"):
-		start()
+	elif command in ("s", "start", "next", "proceed", "next room", "forth", "enter door"):
+		if progressDoor == True:
+			start()
+		else:
+			print("Progress through where? there are no visible exits!")
 
 	elif command in ("l", "look around", "look", "observe"):
 		lookAround()
-
+	elif command in ("pickup loose brick", "use loose brick", "use brick", "pickup brick")
+		useBrick()
 	elif command in ("randomEventTest", "randomeventpls"):
 		# NOTE: This is for only debugging!
 		if passwordPrompt() == "granted":
@@ -844,7 +864,7 @@ def main():
 		load_game()
 
 	else:
-		print(error + "Invalid command! \n")
+		invalidCommand()
 
 
 detect_system()
