@@ -85,7 +85,9 @@ action = Style.BRIGHT + Fore.YELLOW + "==> "
 quote = Style.BRIGHT + Fore.WHITE + '"'
 
 coinsInScene = False
-
+hasSeenAStore = False
+storeInRoom = False
+storeSelected = []
 # Define functions here:
 
 ## Some useful stuff
@@ -95,9 +97,9 @@ def invalidCommand():
 def useBrick(): #temp function called when in a specific room
 	if currentScene == 5:
 		print("you pull out the brick, however quickly drop it as a massive spider lay on it.")
-		time.wait(0.5)
+		time.sleep(0.2)
 		print("you hear a latch *click!* and a massive door way is now visible")
-		progressDoor = True:
+		progressDoor = True
 	else:
 		print("There are no bricks nearby...")
 
@@ -160,13 +162,13 @@ def isDead():
 def gameover():
 	clear()
 	print(rip + "Your body is torn into shreads...")
-	time.sleep(4)
+	time.sleep(2)
 	print(Style.BRIGHT + Fore.YELLOW + ".")
-	time.sleep(1.5)
+	time.sleep(1)
 	print("..")
-	time.sleep(1.5)
+	time.sleep(1)
 	print("...\n")
-	time.sleep(1.5)
+	time.sleep(1)
 
 	print(Style.BRIGHT + Fore.WHITE +
 
@@ -180,7 +182,7 @@ def gameover():
 
 	time.sleep(2)
 
-	print(Style.BRIGHT + Fore.WHITE + "Maybe next time, you might be lucky...\n")
+	print(Style.BRIGHT + Fore.WHITE + "Maybe next time, you might be a bit more lucky...\n")
 	time.sleep(5)
 	clear()
 	exit()
@@ -271,11 +273,11 @@ def heal(value):
 def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 	global hp
 	print(rip + "You get in a battle with {enemy}!\n".format(enemy=enemy))
-	time.sleep(1)
+	time.sleep(0.5)
 
 	combatLoop = True
 	while combatLoop:
-		time.sleep(1)
+		time.sleep(0.8)
 
 		userInput = ask("Fight or Flee?", "fight", "flee")
 		if userInput == "fight":
@@ -290,12 +292,12 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 			# Displays to user
 			print(success + "You deal {damage} damage!".format(damage=round(damage)))
 			print(rip + "{name} deals {damage} damage!\n".format(damage=round(enemyDamage), name=enemy))
-			time.sleep(1)
+			time.sleep(0.8)
 			isDead()
 
 			if enemyHP < 0:
 				print(success + "You successfully killed {name}\n".format(name=enemy))
-				time.sleep(1)
+				time.sleep(0.8)
 				extraCoins = random.randint(10, 25)
 				addCoins(extraCoins)
 				combatLoop = False
@@ -307,13 +309,13 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 			if chance == 1:
 				print(action + "You run away before {name} could catch you.\n".format(name=enemy))
 				combatLoop = 0
-				time.sleep(1)
+				time.sleep(0.8)
 
 				return "flee"
 
 			elif chance == 2:
 				print(action + "You tried to flee, but {name} caught you. \n".format(name=enemy))
-				time.sleep(1.5)
+				time.sleep(1)
 
 				enemyDamage = random.randint(enemyMinDamage, enemyMaxDamage) * 2 * absorbtion
 				hp = hp - enemyDamage
@@ -401,12 +403,12 @@ def checkCoins():
 	global coins
 	print(success + "You have $" + str(coins) + "!\n")
 	if coins == 0:
-		time.sleep(1)
+		time.sleep(0.7)
 		print(Style.BRIGHT + Fore.WHITE + "You have 0 coins? I feel bad, here"
 		" take 10 coins!")
-		time.sleep(2)
+		time.sleep(0.7)
 		addCoins(10)
-		time.sleep(1)
+		time.sleep(0.7)
 
 
 def openInventory():
@@ -479,16 +481,6 @@ def openStore():
 	print("------------------")
 	print(success + "You have $", str(coins))
 
-	storeOptions = CSSOptions.copy()
-	storeSelected = []
-	i = 0
-	while i < 3:
-		i += 1
-		theChosenOne = random.choice(storeOptions)
-		print(Fore.WHITE + "{i}: {name} -- {price}"
-		.format(i=i, name=theChosenOne[0], price=theChosenOne[1]))
-		storeSelected.append(theChosenOne)
-		storeOptions = removeFromList(storeOptions, theChosenOne)
 
 	print("")
 
@@ -549,15 +541,16 @@ def start():
 	global CSDescription
 	global coinsInScene
 	global currentScene
+	global progressDoor
 
 	if surroundingsLit == False:
 		print("You find yourself in an odd and dark place... \nWhat could this"
 		" possibly be?\n")
 		CSDescription = "This place is extremely dark, you can't see anything..."
-		time.sleep(2)
+		time.sleep(1)
 
 		print("Check your inventory, you might have something to \nimprove your vision...\n")
-		time.sleep(2)
+		time.sleep(1)
 		# combat("Bob", 69)
 		#print("Maybe I should use a match to light this place up...") # too straight forward.
 
@@ -566,24 +559,24 @@ def start():
 		if currentScene == 1:
 			print("This place looks like it's been abandoned decades ago...") # NOTE: describe this 'place'!
 			print(action + "An odd creature begins to walk up to you... \n") # NOTE: describe this 'creature'! e.g. this oddly hunched over creature
-			answer = ask("Should you hide or comfront them?", "h", "c")
+			answer = ask("Should you hide or confront them?", "h", "c")
 			if answer == "c":
-				# User selected comfront
+				# User selected confront
 				# Nothing special happens, it is passed on to the next part
 				pass
 
 			elif answer == "h":
 				# User selected hide
 				print(action + "You tried to hide, but there was nowhere to go, "
-				"the figure began to comfront you.")
-				time.sleep(3)
+				"the figure began to confront you.")
+				time.sleep(1.5)
 
 			print(action + "The odd figure got close enough until you "
 			"could see it.") # NOTE: so is this a creature or figure
-			time.sleep(2)
+			time.sleep(1)
 
 			print(action + "The figure looked like an ancient wizard. \n")
-			time.sleep(2) #
+			time.sleep(1) #
 
 			input(quote + 'Greetings, it seems you are new here,'
 			' is that true?"\n' + Style.RESET_ALL)
@@ -594,13 +587,13 @@ def start():
 
 			print(quote + "I see, this is a dangerous place, so tread"
 			' carefully..."') # ITS DANGEROUS TO GO ALONE.
-			time.sleep(2)
+			time.sleep(1)
 
-			print(quote + 'Here, take this, it will help you defend yourself."')
-			time.sleep(3) # TAKE THIS.
+			print(quote + 'Actually! i haave an idea! Here, take this, it should hopefully help you defend yourself."')
+			time.sleep(2) # TAKE THIS.
 
-			print(success + "You recieved a basic sword.")
-			print(success + "You recieved a basic healing potion.")
+			print(success + "You recieved a basic Sword.")
+			print(success + "You recieved a basic Healing Potion.")
 			addCoins(50)
 
 			global Sword
@@ -610,25 +603,26 @@ def start():
 			damageMultiplyer = 1.05
 			Sword = 1
 			currentScene = 2
+			start()
 
 		elif currentScene == 2:
 			print(action + "You ask the ancient wizard:")
-			time.sleep(1.7)
+			time.sleep(1)
 
 			print(Style.RESET_ALL + "Who are you?")
-			time.sleep(1.2)
+			time.sleep(1)
 			print("What is this place? \n")
-			time.sleep(1.2)
+			time.sleep(1)
 
 			print(action + "The wizard responds \n")
-			time.sleep(1.7)
+			time.sleep(1.5)
 
 			print(quote + 'This place is an underground town, it used to be'
 			' thriving, there were plenty of stores, lots of jobs, it was'
 			' a great place to be...\n But then, the rebellion came in'
 			' and wiped this place out, everybody either escaped or died.\n'
 			' And me, I was the founder of this town." \n')
-			time.sleep(10)
+			time.sleep(8)
 			CSDescription = "This place is in ruins, apparently it's supposed to be a town...\nThere is a door to the next room, something seems to be strung across it."
 
 			input(quote + 'Would you like to recieve a quest?" \n'
@@ -639,10 +633,10 @@ def start():
 			print(quote + 'Try and recover the Great Stone of Knowledge,'
 			' it is located in the north-east room, however it is guarded'
 			' by very powerful Almogates." \n')
-			time.sleep(5)
+			time.sleep(3)
 
 			print(quote + 'Good luck." \n')
-			time.sleep(2)
+			time.sleep(1)
 
 			print(action + "He leaves the room and now, you're on your own. \n")
 			currentScene = 3
@@ -651,36 +645,36 @@ def start():
 			CSDescription = "The room looked very charred after the explosion."
 
 			print(action + "After the wizard left, you went into the next room. \n")
-			time.sleep(2)
+			time.sleep(1.5)
 
 			print(action + "It is odly quiet here... you begin to look around... \n")
-			time.sleep(3)
+			time.sleep(2)
 
 			print(rip + "BANG! A small bomb exploded, it was a trap!")
 			damage(20)
-			time.sleep(2)
+			time.sleep(1)
 			currentScene = 4
 
 		elif currentScene == 4:
 			print(action + "You proceed to the next room, being very careful where you step.")
 
-			CSDescription = "This room is rather empty, but an old and dried up fountain lays ahead.\na few coins lay scattered across the bottom, maybe you can pick them up? however a single loose brick in a wall catches your eye..."
+			CSDescription = "This room is rather empty, but an old and dried up fountain lays ahead.\nA few coins lay scattered across the bottom, maybe you can pick them up? But however a single loose red brick in the wall north to you catches your eye..."
 			progressDoor = False
 
 
 
 			coinsInScene = True
-			time.sleep(2)
+			time.sleep(1)
 
 			print(action + "You quickly hear a movement and freeze...\n")
-			time.sleep(2)
+			time.sleep(1)
 
 			print(quote + 'IT WAS YOU WHO DID IT! Y-YOU WERE THE ONE WHO KILLED ALL M'
 			'-MY F-F-FRIENDS!"\n')
-			time.sleep(3)
+			time.sleep(1.5)
 			print(action + "You try to explain that they were mistaken but"
 			" it was too late. \n")
-			time.sleep(2)
+			time.sleep(1)
 
 
 			theResult = combat("Unidentified", 25, 5 ,10)
@@ -693,7 +687,7 @@ def start():
 			currentScene = 5
 
 		elif currentScene == 5:
-
+			print("whew! thats over!")
 
 
 def hpCheck():
@@ -718,12 +712,21 @@ def randomEvent():
 	print("This is a randomly generated event! The stories in here have not been completed yet.")
 
 	global events
+	global hasSeenAStore
+	global storeInRoom
+	global storeSelected
 	randomLoop = True
 
 	if len(events) > 0:
 		selection = random.choice(events)
 		if selection == "store":
-			openStore()
+			CSDescription = CSDescription + " There is a store nearby, they might sell something useful..."
+			if hasSeenAStore == false:
+				print(hint + "There is a store in this room! you can buy items from them, however you might have to \"look around\" to find it!")
+			storeOptions = CSSOptions.copy()
+			initStore()
+
+			storeInRoom = True
 
 		elif selection == "randomFight":
 			randomEnemy()
@@ -738,6 +741,17 @@ def randomEvent():
 	else:
 		print("There are no more unvisited events left!")
 
+def initStore():
+	global storeSelected
+	storeOptions = CSSOptions.copy()
+	i = 0
+	while i < 3:
+		i += 1
+		theChosenOne = random.choice(storeOptions)
+		print(Fore.WHITE + "{i}: {name} -- {price}"
+		.format(i=i, name=theChosenOne[0], price=theChosenOne[1]))
+		storeSelected.append(theChosenOne)
+		storeOptions = removeFromList(storeOptions, theChosenOne)
 
 def randomEnemy():
 	# [Name, Health, Enemy Minimum Damage, Enemy Maximum Damage]
@@ -759,7 +773,7 @@ def pickCoins():
 	if coinsInScene == True:
 		amount = random.randint(4, 6)
 		print(action + "You reach out and grab all the coins")
-		time.sleep(1)
+		time.sleep(0.8)
 
 		addCoins(amount)
 		coinsInScene = False
@@ -781,11 +795,11 @@ def healingPotion():
 			if userInput == "1":
 				# Displays to user
 				print("You have selected the basic healing potion\n")
-				time.sleep(1)
+				time.sleep(0.8)
 				print(rip + "You used up 1 basic healing potion")
 				# Applies the changes
 				heal(20)
-				time.sleep(2)
+				time.sleep(0.8)
 				basicHealingPotion = basicHealingPotion - 1
 				askLoop = 0
 			else:
@@ -818,16 +832,19 @@ def main():
 
 	elif command in ("hp", "health", "health points"):
 		hpCheck()
-
+	elif command in ("goto shop", "goto store", "store", "shop"):
+		print("You entered the store!")
+		openStore()
 	elif command in ("s", "start", "next", "proceed", "next room", "forth", "enter door"):
 		if progressDoor == True:
+			storeInRoom = False
 			start()
 		else:
 			print("Progress through where? there are no visible exits!")
 
 	elif command in ("l", "look around", "look", "observe"):
 		lookAround()
-	elif command in ("pickup loose brick", "use loose brick", "use brick", "pickup brick")
+	elif command in ("pickup loose brick", "use loose brick", "use brick", "pickup brick"):
 		useBrick()
 	elif command in ("randomEventTest", "randomeventpls"):
 		# NOTE: This is for only debugging!
@@ -848,12 +865,17 @@ def main():
 	elif command in ("heal", "potion"):
 		healingPotion()
 
-	elif command in ("store", "store"):
+	elif command in ("cl_store", "plsstore"):
 		# NOTE: This is for only debugging!
 		if passwordPrompt() == "granted":
+			initStore()
 			openStore()
 
-	elif command in ("giveCoins", "addcoins"):
+	elif command in ("cl_rich", "cl_addcoins", "plscoins"):
+		print("The money grinch steps out of the shadows\n")
+		print(quote + "In need of coins, eh? I mean i could let you have some of my precious coins, but ya gotta know the secret code.\"")
+		print(" he said grouchingly\n")
+		print(quote + "Go ahead. I'm waiting...\"")
 		if passwordPrompt() == "granted":
 			addCoins(200)
 
