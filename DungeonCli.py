@@ -837,6 +837,7 @@ def main():
 	elif command in ("s", "start", "next", "proceed", "next room", "forth", "enter door", "go through door"):
 		if progressDoor == True:
 			storeInRoom = False
+			
 			start()
 		else:
 			print("Progress through where? there are no visible exits!")
