@@ -4,12 +4,14 @@
 
 # Import Libraries here:
 from __future__ import print_function, unicode_literals
-from colorama import Fore, Back, Style
+from colorama import Fore, Back, Style # type: ignore
 from PyInquirer import prompt, print_json  # type: ignore
+import threading
 import json
 import time
 import random
 import os
+import playsound # type: ignore
 from sys import platform
 
 from colorama import init  # type: ignore
@@ -19,7 +21,7 @@ init()
 # |		Version!		|
 # --------------------------
 version = Style.DIM + Fore.WHITE + \
-	"==> Development Version 0.3.5 \n" + Style.RESET_ALL
+	"==> Development Version 0.3.6 \n" + Style.RESET_ALL
 # --------------------------
 
 
@@ -28,7 +30,6 @@ version = Style.DIM + Fore.WHITE + \
 # Used to prevent cheating:
 devPassword = "hackerman"
 
-# TODO: Add saving mechanic for these coins
 mainLoop = 1
 coins = 0  # fucking poor cunt lmao.
 hp = 100
@@ -106,6 +107,7 @@ class Inventory:
 
 	armour = 0
 	absorbtion = 0
+
 
 class Scene:
 	current = 1 # the current scene
@@ -189,6 +191,25 @@ def isDead():
 		gameover()
 
 
+class soundThread (threading.Thread):
+	def __init__(self, directory):
+		threading.Thread.__init__(self, daemon=True)
+		self.dir = directory
+
+
+	def run(self):
+		threadPlaySound(self.dir)
+
+
+def threadPlaySound(path):
+	playsound.playsound(path)
+
+
+def playSound(path):
+	theSoundThread = soundThread(path)
+	theSoundThread.start()
+
+
 def gameover():
 	clear()
 	print(rip + "Your body is torn into shreads...")
@@ -202,8 +223,8 @@ def gameover():
 
 	print(Style.BRIGHT + Fore.WHITE +
 
-		  "   _____											_\n"
-		  " / ____|										  | |\n"
+		  "   _____					   _\n"
+		  " / ____|					  | |\n"
 		  "| |  __  __ _ _ __ ___   ___	_____   _____ _ __| |\n"
 		  "| | |_ |/ _` | '_ ` _ \ / _ \  / _ \ \ / / _ \ '__| |\n"
 		  "| |__| | (_| | | | | | |  __/ | (_) \ V /  __/ |  |_|\n"
@@ -455,7 +476,7 @@ def openInventory():
 		print(str(Inventory.sticks) + " x Sticks")
 
 	if Inventory.basicHealingPotion != 0:
-		print(str(Inventory,basicHealingPotion) + " x Basic Healing Potion")
+		print(str(Inventory.basicHealingPotion) + " x Basic Healing Potion")
 
 	if Inventory.sword == 1:
 		print("Wooden Sword")
@@ -620,7 +641,7 @@ def start():
 				  ' carefully..."')  # ITS DANGEROUS TO GO ALONE.
 			time.sleep(1)
 
-			print(quote + 'Actually! i haave an idea! Here, take this, it should hopefully help you defend yourself."')
+			print(quote + 'Here, take this, it will help you defend yourself."')
 			time.sleep(2)  # TAKE THIS.
 
 			print(success + "You recieved a basic Sword.")
@@ -633,6 +654,7 @@ def start():
 			Inventory.damage = 1.05
 			Inventory.sword = 1
 			Scene.current = 2
+			time.sleep(2)
 			start()
 
 		elif Scene.current == 2:
@@ -666,6 +688,10 @@ def start():
 			time.sleep(3)
 
 			print(quote + 'Good luck." \n')
+			playSound("Music/federation.mp3")
+			print(hint + "This song isn't mine and I don't own any rights to it.)")
+			print(hint + "Ben Prunty made this song, it's called 'Federation'.)")
+			print(hint + "I will remove this later when I get another song.)" + Style.RESET_ALL)
 			time.sleep(1)
 
 			print(action + "He leaves the room and now, you're on your own. \n")
@@ -839,11 +865,10 @@ def pickCoins():
 
 
 def healingPotion():
-	global basicHealingPotion
-	if basicHealingPotion > 0:
+	if Inventory.basicHealingPotion > 0:
 		askLoop = 1
 		print(success + "[1] You have {amount} basic healing potions\n"
-			  .format(amount=basicHealingPotion))
+			  .format(amount=Inventory.basicHealingPotion))
 
 		while askLoop:
 			userInput = input(
@@ -856,7 +881,7 @@ def healingPotion():
 				# Applies the changes
 				heal(20)
 				time.sleep(0.8)
-				basicHealingPotion = basicHealingPotion - 1
+				Inventory.basicHealingPotion = Inventory.basicHealingPotion - 1
 				askLoop = 0
 			else:
 				print(error + "Answer must be either 1, 1 or 1!\n")
@@ -929,9 +954,13 @@ def main():
 
 	elif command in ("cl_rich", "cl_addcoins", "plscoins"):
 		print("The money grinch steps out of the shadows\n")
+		time.sleep(1)
 		print(quote + "In need of coins, eh? I mean i could let you have some of my precious coins, but ya gotta know the secret code.\"")
 		print(" he said grouchingly\n")
-		print(quote + "Go ahead. I'm waiting...\"")
+		time.sleep(2)
+		print(quote + "Go ahead. I'm waiting...\n")
+		time.sleep(1)
+
 		if passwordPrompt() == "granted":
 			addCoins(200)
 
@@ -947,6 +976,7 @@ def main():
 
 detect_system()
 clear()
+
 # Introduce the user:
 print(Style.BRIGHT + "Welcome to " + Fore.BLUE + "DungeonCli!" + Style.RESET_ALL)
 
