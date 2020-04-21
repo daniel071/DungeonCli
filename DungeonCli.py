@@ -834,7 +834,7 @@ def main():
 	elif command in ("goto shop", "goto store", "store", "shop"):
 		print("You entered the store!")
 		openStore()
-	elif command in ("s", "start", "next", "proceed", "next room", "forth", "enter door"):
+	elif command in ("s", "start", "next", "proceed", "next room", "forth", "enter door", "go through door"):
 		if progressDoor == True:
 			storeInRoom = False
 			start()
