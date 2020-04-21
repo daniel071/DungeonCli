@@ -37,12 +37,8 @@ hp = 100
 progressDoor = True
 events = ["store", "randomFight"]
 
-# Inventory
-Matches = 1
-Sticks = 3
-Sword = 0
-# This lad should heal about 20 HP
-basicHealingPotion = 0
+
+
 
 # You deal more damage with the better sword you have, for example,
 # having a stone sword deals 10% more damage then no sword.
@@ -76,7 +72,7 @@ CSSOptions = [["Matches", 10], ["Basic Healing Potion", 20],
 # No healing potions
 # No Armour
 
-surroundingsLit = False
+
 
 
 success = Style.BRIGHT + Fore.GREEN + "==> "
@@ -90,17 +86,35 @@ quote = Style.BRIGHT + Fore.WHITE + '"'
 
 hasSeenAStore = False
 
-# Define functions here:
+# Define classes here:
 
 # Some useful stuff
+
+
+
+class Inventory:
+	matches = 1
+	sticks = 3
+	basicHealingPotion = 0
+
+
+	sword = 0
+	damage = 0
+
+
+	armour = 0
+	absorbtion = 0
+
 class Scene:
 	current = 1 # the current scene
+	surroundingsLit = False
 	hasStore = False
 	hasCoins = False
 	storeSelected = []
 	# description of current room, called by observe and look around
 	description = "You haven't started yet!"
 
+# Define functions here:
 
 def invalidCommand():
 	print(error + "Invalid command! \n")
@@ -297,7 +311,7 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 		userInput = ask("Fight or Flee?", "fight", "flee")
 		if userInput == "fight":
 			# Calculates damage
-			damage = random.randint(5, 10) * damageMultiplyer
+			damage = random.randint(5, 10) * Inventory.damage
 			enemyDamage = random.randint(
 				enemyMinDamage, enemyMaxDamage) * absorbtion
 
@@ -356,15 +370,15 @@ def save_game():
 					  "like to save in? ")
 
 	saveFile = {
-		"inventory": {
+		"Inventory": {
 			"Coins": coins,
-			"Sticks": Sticks,
-			"Matches": Matches,
+			"Sticks": Inventory.sticks,
+			"Matches": Inventory.matches,
 			"Sword": Sword,
 			"Armour": armour,
 		},
 		"other": {
-			"damageMultiplyer": damageMultiplyer,
+			"damageMultiplyer": Inventory.damage,
 			"absorbtion": absorbtion,
 			"events": events,
 			"Scene.current": Scene.current,
@@ -385,11 +399,9 @@ def load_game():
 	# across saves, please add it to the global and then...
 
 	global coins
-	global Sticks
-	global Matches
 	global Sword
 	global armour
-	global damageMultiplyer
+	global Inventory
 	global absorbtion
 	global events
 	global Scene
@@ -401,13 +413,13 @@ def load_game():
 		saveFile = json.load(f)
 
 	# ... add it here:
-	coins = saveFile['inventory']['Coins']
-	Sticks = saveFile['inventory']['Sticks']
-	Matches = saveFile['inventory']['Matches']
-	Sword = saveFile['inventory']['Sword']
-	armour = saveFile['inventory']['Armour']
+	coins = saveFile['Inventory']['Coins']
+	Inventory.sticks = saveFile['Inventory']['Sticks']
+	Inventory.matches = saveFile['Inventory']['Matches']
+	Sword = saveFile['Inventory']['Sword']
+	armour = saveFile['Inventory']['Armour']
 
-	damageMultiplyer = saveFile['other']['damageMultiplyer']
+	Inventory.damage = saveFile['other']['damageMultiplyer']
 	absorbtion = saveFile['other']['absorbtion']
 	events = saveFile['other']['events']
 	Scene.current = saveFile['other']['Scene.current']
@@ -433,21 +445,21 @@ def checkCoins():
 def openInventory():
 	print(success + "Inventory:")
 	count = 0
-	if Matches != 0:
-		print(str(Matches) + " x Matches")
+	if Inventory.matches != 0:
+		print(str(Inventory.matches) + " x Matches")
 
-	if Sticks != 0:
-		print(str(Sticks) + " x Sticks")
+	if Inventory.sticks != 0:
+		print(str(Inventory.sticks) + " x Sticks")
 
-	if basicHealingPotion != 0:
-		print(str(basicHealingPotion) + " x Basic Healing Potion")
+	if Inventory.basicHealingPotion != 0:
+		print(str(Inventory,basicHealingPotion) + " x Basic Healing Potion")
 
-	if Sword == 1:
+	if Inventory.sword == 1:
 		print("Wooden Sword")
-	elif Sword == 2:
+	elif Inventory.sword == 2:
 		print("Stone Sword")
 
-	if armour == 1:
+	if Inventory.armour == 1:
 		print("Copper Armour")
 
 	# This print just adds some white space
@@ -456,10 +468,7 @@ def openInventory():
 
 def purchase(storeSelected, id):
 	global coins
-	global Matches
-	global armour
 	global absorbtion
-	global Sword
 	global damageMultiplyer
 	global basicHealingPotion
 
@@ -467,23 +476,23 @@ def purchase(storeSelected, id):
 	price = storeSelected[id][1]
 	if coins >= price:
 		if item == "Matches":
-			Matches = Matches + 1
+			Inventory.matches = Inventory.matches + 1
 		elif item == "Basic Healing Potion":
-			basicHealingPotion = basicHealingPotion + 1
+			Inventory.basicHealingPotion = Inventory.basicHealingPotion + 1
 		elif item == "Copper Armour":
-			if armour == 1:
+			if Inventory.armour == 1:
 				print(error + "You already have this item!\n")
 				return "bruh"
 			else:
-				armour = 1
-				absorbtion = 0.9
+				Inventory.armour = 1
+				Inventory.absorbtion = 0.9
 		elif item == "Stone Sword":
-			if Sword == 2:
+			if Inventory.sword == 2:
 				print(error + "You already have this item!\n")
 				return "bruh"
 			else:
-				Sword = 2
-				damageMultiplyer = 1.1
+				Inventory.sword = 2
+				Inventory.damage = 1.1
 
 		print(action + "You purchased {item} for {price} coins!\n"
 			  .format(item=item, price=price))
@@ -494,6 +503,7 @@ def purchase(storeSelected, id):
 
 def openStore():
 	global CSSOptions
+	global Inventory
 	global coins
 	print("------------------")
 	print("	  STORE	   ")
@@ -534,21 +544,21 @@ def openStore():
 
 
 def useMatch():
-	global Matches
+	global Inventory
 	global surroundingsLit
 	global Scene
 
-	if Matches == 0:
+	if Inventory.matches == 0:
 		print(error + "You don't have any matches!\n")
-	elif surroundingsLit == True:
-		Matches = Matches - 1
+	elif Scene.surroundingsLit == True:
+		Inventory.matches = Inventory.matches - 1
 		print("You light a match. it begins to burn away.")
 		print(rip + "You used up one match. \n")
 
-	elif surroundingsLit == False:
+	elif Scene.surroundingsLit == False:
 		Scene.description = "This place is in ruins, and it's possibly been like that for decades."
-		Matches = Matches - 1
-		surroundingsLit = True
+		Inventory.matches = Inventory.matches - 1
+		Scene.surroundingsLit = True
 		print("You Light a match, your surroundings fill up with light. "
 			  "you can now see!")
 		print(rip + "You used up one match. \n")
@@ -558,14 +568,14 @@ def start():
 	global Scene
 	global progressDoor
 
-	if surroundingsLit == False:
+	if Scene.surroundingsLit == False:
 		print("You find yourself in an odd and dark place... \nWhat could this"
 			  " possibly be?\n")
 		Scene.description = "This place is extremely dark, you can't see anything..."
 		time.sleep(1)
 
 		print(
-			"Check your inventory, you might have something to \nimprove your vision...\n")
+			"Check your Inventory, you might have something to \nimprove your vision...\n")
 		time.sleep(1)
 		# combat("Bob", 69)
 		# print("Maybe I should use a match to light this place up...") # too straight forward.
@@ -614,12 +624,11 @@ def start():
 			print(success + "You recieved a basic Healing Potion.")
 			addCoins(50)
 
-			global Sword
-			global basicHealingPotion
+			global Inventory
 
-			basicHealingPotion = basicHealingPotion + 1
-			damageMultiplyer = 1.05
-			Sword = 1
+			Inventory.basicHealingPotion = Inventory.basicHealingPotion + 1
+			Inventory.damage = 1.05
+			Inventory.sword = 1
 			Scene.current = 2
 			start()
 
