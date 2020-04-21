@@ -136,6 +136,7 @@ def passwordPrompt():
 		  " Please input the developer password!" + Style.RESET_ALL)
 	questions = [
 		{
+		
 			'type': 'password',
 			'message': 'Enter the Developer password',
 			'name': 'password'
