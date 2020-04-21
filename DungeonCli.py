@@ -119,6 +119,30 @@ class Scene:
 	# description of current room, called by observe and look around
 	description = "You haven't started yet!"
 
+class randomDialog:
+	def bombExplodes():
+		dialog=["A small bomb exploded, it was a trap!",
+		"Ouch! You tripped a small Bomb trap!",
+		"You attempted to avoid the obvious trap, however it set off a small bomb!"]
+
+		return random.choice(dialog)
+	def collectCoins():
+		dialog=["You reach out and grab all the coins.",
+		"You stuff your pockets with the coins.",
+		"You reach out in awe to consieve all the coins."]
+		return random.choice(dialog)
+	def gameoverText():
+		dialog=["Maybe next time, you might be a bit more lucky...\n",
+		"Maybe next time, things might be in your favour...\n",
+		"Maybe next time, you'll be more careful...\n",
+		"Maybe next time, you might not be where you are now...\n",
+		"Maybe next time, you'll be more wise...\n",
+		"Maybe next time, you'll choose the right option...\n",
+		"Maybe next time, you won't be so careless...\n",
+		"Maybe next time, things might actually go right...\n",
+		"Maybe next time, you'll remember that you are mortal...\n"]
+		return random.choice(dialog)
+
 # Define functions here:
 
 def invalidCommand():
@@ -235,7 +259,7 @@ def gameover():
 	time.sleep(2)
 
 	print(Style.BRIGHT + Fore.WHITE +
-		  "Maybe next time, you might be a bit more lucky...\n")
+		  randomDialog.gameoverText())
 	time.sleep(5)
 	clear()
 	exit()
@@ -713,8 +737,8 @@ def start():
 
 			playSound("Sounds/explosion.wav")
 			print(rip + "BANG!")
-			time.sleep(0.2)
-			print("  A small bomb exploded, it was a trap!")
+			time.sleep(1)
+			print(randomDialog.bombExplodes())
 			damage(20)
 			time.sleep(1)
 			Scene.current = 4
@@ -801,8 +825,8 @@ def randomEvent():
 		elif selection == "bombTrap":
 			playSound("Sounds/explosion.wav")
 			print(rip + "BANG!")
-			time.sleep(0.2)
-			print("  A small bomb exploded, it was a trap!")
+			time.sleep(1)
+			print(randomDialog.bombExplodes())
 			damage(20)
 			Scene.description = Scene.description + " The room looked very charred after the explosion."
 		elif selection == "wizardThatWantsToKillYou":
@@ -873,7 +897,7 @@ def pickCoins():
 
 	if Scene.hasCoins == True:
 		amount = random.randint(4, 6)
-		print(action + "You reach out and grab all the coins")
+		print(action + randomDialog.collectCoins)
 		time.sleep(0.8)
 
 		addCoins(amount)
