@@ -1011,7 +1011,7 @@ def main():
 
 		if passwordPrompt() == "granted":
 			addCoins(200)
-	elif command in ("cl_skipintro", "plsnointro")
+	elif command in ("cl_skipintro", "plsnointro"):
 		if passwordPrompt() == "granted":
 			Scene.current = 3
 			playSound("Music/federation.mp3")
