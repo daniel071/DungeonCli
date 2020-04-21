@@ -36,7 +36,7 @@ hp = 100
 # Events used for random stuff:
 
 progressDoor = True
-events = ["store", "randomFight"]
+events = ["store", "randomFight", "none", "bombTrap"]
 
 
 
@@ -79,6 +79,7 @@ error = Style.BRIGHT + Fore.RED + "[!] "
 hint = Style.DIM + Fore.WHITE + "(hint: "
 action = Style.BRIGHT + Fore.YELLOW + "==> "
 quote = Style.BRIGHT + Fore.WHITE + '"'
+
 
 
 hasSeenAStore = False
@@ -533,7 +534,8 @@ def openStore():
 	print("	  STORE	   ")
 	print("------------------")
 	print(success + "You have $", str(coins))
-
+	for i in Scene.storeSelected:
+		print(Fore.WHITE + "{name} -- {price}".format(name=i[0], price=i[1]))
 	print("")
 
 	questions = [
@@ -591,6 +593,9 @@ def useMatch():
 def start():
 	global Scene
 	global progressDoor
+
+	Scene.storeSelected = []
+	initStore()
 
 	if Scene.surroundingsLit == False:
 		print("You find yourself in an odd and dark place... \nWhat could this"
@@ -706,7 +711,10 @@ def start():
 			print(action + "It is odly quiet here... you begin to look around... \n")
 			time.sleep(2)
 
-			print(rip + "BANG! A small bomb exploded, it was a trap!")
+			playSound("Sounds/explosion.wav")
+			print(rip + "BANG!")
+			time.sleep(0.2)
+			print("  A small bomb exploded, it was a trap!")
 			damage(20)
 			time.sleep(1)
 			Scene.current = 4
@@ -779,16 +787,24 @@ def randomEvent():
 		if selection == "store":
 			Scene.description = Scene.description + \
 				" There is a store nearby, they might sell something useful..."
-			if hasSeenAStore == false:
+			if hasSeenAStore == False:
 				print(hint + "There is a store in this room! you can buy items from them, however you might have to \"look around\" to find it!")
 			storeOptions = CSSOptions.copy()
-			initStore()
 
 			Scene.hasStore = True
 
 		elif selection == "randomFight":
 			randomEnemy()
 
+		elif selection == "none":
+			print("")
+		elif selection == "bombTrap":
+			playSound("Sounds/explosion.wav")
+			print(rip + "BANG!")
+			time.sleep(0.2)
+			print("  A small bomb exploded, it was a trap!")
+			damage(20)
+			Scene.description = Scene.description + " The room looked very charred after the explosion."
 		elif selection == "wizardThatWantsToKillYou":
 			print(quote + 'You. You have the information you need.\n'
 				  '')
@@ -801,15 +817,14 @@ def randomEvent():
 
 
 def initStore():
-	global storeSelected
+	global Scene
 	storeOptions = CSSOptions.copy()
 	i = 0
 	while i < 3:
 		i += 1
 		theChosenOne = random.choice(storeOptions)
-		print(Fore.WHITE + "{i}: {name} -- {price}"
-			  .format(i=i, name=theChosenOne[0], price=theChosenOne[1]))
-		storeSelected.append(theChosenOne)
+
+		Scene.storeSelected.append(theChosenOne)
 		storeOptions = removeFromList(storeOptions, theChosenOne)
 
 
@@ -831,6 +846,10 @@ class Enemy:
 	def die(self):
 		del self
 
+	def startBattle():
+		combat(self.name, self.health, self.minDamage, self.maxDamage)
+
+
 
 def randomEnemy():
 	# [Name, Health, Enemy Minimum Damage, Enemy Maximum Damage]
@@ -841,7 +860,7 @@ def randomEnemy():
 	enemies = [Enemy("Unidentified", 25, 5, 10), Enemy("Wizard", 40, 10, 20)]
 
 	enemy = random.choice(enemies)
-	combat(enemy)
+	enemy.startBattle()
 	#combat(decision[0], decision[1], decision[2], decision[3])
 
 
@@ -927,12 +946,12 @@ def main():
 		lookAround()
 	elif command in ("pickup loose brick", "use loose brick", "use brick", "pickup brick", "brick"):
 		useBrick()
-	elif command in ("randomEventTest", "randomeventpls"):
+	elif command in ("cl_event", "plsevent"):
 		# NOTE: This is for only debugging!
 		if passwordPrompt() == "granted":
 			randomEvent()
 
-	elif command in ("forceBattle", "battlepls"):
+	elif command in ("cl_battle", "plsbattle"):
 		# NOTE: This is for only debugging!
 		if passwordPrompt() == "granted":
 			randomEnemy()
@@ -949,7 +968,6 @@ def main():
 	elif command in ("cl_store", "plsstore"):
 		# NOTE: This is for only debugging!
 		if passwordPrompt() == "granted":
-			initStore()
 			openStore()
 
 	elif command in ("cl_rich", "cl_addcoins", "plscoins"):
@@ -984,7 +1002,7 @@ print(version)
 print(Style.RESET_ALL + "Type 'h' for help or 's' to start! \n")
 
 # Run those functions here:
-
+initStore()
 while mainLoop == 1:
 	main()
 
