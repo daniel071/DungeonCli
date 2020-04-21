@@ -21,7 +21,7 @@ init()
 # |		Version!		|
 # --------------------------
 version = Style.DIM + Fore.WHITE + \
-	"==> Development Version 0.3.6 \n" + Style.RESET_ALL
+	"==> Development Version 0.3.7 \n" + Style.RESET_ALL
 # --------------------------
 
 
