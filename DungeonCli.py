@@ -106,6 +106,7 @@ class Inventory:
 	armour = 0
 	absorbtion = 0
 
+
 class Scene:
 	current = 1 # the current scene
 	surroundingsLit = False
@@ -190,7 +191,7 @@ def isDead():
 
 class soundThread (threading.Thread):
 	def __init__(self, directory):
-		threading.Thread.__init__(self)
+		threading.Thread.__init__(self, daemon=True)
 		self.dir = directory
 
 
@@ -687,8 +688,8 @@ def start():
 			print(quote + 'Good luck." \n')
 			playSound("Music/federation.mp3")
 			print(hint + "This song isn't mine and I don't own any rights to it.)")
-			print(hint + "Ben Prunty made this song, it's called 'Federation'.")
-			print(hint + "I will remove this later when I get another song.)")
+			print(hint + "Ben Prunty made this song, it's called 'Federation'.)")
+			print(hint + "I will remove this later when I get another song.)" + Style.RESET_ALL)
 			time.sleep(1)
 
 			print(action + "He leaves the room and now, you're on your own. \n")
