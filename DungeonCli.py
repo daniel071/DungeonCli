@@ -21,7 +21,7 @@ init()
 # |		Version!		|
 # --------------------------
 version = Style.DIM + Fore.WHITE + \
-	"==> Development Version 0.3.5 \n" + Style.RESET_ALL
+	"==> Development Version 0.3.6 \n" + Style.RESET_ALL
 # --------------------------
 
 
@@ -195,14 +195,16 @@ class soundThread (threading.Thread):
 
 
 	def run(self):
-		print("it works!!!")
-		playSound(self.dir)
+		threadPlaySound(self.dir)
 
 
-def playSound(path):
+def threadPlaySound(path):
 	playsound.playsound(path)
 
 
+def playSound(path):
+	theSoundThread = soundThread(path)
+	theSoundThread.start()
 
 
 def gameover():
@@ -471,7 +473,7 @@ def openInventory():
 		print(str(Inventory.sticks) + " x Sticks")
 
 	if Inventory.basicHealingPotion != 0:
-		print(str(Inventory,basicHealingPotion) + " x Basic Healing Potion")
+		print(str(Inventory.basicHealingPotion) + " x Basic Healing Potion")
 
 	if Inventory.sword == 1:
 		print("Wooden Sword")
@@ -636,7 +638,7 @@ def start():
 				  ' carefully..."')  # ITS DANGEROUS TO GO ALONE.
 			time.sleep(1)
 
-			print(quote + 'Actually! i haave an idea! Here, take this, it should hopefully help you defend yourself."')
+			print(quote + 'Here, take this, it will help you defend yourself."')
 			time.sleep(2)  # TAKE THIS.
 
 			print(success + "You recieved a basic Sword.")
@@ -649,6 +651,7 @@ def start():
 			Inventory.damage = 1.05
 			Inventory.sword = 1
 			Scene.current = 2
+			time.sleep(1)
 			start()
 
 		elif Scene.current == 2:
@@ -682,6 +685,7 @@ def start():
 			time.sleep(3)
 
 			print(quote + 'Good luck." \n')
+			playSound("Music/federation.mp3")
 			time.sleep(1)
 
 			print(action + "He leaves the room and now, you're on your own. \n")
@@ -855,11 +859,10 @@ def pickCoins():
 
 
 def healingPotion():
-	global basicHealingPotion
-	if basicHealingPotion > 0:
+	if Inventory.basicHealingPotion > 0:
 		askLoop = 1
 		print(success + "[1] You have {amount} basic healing potions\n"
-			  .format(amount=basicHealingPotion))
+			  .format(amount=Inventory.basicHealingPotion))
 
 		while askLoop:
 			userInput = input(
@@ -872,7 +875,7 @@ def healingPotion():
 				# Applies the changes
 				heal(20)
 				time.sleep(0.8)
-				basicHealingPotion = basicHealingPotion - 1
+				Inventory.basicHealingPotion = Inventory.basicHealingPotion - 1
 				askLoop = 0
 			else:
 				print(error + "Answer must be either 1, 1 or 1!\n")
@@ -967,6 +970,7 @@ def main():
 
 detect_system()
 clear()
+
 # Introduce the user:
 print(Style.BRIGHT + "Welcome to " + Fore.BLUE + "DungeonCli!" + Style.RESET_ALL)
 
@@ -976,11 +980,6 @@ print(Style.RESET_ALL + "Type 'h' for help or 's' to start! \n")
 # Run those functions here:
 
 while mainLoop == 1:
-	# mixer.music.init()
-	# mixer.music.load("Music/federation.mp3")
-	# mixer.play
-	theSoundThread = soundThread("Music/federation.mp3")
-	theSoundThread.start()
 	main()
 
 # FUCK YOU WHORE, WE LIKE FORTNITE, WE LIKE FORTNIE
