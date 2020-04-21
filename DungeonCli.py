@@ -330,8 +330,10 @@ def save_game():
 	# NOTE: If you want to add your own variable, transferred
 	# across saves, please add it in the saveFile place.
 
-	directory = input(question + "What is the directory that you would "
+	print(hint + "For example, '/home/user/save.json')")
+	directory = input(Style.RESET_ALL + question + "What is the file that you would "
 	"like to save in? ")
+
 	saveFile = {
     "inventory": {
 		"Coins": coins,
@@ -839,11 +841,11 @@ def main():
 			storeInRoom = False
 			start()
 		else:
-			print("Progress through where? there are no visible exits!")
+			print("Progress through where? there are no visible exits!\n")
 
 	elif command in ("l", "look around", "look", "observe"):
 		lookAround()
-	elif command in ("pickup loose brick", "use loose brick", "use brick", "pickup brick"):
+	elif command in ("pickup loose brick", "use loose brick", "use brick", "pickup brick", "brick"):
 		useBrick()
 	elif command in ("randomEventTest", "randomeventpls"):
 		# NOTE: This is for only debugging!
