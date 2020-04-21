@@ -6,10 +6,12 @@
 from __future__ import print_function, unicode_literals
 from colorama import Fore, Back, Style # type: ignore
 from PyInquirer import prompt, print_json  # type: ignore
+import threading
 import json
 import time
 import random
 import os
+import playsound
 from sys import platform
 
 from colorama import init  # type: ignore
@@ -28,7 +30,6 @@ version = Style.DIM + Fore.WHITE + \
 # Used to prevent cheating:
 devPassword = "hackerman"
 
-# TODO: Add saving mechanic for these coins
 mainLoop = 1
 coins = 0  # fucking poor cunt lmao.
 hp = 100
@@ -185,6 +186,23 @@ def clear():
 def isDead():
 	if hp < 0:
 		gameover()
+
+
+class soundThread (threading.Thread):
+	def __init__(self, directory):
+		threading.Thread.__init__(self)
+		self.dir = directory
+
+
+	def run(self):
+		print("it works!!!")
+		playSound(self.dir)
+
+
+def playSound(path):
+	playsound.playsound(path)
+
+
 
 
 def gameover():
@@ -958,7 +976,11 @@ print(Style.RESET_ALL + "Type 'h' for help or 's' to start! \n")
 # Run those functions here:
 
 while mainLoop == 1:
-	gameover()
+	# mixer.music.init()
+	# mixer.music.load("Music/federation.mp3")
+	# mixer.play
+	theSoundThread = soundThread("Music/federation.mp3")
+	theSoundThread.start()
 	main()
 
 # FUCK YOU WHORE, WE LIKE FORTNITE, WE LIKE FORTNIE
