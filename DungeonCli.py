@@ -528,7 +528,7 @@ def useMatch():
 		print(rip + "You used up one match. \n")
 
 	elif surroundingsLit == False:
-		CSDescription = "This place is in ruins, possibly for decades."
+		CSDescription = "This place is in ruins, and it's possibly been like that for decades."
 
 		Matches = Matches - 1
 		surroundingsLit = True
