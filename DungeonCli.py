@@ -29,13 +29,14 @@ version = Style.DIM + Fore.WHITE + \
 
 # Used to prevent cheating:
 devPassword = "hackerman"
+developer = 0
 
 mainLoop = 1
 coins = 0  # fucking poor cunt lmao.
 hp = 100
 # Events used for random stuff:
 
-progressDoor = True
+
 events = ["store", "randomFight", "none", "bombTrap"]
 
 
@@ -111,6 +112,7 @@ class Inventory:
 
 
 class Scene:
+	canProgress = True
 	current = 1 # the current scene
 	surroundingsLit = False
 	hasStore = False
@@ -150,35 +152,40 @@ def invalidCommand():
 
 
 def useBrick():  # temp function called when in a specific room
+	global Scene
 	if Scene.current == 5:
 		print(
 			"you pull out the brick, however quickly drop it as a massive spider lay on it.")
 		time.sleep(0.2)
 		print("you hear a latch go *click!* and the sound of Bricks on Bricks filles the room... A massive door lays upon your sight.")
-		progressDoor = True
+		Scene.canProgress = True
 	else:
 		print("There are no bricks nearby...")
 
 
 def passwordPrompt():
-	print(Style.BRIGHT + Fore.YELLOW + "This is a developer command!"
-		  " Please input the developer password!" + Style.RESET_ALL)
-	questions = [
-		{
+	if developer == 0:
+		print(Style.BRIGHT + Fore.YELLOW + "This is a developer command!"
+			  " Please input the developer password!" + Style.RESET_ALL)
+		questions = [
+			{
 
-			'type': 'password',
-			'message': 'Enter the Developer password',
-			'name': 'password'
-		}
-	]
-	answers = prompt(questions)
-	userInput = answers['password']
-	if userInput == devPassword:
-		print(success + "Access granted!\n" + Style.RESET_ALL)
-		return "granted"
+				'type': 'password',
+				'message': 'Enter the Developer password',
+				'name': 'password'
+			}
+		]
+		answers = prompt(questions)
+		userInput = answers['password']
+		if userInput == devPassword:
+			print(success + "Access granted!\n" + Style.RESET_ALL)
+			return "granted"
+		else:
+			print(rip + "Incorrect password!\n")
+			return "denied"
 	else:
-		print(rip + "Incorrect password!\n")
-		return "denied"
+		print(success + "you have already use the dev password, so you're still logged in.")
+		return "granted"
 
 
 def removeFromList(list, removal):
@@ -616,7 +623,6 @@ def useMatch():
 
 def start():
 	global Scene
-	global progressDoor
 
 	Scene.storeSelected = []
 	initStore()
@@ -748,7 +754,7 @@ def start():
 				action + "You proceed to the next room, being very careful where you step.")
 
 			Scene.description = "This room is rather empty, but an old and dried up fountain lays ahead.\nA few coins lay scattered across the bottom, maybe you can pick them up? But however a single loose red brick in the wall north to you catches your eye..."
-			progressDoor = False
+			Scene.canProgress = False
 
 			Scene.hasCoins = True
 			time.sleep(1)
@@ -959,7 +965,7 @@ def main():
 		print("You entered the store!")
 		openStore()
 	elif command in ("s", "start", "next", "proceed", "next room", "forth", "enter door", "go through door"):
-		if progressDoor == True:
+		if Scene.canProgress == True:
 			Scene.hasStore = False
 
 			start()
@@ -1005,7 +1011,19 @@ def main():
 
 		if passwordPrompt() == "granted":
 			addCoins(200)
+	elif command in ("cl_skipintro", "plsnointro")
+		if passwordPrompt() == "granted":
+			Scene.current = 3
+			playSound("Music/federation.mp3")
+			print(success + "You recieved a basic Sword.")
+			print(success + "You recieved a basic Healing Potion.")
+			addCoins(50)
 
+			global Inventory
+
+			Inventory.basicHealingPotion = Inventory.basicHealingPotion + 1
+			Inventory.damage = 1.05
+			Inventory.sword = 1
 	elif command in ("save", "save game"):
 		save_game()
 
