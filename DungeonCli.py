@@ -47,8 +47,6 @@ events = ["store", "randomFight"]
 # 2 = Stone Sword = 10% Extra damage
 # 3 = Iron Sword = 20% Extra damage
 # 4 = Diamond Sword = 35% Extra damgage
-Sword = 0
-damageMultiplyer = 1
 
 # Armour absorbs a percentage of damage, for example having copper armour
 # absorbs 10% damage, so if you get 50 damage, you only get 45
@@ -58,8 +56,6 @@ damageMultiplyer = 1
 # 2 = Iron Armour = 0.8 x Damage taken
 # 3 = Platinum Armour = 0.7 x Damage taken
 # 4 = Diamond Armour = 0.6 x Damage taken
-armour = 0
-absorbtion = 1  # Out of 1
 
 
 
@@ -90,7 +86,13 @@ hasSeenAStore = False
 
 # Some useful stuff
 
-
+class Item:
+	def init():
+		self.amount=0
+	def add(number):
+		self.amount+=number
+	def remove(number):
+		self.amount-=number
 
 class Inventory:
 	matches = 1
@@ -136,7 +138,7 @@ def passwordPrompt():
 		  " Please input the developer password!" + Style.RESET_ALL)
 	questions = [
 		{
-		
+
 			'type': 'password',
 			'message': 'Enter the Developer password',
 			'name': 'password'
