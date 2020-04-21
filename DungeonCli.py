@@ -651,7 +651,7 @@ def start():
 			Inventory.damage = 1.05
 			Inventory.sword = 1
 			Scene.current = 2
-			time.sleep(1)
+			time.sleep(2)
 			start()
 
 		elif Scene.current == 2:
@@ -686,6 +686,9 @@ def start():
 
 			print(quote + 'Good luck." \n')
 			playSound("Music/federation.mp3")
+			print(hint + "This song isn't mine and I don't own any rights to it.)")
+			print(hint + "Ben Prunty made this song, it's called 'Federation'.")
+			print(hint + "I will remove this later when I get another song.)")
 			time.sleep(1)
 
 			print(action + "He leaves the room and now, you're on your own. \n")
