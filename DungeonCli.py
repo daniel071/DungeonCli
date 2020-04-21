@@ -4,7 +4,7 @@
 
 # Import Libraries here:
 from __future__ import print_function, unicode_literals
-from colorama import Fore, Back, Style
+from colorama import Fore, Back, Style # type: ignore
 from PyInquirer import prompt, print_json  # type: ignore
 import json
 import time
@@ -136,7 +136,7 @@ def passwordPrompt():
 		  " Please input the developer password!" + Style.RESET_ALL)
 	questions = [
 		{
-		
+
 			'type': 'password',
 			'message': 'Enter the Developer password',
 			'name': 'password'
@@ -200,8 +200,8 @@ def gameover():
 
 	print(Style.BRIGHT + Fore.WHITE +
 
-		  "   _____											_\n"
-		  " / ____|										  | |\n"
+		  "   _____					   _\n"
+		  " / ____|					  | |\n"
 		  "| |  __  __ _ _ __ ___   ___	_____   _____ _ __| |\n"
 		  "| | |_ |/ _` | '_ ` _ \ / _ \  / _ \ \ / / _ \ '__| |\n"
 		  "| |__| | (_| | | | | | |  __/ | (_) \ V /  __/ |  |_|\n"
@@ -927,9 +927,13 @@ def main():
 
 	elif command in ("cl_rich", "cl_addcoins", "plscoins"):
 		print("The money grinch steps out of the shadows\n")
+		time.sleep(1)
 		print(quote + "In need of coins, eh? I mean i could let you have some of my precious coins, but ya gotta know the secret code.\"")
 		print(" he said grouchingly\n")
-		print(quote + "Go ahead. I'm waiting...\"")
+		time.sleep(2)
+		print(quote + "Go ahead. I'm waiting...\n")
+		time.sleep(1)
+
 		if passwordPrompt() == "granted":
 			addCoins(200)
 
@@ -954,6 +958,7 @@ print(Style.RESET_ALL + "Type 'h' for help or 's' to start! \n")
 # Run those functions here:
 
 while mainLoop == 1:
+	gameover()
 	main()
 
 # FUCK YOU WHORE, WE LIKE FORTNITE, WE LIKE FORTNIE
