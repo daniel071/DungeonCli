@@ -529,7 +529,6 @@ def useMatch():
 
 	elif surroundingsLit == False:
 		CSDescription = "This place is in ruins, and it's possibly been like that for decades."
-
 		Matches = Matches - 1
 		surroundingsLit = True
 		print("You Light a match, your surroundings fill up with light. "
@@ -642,7 +641,7 @@ def start():
 			currentScene = 3
 
 		elif currentScene == 3:
-			CSDescription = "The room looked very charred after the explosion."
+			CSDescription = "The room looked very charred after the explosion. you should probably proceed."
 
 			print(action + "After the wizard left, you went into the next room. \n")
 			time.sleep(1.5)
