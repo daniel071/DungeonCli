@@ -11,7 +11,7 @@ import json
 import time
 import random
 import os
-import playsound
+import playsound # type: ignore
 from sys import platform
 
 from colorama import init  # type: ignore
