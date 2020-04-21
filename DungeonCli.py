@@ -65,8 +65,8 @@ damageMultiplyer = 1
 armour = 0
 absorbtion = 1  # Out of 1
 
-# description of current room, called by observe and look around
-CSDescription = "You haven't started yet!"
+
+
 CSSOptions = [["Matches", 10], ["Basic Healing Potion", 20],
 			  ["Copper Armour", 100], ["Stone Sword", 80]]
 
@@ -77,7 +77,7 @@ CSSOptions = [["Matches", 10], ["Basic Healing Potion", 20],
 # No Armour
 
 surroundingsLit = False
-currentScene = 1
+
 
 success = Style.BRIGHT + Fore.GREEN + "==> "
 rip = Style.BRIGHT + Fore.RED + "==> "
@@ -94,9 +94,12 @@ hasSeenAStore = False
 
 # Some useful stuff
 class Scene:
+	current = 1 # the current scene
 	hasStore = False
 	hasCoins = False
 	storeSelected = []
+	# description of current room, called by observe and look around
+	description = "You haven't started yet!"
 
 
 def invalidCommand():
@@ -104,7 +107,7 @@ def invalidCommand():
 
 
 def useBrick():  # temp function called when in a specific room
-	if currentScene == 5:
+	if Scene.current == 5:
 		print(
 			"you pull out the brick, however quickly drop it as a massive spider lay on it.")
 		time.sleep(0.2)
@@ -364,10 +367,10 @@ def save_game():
 			"damageMultiplyer": damageMultiplyer,
 			"absorbtion": absorbtion,
 			"events": events,
-			"currentScene": currentScene,
-			"CSDescription": CSDescription,
+			"Scene.current": Scene.current,
+			"Scene.description": Scene.description,
 			"surroundingsLit": surroundingsLit,
-			"coinsInScene": coinsInScene,
+			"Scene.hasCoins": Scene.hasCoins,
 		}
 	}
 
@@ -389,10 +392,8 @@ def load_game():
 	global damageMultiplyer
 	global absorbtion
 	global events
-	global currentScene
-	global CSDescription
+	global Scene
 	global surroundingsLit
-	global coinsInScene
 
 	directory = input(question + "What is the directory the save is in? ")
 
@@ -409,10 +410,10 @@ def load_game():
 	damageMultiplyer = saveFile['other']['damageMultiplyer']
 	absorbtion = saveFile['other']['absorbtion']
 	events = saveFile['other']['events']
-	currentScene = saveFile['other']['currentScene']
-	CSDescription = saveFile['other']['CSDescription']
+	Scene.current = saveFile['other']['Scene.current']
+	Scene.description = saveFile['other']['Scene.description']
 	surroundingsLit = saveFile['other']['surroundingsLit']
-	coinsInScene = saveFile['other']['coinsInScene']
+	Scene.hasCoins = saveFile['other']['Scene.hasCoins']
 
 	print(success + "Successfully loaded save file!\n")
 
@@ -505,9 +506,9 @@ def openStore():
 		{
 			'type': 'list',
 			'name': 'itemChoice',
-					'choices': [(storeSelected[0])[0],
-								(storeSelected[1])[0],
-								(storeSelected[2])[0], 'Exit'],
+					'choices': [(Scene.storeSelected[0])[0],
+								(Scene.storeSelected[1])[0],
+								(Scene.storeSelected[2])[0], 'Exit'],
 			'message': 'Which item would you like to purchase?',
 		}
 	]
@@ -522,20 +523,20 @@ def openStore():
 			askLoop = 0
 			print(action + "You left the store.\n")
 
-		elif userInput == storeSelected[0][0]:
-			purchase(storeSelected, 0)
+		elif userInput == Scene.storeSelected[0][0]:
+			purchase(Scene.storeSelected, 0)
 
-		elif userInput == storeSelected[1][0]:
-			purchase(storeSelected, 1)
+		elif userInput == Scene.storeSelected[1][0]:
+			purchase(Scene.storeSelected, 1)
 
-		elif userInput == storeSelected[2][0]:
-			purchase(storeSelected, 2)
+		elif userInput == Scene.storeSelected[2][0]:
+			purchase(Scene.storeSelected, 2)
 
 
 def useMatch():
 	global Matches
 	global surroundingsLit
-	global CSDescription
+	global Scene
 
 	if Matches == 0:
 		print(error + "You don't have any matches!\n")
@@ -545,7 +546,7 @@ def useMatch():
 		print(rip + "You used up one match. \n")
 
 	elif surroundingsLit == False:
-		CSDescription = "This place is in ruins, and it's possibly been like that for decades."
+		Scene.description = "This place is in ruins, and it's possibly been like that for decades."
 		Matches = Matches - 1
 		surroundingsLit = True
 		print("You Light a match, your surroundings fill up with light. "
@@ -554,15 +555,13 @@ def useMatch():
 
 
 def start():
-	global CSDescription
-	global coinsInScene
-	global currentScene
+	global Scene
 	global progressDoor
 
 	if surroundingsLit == False:
 		print("You find yourself in an odd and dark place... \nWhat could this"
 			  " possibly be?\n")
-		CSDescription = "This place is extremely dark, you can't see anything..."
+		Scene.description = "This place is extremely dark, you can't see anything..."
 		time.sleep(1)
 
 		print(
@@ -573,7 +572,7 @@ def start():
 
 		# print(hint + "type 'm' to use a match)\n" + Style.RESET_ALL) # too straight forward.
 	else:
-		if currentScene == 1:
+		if Scene.current == 1:
 			# NOTE: describe this 'place'!
 			print("This place looks like it's been abandoned decades ago...")
 			# NOTE: describe this 'creature'! e.g. this oddly hunched over creature
@@ -621,10 +620,10 @@ def start():
 			basicHealingPotion = basicHealingPotion + 1
 			damageMultiplyer = 1.05
 			Sword = 1
-			currentScene = 2
+			Scene.current = 2
 			start()
 
-		elif currentScene == 2:
+		elif Scene.current == 2:
 			print(action + "You ask the ancient wizard:")
 			time.sleep(1)
 
@@ -642,7 +641,7 @@ def start():
 				  ' and wiped this place out, everybody either escaped or died.\n'
 				  ' And me, I was the founder of this town." \n')
 			time.sleep(8)
-			CSDescription = "This place is in ruins, apparently it's supposed to be a town...\nThere is a door to the next room, something seems to be strung across it."
+			Scene.description = "This place is in ruins, apparently it's supposed to be a town...\nThere is a door to the next room, something seems to be strung across it."
 
 			input(quote + 'Would you like to recieve a quest?" \n'
 				  + Style.RESET_ALL)
@@ -658,10 +657,10 @@ def start():
 			time.sleep(1)
 
 			print(action + "He leaves the room and now, you're on your own. \n")
-			currentScene = 3
+			Scene.current = 3
 
-		elif currentScene == 3:
-			CSDescription = "The room looked very charred after the explosion. you should probably proceed."
+		elif Scene.current == 3:
+			Scene.description = "The room looked very charred after the explosion. you should probably proceed."
 
 			print(action + "After the wizard left, you went into the next room. \n")
 			time.sleep(1.5)
@@ -672,16 +671,16 @@ def start():
 			print(rip + "BANG! A small bomb exploded, it was a trap!")
 			damage(20)
 			time.sleep(1)
-			currentScene = 4
+			Scene.current = 4
 
-		elif currentScene == 4:
+		elif Scene.current == 4:
 			print(
 				action + "You proceed to the next room, being very careful where you step.")
 
-			CSDescription = "This room is rather empty, but an old and dried up fountain lays ahead.\nA few coins lay scattered across the bottom, maybe you can pick them up? But however a single loose red brick in the wall north to you catches your eye..."
+			Scene.description = "This room is rather empty, but an old and dried up fountain lays ahead.\nA few coins lay scattered across the bottom, maybe you can pick them up? But however a single loose red brick in the wall north to you catches your eye..."
 			progressDoor = False
 
-			coinsInScene = True
+			Scene.hasCoins = True
 			time.sleep(1)
 
 			print(action + "You quickly hear a movement and freeze...\n")
@@ -702,9 +701,9 @@ def start():
 			elif theResult == "flee":
 				print(action + "You quickly ran away, you're safe now. \n")
 
-			currentScene = 5
+			Scene.current = 5
 
-		elif currentScene == 5:
+		elif Scene.current == 5:
 			print("whew! thats over!")
 
 
@@ -733,21 +732,21 @@ def randomEvent():
 
 	global events
 	global hasSeenAStore
-	global storeInRoom
+	global Scene
 	global storeSelected
 	randomLoop = True
 
 	if len(events) > 0:
 		selection = random.choice(events)
 		if selection == "store":
-			CSDescription = CSDescription + \
+			Scene.description = Scene.description + \
 				" There is a store nearby, they might sell something useful..."
 			if hasSeenAStore == false:
 				print(hint + "There is a store in this room! you can buy items from them, however you might have to \"look around\" to find it!")
 			storeOptions = CSSOptions.copy()
 			initStore()
 
-			storeInRoom = True
+			Scene.hasStore = True
 
 		elif selection == "randomFight":
 			randomEnemy()
@@ -809,19 +808,19 @@ def randomEnemy():
 
 
 def lookAround():
-	print(CSDescription + "\n")
+	print(Scene.description + "\n")
 
 
 def pickCoins():
-	global coinsInScene
+	global Scene
 
-	if coinsInScene == True:
+	if Scene.hasCoins == True:
 		amount = random.randint(4, 6)
 		print(action + "You reach out and grab all the coins")
 		time.sleep(0.8)
 
 		addCoins(amount)
-		coinsInScene = False
+		Scene.hasCoins = False
 
 	else:
 		print(error + "There are no coins to pick up! \n")
@@ -881,7 +880,7 @@ def main():
 		openStore()
 	elif command in ("s", "start", "next", "proceed", "next room", "forth", "enter door", "go through door"):
 		if progressDoor == True:
-			storeInRoom = False
+			Scene.hasStore = False
 
 			start()
 		else:
@@ -945,7 +944,6 @@ print(Style.RESET_ALL + "Type 'h' for help or 's' to start! \n")
 # Run those functions here:
 
 while mainLoop == 1:
-	print(Scene.hasCoins)
 	main()
 
 # FUCK YOU WHORE, WE LIKE FORTNITE, WE LIKE FORTNIE
