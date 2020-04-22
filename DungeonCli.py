@@ -14,7 +14,7 @@ import os
 import playsound # type: ignore
 from sys import platform
 from sys import stdout
-from threading import Thread
+import multiprocessing
 import readchar # type: ignore
 
 from colorama import init  # type: ignore
@@ -31,6 +31,7 @@ version = Style.DIM + Fore.WHITE + \
 # Define variables here:
 
 # Used to prevent cheating:
+all_processes = []
 devPassword = "hackerman"
 developer = 0
 
@@ -186,6 +187,10 @@ class inputDetector:
 # 		time.sleep(printspeed)
 # 	stdout.write("\n")
 # 	keyboardtask.terminate()
+def endThreads():
+	for process in all_processes:
+		process.terminate()
+
 
 def invalidCommand():
 	print(error + "Invalid command! \n")
@@ -265,7 +270,12 @@ def isDead():
 
 class soundThread (threading.Thread):
 	def __init__(self, directory):
-		threading.Thread.__init__(self, daemon=True)
+		global all_processes
+		self.dir = directory
+
+		process = multiprocessing.Process(target=playsound.playsound, args=(directory,))
+		process.start()
+		all_processes.append(process)
 		self.dir = directory
 
 
@@ -273,13 +283,9 @@ class soundThread (threading.Thread):
 		threadPlaySound(self.dir)
 
 
-def threadPlaySound(path):
-	playsound.playsound(path)
-
 
 def playSound(path):
 	theSoundThread = soundThread(path)
-	theSoundThread.start()
 
 
 def gameover():
@@ -763,6 +769,7 @@ def start():
 			time.sleep(3)
 
 			print(quote + 'Good luck." \n')
+			endThreads()
 			playSound("Music/federation.mp3")
 			print(hint + "This song isn't mine and I don't own any rights to it.)")
 			print(hint + "Ben Prunty made this song, it's called 'Federation'.)")
@@ -979,6 +986,8 @@ def healingPotion():
 
 def skipIntro():
 	Scene.current = 3
+	endThreads()
+
 	playSound("Music/federation.mp3")
 	print(success + "You recieved a basic Sword.")
 	print(success + "You recieved a basic Healing Potion.")
@@ -1009,6 +1018,7 @@ def main():
 
 	elif command in ("e", "exit", "close", "alt-f4"):
 		global mainLoop
+		endThreads()
 		mainLoop = 0
 
 	elif command in ("hp", "health", "health points"):
@@ -1078,6 +1088,7 @@ def main():
 
 detect_system()
 clear()
+playSound("Music/spaceCruise.mp3")
 
 # Introduce the user:
 print(Style.RESET_ALL + Style.BRIGHT + "Welcome to " + Fore.BLUE + "DungeonCli!" + Style.RESET_ALL)
