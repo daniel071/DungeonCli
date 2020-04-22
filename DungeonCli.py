@@ -22,7 +22,7 @@ init()
 # |		Version!		|
 # --------------------------
 version = Style.DIM + Fore.WHITE + \
-	"==> Development Version 0.3.7 \n" + Style.RESET_ALL
+	"==> Development Version 0.3.8 \n" + Style.RESET_ALL
 # --------------------------
 
 
@@ -944,6 +944,18 @@ def healingPotion():
 	else:
 		print(error + "You don't have any potions!\n")
 
+def skipIntro():
+	Scene.current = 3
+	playSound("Music/federation.mp3")
+	print(success + "You recieved a basic Sword.")
+	print(success + "You recieved a basic Healing Potion.")
+	addCoins(50)
+
+	global Inventory
+	Scene.surroundingsLit = True
+	Inventory.basicHealingPotion = Inventory.basicHealingPotion + 1
+	Inventory.damage = 1.05
+	Inventory.sword = 1
 
 def main():
 	detect_system()
@@ -1020,17 +1032,7 @@ def main():
 			addCoins(200)
 	elif command in ("cl_skipintro", "plsnointro"):
 		if passwordPrompt() == "granted":
-			Scene.current = 3
-			playSound("Music/federation.mp3")
-			print(success + "You recieved a basic Sword.")
-			print(success + "You recieved a basic Healing Potion.")
-			addCoins(50)
-
-			global Inventory
-			Scene.surroundingsLit = True
-			Inventory.basicHealingPotion = Inventory.basicHealingPotion + 1
-			Inventory.damage = 1.05
-			Inventory.sword = 1
+			skipIntro()
 	elif command in ("save", "save game"):
 		save_game()
 
