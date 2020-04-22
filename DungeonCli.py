@@ -91,12 +91,15 @@ hasSeenAStore = False
 # Some useful stuff
 
 class Item:
-	def init():
+	def __init__():
 		self.amount=0
-	def add(number):
+
+	def add(self, number):
 		self.amount+=number
-	def remove(number):
+
+	def remove(self, number):
 		self.amount-=number
+
 
 class Inventory:
 	matches = 1
