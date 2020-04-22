@@ -24,7 +24,7 @@ init()
 # |		Version!		|
 # --------------------------
 version = Style.DIM + Fore.WHITE + \
-	"==> Development Version 0.3.8 \n" + Style.RESET_ALL
+	"==> Development Version 0.3.9 \n" + Style.RESET_ALL
 # --------------------------
 
 
@@ -274,7 +274,7 @@ def isDead():
 	if hp < 0:
 		gameover()
 
-# This is really bad implementatio, but it works
+# This is really bad implementation, but it works
 class soundThread (threading.Thread):
 	def __init__(self, directory, theLoop):
 		global all_processes
@@ -485,6 +485,8 @@ def save_game():
 	# NOTE: If you want to add your own variable, transferred
 	# across saves, please add it in the saveFile place.
 
+	print(Style.BRIGHT + Fore.WHITE + "NOTE: This save function is a work in progress!"
+	" It might not work as attended.\n")
 	print(hint + "For example, '/home/user/save.json')")
 	directory = input(Style.RESET_ALL + question + "What is the file that you would "
 					  "like to save in? ")
@@ -525,6 +527,9 @@ def load_game():
 	global events
 	global Scene
 	global surroundingsLit
+
+	print(Style.BRIGHT + Fore.WHITE + "NOTE: This save function is a work in progress!"
+	" It might not work as attended.\n")
 
 	directory = input(question + "What is the directory the save is in? ")
 
