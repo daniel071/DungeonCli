@@ -15,6 +15,7 @@ import playsound # type: ignore
 from sys import platform
 from sys import stdout
 from threading import Thread
+import readchar
 
 from colorama import init  # type: ignore
 init()
@@ -154,46 +155,6 @@ printspeed = 0.025
 defprntspd = 0.025
 
 
-class _Getch:
-    """Gets a single character from standard input.  Does not echo to the
-screen."""
-    def __init__(self):
-        try:
-            self.impl = _GetchWindows()
-        except ImportError:
-            self.impl = _GetchUnix()
-
-    def __call__(self): return self.impl()
-
-
-class _GetchUnix:
-    def __init__(self):
-        import tty, sys
-
-    def __call__(self):
-        import sys, tty, termios
-        fd = sys.stdin.fileno()
-        old_settings = termios.tcgetattr(fd)
-        try:
-            tty.setraw(sys.stdin.fileno())
-            ch = sys.stdin.read(1)
-        finally:
-            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-        return ch
-
-
-class _GetchWindows:
-    def __init__(self):
-        import msvcrt
-
-    def __call__(self):
-        import msvcrt
-        return msvcrt.getch()
-
-
-
-getch = _Getch()
-
 class inputDetector:
 	def __init__(self):
 		self._running = True
@@ -204,7 +165,7 @@ class inputDetector:
 	def run(self, n):
 		while self._running and n > 0:
 			global printspeed
-			getch()
+			readchar.readchar()
 			self._running = False
 			printspeed = 0.00001
 # Define functions here:
