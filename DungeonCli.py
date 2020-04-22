@@ -401,7 +401,7 @@ def heal(value):
 		hp = 100
 
 
-def combat(self, enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
+def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 	global hp
 	print(rip + "You get in a battle with {enemy}!\n".format(enemy=enemy))
 	time.sleep(0.5)
