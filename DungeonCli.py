@@ -13,6 +13,7 @@ import random
 import os
 import playsound # type: ignore
 from sys import platform
+from sys import stdout
 
 from colorama import init  # type: ignore
 init()
@@ -146,6 +147,12 @@ class randomDialog:
 		return random.choice(dialog)
 
 # Define functions here:
+def print(toPrint):
+	for letter in toPrint:
+		stdout.write(letter)
+		stdout.flush()
+		time.sleep(0.01)
+	stdout.write("\n")
 
 def invalidCommand():
 	print(error + "Invalid command! \n")
@@ -964,7 +971,7 @@ def main():
 	elif command in ("goto shop", "goto store", "store", "shop"):
 		print("You entered the store!")
 		openStore()
-	elif command in ("s", "start", "next", "proceed", "next room", "forth", "enter door", "go through door"):
+	elif command in ("s", "start", "next", "proceed", "next room", "forth", "enter door", "go through door", "n"):
 		if Scene.canProgress == True:
 			Scene.hasStore = False
 
@@ -1020,7 +1027,7 @@ def main():
 			addCoins(50)
 
 			global Inventory
-
+			Scene.surroundingsLit = True
 			Inventory.basicHealingPotion = Inventory.basicHealingPotion + 1
 			Inventory.damage = 1.05
 			Inventory.sword = 1
