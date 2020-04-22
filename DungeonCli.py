@@ -16,7 +16,7 @@ from sys import platform
 from sys import stdout
 
 from colorama import init  # type: ignore
-init() 
+init()
 
 # --------------------------
 # |		Version!		|
@@ -1050,7 +1050,7 @@ detect_system()
 clear()
 
 # Introduce the user:
-print(Style.BRIGHT + "Welcome to " + Fore.BLUE + "DungeonCli!" + Style.RESET_ALL)
+print(Style.RESET_ALL + Style.BRIGHT + "Welcome to " + Fore.BLUE + "DungeonCli!" + Style.RESET_ALL)
 
 print(version)
 print(Style.RESET_ALL + "Type 'h' for help or 's' to start! \n")
