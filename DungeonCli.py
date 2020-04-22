@@ -154,7 +154,7 @@ def print(toPrint):
 	for letter in toPrint:
 		stdout.write(letter)
 		stdout.flush()
-		time.sleep(0.01)
+		time.sleep(0.025)
 	stdout.write("\n")
 
 def invalidCommand():
