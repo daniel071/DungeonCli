@@ -938,8 +938,10 @@ class Enemy:
 		self.minDamage = minDamage
 		self.maxDamage = maxDamage
 
-	def __del__(self):
-		print("%s has died" % (self.name))
+	# NOTE: This code would run, even if you would've fleed or died.
+	# NOTE: That's why I've commented this out.
+	# def __del__(self):
+	# 	print("%s has died" % (self.name))
 
 	def takeDamage(self, damage):
 		self.health -= damage
