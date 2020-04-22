@@ -401,7 +401,7 @@ def heal(value):
 		hp = 100
 
 
-def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
+def combat(self, enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 	global hp
 	print(rip + "You get in a battle with {enemy}!\n".format(enemy=enemy))
 	time.sleep(0.5)
@@ -415,7 +415,7 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 			# Calculates damage
 			damage = random.randint(5, 10) * Inventory.damage
 			enemyDamage = random.randint(
-				enemyMinDamage, enemyMaxDamage) * absorbtion
+				enemyMinDamage, enemyMaxDamage) * Inventory.absorbtion
 
 			# Applies damage
 			hp = hp - enemyDamage
@@ -454,7 +454,7 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 				time.sleep(1)
 
 				enemyDamage = random.randint(
-					enemyMinDamage, enemyMaxDamage) * 2 * absorbtion
+					enemyMinDamage, enemyMaxDamage) * 2 * Inventory.absorbtion
 				hp = hp - enemyDamage
 				print(rip + "{name} deals {damage} damage!\n"
 					  .format(damage=round(enemyDamage), name=enemy))
@@ -481,7 +481,7 @@ def save_game():
 		},
 		"other": {
 			"damageMultiplyer": Inventory.damage,
-			"absorbtion": absorbtion,
+			"absorbtion": Inventory.absorbtion,
 			"events": events,
 			"Scene.current": Scene.current,
 			"Scene.description": Scene.description,
@@ -504,7 +504,6 @@ def load_game():
 	global Sword
 	global armour
 	global Inventory
-	global absorbtion
 	global events
 	global Scene
 	global surroundingsLit
@@ -522,7 +521,7 @@ def load_game():
 	armour = saveFile['Inventory']['Armour']
 
 	Inventory.damage = saveFile['other']['damageMultiplyer']
-	absorbtion = saveFile['other']['absorbtion']
+	Inventory.absorbtion = saveFile['other']['absorbtion']
 	events = saveFile['other']['events']
 	Scene.current = saveFile['other']['Scene.current']
 	Scene.description = saveFile['other']['Scene.description']
@@ -923,7 +922,7 @@ class Enemy:
 	def die(self):
 		del self
 
-	def startBattle():
+	def startBattle(self):
 		combat(self.name, self.health, self.minDamage, self.maxDamage)
 
 
