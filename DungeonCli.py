@@ -16,7 +16,7 @@ from sys import platform
 from sys import stdout
 
 from colorama import init  # type: ignore
-init()
+init() 
 
 # --------------------------
 # |		Version!		|
