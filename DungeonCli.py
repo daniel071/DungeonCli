@@ -15,7 +15,7 @@ import playsound # type: ignore
 from sys import platform
 from sys import stdout
 from threading import Thread
-import readchar
+import readchar # type: ignore
 
 from colorama import init  # type: ignore
 init()
@@ -93,7 +93,7 @@ hasSeenAStore = False
 # Some useful stuff
 
 class Item:
-	def __init__():
+	def __init__(self):
 		self.amount=0
 
 	def add(self, number):
@@ -128,18 +128,18 @@ class Scene:
 	description = "You haven't started yet!"
 
 class randomDialog:
-	def bombExplodes():
+	def bombExplodes(self):
 		dialog=["A small bomb exploded, it was a trap!",
 		"Ouch! You tripped a small Bomb trap!",
 		"You attempted to avoid the obvious trap, however it set off a small bomb!"]
 
 		return random.choice(dialog)
-	def collectCoins():
+	def collectCoins(self):
 		dialog=["You reach out and grab all the coins.",
 		"You stuff your pockets with the coins.",
 		"You reach out in awe to consieve all the coins."]
 		return random.choice(dialog)
-	def gameoverText():
+	def gameoverText(self):
 		dialog=["Maybe next time, you might be a bit more lucky...\n",
 		"Maybe next time, things might be in your favour...\n",
 		"Maybe next time, you'll be more careful...\n",
@@ -171,21 +171,21 @@ class inputDetector:
 # Define functions here:
 
 
+# NOTE: Scrolling text is really broken at the moment, so I've commented
+# NOTE: it out. Fix it when you can.
 
-
-
-def print(toPrint):
-	global printspeed
-	keyboardtask = inputDetector()
-	keyboardthread = Thread(target = keyboardtask.run, args =(10, ))
-	printspeed = defprntspd
-	keyboardthread.start()
-	for letter in toPrint:
-		stdout.write(letter)
-		stdout.flush()
-		time.sleep(printspeed)
-	stdout.write("\n")
-	keyboardtask.terminate()
+# def print(toPrint):
+# 	global printspeed
+# 	keyboardtask = inputDetector()
+# 	keyboardthread = Thread(target = keyboardtask.run, args =(10, ))
+# 	printspeed = defprntspd
+# 	keyboardthread.start()
+# 	for letter in toPrint:
+# 		stdout.write(letter)
+# 		stdout.flush()
+# 		time.sleep(printspeed)
+# 	stdout.write("\n")
+# 	keyboardtask.terminate()
 
 def invalidCommand():
 	print(error + "Invalid command! \n")
