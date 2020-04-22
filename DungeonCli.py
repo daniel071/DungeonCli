@@ -1,6 +1,6 @@
 
 # DungeonCli is a terminal based program where you get to explore places and
-# earn coins. You can spend those coins on various items, have fun!
+# earn coins. You can spend those coins on various items, have fun! 
 
 # Import Libraries here:
 from __future__ import print_function, unicode_literals
