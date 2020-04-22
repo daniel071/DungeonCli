@@ -790,7 +790,7 @@ def start():
 			playSound("Sounds/explosion.wav")
 			print(rip + "BANG!")
 			time.sleep(1)
-			print(randomDialog.bombExplodes())
+			print(randomDialog.bombExplodes(randomDialog))
 			damage(20)
 			time.sleep(1)
 			Scene.current = 4
@@ -949,7 +949,7 @@ def pickCoins():
 
 	if Scene.hasCoins == True:
 		amount = random.randint(4, 6)
-		print(action + randomDialog.collectCoins)
+		print(action + randomDialog.collectCoins(randomDialog))
 		time.sleep(0.8)
 
 		addCoins(amount)
