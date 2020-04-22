@@ -130,16 +130,20 @@ class Scene:
 
 class randomDialog:
 	def bombExplodes(self):
-		dialog=["A small bomb exploded, it was a trap!",
-		"Ouch! You tripped a small Bomb trap!",
-		"You attempted to avoid the obvious trap, however it set off a small bomb!"]
+		dialog=["A small bomb exploded, it was a trap!\n",
+		"Ouch! You tripped a small Bomb trap!\n",
+		"You attempted to avoid the obvious trap, however it set off a small bomb!\n"]
 
 		return random.choice(dialog)
+
+
 	def collectCoins(self):
 		dialog=["You reach out and grab all the coins.",
 		"You stuff your pockets with the coins.",
 		"You reach out in awe to consieve all the coins."]
 		return random.choice(dialog)
+
+
 	def gameoverText(self):
 		dialog=["Maybe next time, you might be a bit more lucky...\n",
 		"Maybe next time, things might be in your favour...\n",
@@ -199,10 +203,13 @@ def invalidCommand():
 def useBrick():  # temp function called when in a specific room
 	global Scene
 	if Scene.current == 5:
-		print(
-			"you pull out the brick, however quickly drop it as a massive spider lay on it.")
-		time.sleep(0.2)
-		print("you hear a latch go *click!* and the sound of Bricks on Bricks filles the room... A massive door lays upon your sight.")
+		print(action + "You pull out the brick however, quickly drop it as a massive spider lay on it.")
+		time.sleep(0.7)
+		print("You hear a latch go *click!* and the sound of Bricks and Bricks"
+		" fill the room... A massive door lays upon your sight.\n")
+		time.sleep(1)
+
+		Scene.description = "A massive door is upon your sight. You should probably check it out"
 		Scene.canProgress = True
 	else:
 		print("There are no bricks nearby...")
@@ -289,6 +296,8 @@ def playSound(path):
 
 
 def gameover():
+	endThreads()
+
 	clear()
 	print(rip + "Your body is torn into shreads...")
 	time.sleep(2)
@@ -312,7 +321,7 @@ def gameover():
 	time.sleep(2)
 
 	print(Style.BRIGHT + Fore.WHITE +
-		  randomDialog.gameoverText())
+		  randomDialog.gameoverText(randomDialog))
 	time.sleep(5)
 	clear()
 	exit()
@@ -826,7 +835,16 @@ def start():
 			Scene.current = 5
 
 		elif Scene.current == 5:
-			print("whew! thats over!")
+			print(action + "You walk towards the massive door, slightly nervous"
+			" about what you'll find there.")
+			time.sleep(1.5)
+			print(action + "A giant spider appears!")
+			time.sleep(0.7)
+			print(rip + "The spider spit acid on you!")
+			time.sleep(0.6)
+			damage(20)
+			time.sleep(0.5)
+			# Start battle with 'Giant Spider'
 
 
 def hpCheck():
@@ -1080,6 +1098,10 @@ def main():
 
 	elif command in ("load", "load game"):
 		load_game()
+	elif command in ("plsdie", "plskill"):
+		if passwordPrompt() == "granted":
+			gameover()
+
 
 	else:
 		invalidCommand()
