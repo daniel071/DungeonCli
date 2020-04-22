@@ -1,6 +1,6 @@
 
 # DungeonCli is a terminal based program where you get to explore places and
-# earn coins. You can spend those coins on various items, have fun! 
+# earn coins. You can spend those coins on various items, have fun!
 
 # Import Libraries here:
 from __future__ import print_function, unicode_literals
@@ -274,13 +274,18 @@ def isDead():
 	if hp < 0:
 		gameover()
 
-
+# This is really bad implementatio, but it works
 class soundThread (threading.Thread):
-	def __init__(self, directory):
+	def __init__(self, directory, theLoop):
 		global all_processes
 		self.dir = directory
+		self.loop = theLoop
 
-		process = multiprocessing.Process(target=playsound.playsound, args=(directory,))
+		if self.loop == True:
+			process = multiprocessing.Process(target=self.playLoop)
+		else:
+			process = multiprocessing.Process(target=playsound.playsound, args=(directory,))
+
 		process.start()
 		all_processes.append(process)
 		self.dir = directory
@@ -290,9 +295,13 @@ class soundThread (threading.Thread):
 		threadPlaySound(self.dir)
 
 
+	def playLoop(self):
+		while True:
+			playsound.playsound(self.dir)
 
-def playSound(path):
-	theSoundThread = soundThread(path)
+
+def playSound(path, ifLoop):
+	theSoundThread = soundThread(path, ifLoop)
 
 
 def gameover():
@@ -778,7 +787,7 @@ def start():
 
 			print(quote + 'Good luck." \n')
 			endThreads()
-			playSound("Music/federation.mp3")
+			playSound("Music/federation.mp3", True)
 			print(hint + "This song isn't mine and I don't own any rights to it.)")
 			print(hint + "Ben Prunty made this song, it's called 'Federation'.)")
 			print(hint + "I will remove this later when I get another song.)" + Style.RESET_ALL)
@@ -796,7 +805,7 @@ def start():
 			print(action + "It is odly quiet here... you begin to look around... \n")
 			time.sleep(2)
 
-			playSound("Sounds/explosion.wav")
+			playSound("Sounds/explosion.wav", False)
 			print(rip + "BANG!")
 			time.sleep(1)
 			print(randomDialog.bombExplodes(randomDialog))
@@ -893,7 +902,7 @@ def randomEvent():
 		elif selection == "none":
 			print("")
 		elif selection == "bombTrap":
-			playSound("Sounds/explosion.wav")
+			playSound("Sounds/explosion.wav", False)
 			print(rip + "BANG!")
 			time.sleep(1)
 			print(randomDialog.bombExplodes())
@@ -1005,7 +1014,7 @@ def skipIntro():
 	Scene.current = 3
 	endThreads()
 
-	playSound("Music/federation.mp3")
+	playSound("Music/federation.mp3", True)
 	print(success + "You recieved a basic Sword.")
 	print(success + "You recieved a basic Healing Potion.")
 	addCoins(50)
@@ -1109,8 +1118,7 @@ def main():
 
 detect_system()
 clear()
-playSound("Music/spaceCruise.mp3")
-
+playSound("Music/spaceCruise.mp3", True)
 # Introduce the user:
 print(Style.RESET_ALL + Style.BRIGHT + "Welcome to " + Fore.BLUE + "DungeonCli!" + Style.RESET_ALL)
 
