@@ -3,7 +3,7 @@
 # earn coins. You can spend those coins on various items, have fun!
 
 # Import Libraries here:
-from __future__ import print_function, unicode_literals
+#from __future__ import print_function, unicode_literals
 from colorama import Fore, Back, Style # type: ignore
 from PyInquirer import prompt, print_json  # type: ignore
 import threading
@@ -13,7 +13,6 @@ import random
 import os
 import playsound # type: ignore
 from sys import platform
-from sys import stdout
 import multiprocessing
 
 
@@ -184,10 +183,28 @@ def printScan(toPrint):
 	# keyboardthread = multiprocessing.Process(target = keyboardtask.run, args =(10, ))
 	# printspeed = defprntspd
 	# keyboardthread.start()
+	i = 0
+	a = ""
+	b = ""
+	c = ""
 	for letter in toPrint:
-		print(letter, end='', flush=True)
-		stdout.flush()
+		i += 1
+		if i == 1:
+			a = letter
+		if i == 2:
+			b = letter
+		if i == 3:
+			c = letter
+		if i == 4:
+			print(a + b + c + letter, end='', flush=True)
+			i = 0
+			a = ""
+			b = ""
+			c = ""
 		time.sleep(0.015)
+
+	if i > 0:
+		print(a + b + c, end='', flush=True)
 	print("")
 	# keyboardtask.terminate()
 
