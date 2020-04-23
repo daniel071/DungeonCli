@@ -178,7 +178,7 @@ class randomDialog:
 # NOTE: it out. Fix it when you can.
 
 def printScan(toPrint):
-	print("Dev! about to print " + toPrint)
+	#print("Dev! about to print " + toPrint)
 	# global printspeed
 	# keyboardtask = inputDetector()
 	# keyboardthread = multiprocessing.Process(target = keyboardtask.run, args =(10, ))
@@ -1175,7 +1175,7 @@ def main():
 
 detect_system()
 if __name__ == '__main__':
-	freeze_support()
+	multiprocessing.freeze_support()
 	p = multiprocessing.Pool(4)
 	clear()
 	playSound("Music/spaceCruise.mp3", True)
