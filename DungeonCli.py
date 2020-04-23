@@ -488,10 +488,12 @@ def options():
 			'name': 'selection',
 					'choices': ['Toggle Music',
 								'Exit',],
-			'message': 'Which item would you like to purchase?',
+			'message': 'What options would you like to toggle?',
 		}
 	]
 
+	print(Style.BOLD + Fore.WHITE + "NOTE: The store is currently a work"
+	"in progress! Some parts have not been implemented yet!")
 	askLoop = 1
 	while askLoop == 1:
 		answers = prompt(questions)
@@ -503,7 +505,7 @@ def options():
 			print(action + "You exited the options menu\n")
 
 		elif userInput == "Toggle Music":
-			print("You toggled music to insert boolean here")
+			print("You toggled music to <insert boolean here>")
 
 
 
@@ -659,7 +661,7 @@ def openStore():
 	print("------------------")
 	print("	  STORE	   ")
 	print("------------------")
-	print(success + "You have $", str(coins))
+	print(success + "You have $" + str(coins))
 	for i in Scene.storeSelected:
 		print(Fore.WHITE + "{name} -- {price}".format(name=i[0], price=i[1]))
 	print("")
