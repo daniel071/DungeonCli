@@ -482,6 +482,33 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 
 
 # Commands used
+def options():
+	questions = [
+		{
+			'type': 'list',
+			'name': 'selection',
+					'choices': ['Toggle Music',
+								'Exit',],
+			'message': 'Which item would you like to purchase?',
+		}
+	]
+
+	askLoop = 1
+	while askLoop == 1:
+		answers = prompt(questions)
+		# print_json(answers)
+		userInput = answers['selection']
+		# print(action + "You selected:" + userInput)
+		if userInput == "Exit":
+			askLoop = 0
+			print(action + "You exited the options menu\n")
+
+		elif userInput == "Toggle Music":
+			print("You toggled music to insert boolean here")
+
+
+
+
 def save_game():
 	# NOTE: If you want to add your own variable, transferred
 	# across saves, please add it in the saveFile place.
@@ -1110,6 +1137,7 @@ def main():
 	elif command in ("cl_skipintro", "plsnointro"):
 		if passwordPrompt() == "granted":
 			skipIntro()
+
 	elif command in ("save", "save game"):
 		save_game()
 
@@ -1119,6 +1147,8 @@ def main():
 		if passwordPrompt() == "granted":
 			gameover()
 
+	elif command in ("o", "options"):
+		options()
 
 	else:
 		invalidCommand()
