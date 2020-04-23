@@ -191,6 +191,7 @@ class inputDetector:
 # 		time.sleep(printspeed)
 # 	stdout.write("\n")
 # 	keyboardtask.terminate()
+
 def endThreads():
 	for process in all_processes:
 		process.terminate()
@@ -1124,18 +1125,19 @@ def main():
 
 
 detect_system()
-clear()
-playSound("Music/spaceCruise.mp3", True)
-# Introduce the user:
-print(Style.RESET_ALL + Style.BRIGHT + "Welcome to " + Fore.BLUE + "DungeonCli!" + Style.RESET_ALL)
+if __name__ == '__main__':
+	clear()
+	playSound("Music/spaceCruise.mp3", True)
+	# Introduce the user:
+	print(Style.RESET_ALL + Style.BRIGHT + "Welcome to " + Fore.BLUE + "DungeonCli!" + Style.RESET_ALL)
 
-print(version)
-print(Style.RESET_ALL + "Type 'h' for help or 's' to start! \n")
+	print(version)
+	print(Style.RESET_ALL + "Type 'h' for help or 's' to start! \n")
 
-# Run those functions here:
-initStore()
-while mainLoop == 1:
-	main()
+	# Run those functions here:
+	initStore()
+	while mainLoop == 1:
+		main()
 
 # FUCK YOU WHORE, WE LIKE FORTNITE, WE LIKE FORTNIE
 # FUCK YOU WHORE, WE LIKE FORTNITE, WE LIKE FORTNIE
