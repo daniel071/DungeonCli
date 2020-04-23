@@ -1176,8 +1176,8 @@ def main():
 detect_system()
 if __name__ == '__main__':
 	multiprocessing.freeze_support()
-	p = multiprocessing.Pool(4)
 	clear()
+	print("playing moosic")
 	playSound("Music/spaceCruise.mp3", True)
 	# Introduce the user:
 	printScan(Style.RESET_ALL + Style.BRIGHT + "Welcome to " + Fore.BLUE + "DungeonCli!" + Style.RESET_ALL)
