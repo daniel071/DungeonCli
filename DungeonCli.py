@@ -13,7 +13,7 @@ import random
 import os
 import playsound # type: ignore
 from sys import platform
-import multiprocessing
+import multiprocessing # DANIEL YOU CUNK :) PLS USE THREADS!!
 
 
 from colorama import init  # type: ignore
