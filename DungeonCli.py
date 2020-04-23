@@ -120,7 +120,7 @@ class Inventory:
 class Scene:
 	canProgress = True
 	current = 1 # the current scene
-	surroundingsLit = False
+	surroundingsLit = False # bro idk but the wizard must be able to see in the dark or something.
 	hasStore = False
 	hasCoins = False
 	storeSelected = []
@@ -184,28 +184,29 @@ def printScan(toPrint):
 	# keyboardthread = multiprocessing.Process(target = keyboardtask.run, args =(10, ))
 	# printspeed = defprntspd
 	# keyboardthread.start()
-	i = 0
-	a = ""
-	b = ""
-	c = ""
+	# i = 0
+	# a = ""
+	# b = ""
+	# c = ""
 	for letter in toPrint:
-		i += 1
-		if i == 1:
-			a = letter
-		if i == 2:
-			b = letter
-		if i == 3:
-			c = letter
-		if i == 4:
-			print(a + b + c + letter, end='', flush=True)
-			i = 0
-			a = ""
-			b = ""
-			c = ""
+		print(letter, end='', flush=True)
+		# i += 1
+		# if i == 1:
+		# 	a = letter
+		# if i == 2:
+		# 	b = letter
+		# if i == 3:
+		# 	c = letter
+		# if i == 4:
+		# 	print(a + b + c + letter, end='', flush=True)
+		# 	i = 0
+		# 	a = ""
+		# 	b = ""
+		# 	c = ""
 		time.sleep(0.015)
 
-	if i > 0:
-		print(a + b + c, end='', flush=True)
+	# if i > 0:
+	# 	print(a + b + c, end='', flush=True)
 	print("")
 	# keyboardtask.terminate()
 
@@ -223,7 +224,7 @@ def useBrick():  # temp function called when in a specific room
 	if Scene.current == 5:
 		printScan(action + "You pull out the brick however, quickly drop it as a massive spider lay on it.")
 		time.sleep(0.7)
-		printScan("You hear a latch go *click!* and the sound of Bricks and Bricks"
+		printScan("You hear a latch go *click!* and the sound of Bricks on Bricks"
 		" fill the room... A massive door lays upon your sight.\n")
 		time.sleep(1)
 
