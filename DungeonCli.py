@@ -15,10 +15,10 @@ import playsound # type: ignore
 from sys import platform
 from sys import stdout
 import multiprocessing
-import readchar # type: ignore
+
 
 from colorama import init  # type: ignore
-init()
+
 
 # --------------------------
 # |		Version!		|
@@ -156,41 +156,40 @@ class randomDialog:
 		"Maybe next time, you'll remember that you are mortal...\n"]
 		return random.choice(dialog)
 
-printspeed = 0.025
-defprntspd = 0.025
+# printspeed = 0.025
+# defprntspd = 0.025
 
 
-class inputDetector:
-	def __init__(self):
-		self._running = True
-
-	def terminate(self):
-		self._running = False
-
-	def run(self, n):
-		while self._running and n > 0:
-			global printspeed
-			readchar.readchar()
-			self._running = False
-			printspeed = 0.00001
+# class inputDetector:
+# 	def __init__(self):
+# 		self._running = True
+#
+# 	def terminate(self):
+# 		self._running = False
+#
+# 	def run(self, n):
+# 		while self._running and n > 0:
+# 			global printspeed
+# 			if kbhit() == true:
+# 				printspeed = 0.00001
 # Define functions here:
 
 
 # NOTE: Scrolling text is really broken at the moment, so I've commented
 # NOTE: it out. Fix it when you can.
 
-# def print(toPrint):
-# 	global printspeed
-# 	keyboardtask = inputDetector()
-# 	keyboardthread = Thread(target = keyboardtask.run, args =(10, ))
-# 	printspeed = defprntspd
-# 	keyboardthread.start()
-# 	for letter in toPrint:
-# 		stdout.write(letter)
-# 		stdout.flush()
-# 		time.sleep(printspeed)
-# 	stdout.write("\n")
-# 	keyboardtask.terminate()
+def print(toPrint):
+	# global printspeed
+	# keyboardtask = inputDetector()
+	# keyboardthread = multiprocessing.Process(target = keyboardtask.run, args =(10, ))
+	# printspeed = defprntspd
+	# keyboardthread.start()
+	for letter in toPrint:
+		stdout.write(letter)
+		stdout.flush()
+		time.sleep(0.015)
+	stdout.write("\n")
+	# keyboardtask.terminate()
 
 def endThreads():
 	for process in all_processes:
