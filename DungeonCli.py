@@ -24,7 +24,7 @@ from colorama import init  # type: ignore
 # |		Version!		|
 # --------------------------
 version = Style.DIM + Fore.WHITE + \
-	"==> Development Version 0.3.9 \n" + Style.RESET_ALL
+	"==> Release Version 0.4.0 \n" + Style.RESET_ALL
 # --------------------------
 
 
