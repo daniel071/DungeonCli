@@ -1128,6 +1128,8 @@ def endScreen():
 	print("The classic command line experience")
 	print(" ")
 	print("Made by the awesome DungeonCli team!")
+	print("join the discord! " + Fore.CYAN + "https://discord.gg/eAUqKKe")
+	print("")
 	# THIS IS AN EXAMPLE. FEEL FREE TO CHANGE IT!
 
 def main():
