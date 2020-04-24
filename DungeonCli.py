@@ -10,7 +10,7 @@ import threading
 import json
 import time
 import random
-import os
+import os 
 import playsound # type: ignore
 from sys import platform
 import multiprocessing # DANIEL YOU CUNK :) PLS USE THREADS!!
