@@ -14,7 +14,8 @@ import os
 import playsound # type: ignore
 from sys import platform
 import multiprocessing # DANIEL YOU CUNK :) PLS USE THREADS!!
-					   # ONCE I FIGURE OUT HOW TO END THREADS!!!!!
+					   # ONCE I FIGURE OUT HOW TO END THREADS, XENTHIO!
+					   # You know how hard it is?
 
 
 from colorama import init  # type: ignore
@@ -765,7 +766,7 @@ def start():
 	else:
 		if Scene.current == 1:
 			# NOTE: describe this 'place'!
-			printScan("This place looks like it's been abandoned decades ago...")
+			printScan(Style.RESET_ALL + "This place looks like it's been abandoned decades ago...")
 			# NOTE: describe this 'creature'! e.g. this oddly hunched over creature
 			printScan(action + "An odd creature begins to walk up to you... \n")
 			answer = ask("Should you hide or confront them?", "h", "c")
@@ -787,9 +788,10 @@ def start():
 			printScan(action + "The figure looked like an ancient wizard. \n")
 			time.sleep(1)
 
-			input(quote + 'Greetings, it seems you are new here,'
+			print(hint + "type an answer)")
+			input(Style.BRIGHT + quote + 'Greetings, it seems you are new here,'
 				  ' is that true?"\n' + Style.RESET_ALL) # this is kinda fucking retarded... the user doesn't even know its an input.
-
+				  										 # I gave a hint to the user
 			# NOTE: maybe. give the user a choice to say something.
 			printScan(action + "You said yes. \n")
 			time.sleep(0.7)
@@ -812,6 +814,9 @@ def start():
 			Inventory.sword = 1
 			Scene.current = 2
 			time.sleep(2)
+
+			# Add a new line
+			print("")
 			start()
 
 		elif Scene.current == 2:
@@ -834,7 +839,8 @@ def start():
 			time.sleep(8)
 			Scene.description = "This place is in ruins, apparently it's supposed to be a town...\nThere is a door to the next room, something seems to be strung across it."
 
-			input(quote + 'Would you like to recieve a quest?" \n'
+			print(hint + "type an answer)")
+			input(Style.BRIGHT + quote + 'Would you like to recieve a quest?" \n'
 				  + Style.RESET_ALL)
 			printScan(action + "You said yes. \n")
 			time.sleep(0.8)
@@ -1093,14 +1099,17 @@ def useSticks():
 def search():
 	# i'm gonna make this interesting and do something at some point.
 	if Scene.hasStore:
-		printScan("This room has a store.")
+		printScan("This room has a store.\n")
 	if Scene.hasCoins:
-		printScan("There are some coins nearby...")
+		printScan("There are some coins nearby...\n")
+	else:
+		printScan("You find nothing that interests you,\nI'd be better to"
+		" move on...\n")
 
 def listen():
 	# i'm gonna make this interesting and do something at some point.
 	# room specific dialog here maybe...
-	printScan("It's extremely quiet, small drops of water reverb around the room...")
+	printScan("It's extremely quiet, small drops of water reverb around the room...\n")
 
 def main():
 	detect_system()
@@ -1139,16 +1148,22 @@ def main():
 			start()
 		else:
 			printScan("Progress through where? there are no visible exits!\n")
+
 	elif command in ("listen", "listen for sounds"):
 		listen()
+
 	elif command in ("search around", "search", "look for items", "search for items"):
-		lookAround()
+		search()
+
 	elif command in ("l", "look around", "look", "observe", "observe surroundings", "look at surroundings"):
 		lookAround()
+
 	elif command in ("pickup loose brick", "use loose brick", "use brick", "pickup brick", "brick"):
 		useBrick()
+
 	elif command in ("use sticks to light fire", "light fire with sticks"):
 		printScan(error + "You cannot do that! The sticks are too wet...\n")
+
 	elif command in ("use sticks", "sticks"):
 		useSticks()
 	elif command in ("cl_event", "plsevent"):
