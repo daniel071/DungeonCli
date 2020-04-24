@@ -92,6 +92,7 @@ hint = Style.DIM + Fore.WHITE + "(hint: "
 action = Style.BRIGHT + Fore.YELLOW + "==> "
 quote = Style.BRIGHT + Fore.WHITE + '"'
 info = Style.BRIGHT + Fore.WHITE + "==> " + Style.RESET_ALL
+prompt = Style.BRIGHT + Fore.CYAN
 
 
 hasSeenAStore = False
@@ -520,7 +521,7 @@ def options():
 		}
 	]
 
-	printScan(Style.BOLD + Fore.WHITE + "NOTE: The store is currently a work"
+	printScan(Style.BRIGHT + Fore.WHITE + "NOTE: The store is currently a work"
 	"in progress! Some parts have not been implemented yet!")
 	askLoop = 1
 	while askLoop == 1:
@@ -1101,7 +1102,7 @@ def skipIntro():
 
 def useSticks():
 	# i'm gonna make this interesting and do something at some point.
-	printScan(info + "These don't seem to do anything right now...")
+	printScan(info + "These don't seem to do anything right now...\n")
 
 def search():
 	# i'm gonna make this interesting and do something at some point.
@@ -1174,7 +1175,7 @@ def nextScene():
 def main():
 	detect_system()
 
-	command = input(info + "[Action] " + Style.RESET_ALL)
+	command = input(prompt + "[Action] " + Style.RESET_ALL)
 	if command in ("check money", "check coins", "coins", "money", "c"):
 		checkCoins()
 
