@@ -1143,7 +1143,7 @@ def endScreen():
 	print("Simulating the classic command line experience.".center(width,' '))
 	print(" ")
 	print("Made by the awesome DungeonCli team!".center(width,' '))
-	print(("join the discord! " + Fore.CYAN + "https://discord.gg/eAUqKKe" + Style.RESET_ALL).center(b,' '))
+	print(("Join the discord! " + Fore.CYAN + "https://discord.gg/eAUqKKe" + Style.RESET_ALL).center(b,' '))
 	print(" ")
 	print((Fore.CYAN + "http://pavela.net:3000/Daniel/DungeonCli" + Style.RESET_ALL).center(b - 1,' '))
 	print(" ")
@@ -1253,6 +1253,10 @@ def main():
 
 	elif command in ("o", "options"):
 		options()
+
+	elif command in ("about", "us", "about us", "info"):
+		endScreen()
+
 
 	else:
 		invalidCommand()
