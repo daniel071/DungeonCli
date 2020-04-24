@@ -14,6 +14,7 @@ import os
 import playsound # type: ignore
 from sys import platform
 import multiprocessing # DANIEL YOU CUNK :) PLS USE THREADS!!
+					   # ONCE I FIGURE OUT HOW TO END THREADS!!!!!
 
 
 from colorama import init  # type: ignore
@@ -1120,8 +1121,9 @@ def main():
 
 	elif command in ("e", "exit", "close", "alt-f4"):
 		global mainLoop
-		printScan("Closing DungeonCli...")
-		printScan("See you next time.")
+		print(Style.BRIGHT + "==> " + Style.RESET_ALL + "Closing DungeonCli...")
+		time.sleep(0.2)
+		printScan("See you next time.\n")
 		endThreads()
 		mainLoop = 0
 
