@@ -1101,6 +1101,25 @@ def listen():
 	# room specific dialog here maybe...
 	printScan("It's extremely quiet, small drops of water reverb around the room...")
 
+def endScreen():
+	# print("╔════════════════════════════════════════════╗")
+	# print("║                 {nameeeee}                 ║".format(nameeeee=(Style.BRIGHT + Fore.BLUE + "DungeonCli" + Style.RESET_ALL)))
+	# print("╠════════════════════════════════════════════╣")
+	# print("║                                            ║")
+	# print("║     The classic command line experience    ║")
+	# print("║                                            ║")
+	# print("║       Made by some awesome people at       ║")
+	# print("║                 pavela.net                 ║")
+	# print("║                                            ║")
+	# print("╚════════════════════════════════════════════╝")
+	print(Style.BRIGHT + Fore.BLUE + "DungeonCli!")
+	print("-----------")
+	print(" ")
+	print("The classic command line experience")
+	print(" ")
+	print("Made by the awesome DungeonCli team!")
+	# THIS IS AN EXAMPLE. FEEL FREE TO CHANGE IT!
+
 def main():
 	detect_system()
 
@@ -1121,7 +1140,11 @@ def main():
 	elif command in ("e", "exit", "close", "alt-f4"):
 		global mainLoop
 		printScan("Closing DungeonCli...")
+		time.sleep(0.5)
 		printScan("See you next time.")
+		time.sleep(0.5)
+		clear()
+		endScreen()
 		endThreads()
 		mainLoop = 0
 
