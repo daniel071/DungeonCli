@@ -6,7 +6,7 @@
 #from __future__ import print_function, unicode_literals
 #from __future__ import print_function
 from colorama import Fore, Back, Style # type: ignore
-from PyInquirer import prompt, print_json  # type: ignore
+from PyInquirer import prompt, print_json # type: ignore
 import threading
 import json
 import time
@@ -95,7 +95,8 @@ error = Style.BRIGHT + Fore.RED + "[!] "
 hint = Style.DIM + Fore.WHITE + "(hint: "
 action = Style.BRIGHT + Fore.YELLOW + "==> "
 quote = Style.BRIGHT + Fore.WHITE + '"'
-
+info = Style.BRIGHT + Fore.WHITE + "==> " + Style.RESET_ALL
+askPrompt = Style.BRIGHT + Fore.CYAN
 
 
 hasSeenAStore = False
@@ -510,7 +511,7 @@ def options():
 		}
 	]
 
-	printScan(Style.BOLD + Fore.WHITE + "NOTE: The store is currently a work"
+	printScan(Style.BRIGHT + Fore.WHITE + "NOTE: The store is currently a work"
 	"in progress! Some parts have not been implemented yet!")
 	askLoop = 1
 	while askLoop == 1:
@@ -1091,7 +1092,7 @@ def skipIntro():
 
 def useSticks():
 	# i'm gonna make this interesting and do something at some point.
-	printScan(info + "These don't seem to do anything right now...")
+	printScan(info + "These don't seem to do anything right now...\n")
 
 def search():
 	# i'm gonna make this interesting and do something at some point.
@@ -1133,7 +1134,7 @@ def endScreen():
 	print("Simulating the classic command line experience.".center(width,' '))
 	print(" ")
 	print("Made by the awesome DungeonCli team!".center(width,' '))
-	print(("join the discord! " + Fore.CYAN + "https://discord.gg/eAUqKKe" + Style.RESET_ALL).center(b,' '))
+	print(("Join the discord! " + Fore.CYAN + "https://discord.gg/eAUqKKe" + Style.RESET_ALL).center(b,' '))
 	print(" ")
 	print((Fore.CYAN + "http://pavela.net:3000/Daniel/DungeonCli" + Style.RESET_ALL).center(b - 1,' '))
 	print(" ")
@@ -1164,35 +1165,49 @@ def nextScene():
 def main():
 	detect_system()
 
-	command = input(Style.BRIGHT + Fore.CYAN + "[Action] " + Style.RESET_ALL)
+	command = input(askPrompt + "[Action] " + Style.RESET_ALL)
 	if command in ("check money", "check coins", "coins", "money", "c"):
 		checkCoins()
+
 	elif command in ("open inventory", "open inv", "inventory", "inv", "i", "check inventory", "check inv", "pockets", "check pocket", "check pockets", "search pockets", "search pocket", "open pockets", "open pocket", "look in pocket", "look in pockets"):
 		openInventory()
+
 	elif command in ("use match", "strike match", "match", "light match", "use matches", "matches", "m"):
 		useMatch()
+
 	elif command in ("h", "help", "umm", "asdfghjkl", "qwertyuiop"):
 		printScan("Help menu \n")
+
 	elif command in ("e", "exit", "close", "alt-f4"):
 		exit()
+
 	elif command in ("hp", "health", "health points"):
 		hpCheck()
+
 	elif command in ("goto shop", "goto store", "store", "shop"):
 		openStore()
+
 	elif command in ("s", "start", "next", "proceed", "next room", "forth", "enter door", "go through door", "n"):
 		nextScene()
+
 	elif command in ("listen", "listen for sounds"):
 		listen()
+
 	elif command in ("search around", "search", "look for items", "search for items"):
 		search()
+
 	elif command in ("l", "look around", "look", "observe", "observe surroundings", "look at surroundings"):
 		lookAround()
+
 	elif command in ("pickup loose brick", "use loose brick", "use brick", "pickup brick", "brick"):
 		useBrick()
+
 	elif command in ("use sticks to light fire", "light fire with sticks"):
 		printScan(error + "You cannot do that! The sticks are too wet...\n")
+
 	elif command in ("use sticks", "sticks"):
 		useSticks()
+
 	elif command in ("cl_event", "plsevent"):
 		# NOTE: This is for only debugging!
 		if passwordPrompt() == "granted":
@@ -1243,6 +1258,10 @@ def main():
 
 	elif command in ("o", "options"):
 		options()
+
+	elif command in ("about", "us", "about us", "info"):
+		endScreen()
+
 
 	else:
 		invalidCommand()
