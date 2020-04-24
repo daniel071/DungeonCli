@@ -17,6 +17,7 @@ import multiprocessing # DANIEL YOU CUNK :) PLS USE THREADS!!
 					   # ONCE I FIGURE OUT HOW TO END THREADS, XENTHIO!
 					   # You know how hard it is?
 					   # YES I NEEDED TO DO THE SAME THING! BUT YOU KNOW THREADS END AFTER THE FUNCTION FINISHES, RIGHT?
+					   # I CAN'T MAKE A BUILD UNTIL YOU SWITCH TO THREADS...
 
 
 from colorama import init  # type: ignore
