@@ -3,3 +3,4 @@ prompt-toolkit==1.0.14
 PyInquirer==1.0.3
 playsound==1.2.2
 readchar==2.0.1
+defKey==1.0.1

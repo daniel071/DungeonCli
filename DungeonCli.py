@@ -4,6 +4,7 @@
 
 # Import Libraries here:
 #from __future__ import print_function, unicode_literals
+#from __future__ import print_function
 from colorama import Fore, Back, Style # type: ignore
 from PyInquirer import prompt, print_json  # type: ignore
 import threading
@@ -12,7 +13,10 @@ import time
 import random
 import os
 import playsound # type: ignore
+from sys import stdout
+from defKey import defKey
 from sys import platform
+from threading import Lock
 import multiprocessing # DANIEL YOU CUNK :) PLS USE THREADS!!
 					   # ONCE I FIGURE OUT HOW TO END THREADS, XENTHIO!
 					   # You know how hard it is?
@@ -164,8 +168,8 @@ class randomDialog:
 		"Maybe next time, you'll remember that you are mortal...\n"]
 		return random.choice(dialog)
 
-# printspeed = 0.025
-# defprntspd = 0.025
+printspeed = 0.015
+defprntspd = 0.015
 
 
 # class inputDetector:
@@ -183,41 +187,27 @@ class randomDialog:
 # Define functions here:
 
 
+def skipDialog():
+	global printspeed
+	printspeed = 0.00001
+
+defKey.bind("z", skipDialog)
 # NOTE: Scrolling text is really broken at the moment, so I've commented
 # NOTE: it out. Fix it when you can.
+print_lock = Lock()
 
 def printScan(toPrint):
-	#print("Dev! about to print " + toPrint)
-	# global printspeed
-	# keyboardtask = inputDetector()
-	# keyboardthread = multiprocessing.Process(target = keyboardtask.run, args =(10, ))
-	# printspeed = defprntspd
-	# keyboardthread.start()
-	# i = 0
-	# a = ""
-	# b = ""
-	# c = ""
+	global printspeed
+	printspeed = defprntspd
+	defKey.start()
 	for letter in toPrint:
 		print(letter, end='', flush=True)
-		# i += 1
-		# if i == 1:
-		# 	a = letter
-		# if i == 2:
-		# 	b = letter
-		# if i == 3:
-		# 	c = letter
-		# if i == 4:
-		# 	print(a + b + c + letter, end='', flush=True)
-		# 	i = 0
-		# 	a = ""
-		# 	b = ""
-		# 	c = ""
-		time.sleep(0.015)
+		time.sleep(printspeed)
 
-	# if i > 0:
-	# 	print(a + b + c, end='', flush=True)
-	print("")
-	# keyboardtask.terminate()
+	defKey.stop()
+	print("\r", flush=True)
+
+
 
 def endThreads():
 	for process in all_processes:
@@ -1267,13 +1257,15 @@ if __name__ == '__main__':
 	except:
 		width = 54
 	a = int((width - 10) / 2)
+
 	print("".center(a,'-') + Style.BRIGHT + Fore.BLUE + "DungeonCli" + Style.RESET_ALL + "".center(a,'-'))
 	playSound("Music/spaceCruise.mp3", True) # DANIEL USE THREADS PLEAASE :)
 	# Introduce the user:
-	printScan(Style.RESET_ALL + Style.BRIGHT + "Welcome to " + Fore.BLUE + "DungeonCli!" + Style.RESET_ALL)
+	printScan(Style.RESET_ALL + Style.BRIGHT + "Welcome to " + Fore.BLUE + "DungeonCli" + Style.RESET_ALL + " ")
 
-	printScan(Style.DIM + Fore.WHITE + "==> " + version + "\n" + Style.RESET_ALL)
-	printScan(Style.RESET_ALL + "Type 'h' for help or 's' to start! \n")
+	printScan(Style.DIM + Fore.WHITE + "==> " + version + "" + Style.RESET_ALL)
+	print(" ")
+	printScan("Type 'h' for help or 's' to start!")
 
 	# Run those functions here:
 	initStore()
