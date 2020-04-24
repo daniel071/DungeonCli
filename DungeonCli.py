@@ -200,12 +200,12 @@ print_lock = Lock()
 def printScan(toPrint):
 	global printspeed
 	printspeed = defprntspd
-	defKey.start()
+
 	for letter in toPrint:
 		print(letter, end='', flush=True)
 		time.sleep(printspeed)
 
-	defKey.stop()
+
 	print("\r", flush=True)
 
 
@@ -1164,8 +1164,9 @@ def nextScene():
 
 def main():
 	detect_system()
-
+	defKey.stop()
 	command = input(askPrompt + "[Action] " + Style.RESET_ALL)
+	defKey.start()
 	if command in ("check money", "check coins", "coins", "money", "c"):
 		checkCoins()
 
@@ -1270,6 +1271,8 @@ def main():
 detect_system()
 if __name__ == '__main__':
 	multiprocessing.freeze_support()
+	defKey.start()
+	print("\r")
 	clear()
 	try:
 		width = int(os.get_terminal_size().columns)
@@ -1278,12 +1281,13 @@ if __name__ == '__main__':
 	a = int((width - 10) / 2)
 
 	print("".center(a,'-') + Style.BRIGHT + Fore.BLUE + "DungeonCli" + Style.RESET_ALL + "".center(a,'-'))
+	print("\r")
 	playSound("Music/spaceCruise.mp3", True) # DANIEL USE THREADS PLEAASE :)
 	# Introduce the user:
 	printScan(Style.RESET_ALL + Style.BRIGHT + "Welcome to " + Fore.BLUE + "DungeonCli" + Style.RESET_ALL + " ")
 
 	printScan(Style.DIM + Fore.WHITE + "==> " + version + "" + Style.RESET_ALL)
-	print(" ")
+	print("")
 	printScan("Type 'h' for help or 's' to start!")
 
 	# Run those functions here:
