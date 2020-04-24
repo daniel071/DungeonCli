@@ -1262,7 +1262,12 @@ detect_system()
 if __name__ == '__main__':
 	multiprocessing.freeze_support()
 	clear()
-	endScreen()
+	try:
+		width = int(os.get_terminal_size().columns)
+	except:
+		width = 54
+	a = int((width - 10) / 2)
+	print("".center(a,'-') + Style.BRIGHT + Fore.BLUE + "DungeonCli" + Style.RESET_ALL + "".center(a,'-'))
 	playSound("Music/spaceCruise.mp3", True) # DANIEL USE THREADS PLEAASE :)
 	# Introduce the user:
 	printScan(Style.RESET_ALL + Style.BRIGHT + "Welcome to " + Fore.BLUE + "DungeonCli!" + Style.RESET_ALL)
