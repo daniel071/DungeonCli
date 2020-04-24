@@ -125,7 +125,8 @@ class Scene:
 	hasCoins = False
 	storeSelected = []
 	# description of current room, called by observe and look around
-	description = "You haven't started yet!"
+	description = "You haven't started yet! Type 's' to start."
+	soundDescription = "You haven't started yet! Type 's' to start."
 
 class randomDialog:
 	def bombExplodes(self):
@@ -735,6 +736,10 @@ def useMatch():
 		printScan("You Light a match, your surroundings fill up with light. "
 			  "you can now see!")
 		printScan(rip + "You used up one match. \n")
+		if Scene.current == 1:
+			print("")
+			time.sleep(1)
+			start()
 
 
 def start():
@@ -782,7 +787,7 @@ def start():
 			time.sleep(1)
 
 			input(quote + 'Greetings, it seems you are new here,'
-				  ' is that true?"\n' + Style.RESET_ALL)
+				  ' is that true?"\n' + Style.RESET_ALL) # this is kinda fucking retarded... the user doesn't even know its an input.
 
 			# NOTE: maybe. give the user a choice to say something.
 			printScan(action + "You said yes. \n")
@@ -1080,6 +1085,22 @@ def skipIntro():
 	Inventory.damage = 1.05
 	Inventory.sword = 1
 
+def useSticks():
+	# i'm gonna make this interesting and do something at some point.
+	printScan(info + "These don't seem to do anything right now...")
+
+def search():
+	# i'm gonna make this interesting and do something at some point.
+	if Scene.hasStore:
+		printScan("This room has a store.")
+	if Scene.hasCoins:
+		printScan("There are some coins nearby...")
+
+def listen():
+	# i'm gonna make this interesting and do something at some point.
+	# room specific dialog here maybe...
+	printScan("It's extremely quiet, small drops of water reverb around the room...")
+
 def main():
 	detect_system()
 
@@ -1087,7 +1108,7 @@ def main():
 	if command in ("check money", "check coins", "coins", "money", "c"):
 		checkCoins()
 
-	elif command in ("open inventory", "open inv", "inventory", "inv", "i", "check inventory", "check inv"):
+	elif command in ("open inventory", "open inv", "inventory", "inv", "i", "check inventory", "check inv", "pockets", "check pocket", "check pockets", "search pockets", "search pocket", "open pockets", "open pocket", "look in pocket", "look in pockets"):
 		openInventory()
 
 	elif command in ("use match", "strike match", "match", "light match",
@@ -1099,6 +1120,8 @@ def main():
 
 	elif command in ("e", "exit", "close", "alt-f4"):
 		global mainLoop
+		printScan("Closing DungeonCli...")
+		printScan("See you next time.")
 		endThreads()
 		mainLoop = 0
 
@@ -1114,11 +1137,20 @@ def main():
 			start()
 		else:
 			printScan("Progress through where? there are no visible exits!\n")
-
-	elif command in ("l", "look around", "look", "observe"):
+	elif command in ("listen", "listen for sounds"):
+		listen()
+	elif command in ("search around", "search", "look for items", "search for items"):
+		lookAround()
+	elif command in ("l", "look around", "look", "observe", "observe surroundings", "look at surroundings"):
 		lookAround()
 	elif command in ("pickup loose brick", "use loose brick", "use brick", "pickup brick", "brick"):
 		useBrick()
+	elif command in ("use sticks to light fire", ""):
+
+	elif command in ("use sticks to light fire", "light fire with sticks"):
+		printScan(error + "You cannot do that! The sticks are too wet...\n")
+	elif command in ("use sticks", "sticks"):
+		useSticks()
 	elif command in ("cl_event", "plsevent"):
 		# NOTE: This is for only debugging!
 		if passwordPrompt() == "granted":
@@ -1178,7 +1210,6 @@ detect_system()
 if __name__ == '__main__':
 	multiprocessing.freeze_support()
 	clear()
-	print("playing moosic")
 	playSound("Music/spaceCruise.mp3", True)
 	# Introduce the user:
 	printScan(Style.RESET_ALL + Style.BRIGHT + "Welcome to " + Fore.BLUE + "DungeonCli!" + Style.RESET_ALL)
