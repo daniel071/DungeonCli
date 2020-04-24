@@ -683,6 +683,7 @@ def purchase(storeSelected, id):
 
 
 def openStore():
+	printScan("You entered the store!")
 	global CSSOptions
 	global Inventory
 	global coins
@@ -1151,62 +1152,55 @@ def endScreen():
 
 	# THIS IS AN EXAMPLE. FEEL FREE TO CHANGE IT!
 
+def exit():
+	global mainLoop
+	print(Style.BRIGHT + "==> " + Style.RESET_ALL + "Closing DungeonCli...")
+	time.sleep(0.2)
+	printScan("See you next time.\n")
+	time.sleep(0.5)
+	clear()
+	endThreads()
+	mainLoop = 0
+	endScreen()
+
+def nextScene():
+	if Scene.canProgress == True:
+		Scene.hasStore = False
+
+		start()
+	else:
+		printScan("Progress through where? there are no visible exits!\n")
+
 def main():
 	detect_system()
 
 	command = input(Style.BRIGHT + Fore.CYAN + "[Action] " + Style.RESET_ALL)
 	if command in ("check money", "check coins", "coins", "money", "c"):
 		checkCoins()
-
 	elif command in ("open inventory", "open inv", "inventory", "inv", "i", "check inventory", "check inv", "pockets", "check pocket", "check pockets", "search pockets", "search pocket", "open pockets", "open pocket", "look in pocket", "look in pockets"):
 		openInventory()
-
-	elif command in ("use match", "strike match", "match", "light match",
-					 "use matches", "matches", "m"):
+	elif command in ("use match", "strike match", "match", "light match", "use matches", "matches", "m"):
 		useMatch()
-
 	elif command in ("h", "help", "umm", "asdfghjkl", "qwertyuiop"):
 		printScan("Help menu \n")
-
 	elif command in ("e", "exit", "close", "alt-f4"):
-		global mainLoop
-		print(Style.BRIGHT + "==> " + Style.RESET_ALL + "Closing DungeonCli...")
-		time.sleep(0.2)
-		printScan("See you next time.\n")
-		time.sleep(0.5)
-		clear()
-		endThreads()
-		mainLoop = 0
-		endScreen()
-
+		exit()
 	elif command in ("hp", "health", "health points"):
 		hpCheck()
 	elif command in ("goto shop", "goto store", "store", "shop"):
-		printScan("You entered the store!")
 		openStore()
 	elif command in ("s", "start", "next", "proceed", "next room", "forth", "enter door", "go through door", "n"):
-		if Scene.canProgress == True:
-			Scene.hasStore = False
-
-			start()
-		else:
-			printScan("Progress through where? there are no visible exits!\n")
-
+		nextScene()
 	elif command in ("listen", "listen for sounds"):
 		listen()
-
 	elif command in ("search around", "search", "look for items", "search for items"):
 		search()
-
 	elif command in ("l", "look around", "look", "observe", "observe surroundings", "look at surroundings"):
 		lookAround()
-
 	elif command in ("pickup loose brick", "use loose brick", "use brick", "pickup brick", "brick"):
 		useBrick()
-
 	elif command in ("use sticks to light fire", "light fire with sticks"):
 		printScan(error + "You cannot do that! The sticks are too wet...\n")
-
 	elif command in ("use sticks", "sticks"):
 		useSticks()
 	elif command in ("cl_event", "plsevent"):
