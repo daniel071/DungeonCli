@@ -91,7 +91,7 @@ error = Style.BRIGHT + Fore.RED + "[!] "
 hint = Style.DIM + Fore.WHITE + "(hint: "
 action = Style.BRIGHT + Fore.YELLOW + "==> "
 quote = Style.BRIGHT + Fore.WHITE + '"'
-
+info = Style.BRIGHT + Fore.WHITE + "==> " + Style.RESET_ALL
 
 
 hasSeenAStore = False
@@ -1174,35 +1174,49 @@ def nextScene():
 def main():
 	detect_system()
 
-	command = input(Style.BRIGHT + Fore.CYAN + "[Action] " + Style.RESET_ALL)
+	command = input(info + "[Action] " + Style.RESET_ALL)
 	if command in ("check money", "check coins", "coins", "money", "c"):
 		checkCoins()
+
 	elif command in ("open inventory", "open inv", "inventory", "inv", "i", "check inventory", "check inv", "pockets", "check pocket", "check pockets", "search pockets", "search pocket", "open pockets", "open pocket", "look in pocket", "look in pockets"):
 		openInventory()
+
 	elif command in ("use match", "strike match", "match", "light match", "use matches", "matches", "m"):
 		useMatch()
+
 	elif command in ("h", "help", "umm", "asdfghjkl", "qwertyuiop"):
 		printScan("Help menu \n")
+
 	elif command in ("e", "exit", "close", "alt-f4"):
 		exit()
+
 	elif command in ("hp", "health", "health points"):
 		hpCheck()
+
 	elif command in ("goto shop", "goto store", "store", "shop"):
 		openStore()
+
 	elif command in ("s", "start", "next", "proceed", "next room", "forth", "enter door", "go through door", "n"):
 		nextScene()
+
 	elif command in ("listen", "listen for sounds"):
 		listen()
+
 	elif command in ("search around", "search", "look for items", "search for items"):
 		search()
+
 	elif command in ("l", "look around", "look", "observe", "observe surroundings", "look at surroundings"):
 		lookAround()
+
 	elif command in ("pickup loose brick", "use loose brick", "use brick", "pickup brick", "brick"):
 		useBrick()
+
 	elif command in ("use sticks to light fire", "light fire with sticks"):
 		printScan(error + "You cannot do that! The sticks are too wet...\n")
+
 	elif command in ("use sticks", "sticks"):
 		useSticks()
+
 	elif command in ("cl_event", "plsevent"):
 		# NOTE: This is for only debugging!
 		if passwordPrompt() == "granted":
