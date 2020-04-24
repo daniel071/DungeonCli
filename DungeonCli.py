@@ -10,7 +10,7 @@ import threading
 import json
 import time
 import random
-import os 
+import os
 import playsound # type: ignore
 from sys import platform
 import multiprocessing # DANIEL YOU CUNK :) PLS USE THREADS!!
@@ -788,8 +788,8 @@ def start():
 			printScan(action + "The figure looked like an ancient wizard. \n")
 			time.sleep(1)
 
-			print(hint + "type an answer)")
-			input(Style.BRIGHT + quote + 'Greetings, it seems you are new here,'
+			printScan(hint + "type an answer)")
+			input(Style.RESET_ALL + quote + 'Greetings, it seems you are new here,'
 				  ' is that true?"\n' + Style.RESET_ALL) # this is kinda fucking retarded... the user doesn't even know its an input.
 				  										 # I gave a hint to the user
 			# NOTE: maybe. give the user a choice to say something.
@@ -839,8 +839,8 @@ def start():
 			time.sleep(8)
 			Scene.description = "This place is in ruins, apparently it's supposed to be a town...\nThere is a door to the next room, something seems to be strung across it."
 
-			print(hint + "type an answer)")
-			input(Style.BRIGHT + quote + 'Would you like to recieve a quest?" \n'
+			printScan(hint + "type an answer)")
+			input(Style.RESET_ALL + quote + 'Would you like to recieve a quest?" \n'
 				  + Style.RESET_ALL)
 			printScan(action + "You said yes. \n")
 			time.sleep(0.8)
