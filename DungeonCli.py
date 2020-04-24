@@ -1124,14 +1124,15 @@ def endScreen():
 	# print("║                 pavela.net                 ║")
 	# print("║                                            ║")
 	# print("╚════════════════════════════════════════════╝")
-	print(Style.BRIGHT + Fore.BLUE + "DungeonCli!" + Style.RESET_ALL)
-	print("-----------")
+	print("".center(20,'-') + Style.BRIGHT + Fore.BLUE + "DungeonCli!" + Style.RESET_ALL + "".center(20,'-'))
 	print(" ")
-	print("The classic command line experience")
+	print("The classic command line experience".center(51,' '))
 	print(" ")
-	print("Made by the awesome DungeonCli team!")
-	print("join the discord! " + Fore.CYAN + "https://discord.gg/eAUqKKe")
-	print("")
+	print("Made by the awesome DungeonCli team!".center(51,' '))
+	print(("join the discord! " + Fore.CYAN + "https://discord.gg/eAUqKKe" + Style.RESET_ALL).center(61,' '))
+	print(" ")
+	print("-".center(51,'-'))
+
 	# THIS IS AN EXAMPLE. FEEL FREE TO CHANGE IT!
 
 def main():
