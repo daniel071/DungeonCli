@@ -1145,8 +1145,6 @@ def main():
 		lookAround()
 	elif command in ("pickup loose brick", "use loose brick", "use brick", "pickup brick", "brick"):
 		useBrick()
-	elif command in ("use sticks to light fire", ""):
-
 	elif command in ("use sticks to light fire", "light fire with sticks"):
 		printScan(error + "You cannot do that! The sticks are too wet...\n")
 	elif command in ("use sticks", "sticks"):
@@ -1210,7 +1208,7 @@ detect_system()
 if __name__ == '__main__':
 	multiprocessing.freeze_support()
 	clear()
-	playSound("Music/spaceCruise.mp3", True)
+	playSound("Music/spaceCruise.mp3", True) # DANIEL USE THREADS PLEAASE :)
 	# Introduce the user:
 	printScan(Style.RESET_ALL + Style.BRIGHT + "Welcome to " + Fore.BLUE + "DungeonCli!" + Style.RESET_ALL)
 
