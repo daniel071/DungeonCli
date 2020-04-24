@@ -89,3 +89,7 @@ fix it.
 You can always help with translations, currently, they are not implemented
 but if you are interested in helping translate a language, we will implement
 that. If you want to translate, just let us know by opening up an issue.
+
+Congratulations! You got to the end, perhaps you'd like to join the official
+discord server?
+https://discord.gg/eAUqKKe
