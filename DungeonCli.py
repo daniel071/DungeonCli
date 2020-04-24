@@ -31,8 +31,7 @@ from colorama import init  # type: ignore
 # --------------------------
 # |		Version!		|
 # --------------------------
-version = Style.DIM + Fore.WHITE + \
-	"==> Development Version 0.4.1 \n" + Style.RESET_ALL
+version = "Development Version 0.4.1"
 # --------------------------
 
 
@@ -1129,14 +1128,26 @@ def endScreen():
 	# print("║                 pavela.net                 ║")
 	# print("║                                            ║")
 	# print("╚════════════════════════════════════════════╝")
-	print("".center(20,'-') + Style.BRIGHT + Fore.BLUE + "DungeonCli!" + Style.RESET_ALL + "".center(20,'-'))
+
+	try:
+		width = int(os.get_terminal_size().columns)
+	except:
+		width = 54
+	a = int((width - 10) / 2)
+	b = int(width + 10)
+
+	print("".center(a,'-') + Style.BRIGHT + Fore.BLUE + "DungeonCli" + Style.RESET_ALL + "".center(a,'-'))
+	print(Style.DIM + Fore.WHITE + version.center(width,' ') + Style.RESET_ALL)
 	print(" ")
-	print("The classic command line experience".center(51,' '))
+	print("Simulating the classic command line experience.".center(width,' '))
 	print(" ")
-	print("Made by the awesome DungeonCli team!".center(51,' '))
-	print(("join the discord! " + Fore.CYAN + "https://discord.gg/eAUqKKe" + Style.RESET_ALL).center(61,' '))
+	print("Made by the awesome DungeonCli team!".center(width,' '))
+	print(("join the discord! " + Fore.CYAN + "https://discord.gg/eAUqKKe" + Style.RESET_ALL).center(b,' '))
 	print(" ")
-	print("-".center(51,'-'))
+	print((Fore.CYAN + "http://pavela.net:3000/Daniel/DungeonCli" + Style.RESET_ALL).center(b - 1,' '))
+	print(" ")
+	print("-".center(width,'-'))
+	print(" ")
 
 	# THIS IS AN EXAMPLE. FEEL FREE TO CHANGE IT!
 
@@ -1261,7 +1272,7 @@ if __name__ == '__main__':
 	# Introduce the user:
 	printScan(Style.RESET_ALL + Style.BRIGHT + "Welcome to " + Fore.BLUE + "DungeonCli!" + Style.RESET_ALL)
 
-	printScan(version)
+	printScan(Style.DIM + Fore.WHITE + "==> " + version + "\n" + Style.RESET_ALL)
 	printScan(Style.RESET_ALL + "Type 'h' for help or 's' to start! \n")
 
 	# Run those functions here:
