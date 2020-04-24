@@ -5,7 +5,7 @@
 # Import Libraries here:
 #from __future__ import print_function, unicode_literals
 from colorama import Fore, Back, Style # type: ignore
-from PyInquirer import prompt, print_json  # type: ignore
+from PyInquirer import prompt, print_json # type: ignore
 import threading
 import json
 import time
@@ -92,7 +92,7 @@ hint = Style.DIM + Fore.WHITE + "(hint: "
 action = Style.BRIGHT + Fore.YELLOW + "==> "
 quote = Style.BRIGHT + Fore.WHITE + '"'
 info = Style.BRIGHT + Fore.WHITE + "==> " + Style.RESET_ALL
-prompt = Style.BRIGHT + Fore.CYAN
+askPrompt = Style.BRIGHT + Fore.CYAN
 
 
 hasSeenAStore = False
@@ -1175,7 +1175,7 @@ def nextScene():
 def main():
 	detect_system()
 
-	command = input(prompt + "[Action] " + Style.RESET_ALL)
+	command = input(askPrompt + "[Action] " + Style.RESET_ALL)
 	if command in ("check money", "check coins", "coins", "money", "c"):
 		checkCoins()
 
