@@ -102,6 +102,7 @@ info = Style.BRIGHT + Fore.WHITE + "==> " + Style.RESET_ALL
 askPrompt = Style.BRIGHT + Fore.CYAN
 
 
+hasCombatFinished = "no."
 hasSeenAStore = False
 
 # Define classes here:
@@ -457,6 +458,9 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 	global hp
 	global Inventory
 	global combatEnemyHP
+	global hasCombatFinished
+
+	hasCombatFinished = "no."
 
 
 	def finishUpMusic():
@@ -535,7 +539,7 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 
 	combatLoop = True
 	while combatLoop:
-		if hasCombatFinished == "killed"
+		if hasCombatFinished == "killed":
 			combatLoop = False
 			return "killed"
 
@@ -993,7 +997,33 @@ def start():
 			time.sleep(0.6)
 			damage(20)
 			time.sleep(0.5)
-			# Start battle with 'Giant Spider'
+			printScan(action + "There's nothing you can do other than fight!")
+			spiderLoop = True
+			while spiderLoop == True:
+				# Start battle with 'Giant Spider'
+				# NOTE: The spider is VERY op is unfair, I should fix that
+				theResult = combat("Giant Spider", 30, 7, 13)
+				if theResult == "killed":
+					printScan(action + "Phew! That was hard! You prepare to move on... \n")
+					spiderLoop = False
+
+				elif theResult == "flee":
+					printScan(action + "You've escaped, but the spider is determined to catch you!")
+					time.sleep(1)
+					printScan(action + "You try to run away from the spider however, you reach a dead end.")
+					time.sleep(1)
+					printScan(action + "You're forced into another battle!")
+					time.sleep(1)
+
+			Scene.current = 6
+		elif Scene.current == 6:
+			printScan(action + "You meet the wizard once again.")
+			time.sleep(1)
+			printScan(quote + 'JESUS! How did you survive like that?"')
+			time.sleep(1)
+			printScan(action + "The wizard cast a spell on you that restored all your health.")
+			time.sleep(0.5)
+			heal(100)
 
 
 def hpCheck():
