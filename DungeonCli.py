@@ -1293,6 +1293,8 @@ if __name__ == '__main__':
 	print("".center(a,'-') + Style.BRIGHT + Fore.BLUE + "DungeonCli" + Style.RESET_ALL + "".center(a,'-'))
 	print("\r")
 
+	playSound("Music/spaceCruise.mp3", True) # DANIEL USE THREADS PLEAASE :)
+
 	# Introduce the user:
 	printScan(Style.RESET_ALL + Style.BRIGHT + "Welcome to " + Fore.BLUE + "DungeonCli" + Style.RESET_ALL + " ")
 
