@@ -52,8 +52,8 @@ coins = 0  # fucking poor cunt lmao.
 hp = 100
 # Events used for random stuff:
 
-
-events = ["store", "randomFight", "none", "bombTrap"]
+# TODO: when 'wizardThatWantsToKillYou' is done, add it here
+events = ["store", "randomFight", "none", "bombTrap",]
 
 
 
@@ -755,10 +755,12 @@ def purchase(storeSelected, id):
 
 
 def openStore():
+	initStore()
 	printScan("You entered the store!")
 	global CSSOptions
 	global Inventory
 	global coins
+	global Scene
 	printScan("------------------")
 	printScan("	  STORE	   ")
 	printScan("------------------")
@@ -787,6 +789,7 @@ def openStore():
 		if userInput == "Exit":
 			askLoop = 0
 			printScan(action + "You left the store.\n")
+			Scene.storeSelected = []
 
 		elif userInput == Scene.storeSelected[0][0]:
 			purchase(Scene.storeSelected, 0)
@@ -962,7 +965,7 @@ def start():
 				action + "You proceed to the next room, being very careful where you step.")
 
 			Scene.description = "This room is rather empty, but an old and dried up fountain lays ahead.\nA few coins lay scattered across the bottom, maybe you can pick them up? But however a single loose red brick in the wall north to you catches your eye..."
-			Scene.canProgress = False
+
 
 			Scene.hasCoins = True
 			time.sleep(1)
@@ -988,6 +991,11 @@ def start():
 			Scene.current = 5
 
 		elif Scene.current == 5:
+			randomEvent()
+			Scene.canProgress = False
+			Scene.current = 6
+
+		elif Scene.current == 6:
 			printScan(action + "You walk towards the massive door, slightly nervous"
 			" about what you'll find there.")
 			time.sleep(1.5)
@@ -1002,7 +1010,7 @@ def start():
 			while spiderLoop == True:
 				# Start battle with 'Giant Spider'
 				# NOTE: The spider is VERY op is unfair, I should fix that
-				theResult = combat("Giant Spider", 30, 7, 13)
+				theResult = combat("Giant Spider", 35, 8, 14)
 				if theResult == "killed":
 					printScan(action + "Phew! That was hard! You prepare to move on... \n")
 					spiderLoop = False
@@ -1015,8 +1023,9 @@ def start():
 					printScan(action + "You're forced into another battle!")
 					time.sleep(1)
 
-			Scene.current = 6
-		elif Scene.current == 6:
+			Scene.current = 7
+
+		elif Scene.current == 7:
 			printScan(action + "You meet the wizard once again.")
 			time.sleep(1)
 			printScan(quote + 'JESUS! How did you survive like that?"')
@@ -1047,8 +1056,6 @@ def hpCheck():
 
 
 def randomEvent():
-	printScan("This is a randomly generated event! The stories in here have not been completed yet.")
-
 	global events
 	global hasSeenAStore
 	global Scene
@@ -1067,10 +1074,15 @@ def randomEvent():
 			Scene.hasStore = True
 
 		elif selection == "randomFight":
+			printScan(action + "You hear a movement -- you freeze")
+			printScan(action + "Someone is trying to attack you,")
+			printScan(action + "It's too late to avoid a fight now!\n")
 			randomEnemy()
 
 		elif selection == "none":
-			printScan("")
+			printScan(action + "You find absolutely nothing in this room...")
+			printScan(action + "Perhaps you should move on...\n")
+
 		elif selection == "bombTrap":
 			playSound("Sounds/explosion.wav", False)
 			printScan(rip + "BANG!")
@@ -1078,7 +1090,9 @@ def randomEvent():
 			printScan(randomDialog.bombExplodes())
 			damage(20)
 			Scene.description = Scene.description + " The room looked very charred after the explosion."
+
 		elif selection == "wizardThatWantsToKillYou":
+			#TODO: Finish this!
 			printScan(quote + 'You. You have the information you need.\n'
 				  '')
 			pass
@@ -1268,7 +1282,7 @@ def nextScene():
 		start()
 	else:
 		printScan("Progress through where? there are no visible exits!")
-		printScan(hint + "maybe try 'look' and see what you find...)\n")
+		printScan(hint + "maybe try 'look' and see what you find...)\n" + Style.RESET_ALL)
 
 def main():
 	detect_system()
@@ -1403,7 +1417,6 @@ if __name__ == '__main__':
 	printScan("Type 'h' for help or 's' to start!")
 
 	# Run those functions here:
-	initStore()
 	while mainLoop == 1:
 		main()
 
