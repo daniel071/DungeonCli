@@ -35,7 +35,7 @@ from colorama import init  # type: ignore
 # --------------------------
 # |		Version!		|
 # --------------------------
-version = "Development Version 0.4.1"
+version = "Development Version 0.4.3"
 # --------------------------
 
 
@@ -484,6 +484,7 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 		# for some reason this function couldn't use enemyhp???? so I made
 		# a seperate one so it would work... :)
 
+		global hasCombatFinished
 		global hp
 		global combatLoop
 
@@ -507,7 +508,7 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 
 			finishUpMusic()
 
-			return "kill"
+			hasCombatFinished = "killed"
 
 		return enemyHP
 
@@ -534,6 +535,11 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 
 	combatLoop = True
 	while combatLoop:
+		if hasCombatFinished == "killed"
+			combatLoop = False
+			return "killed"
+
+
 		answers = prompt(questions)
 		userInput = answers['userChoice']
 		if userInput == "Fight":
@@ -905,7 +911,7 @@ def start():
 				  ' a great place to be...\n But then, the rebellion came in'
 				  ' and wiped this place out, everybody either escaped or died.\n'
 				  ' And me, I was the founder of this town." \n')
-			time.sleep(8)
+			time.sleep(4)
 			Scene.description = "This place is in ruins, apparently it's supposed to be a town...\nThere is a door to the next room, something seems to be strung across it."
 
 			printScan(hint + "type an answer)")
@@ -968,7 +974,7 @@ def start():
 			time.sleep(1)
 
 			theResult = combat("Unidentified", 25, 5, 10)
-			if theResult == "kill":
+			if theResult == "killed":
 				printScan(
 					action + "You killed the unknown person however, you can't stop feeling bad. \n")
 
@@ -1231,8 +1237,8 @@ def nextScene():
 
 		start()
 	else:
-		printScan("Progress through where? there are no visible exits!\n")
-		printScan(hint + "maybe try 'look' and see what you find...)")
+		printScan("Progress through where? there are no visible exits!")
+		printScan(hint + "maybe try 'look' and see what you find...)\n")
 
 def main():
 	detect_system()

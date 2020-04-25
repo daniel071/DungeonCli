@@ -97,11 +97,11 @@ that. If you want to translate, just let us know by opening up an issue.
 - [ ] Write more story
 - [x] Basic Gameplay mechanics
 - [ ] Real 'bin' format save files. not the fake stuff.
-- [ ] Overhaul the combat system, add sparing and using items
+- [x] Overhaul the combat system, add sparing and using items
 - [ ] Fix combat system dealing no damage
 - [ ] Make extra swords that deal extra damage
 - [ ] Add more Armour which absorbs a percentage of damage
-
+- [ ] Fix bug where if you die while in combat, the combat function persists
 ## What to do next?
 Congratulations! You got to the end, perhaps you'd like to join the official
 discord server?
