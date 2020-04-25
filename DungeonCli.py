@@ -46,6 +46,7 @@ all_processes = []
 devPassword = "hackerman"
 developer = 0
 
+invalidCommands = 0
 mainLoop = 1
 coins = 0  # fucking poor cunt lmao.
 hp = 100
@@ -216,7 +217,14 @@ def endThreads():
 
 
 def invalidCommand():
+	global invalidCommands
+
+	invalidCommands = invalidCommands + 1
 	printScan(error + "Invalid command! \n")
+	if invalidCommands > 3:
+		printScan(hint + "if you're stuck on how to progress, simply type 's')\n"
+		+ Style.RESET_ALL)
+		invalidCommands = 0
 
 
 def useBrick():  # temp function called when in a specific room
