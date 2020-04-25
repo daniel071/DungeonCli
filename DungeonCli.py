@@ -458,7 +458,12 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 	global Inventory
 	global combatEnemyHP
 
-	combatEnemyHP = enemyHP
+
+	def finishUpMusic():
+		endThreads()
+		playSound("Music/federation.mp3", True)
+
+
 
 	def enemyDealDamage(multiplyer):
 		global hp
@@ -475,22 +480,20 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 		isDead()
 
 
-	print(enemyHP)
-
-	def playerDealDamage():
+	def playerDealDamage(enemyHP):
 		# for some reason this function couldn't use enemyhp???? so I made
 		# a seperate one so it would work... :)
 
 		global hp
-		global combatEnemyHP
-
-		enemyHP = combatEnemyHP
+		global combatLoop
 
 		playerDamage = random.randint(5, 10) * Inventory.damage
 		enemyHP = enemyHP - playerDamage
 
 		printScan(success + "You deal {damage} damage!".format(damage=round(playerDamage)))
 		time.sleep(0.2)
+		return enemyHP
+
 		if enemyHP < 0:
 			combatLoop = False
 			printScan(success + "You successfully killed {name}\n"
@@ -503,8 +506,7 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 
 			combatLoop = False
 
-			endThreads()
-			playSound("Music/federation.mp3", True)
+			finishUpMusic()
 
 			return "kill"
 
@@ -534,11 +536,28 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 		answers = prompt(questions)
 		userInput = answers['userChoice']
 		if userInput == "Fight":
-			playerDealDamage()
+			enemyHP = playerDealDamage(enemyHP)
 			enemyDealDamage(1)
 
 		elif userInput == "Flee":
-			enemyDealDamage(2)
+			attemptFlee = random.randint(1, 2)
+			if attemptFlee == 1:
+				printScan(action + "You tried to flee, but {name} caught you. \n"
+				.format(name=enemy))
+				enemyDealDamage(2)
+
+			else:
+				printScan(action + "You run away before {name} could catch you.\n"
+				.format(name=enemy))
+				combatLoop = False
+				time.sleep(0.4)
+
+				finishUpMusic()
+
+				return "flee"
+
+
+
 
 		elif userInput == "Use item":
 			healingPotion()
@@ -546,7 +565,7 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 
 		elif userInput == "Check HP":
 			hpCheck()
-			printScan(action + "The enemy has {amount} hp!\n".format(amount=enemyHP))
+			printScan(action + "The enemy has {amount} hp!\n".format(amount=round(enemyHP)))
 			time.sleep(0.2)
 
 
