@@ -302,36 +302,34 @@ def isDead():
 		gameover()
 
 # This is really bad implementation, but it works
-class killableThread(threading.Thread):
-	def __init__(self, directory, theLoop, *args, **kwargs):
+class soundThread (threading.Thread):
+	def __init__(self, directory, theLoop):
+		global all_processes
 		self.dir = directory
-		self.isLoop = theLoop
+		self.loop = theLoop
 
-		super(killableThread, self).__init__(*args, **kwargs)
-		self._stop_event = threading.Event()
+		if self.loop == True:
+			process = multiprocessing.Process(target=self.playLoop)
+		else:
+			process = multiprocessing.Process(target=playsound.playsound, args=(directory,))
 
-		self._running = True
+		process.start()
+		all_processes.append(process)
+		self.dir = directory
 
 
 	def run(self):
-		playsound.playsound(self.dir)
+		threadPlaySound(self.dir)
 
 
-	def terminate(self):
-		self._running = False
-
-
-	def stop(self):
-	    self._stop_event.set()
-
-	def stopped(self):
-	    return self._stop_event.is_set()
+	def playLoop(self):
+		while True:
+			playsound.playsound(self.dir)
 
 
 def playSound(path, ifLoop):
-	new_process = killableThread(path, ifLoop)
-	new_process.start()
-	all_processes.append(new_process)
+	theSoundThread = soundThread(path, ifLoop)
+
 
 
 
@@ -1294,7 +1292,7 @@ if __name__ == '__main__':
 
 	print("".center(a,'-') + Style.BRIGHT + Fore.BLUE + "DungeonCli" + Style.RESET_ALL + "".center(a,'-'))
 	print("\r")
-	playSound("Music/spaceCruise.mp3", True) # DANIEL USE THREADS PLEAASE :)
+
 	# Introduce the user:
 	printScan(Style.RESET_ALL + Style.BRIGHT + "Welcome to " + Fore.BLUE + "DungeonCli" + Style.RESET_ALL + " ")
 
@@ -1305,6 +1303,7 @@ if __name__ == '__main__':
 	# Run those functions here:
 	initStore()
 	while mainLoop == 1:
+		playSound("Music/spaceCruise.mp3", True) # DANIEL USE THREADS PLEAASE :)
 		main()
 
 # FUCK YOU WHORE, WE LIKE FORTNITE, WE LIKE FORTNIE
