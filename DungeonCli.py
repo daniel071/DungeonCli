@@ -192,7 +192,7 @@ def skipDialog():
 	global printspeed
 	printspeed = 0.00001
 
-defKey.bind("z", skipDialog)
+
 # NOTE: Scrolling text is really broken at the moment, so I've commented
 # NOTE: it out. Fix it when you can.
 print_lock = Lock()
@@ -200,13 +200,16 @@ print_lock = Lock()
 def printScan(toPrint):
 	global printspeed
 	printspeed = defprntspd
-
+	defKey.start()
+	defKey.bind("z", skipDialog)
 	for letter in toPrint:
+
 		print(letter, end='', flush=True)
 		time.sleep(printspeed)
 
-
+	defKey.stop()
 	print("\r", flush=True)
+
 
 
 
@@ -1127,7 +1130,7 @@ def endScreen():
 		width = 54
 	a = int((width - 10) / 2)
 	b = int(width + 10)
-
+	print("\r", flush=True)
 	print("".center(a,'-') + Style.BRIGHT + Fore.BLUE + "DungeonCli" + Style.RESET_ALL + "".center(a,'-'))
 	print(Style.DIM + Fore.WHITE + version.center(width,' ') + Style.RESET_ALL)
 	print(" ")
@@ -1164,9 +1167,8 @@ def nextScene():
 
 def main():
 	detect_system()
-	defKey.stop()
+
 	command = input(askPrompt + "[Action] " + Style.RESET_ALL)
-	defKey.start()
 	if command in ("check money", "check coins", "coins", "money", "c"):
 		checkCoins()
 
@@ -1271,8 +1273,6 @@ def main():
 detect_system()
 if __name__ == '__main__':
 	multiprocessing.freeze_support()
-	defKey.start()
-	print("\r")
 	clear()
 	try:
 		width = int(os.get_terminal_size().columns)
@@ -1281,13 +1281,12 @@ if __name__ == '__main__':
 	a = int((width - 10) / 2)
 
 	print("".center(a,'-') + Style.BRIGHT + Fore.BLUE + "DungeonCli" + Style.RESET_ALL + "".center(a,'-'))
-	print("\r")
 	playSound("Music/spaceCruise.mp3", True) # DANIEL USE THREADS PLEAASE :)
 	# Introduce the user:
-	printScan(Style.RESET_ALL + Style.BRIGHT + "Welcome to " + Fore.BLUE + "DungeonCli" + Style.RESET_ALL + " ")
+	printScan(Style.RESET_ALL + Style.BRIGHT + "Welcome to " + Fore.BLUE + "DungeonCli" + Style.RESET_ALL + "")
 
 	printScan(Style.DIM + Fore.WHITE + "==> " + version + "" + Style.RESET_ALL)
-	print("")
+	print(" ")
 	printScan("Type 'h' for help or 's' to start!")
 
 	# Run those functions here:
