@@ -492,7 +492,6 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 
 		printScan(success + "You deal {damage} damage!".format(damage=round(playerDamage)))
 		time.sleep(0.2)
-		return enemyHP
 
 		if enemyHP < 0:
 			combatLoop = False
@@ -509,6 +508,8 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 			finishUpMusic()
 
 			return "kill"
+
+		return enemyHP
 
 
 	endThreads()
@@ -1231,6 +1232,7 @@ def nextScene():
 		start()
 	else:
 		printScan("Progress through where? there are no visible exits!\n")
+		printScan(hint + "maybe try 'look' and see what you find...)")
 
 def main():
 	detect_system()
@@ -1309,7 +1311,7 @@ def main():
 		printScan(quote + "In need of coins, eh? I mean i could let you have some of my precious coins, but ya gotta know the secret code.\"")
 		printScan(" he said grouchingly\n")
 		time.sleep(2)
-		printScan(quote + "Go ahead. I'm waiting...\n")
+		printScan(quote + "Go ahead. I'm waiting...\" \n")
 		time.sleep(1)
 
 		if passwordPrompt() == "granted":
