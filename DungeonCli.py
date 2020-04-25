@@ -830,7 +830,6 @@ def start():
 	global Scene
 
 	Scene.storeSelected = []
-	initStore()
 
 	if Scene.surroundingsLit == False:
 		printScan("You find yourself in an odd and dark place... \nWhat could this"
@@ -944,6 +943,11 @@ def start():
 			Scene.current = 3
 
 		elif Scene.current == 3:
+			randomEvent()
+			Scene.current = 4
+
+
+		elif Scene.current == 4:
 			Scene.description = "The room looked very charred after the explosion. you should probably proceed."
 
 			printScan(action + "After the wizard left, you went into the next room. \n")
@@ -956,11 +960,16 @@ def start():
 			printScan(rip + "BANG!")
 			time.sleep(1)
 			printScan(randomDialog.bombExplodes(randomDialog))
-			damage(20)
+			damage(random.randint(5, 15))
 			time.sleep(1)
-			Scene.current = 4
+			Scene.current = 5
 
-		elif Scene.current == 4:
+		elif Scene.current == 5:
+			randomEvent()
+			Scene.current = 6
+
+
+		elif Scene.current == 6:
 			printScan(
 				action + "You proceed to the next room, being very careful where you step.")
 
@@ -988,14 +997,14 @@ def start():
 			elif theResult == "flee":
 				printScan(action + "You quickly ran away, you're safe now. \n")
 
-			Scene.current = 5
+			Scene.current = 7
 
-		elif Scene.current == 5:
+		elif Scene.current == 7:
 			randomEvent()
 			Scene.canProgress = False
-			Scene.current = 6
+			Scene.current = 8
 
-		elif Scene.current == 6:
+		elif Scene.current == 8:
 			printScan(action + "You walk towards the massive door, slightly nervous"
 			" about what you'll find there.")
 			time.sleep(1.5)
@@ -1023,9 +1032,9 @@ def start():
 					printScan(action + "You're forced into another battle!")
 					time.sleep(1)
 
-			Scene.current = 7
+			Scene.current = 9
 
-		elif Scene.current == 7:
+		elif Scene.current == 9:
 			printScan(action + "You meet the wizard once again.")
 			time.sleep(1)
 			printScan(quote + 'JESUS! How did you survive like that?"')
@@ -1065,13 +1074,9 @@ def randomEvent():
 	if len(events) > 0:
 		selection = random.choice(events)
 		if selection == "store":
-			Scene.description = Scene.description + \
-				" There is a store nearby, they might sell something useful..."
-			if hasSeenAStore == False:
-				printScan(hint + "There is a store in this room! you can buy items from them, however you might have to \"look around\" to find it!")
-			storeOptions = CSSOptions.copy()
-
-			Scene.hasStore = True
+			printScan(action + "You find a small store setup here")
+			printScan(action + "Maybe they'll have something useful here..")
+			openStore()
 
 		elif selection == "randomFight":
 			printScan(action + "You hear a movement -- you freeze")
@@ -1087,8 +1092,8 @@ def randomEvent():
 			playSound("Sounds/explosion.wav", False)
 			printScan(rip + "BANG!")
 			time.sleep(1)
-			printScan(randomDialog.bombExplodes())
-			damage(20)
+			printScan(randomDialog.bombExplodes(randomDialog))
+			damage(random.randint(5, 15))
 			Scene.description = Scene.description + " The room looked very charred after the explosion."
 
 		elif selection == "wizardThatWantsToKillYou":
