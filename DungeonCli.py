@@ -1293,6 +1293,7 @@ if __name__ == '__main__':
 	print("".center(a,'-') + Style.BRIGHT + Fore.BLUE + "DungeonCli" + Style.RESET_ALL + "".center(a,'-'))
 	print("\r")
 
+	# Play moosic
 	playSound("Music/spaceCruise.mp3", True) # DANIEL USE THREADS PLEAASE :)
 
 	# Introduce the user:
@@ -1305,7 +1306,6 @@ if __name__ == '__main__':
 	# Run those functions here:
 	initStore()
 	while mainLoop == 1:
-		playSound("Music/spaceCruise.mp3", True) # DANIEL USE THREADS PLEAASE :)
 		main()
 
 # FUCK YOU WHORE, WE LIKE FORTNITE, WE LIKE FORTNIE
