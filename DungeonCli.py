@@ -213,7 +213,7 @@ def printScan(toPrint):
 
 def endThreads():
 	for process in all_processes:
-		process.terminate()
+		process.stop()
 
 
 def invalidCommand():
@@ -302,24 +302,24 @@ def isDead():
 		gameover()
 
 # This is really bad implementation, but it works
-class soundThread (threading.Thread):
+class soundThread(threading.Thread):
 	def __init__(self, directory, theLoop):
 		global all_processes
 		self.dir = directory
 		self.loop = theLoop
 
 		if self.loop == True:
-			process = multiprocessing.Process(target=self.playLoop)
+			process = threading.Thread(target=self.playLoop)
 		else:
-			process = multiprocessing.Process(target=playsound.playsound, args=(directory,))
+			process = threading.Thread(target=playsound.playsound, args=(directory,))
 
 		process.start()
 		all_processes.append(process)
 		self.dir = directory
 
 
-	def run(self):
-		threadPlaySound(self.dir)
+	def stop(self):
+		stop()
 
 
 	def playLoop(self):
