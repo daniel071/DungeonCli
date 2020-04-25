@@ -454,6 +454,22 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 	# NOTE: I, Daniel will overhaul this to use PyInquirer instead,
 	# NOTE: display HP, fix the bugs and add extra commands such as
 	# NOTE: sparing and using items!
+	global hp
+	global Inventory
+
+	def enemyDealDamage(multiplyer):
+		enemyDamage = random.randint(enemyMinDamage, enemyMaxDamage) * Inventory.absorbtion * multiplyer
+		hp = hp - enemyDamage
+		printScan(rip + "{name} deals {damage} damage!\n"
+		.format(damage=round(enemyDamage), name=enemy))
+		time.sleep(0.2)
+		isDead()
+
+	def playerDealDamage():
+		print("Not implemented!")
+
+
+
 	endThreads()
 	songToPlay = random.choice(battleSongs)
 	playSound(songToPlay, True)
@@ -462,67 +478,36 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 	printScan(rip + "You get in a battle with {enemy}!\n".format(enemy=enemy))
 	time.sleep(0.5)
 
+	questions = [
+		{
+			'type': 'list',
+			'name': 'userChoice',
+					'choices': ['Fight',
+								'Flee',
+								'Use item',
+								'Check HP'],
+			'message': 'What would you like to do?',
+		}
+	]
+
 	combatLoop = True
 	while combatLoop:
-		time.sleep(0.8)
+		answers = prompt(questions)
+		userInput = answers['userChoice']
+		if userInput == "Fight":
+			playerDealDamage()
+			enemyDealDamage(1)
 
-		userInput = ask("Fight or Flee?", "fight", "flee")
-		if userInput == "fight":
-			# Calculates damage
-			damage = random.randint(5, 10) * Inventory.damage
-			enemyDamage = random.randint(
-				enemyMinDamage, enemyMaxDamage) * Inventory.absorbtion
+		elif userInput == "Flee":
+			enemyDealDamage(2)
 
-			# Applies damage
-			hp = hp - enemyDamage
-			enemyHP = enemyHP - damage
+		elif userInput == "Use item":
+			healingPotion()
+			enemyDealDamage(1)
 
-			# Displays to user
-			printScan(
-				success + "You deal {damage} damage!".format(damage=round(damage)))
-			printScan(
-				rip + "{name} deals {damage} damage!\n".format(damage=round(enemyDamage), name=enemy))
-			time.sleep(0.8)
-			isDead()
+		elif userInput == "Check HP":
+			print(userInput)
 
-			if enemyHP < 0:
-				printScan(
-					success + "You successfully killed {name}\n".format(name=enemy))
-				time.sleep(0.8)
-				extraCoins = random.randint(10, 25)
-				addCoins(extraCoins)
-				combatLoop = False
-
-				endThreads()
-				playSound("Music/federation.mp3", True)
-
-				return "kill"
-
-		elif userInput == "flee":
-			chance = random.randint(1, 2)
-			if chance == 1:
-				printScan(
-					action + "You run away before {name} could catch you.\n".format(name=enemy))
-				combatLoop = 0
-				time.sleep(0.8)
-
-				endThreads()
-				playSound("Music/federation.mp3", True)
-
-				return "flee"
-
-			elif chance == 2:
-				printScan(
-					action + "You tried to flee, but {name} caught you. \n".format(name=enemy))
-				time.sleep(1)
-
-				enemyDamage = random.randint(
-					enemyMinDamage, enemyMaxDamage) * 2 * Inventory.absorbtion
-				hp = hp - enemyDamage
-				printScan(rip + "{name} deals {damage} damage!\n"
-					  .format(damage=round(enemyDamage), name=enemy))
-				time.sleep(1)
-				isDead()
 
 
 # Commands used
