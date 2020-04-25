@@ -80,6 +80,8 @@ events = ["store", "randomFight", "none", "bombTrap"]
 CSSOptions = [["Matches", 10], ["Basic Healing Potion", 20],
 			  ["Copper Armour", 100], ["Stone Sword", 80]]
 
+battleSongs = ["Music/milkywayBattle.mp3", "Music/rockmenBattle.mp3"]
+
 # 1 x Matches.
 # 3 x Sticks.
 # (no sword)
@@ -449,6 +451,13 @@ def heal(value):
 
 
 def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
+	# NOTE: I, Daniel will overhaul this to use PyInquirer instead,
+	# NOTE: display HP, fix the bugs and add extra commands such as
+	# NOTE: sparing and using items!
+	endThreads()
+	songToPlay = random.choice(battleSongs)
+	playSound(songToPlay, True)
+
 	global hp
 	printScan(rip + "You get in a battle with {enemy}!\n".format(enemy=enemy))
 	time.sleep(0.5)
@@ -483,6 +492,10 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 				extraCoins = random.randint(10, 25)
 				addCoins(extraCoins)
 				combatLoop = False
+
+				endThreads()
+				playSound("Music/federation.mp3", True)
+
 				return "kill"
 
 		elif userInput == "flee":
@@ -492,6 +505,9 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 					action + "You run away before {name} could catch you.\n".format(name=enemy))
 				combatLoop = 0
 				time.sleep(0.8)
+
+				endThreads()
+				playSound("Music/federation.mp3", True)
 
 				return "flee"
 
@@ -1279,7 +1295,10 @@ def main():
 
 
 detect_system()
+
+# Play moosic
 playSound("Music/spaceCruise.mp3", True) # DANIEL USE THREADS PLEAASE :)
+
 if __name__ == '__main__':
 	multiprocessing.freeze_support()
 	defKey.start()
@@ -1293,8 +1312,6 @@ if __name__ == '__main__':
 
 	print("".center(a,'-') + Style.BRIGHT + Fore.BLUE + "DungeonCli" + Style.RESET_ALL + "".center(a,'-'))
 	print("\r")
-
-	# Play moosic
 
 	# Introduce the user:
 	printScan(Style.RESET_ALL + Style.BRIGHT + "Welcome to " + Fore.BLUE + "DungeonCli" + Style.RESET_ALL + " ")
