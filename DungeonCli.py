@@ -1279,6 +1279,7 @@ def main():
 
 
 detect_system()
+playSound("Music/spaceCruise.mp3", True) # DANIEL USE THREADS PLEAASE :)
 if __name__ == '__main__':
 	multiprocessing.freeze_support()
 	defKey.start()
@@ -1294,7 +1295,6 @@ if __name__ == '__main__':
 	print("\r")
 
 	# Play moosic
-	playSound("Music/spaceCruise.mp3", True) # DANIEL USE THREADS PLEAASE :)
 
 	# Introduce the user:
 	printScan(Style.RESET_ALL + Style.BRIGHT + "Welcome to " + Fore.BLUE + "DungeonCli" + Style.RESET_ALL + " ")
