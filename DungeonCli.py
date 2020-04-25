@@ -213,7 +213,7 @@ def printScan(toPrint):
 
 def endThreads():
 	for process in all_processes:
-		process.stop()
+		process.terminate()
 
 
 def invalidCommand():
@@ -302,33 +302,37 @@ def isDead():
 		gameover()
 
 # This is really bad implementation, but it works
-class soundThread(threading.Thread):
-	def __init__(self, directory, theLoop):
-		global all_processes
+class killableThread(threading.Thread):
+	def __init__(self, directory, theLoop, *args, **kwargs):
 		self.dir = directory
-		self.loop = theLoop
+		self.isLoop = theLoop
 
-		if self.loop == True:
-			process = threading.Thread(target=self.playLoop)
-		else:
-			process = threading.Thread(target=playsound.playsound, args=(directory,))
+		super(killableThread, self).__init__(*args, **kwargs)
+		self._stop_event = threading.Event()
 
-		process.start()
-		all_processes.append(process)
-		self.dir = directory
+		self._running = True
+
+
+	def run(self):
+		playsound.playsound(self.dir)
+
+
+	def terminate(self):
+		self._running = False
 
 
 	def stop(self):
-		stop()
+	    self._stop_event.set()
 
-
-	def playLoop(self):
-		while True:
-			playsound.playsound(self.dir)
+	def stopped(self):
+	    return self._stop_event.is_set()
 
 
 def playSound(path, ifLoop):
-	theSoundThread = soundThread(path, ifLoop)
+	new_process = killableThread(path, ifLoop)
+	new_process.start()
+	all_processes.append(new_process)
+
 
 
 def gameover():
