@@ -126,11 +126,11 @@ class Inventory:
 
 
 	sword = 0
-	damage = 0
+	damage = 1
 
 
 	armour = 0
-	absorbtion = 0
+	absorbtion = 1
 
 
 class Scene:
@@ -456,18 +456,57 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 	# NOTE: sparing and using items!
 	global hp
 	global Inventory
+	global combatEnemyHP
+
+	combatEnemyHP = enemyHP
 
 	def enemyDealDamage(multiplyer):
+		global hp
+
 		enemyDamage = random.randint(enemyMinDamage, enemyMaxDamage) * Inventory.absorbtion * multiplyer
 		hp = hp - enemyDamage
+
 		printScan(rip + "{name} deals {damage} damage!\n"
 		.format(damage=round(enemyDamage), name=enemy))
-		time.sleep(0.2)
+		time.sleep(0.4)
+		if hp < 0:
+			combatLoop == False
+
 		isDead()
 
-	def playerDealDamage():
-		print("Not implemented!")
 
+	print(enemyHP)
+
+	def playerDealDamage():
+		# for some reason this function couldn't use enemyhp???? so I made
+		# a seperate one so it would work... :)
+
+		global hp
+		global combatEnemyHP
+
+		enemyHP = combatEnemyHP
+
+		playerDamage = random.randint(5, 10) * Inventory.damage
+		enemyHP = enemyHP - playerDamage
+
+		printScan(success + "You deal {damage} damage!".format(damage=round(playerDamage)))
+		time.sleep(0.2)
+		if enemyHP < 0:
+			combatLoop = False
+			printScan(success + "You successfully killed {name}\n"
+			.format(name=enemy))
+
+			time.sleep(0.4)
+
+			extraCoins = random.randint(10, 25)
+			addCoins(extraCoins)
+
+			combatLoop = False
+
+			endThreads()
+			playSound("Music/federation.mp3", True)
+
+			return "kill"
 
 
 	endThreads()
@@ -506,8 +545,9 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 			enemyDealDamage(1)
 
 		elif userInput == "Check HP":
-			print(userInput)
-
+			hpCheck()
+			printScan(action + "The enemy has {amount} hp!\n".format(amount=enemyHP))
+			time.sleep(0.2)
 
 
 # Commands used
