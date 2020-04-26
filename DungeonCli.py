@@ -1104,7 +1104,7 @@ def randomEvent():
 	global storeSelected
 	randomLoop = True
 
-	print(action + "You proceed into the next room...\n")
+	printScan(action + "You proceed into the next room...\n")
 
 	if len(events) > 0:
 		selection = random.choice(events)
