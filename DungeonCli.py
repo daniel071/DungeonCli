@@ -79,7 +79,7 @@ events = ["store", "randomFight", "none", "bombTrap",]
 
 
 CSSOptions = [["Matches", 10], ["Basic Healing Potion", 20],
-			  ["Copper Armour", 100], ["Stone Sword", 80], ["Advanced Healing Potion", 70]]
+			  ["Copper Armour", 75], ["Stone Sword", 60], ["Advanced Healing Potion", 70]]
 
 battleSongs = ["Music/milkywayBattle.mp3", "Music/rockmenBattle.mp3"]
 
@@ -239,7 +239,7 @@ def invalidCommand():
 
 def useBrick():  # temp function called when in a specific room
 	global Scene
-	if Scene.current == 5:
+	if Scene.current == 8:
 		printScan(action + "You pull out the brick however, quickly drop it as a massive spider lay on it.")
 		time.sleep(0.7)
 		printScan("You hear a latch go *click!* and the sound of Bricks on Bricks"
@@ -249,7 +249,7 @@ def useBrick():  # temp function called when in a specific room
 		Scene.description = "A massive door is upon your sight. You should probably check it out"
 		Scene.canProgress = True
 	else:
-		printScan("There are no bricks nearby...")
+		printScan(error + "There are no bricks nearby!\n")
 
 
 def passwordPrompt():
@@ -464,8 +464,6 @@ def bombTrapScene():
 
 	Scene.description = "The room looked very charred after the explosion. you should probably proceed."
 
-	time.sleep(1.5)
-
 	printScan(action + "It is odly quiet here... you begin to look around... \n")
 	time.sleep(2)
 
@@ -543,7 +541,7 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 
 				time.sleep(0.4)
 
-				extraCoins = random.randint(10, 25)
+				extraCoins = random.randint(25, 35)
 				addCoins(extraCoins)
 
 				combatLoop = False
@@ -1115,8 +1113,11 @@ def randomEvent():
 
 		elif selection == "randomFight":
 			printScan(action + "You hear a movement -- you freeze")
+			time.sleep(0.6)
 			printScan(action + "Someone is trying to attack you,")
+			time.sleep(0.6)
 			printScan(action + "It's too late to avoid a fight now!\n")
+			time.sleep(0.6)
 			randomEnemy()
 
 		elif selection == "none":
@@ -1196,7 +1197,7 @@ def pickCoins():
 	global Scene
 
 	if Scene.hasCoins == True:
-		amount = random.randint(4, 6)
+		amount = random.randint(10, 12)
 		printScan(action + randomDialog.collectCoins(randomDialog))
 		time.sleep(0.8)
 
