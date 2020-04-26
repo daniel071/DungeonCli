@@ -548,7 +548,7 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 	playSound(songToPlay, True)
 
 	global hp
-	printScan(rip + "You get in a battle with {enemy}!\n".format(enemy=enemy))
+	printScan(rip + "You get in a battle with {enemy}!\n".format(enemy=enemy) + Style.RESET_ALL)
 	time.sleep(0.5)
 
 	questions = [
@@ -1413,13 +1413,11 @@ def main():
 
 detect_system()
 
-# Play moosic
-
 if __name__ == '__main__':
 	# Play moosic
 	playSound("Music/spaceCruise.mp3", True)
 	multiprocessing.freeze_support()
-	
+
 	defKey.start()
 	print("\r")
 	clear()
