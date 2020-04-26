@@ -1414,11 +1414,12 @@ def main():
 detect_system()
 
 # Play moosic
-# playSound("Music/spaceCruise.mp3", True) # DANIEL USE THREADS PLEAASE :)
 
 if __name__ == '__main__':
+	# Play moosic
 	playSound("Music/spaceCruise.mp3", True)
 	multiprocessing.freeze_support()
+	
 	defKey.start()
 	print("\r")
 	clear()
