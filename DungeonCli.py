@@ -206,7 +206,7 @@ def skipDialog():
 	global printspeed
 	printspeed = 0.00001
 
-defKey.bind("z", skipDialog)
+#defKey.bind("z", skipDialog)
 # NOTE: Scrolling text is really broken at the moment, so I've commented
 # NOTE: it out. Fix it when you can.
 print_lock = Lock()
@@ -1503,9 +1503,9 @@ def nextScene():
 def main():
 	global Inventory
 	detect_system()
-	defKey.stop()
+	#defKey.stop()
 	command = input(askPrompt + "[Action] " + Style.RESET_ALL)
-	defKey.start()
+	#defKey.start()
 	if command in ("check money", "check coins", "coins", "money", "c"):
 		checkCoins()
 
@@ -1626,7 +1626,7 @@ if __name__ == '__main__':
 	playSound("Music/spaceCruise.mp3", True)
 	multiprocessing.freeze_support()
 
-	defKey.start()
+	#defKey.start()
 	print("\r")
 	clear()
 	try:
