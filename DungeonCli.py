@@ -464,7 +464,6 @@ def bombTrapScene():
 
 	Scene.description = "The room looked very charred after the explosion. you should probably proceed."
 
-	printScan(action + "You proceed into the next room. \n")
 	time.sleep(1.5)
 
 	printScan(action + "It is odly quiet here... you begin to look around... \n")
