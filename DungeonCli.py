@@ -42,11 +42,13 @@ version = "Development Version 0.4.5"
 
 # Define variables here:
 
-# Used to prevent cheating:
 all_processes = []
+
+# Used to prevent cheating:
 devPassword = "hackerman"
 developer = 0
 
+playMusic = True
 invalidCommands = 0
 mainLoop = 1
 coins = 0  # fucking poor cunt lmao.
@@ -338,7 +340,10 @@ class soundThread (threading.Thread):
 
 
 def playSound(path, ifLoop):
-	theSoundThread = soundThread(path, ifLoop)
+	if playMusic == True:
+		theSoundThread = soundThread(path, ifLoop)
+	else:
+		return "No music played"
 
 
 
@@ -618,6 +623,7 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 
 # Commands used
 def options():
+	global playMusic
 	questions = [
 		{
 			'type': 'list',
@@ -628,8 +634,6 @@ def options():
 		}
 	]
 
-	printScan(Style.BRIGHT + Fore.WHITE + "NOTE: The store is currently a work"
-	"in progress! Some parts have not been implemented yet!")
 	askLoop = 1
 	while askLoop == 1:
 		answers = prompt(questions)
@@ -641,7 +645,16 @@ def options():
 			printScan(action + "You exited the options menu\n")
 
 		elif userInput == "Toggle Music":
-			printScan("You toggled music to <insert boolean here>")
+			playMusic = not playMusic
+			if playMusic is False:
+				endThreads()
+			else:
+				if Scene.current > 2:
+					playSound("Music/federation.mp3", True)
+				else:
+					playSound("Music/spaceCruise.mp3", True)
+
+			printScan("You toggled music to {value}\n".format(value=playMusic))
 
 
 
