@@ -48,10 +48,7 @@ all_processes = []
 devPassword = "hackerman"
 developer = 0
 
-<<<<<<< HEAD
-=======
 playMusic = True
->>>>>>> d401c14d203b0f64626bedc0fa9755d6d42c2c4b
 invalidCommands = 0
 mainLoop = 1
 coins = 0  # fucking poor cunt lmao.
@@ -1630,12 +1627,9 @@ if __name__ == '__main__':
 	# Play moosic
 	playSound("Music/spaceCruise.mp3", True)
 	multiprocessing.freeze_support()
-<<<<<<< HEAD
-=======
 
 	defKey.start()
 	print("\r")
->>>>>>> d401c14d203b0f64626bedc0fa9755d6d42c2c4b
 	clear()
 	try:
 		width = int(os.get_terminal_size().columns)
@@ -1644,12 +1638,8 @@ if __name__ == '__main__':
 	a = int((width - 10) / 2)
 
 	print("".center(a,'-') + Style.BRIGHT + Fore.BLUE + "DungeonCli" + Style.RESET_ALL + "".center(a,'-'))
-<<<<<<< HEAD
-	playSound("Music/spaceCruise.mp3", True) # DANIEL USE THREADS PLEAASE :)
-=======
 	print("\r")
 
->>>>>>> d401c14d203b0f64626bedc0fa9755d6d42c2c4b
 	# Introduce the user:
 	printScan(Style.RESET_ALL + Style.BRIGHT + "Welcome to " + Fore.BLUE + "DungeonCli" + Style.RESET_ALL + "")
 
