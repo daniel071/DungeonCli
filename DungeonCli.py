@@ -36,7 +36,7 @@ from colorama import init  # type: ignore
 # --------------------------
 # |		Version!		|
 # --------------------------
-version = "Development Version 0.4.6"
+version = "Development Version 0.4.7"
 # --------------------------
 
 
@@ -56,7 +56,8 @@ hp = 100
 # Events used for random stuff:
 
 # TODO: when 'wizardThatWantsToKillYou' is done, add it here
-events = ["store", "randomFight", "none", "bombTrap",]
+events = ["store", "store", "randomFight", "none", "bombTrap",
+"treasure",]
 
 
 
@@ -452,7 +453,7 @@ def ask3(funcQuestion, answer1, answer2, answer3):
 def damage(value):
 	global hp
 	hp = hp - value
-	printScan(rip + ("You lost " + str(value) + " health! \n"))
+	printScan(rip + ("You lost " + str(round(value)) + " health! \n"))
 	isDead()
 
 
@@ -1071,7 +1072,7 @@ def start():
 			while spiderLoop == True:
 				# Start battle with 'Giant Spider'
 				# NOTE: The spider is VERY op is unfair, I should fix that
-				theResult = combat("Giant Spider", 35, 8, 14)
+				theResult = combat("Giant Spider", 35, 8, 12)
 				if theResult == "killed":
 					printScan(action + "Phew! That was hard! You prepare to move on... \n")
 					spiderLoop = False
@@ -1094,6 +1095,32 @@ def start():
 			printScan(action + "The wizard cast a spell on you that restored all your health.")
 			time.sleep(0.5)
 			heal(100)
+			time.sleep(0.5)
+
+			printScan(quote + "Anyways, I'm going to need someone to help me"
+			" reconstruct the town however, \nthere's all of these dark wizards"
+			" preventing me from doing so, \nthe only way I can defeat them"
+			" is by obtaining the Great Stone of Knowledge.\"\n")
+			time.sleep(0.5)
+			printScan(quote + "I'm depending on you for this, I'm too weak"
+			" to do it myself\"")
+			time.sleep(0.7)
+			printScan(Style.BRIGHT + "Gylore stated\n")
+			printScan(quote + "Here, take this, it should help you buy the"
+			" resources you need.")
+			time.sleep(1)
+			addCoins(50)
+
+			Scene.current = 10
+
+		elif Scene.current == 10:
+			randomEvent()
+			Scene.current = 11
+
+		elif Scene.current == 11:
+			randomEvent()
+			Scene.current = 12
+
 
 
 def hpCheck():
@@ -1153,6 +1180,62 @@ def randomEvent():
 			printScan(quote + 'You. You have the information you need.\n'
 				  '')
 			pass
+
+		elif selection == "treasure":
+			printScan(action + "You find what seems to be an enourmous amount of gold...")
+			time.sleep(1)
+			printScan(action + "However, it seems to be locked in a vault...")
+			time.sleep(1)
+			printScan(action + "Perhaps you could try break into it...\n")
+			time.sleep(1)
+			questions = [
+				{
+					'type': 'confirm',
+					'name': 'promptChoice',
+					'message': 'Will you try break into the vault of gold?',
+				}
+			]
+
+			theAnswer = prompt(questions)
+			theDecision = theAnswer['promptChoice']
+
+			if theDecision is False:
+				print("")
+				printScan(action + "You think this is too risky and proceed to move on.\n")
+			else:
+				theLuck = random.randint(1, 3)
+				if theLuck == 1:
+					printScan(action + "You spent several minutes trying to unlock the vault...")
+					time.sleep(2)
+					printScan(success + "You somehow unlock it!\n")
+					time.sleep(0.6)
+					printScan(action + "You walk into the vault but you are"
+					" disappointed as it looks like someone has cleared out"
+					" all the gold.\n")
+					time.sleep(1)
+
+				elif theLuck == 2:
+					printScan(action + "You spent several minutes trying to unlock the vault...")
+					time.sleep(2)
+					printScan(success + "You somehow unlock it!\n")
+					time.sleep(0.6)
+					printScan(success + "You walk into the vault and you find"
+					" hundreds of coins! You pick up as much as you can...")
+					addCoins(50)
+
+				elif theLuck == 3:
+					printScan(action + "You spent several minutes trying to unlock the vault...")
+					time.sleep(2)
+					printScan(action + "You seem to be out of luck, however"
+					" you've been spotted!\n")
+					time.sleep(0.6)
+					printScan(quote + 'YOU! STOP RIGHT THERE! YOU THIEF!"')
+					printScan(Style.BRIGHT + "The Money Grinch shouted.\n")
+					time.sleep(0.6)
+
+					combat("Money Grinch", 30, 1, 30)
+
+
 
 		events = removeFromList(events, selection)
 
