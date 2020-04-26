@@ -501,7 +501,7 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 		enemyDamage = random.randint(enemyMinDamage, enemyMaxDamage) * Inventory.absorbtion * multiplyer
 		hp = hp - enemyDamage
 
-		printScan(rip + "{name} deals {damage} damage!\n"
+		printScan(rip + "{name} deals {damage} damage!"
 		.format(damage=round(enemyDamage), name=enemy))
 		time.sleep(0.4)
 		if hp < 0:
@@ -573,8 +573,9 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 		answers = prompt(questions)
 		userInput = answers['userChoice']
 		if userInput == "Fight":
-			enemyHP = playerDealDamage(enemyHP)
 			enemyDealDamage(1)
+			enemyHP = playerDealDamage(enemyHP)
+
 
 		elif userInput == "Flee":
 			attemptFlee = random.randint(1, 2)
@@ -593,9 +594,6 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 
 				return "flee"
 
-
-
-
 		elif userInput == "Use item":
 			theOutput = healingPotion()
 			if theOutput != "notUsed":
@@ -606,6 +604,7 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 			printScan(action + "The enemy has {amount} hp!\n".format(amount=round(enemyHP)))
 			time.sleep(0.2)
 
+		print("")
 
 # Commands used
 def options():
