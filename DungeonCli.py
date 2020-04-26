@@ -451,6 +451,26 @@ def heal(value):
 		hp = 100
 
 
+def bombTrapScene():
+	global Scene
+
+	Scene.description = "The room looked very charred after the explosion. you should probably proceed."
+
+	printScan(action + "You proceed into the next room. \n")
+	time.sleep(1.5)
+
+	printScan(action + "It is odly quiet here... you begin to look around... \n")
+	time.sleep(2)
+
+	playSound("Sounds/explosion.wav", False)
+	printScan(rip + "BANG!")
+	time.sleep(1)
+	printScan(randomDialog.bombExplodes(randomDialog))
+	damage(random.randint(5, 15))
+	time.sleep(1)
+
+
+
 def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 	# NOTE: I, Daniel will overhaul this to use PyInquirer instead,
 	# NOTE: display HP, fix the bugs and add extra commands such as
@@ -948,20 +968,7 @@ def start():
 
 
 		elif Scene.current == 4:
-			Scene.description = "The room looked very charred after the explosion. you should probably proceed."
-
-			printScan(action + "After the wizard left, you went into the next room. \n")
-			time.sleep(1.5)
-
-			printScan(action + "It is odly quiet here... you begin to look around... \n")
-			time.sleep(2)
-
-			playSound("Sounds/explosion.wav", False)
-			printScan(rip + "BANG!")
-			time.sleep(1)
-			printScan(randomDialog.bombExplodes(randomDialog))
-			damage(random.randint(5, 15))
-			time.sleep(1)
+			bombTrapScene()
 			Scene.current = 5
 
 		elif Scene.current == 5:
@@ -972,8 +979,6 @@ def start():
 		elif Scene.current == 6:
 			printScan(
 				action + "You proceed to the next room, being very careful where you step.")
-
-			Scene.description = "This room is rather empty, but an old and dried up fountain lays ahead.\nA few coins lay scattered across the bottom, maybe you can pick them up? But however a single loose red brick in the wall north to you catches your eye..."
 
 
 			Scene.hasCoins = True
@@ -1000,8 +1005,9 @@ def start():
 			Scene.current = 7
 
 		elif Scene.current == 7:
+			Scene.description = "This room is rather empty, but an old and dried up fountain lays ahead.\nA few coins lay scattered across the bottom, maybe you can pick them up? But however a single loose red brick in the wall north to you catches your eye..."
 			randomEvent()
-			Scene.canProgress = False
+			Scene.canProgress = True
 			Scene.current = 8
 
 		elif Scene.current == 8:
@@ -1012,7 +1018,7 @@ def start():
 			time.sleep(0.7)
 			printScan(rip + "The spider spit acid on you!")
 			time.sleep(0.6)
-			damage(20)
+			damage(15)
 			time.sleep(0.5)
 			printScan(action + "There's nothing you can do other than fight!")
 			spiderLoop = True
@@ -1089,12 +1095,7 @@ def randomEvent():
 			printScan(action + "Perhaps you should move on...\n")
 
 		elif selection == "bombTrap":
-			playSound("Sounds/explosion.wav", False)
-			printScan(rip + "BANG!")
-			time.sleep(1)
-			printScan(randomDialog.bombExplodes(randomDialog))
-			damage(random.randint(5, 15))
-			Scene.description = Scene.description + " The room looked very charred after the explosion."
+			bombTrapScene()
 
 		elif selection == "wizardThatWantsToKillYou":
 			#TODO: Finish this!
