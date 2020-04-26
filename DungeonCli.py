@@ -36,7 +36,7 @@ from colorama import init  # type: ignore
 # --------------------------
 # |		Version!		|
 # --------------------------
-version = "Development Version 0.4.5"
+version = "Development Version 0.4.6"
 # --------------------------
 
 
@@ -135,11 +135,11 @@ class Inventory:
 
 
 	sword = 0
-	damage = 1
+	damage = 1.0
 
 
 	armour = 0
-	absorbtion = 1
+	absorbtion = 1.0
 
 
 class Scene:
@@ -476,7 +476,7 @@ def bombTrapScene():
 	printScan(rip + "BANG!")
 	time.sleep(1)
 	printScan(randomDialog.bombExplodes(randomDialog))
-	damage(random.randint(5, 15))
+	damage(random.randint(5, 15) * Inventory.absorbtion)
 	time.sleep(1)
 
 
@@ -533,7 +533,8 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 
 
 		else:
-			playerDamage = random.randint(5, 10) * Inventory.damage
+			playerDamage = random.randint(5, 10)
+			playerDamage = playerDamage * Inventory.damage
 			enemyHP = enemyHP - playerDamage
 
 			printScan(success + "You deal {damage} damage!".format(damage=round(playerDamage)))
@@ -597,7 +598,7 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 			if attemptFlee == 1:
 				printScan(action + "You tried to flee, but {name} caught you. \n"
 				.format(name=enemy))
-				enemyDealDamage(2)
+				enemyDealDamage(1.5)
 
 			else:
 				printScan(action + "You run away before {name} could catch you.\n"
@@ -611,8 +612,11 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 
 		elif userInput == "Use item":
 			theOutput = healingPotion()
-			if theOutput != "notUsed":
-				enemyDealDamage(1)
+			if theOutput != 0:
+				i = 0
+				while i < theOutput:
+					enemyDealDamage(1)
+					i = i + 1
 
 		elif userInput == "Check HP":
 			hpCheck()
@@ -746,6 +750,10 @@ def checkCoins():
 
 def openInventory():
 	printScan(success + "Inventory:")
+
+	printScan(success + "Your damage inflicted multipler is {m}x".format(m=Inventory.damage))
+	printScan(success + "Your damage taken multiplyer is {p}x\n".format(p=Inventory.absorbtion))
+
 	count = 0
 	if Inventory.matches != 0:
 		printScan(str(Inventory.matches) + " x Matches")
@@ -1224,7 +1232,7 @@ def pickCoins():
 
 def healingPotion():
 	global Inventory
-	theResult = "notUsed"
+	theResult = 0
 
 
 	if Inventory.basicHealingPotion != 0:
@@ -1269,7 +1277,7 @@ def healingPotion():
 
 		elif userInput == "Basic Healing Potion":
 			if Inventory.basicHealingPotion > 0:
-				theResult = "isUsed"
+				theResult = theResult + 1
 				printScan(rip + "You used up 1 basic healing potion")
 				Inventory.basicHealingPotion = Inventory.basicHealingPotion - 1
 				heal(20)
@@ -1281,7 +1289,7 @@ def healingPotion():
 
 		elif userInput == "Advanced Healing Potion":
 			if Inventory.advancedHealingPotion > 0:
-				theResult = "isUsed"
+				theResult = theResult + 1
 				printScan(rip + "You used up 1 advanced healing potion")
 				Inventory.advancedHealingPotion = Inventory.advancedHealingPotion - 1
 				heal(50)
@@ -1410,6 +1418,7 @@ def nextScene():
 		printScan(hint + "maybe try 'look' and see what you find...)\n" + Style.RESET_ALL)
 
 def main():
+	global Inventory
 	detect_system()
 	defKey.stop()
 	command = input(askPrompt + "[Action] " + Style.RESET_ALL)
@@ -1512,6 +1521,16 @@ def main():
 
 	elif command in ("credits", "contributers", "people"):
 		creditScreen()
+
+	elif command in ("plsop", "please make me OP"):
+		if passwordPrompt() == "granted":
+			addCoins(1000)
+			Inventory.basicHealingPotion = 50
+			Inventory.advancedHealingPotion = 50
+			Inventory.sword = 2
+			Inventory.damage = 100.0
+			Inventory.armour = 1
+			Inventory.absorbtion = 0.2
 
 	else:
 		invalidCommand()
