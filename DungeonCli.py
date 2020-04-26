@@ -78,7 +78,7 @@ events = ["store", "randomFight", "none", "bombTrap",]
 
 
 CSSOptions = [["Matches", 10], ["Basic Healing Potion", 20],
-			  ["Copper Armour", 100], ["Stone Sword", 80]]
+			  ["Copper Armour", 100], ["Stone Sword", 80], ["Advanced Healing Potion", 40]]
 
 battleSongs = ["Music/milkywayBattle.mp3", "Music/rockmenBattle.mp3"]
 
@@ -101,7 +101,7 @@ quote = Style.BRIGHT + Fore.WHITE + '"'
 info = Style.BRIGHT + Fore.WHITE + "==> " + Style.RESET_ALL
 askPrompt = Style.BRIGHT + Fore.CYAN
 
-
+# theCombatHasNotFinished! alsoICanTalkInCamelCaseMakesSenseRight?
 hasCombatFinished = "no."
 hasSeenAStore = False
 
@@ -123,7 +123,12 @@ class Item:
 class Inventory:
 	matches = 1
 	sticks = 3
+
+	# Basic healing potion heals 20 health
 	basicHealingPotion = 0
+
+	# Advanced healing potion heals 50 health
+	advancedHealingPotion = 0
 
 
 	sword = 0
@@ -138,6 +143,7 @@ class Scene:
 	canProgress = True
 	current = 1 # the current scene
 	surroundingsLit = False # bro idk but the wizard must be able to see in the dark or something.
+							# maybe the wizard has nightvision goggles :)
 	hasStore = False
 	hasCoins = False
 	storeSelected = []
@@ -727,12 +733,16 @@ def openInventory():
 	if Inventory.basicHealingPotion != 0:
 		printScan(str(Inventory.basicHealingPotion) + " x Basic Healing Potion")
 
+	if Inventory.advancedHealingPotion !=0:
+		printScan(str(Inventory.advancedHealingPotion) + " x Advanced Healing Potion")
+
 	if Inventory.sword == 1:
 		printScan("Wooden Sword")
-	elif Inventory.sword == 2:
+
+	if Inventory.sword == 2:
 		printScan("Stone Sword")
 
-	if Inventory.armour == 1:
+	elif Inventory.armour == 1:
 		printScan("Copper Armour")
 
 	# This printScan just adds some white space
@@ -744,6 +754,7 @@ def purchase(storeSelected, id):
 	global absorbtion
 	global damageMultiplyer
 	global basicHealingPotion
+	global advancedHealingPotion
 
 	item = storeSelected[id][0]
 	price = storeSelected[id][1]
@@ -752,6 +763,10 @@ def purchase(storeSelected, id):
 			Inventory.matches = Inventory.matches + 1
 		elif item == "Basic Healing Potion":
 			Inventory.basicHealingPotion = Inventory.basicHealingPotion + 1
+
+		elif item == "Advanced Healing Potion":
+			Inventory.advancedHealingPotion = Inventory.advancedHealingPotion + 1
+
 		elif item == "Copper Armour":
 			if Inventory.armour == 1:
 				printScan(error + "You already have this item!\n")
@@ -1399,9 +1414,10 @@ def main():
 detect_system()
 
 # Play moosic
-playSound("Music/spaceCruise.mp3", True) # DANIEL USE THREADS PLEAASE :)
+# playSound("Music/spaceCruise.mp3", True) # DANIEL USE THREADS PLEAASE :)
 
 if __name__ == '__main__':
+	playSound("Music/spaceCruise.mp3", True)
 	multiprocessing.freeze_support()
 	defKey.start()
 	print("\r")
