@@ -499,17 +499,21 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 
 	def enemyDealDamage(multiplyer):
 		global hp
+		isMiss = random.randint(1,6)
+		if isMiss == 5:
+			printScan(action + "{name} missed!".format(name=enemy))
+			printScan(success + "You took no damage!\n")
+		else:
+			enemyDamage = random.randint(enemyMinDamage, enemyMaxDamage) * Inventory.absorbtion * multiplyer
+			hp = hp - enemyDamage
 
-		enemyDamage = random.randint(enemyMinDamage, enemyMaxDamage) * Inventory.absorbtion * multiplyer
-		hp = hp - enemyDamage
+			printScan(rip + "{name} deals {damage} damage!"
+			.format(damage=round(enemyDamage), name=enemy))
+			time.sleep(0.4)
+			if hp < 0:
+				combatLoop == False
 
-		printScan(rip + "{name} deals {damage} damage!"
-		.format(damage=round(enemyDamage), name=enemy))
-		time.sleep(0.4)
-		if hp < 0:
-			combatLoop == False
-
-		isDead()
+			isDead()
 
 
 	def playerDealDamage(enemyHP):
@@ -520,27 +524,34 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 		global hp
 		global combatLoop
 
-		playerDamage = random.randint(5, 10) * Inventory.damage
-		enemyHP = enemyHP - playerDamage
+		isMiss = random.randint(1,7)
+		if isMiss == 5:
+			printScan(action + "You missed!")
+			printScan(rip + "You dealt no damage!\n")
 
-		printScan(success + "You deal {damage} damage!".format(damage=round(playerDamage)))
-		time.sleep(0.2)
 
-		if enemyHP < 0:
-			combatLoop = False
-			printScan(success + "You successfully killed {name}\n"
-			.format(name=enemy))
+		else:
+			playerDamage = random.randint(5, 10) * Inventory.damage
+			enemyHP = enemyHP - playerDamage
 
-			time.sleep(0.4)
+			printScan(success + "You deal {damage} damage!".format(damage=round(playerDamage)))
+			time.sleep(0.2)
 
-			extraCoins = random.randint(10, 25)
-			addCoins(extraCoins)
+			if enemyHP < 0:
+				combatLoop = False
+				printScan(success + "You successfully killed {name}\n"
+				.format(name=enemy))
 
-			combatLoop = False
+				time.sleep(0.4)
 
-			finishUpMusic()
+				extraCoins = random.randint(10, 25)
+				addCoins(extraCoins)
 
-			hasCombatFinished = "killed"
+				combatLoop = False
+
+				finishUpMusic()
+
+				hasCombatFinished = "killed"
 
 		return enemyHP
 
@@ -1093,6 +1104,8 @@ def randomEvent():
 	global Scene
 	global storeSelected
 	randomLoop = True
+
+	print(action + "You proceed into the next room...\n")
 
 	if len(events) > 0:
 		selection = random.choice(events)
