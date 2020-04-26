@@ -35,7 +35,7 @@ from colorama import init  # type: ignore
 # --------------------------
 # |		Version!		|
 # --------------------------
-version = "Development Version 0.4.4"
+version = "Development Version 0.4.5"
 # --------------------------
 
 
