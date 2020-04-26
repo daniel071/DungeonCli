@@ -1034,7 +1034,7 @@ def start():
 		elif Scene.current == 7:
 			Scene.description = "This room is rather empty, but an old and dried up fountain lays ahead.\nA few coins lay scattered across the bottom, maybe you can pick them up? But however a single loose red brick in the wall north to you catches your eye..."
 			randomEvent()
-			Scene.canProgress = True
+			Scene.canProgress = False
 			Scene.current = 8
 
 		elif Scene.current == 8:
