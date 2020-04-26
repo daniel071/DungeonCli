@@ -78,7 +78,7 @@ events = ["store", "randomFight", "none", "bombTrap",]
 
 
 CSSOptions = [["Matches", 10], ["Basic Healing Potion", 20],
-			  ["Copper Armour", 100], ["Stone Sword", 80], ["Advanced Healing Potion", 40]]
+			  ["Copper Armour", 100], ["Stone Sword", 80], ["Advanced Healing Potion", 70]]
 
 battleSongs = ["Music/milkywayBattle.mp3", "Music/rockmenBattle.mp3"]
 
@@ -597,8 +597,9 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 
 
 		elif userInput == "Use item":
-			healingPotion()
-			enemyDealDamage(1)
+			theOutput = healingPotion()
+			if theOutput != "notUsed":
+				enemyDealDamage(1)
 
 		elif userInput == "Check HP":
 			hpCheck()
@@ -1194,28 +1195,73 @@ def pickCoins():
 
 
 def healingPotion():
-	if Inventory.basicHealingPotion > 0:
-		askLoop = 1
-		printScan(success + "[1] You have {amount} basic healing potions\n"
-			  .format(amount=Inventory.basicHealingPotion))
+	global Inventory
+	theResult = "notUsed"
 
-		while askLoop:
-			userInput = input(
-				question + "Which potion would you like to use? ")
-			if userInput == "1":
-				# Displays to user
-				printScan("You have selected the basic healing potion\n")
-				time.sleep(0.8)
-				printScan(rip + "You used up 1 basic healing potion")
-				# Applies the changes
-				heal(20)
-				time.sleep(0.8)
-				Inventory.basicHealingPotion = Inventory.basicHealingPotion - 1
-				askLoop = 0
-			else:
-				printScan(error + "Answer must be either 1, 1 or 1!\n")
-	else:
+
+	if Inventory.basicHealingPotion != 0:
+		printScan(success + "You have {amount} basic healing potions."
+		.format(amount=Inventory.basicHealingPotion))
+	if Inventory.advancedHealingPotion != 0:
+		printScan(success + "You have {amount} advanced healing potions."
+		.format(amount=Inventory.advancedHealingPotion))
+
+	if Inventory.basicHealingPotion == 0 and Inventory.advancedHealingPotion == 0:
 		printScan(error + "You don't have any potions!\n")
+		askLoop = False
+		return "notUsed"
+
+
+	# Adds a new line
+	print("")
+
+
+	questions = [
+		{
+			'type': 'list',
+			'name': 'itemChoice',
+					'choices': ["Basic Healing Potion",
+								"Advanced Healing Potion",
+								'Exit'],
+			'message': 'What potion would you like to use?',
+		}
+	]
+
+	askLoop = True
+	while askLoop:
+		theAnswer = prompt(questions)
+		userInput = theAnswer['itemChoice']
+
+
+		if userInput == "Exit":
+			printScan("")
+			askLoop = False
+			return theResult
+
+
+		elif userInput == "Basic Healing Potion":
+			if Inventory.basicHealingPotion > 0:
+				theResult = "isUsed"
+				printScan(rip + "You used up 1 basic healing potion")
+				Inventory.basicHealingPotion = Inventory.basicHealingPotion - 1
+				heal(20)
+				time.sleep(0.4)
+
+			else:
+				printScan(error + "You don't have any basic healing potions!\n")
+
+
+		elif userInput == "Advanced Healing Potion":
+			if Inventory.advancedHealingPotion > 0:
+				theResult = "isUsed"
+				printScan(rip + "You used up 1 advanced healing potion")
+				Inventory.advancedHealingPotion = Inventory.advancedHealingPotion - 1
+				heal(50)
+				time.sleep(0.4)
+
+			else:
+				printScan(error + "You don't have any advanced healing potions!\n")
+
 
 def skipIntro():
 	Scene.current = 3
