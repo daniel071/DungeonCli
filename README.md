@@ -92,11 +92,15 @@ that. If you want to translate, just let us know by opening up an issue.
 
 ## To Do!
 - [ ] Neat and text based engine.
-- [x] Make text easy to read by having it scan in. 
-- [ ] Convince Daniel to use threads
+- [x] Make text easy to read by having it scan in.
+- [ ] Convince Daniel to use threads (I do want to use threads!! I can't figure out how to kill threads tho!!)
 - [ ] Write more story
 - [x] Basic Gameplay mechanics
 - [ ] Real 'bin' format save files. not the fake stuff.
+- [ ] Overhaul the combat system, add sparing and using items
+- [ ] Fix combat system dealing no damage
+- [ ] Make extra swords that deal extra damage
+- [ ] Add more Armour which absorbs a percentage of damage
 
 ## What to do next?
 Congratulations! You got to the end, perhaps you'd like to join the official

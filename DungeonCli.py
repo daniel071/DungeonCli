@@ -46,6 +46,7 @@ all_processes = []
 devPassword = "hackerman"
 developer = 0
 
+invalidCommands = 0
 mainLoop = 1
 coins = 0  # fucking poor cunt lmao.
 hp = 100
@@ -215,11 +216,18 @@ def printScan(toPrint):
 
 def endThreads():
 	for process in all_processes:
-		process.terminate()
+		process.stop()
 
 
 def invalidCommand():
+	global invalidCommands
+
+	invalidCommands = invalidCommands + 1
 	printScan(error + "Invalid command! \n")
+	if invalidCommands > 3:
+		printScan(hint + "if you're stuck on how to progress, simply type 's')\n"
+		+ Style.RESET_ALL)
+		invalidCommands = 0
 
 
 def useBrick():  # temp function called when in a specific room
@@ -297,24 +305,24 @@ def isDead():
 		gameover()
 
 # This is really bad implementation, but it works
-class soundThread (threading.Thread):
+class soundThread(threading.Thread):
 	def __init__(self, directory, theLoop):
 		global all_processes
 		self.dir = directory
 		self.loop = theLoop
 
 		if self.loop == True:
-			process = multiprocessing.Process(target=self.playLoop)
+			process = threading.Thread(target=self.playLoop)
 		else:
-			process = multiprocessing.Process(target=playsound.playsound, args=(directory,))
+			process = threading.Thread(target=playsound.playsound, args=(directory,))
 
 		process.start()
 		all_processes.append(process)
 		self.dir = directory
 
 
-	def run(self):
-		threadPlaySound(self.dir)
+	def stop(self):
+		stop()
 
 
 	def playLoop(self):
