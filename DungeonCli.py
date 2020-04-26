@@ -345,7 +345,7 @@ def playSound(path, ifLoop):
 
 def gameover():
 	endThreads()
-
+	playSound("Music/determination.mp3", False)
 	clear()
 	printScan(rip + "Your body is torn into shreads...")
 	time.sleep(2)
@@ -370,9 +370,9 @@ def gameover():
 
 	printScan(Style.BRIGHT + Fore.WHITE +
 		  randomDialog.gameoverText(randomDialog))
-	time.sleep(5)
+	time.sleep(6.4)
 	clear()
-	exit()
+	endThreads()
 	sys.exit()
 
 
