@@ -15,7 +15,7 @@ import os
 import sys
 import playsound # type: ignore
 from sys import stdout
-from defKey import defKey
+# from defKey import defKey
 from sys import platform
 from threading import Lock
 import multiprocessing # DANIEL YOU CUNK :) PLS USE THREADS!!
