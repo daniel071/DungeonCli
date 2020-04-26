@@ -62,19 +62,19 @@ events = ["store", "randomFight", "none", "bombTrap",]
 # You deal more damage with the better sword you have, for example,
 # having a stone sword deals 10% more damage then no sword.
 # 0 = No Sword = 0% Extra damage
-# 1 = Wooden Sword = 5% Extra damage
-# 2 = Stone Sword = 10% Extra damage
-# 3 = Iron Sword = 20% Extra damage
-# 4 = Diamond Sword = 35% Extra damgage
+# 1 = Wooden Sword = 10% Extra damage
+# 2 = Stone Sword = 20% Extra damage
+# 3 = Iron Sword = 40% Extra damage
+# 4 = Diamond Sword = 60% Extra damage
 
 # Armour absorbs a percentage of damage, for example having copper armour
 # absorbs 10% damage, so if you get 50 damage, you only get 45
 
 # 0 = No Armour = 1 x Damage taken
-# 1 = Copper Armour = 0.9 x Damage taken
-# 2 = Iron Armour = 0.8 x Damage taken
-# 3 = Platinum Armour = 0.7 x Damage taken
-# 4 = Diamond Armour = 0.6 x Damage taken
+# 1 = Copper Armour = 0.8 x Damage taken
+# 2 = Iron Armour = 0.6 x Damage taken
+# 3 = Platinum Armour = 0.4 x Damage taken
+# 4 = Diamond Armour = 0.2 x Damage taken
 
 
 
@@ -785,14 +785,14 @@ def purchase(storeSelected, id):
 				return "bruh"
 			else:
 				Inventory.armour = 1
-				Inventory.absorbtion = 0.9
+				Inventory.absorbtion = 0.8
 		elif item == "Stone Sword":
 			if Inventory.sword == 2:
 				printScan(error + "You already have this item!\n")
 				return "bruh"
 			else:
 				Inventory.sword = 2
-				Inventory.damage = 1.1
+				Inventory.damage = 1.2
 
 		printScan(action + "You purchased {item} for {price} coins!\n"
 			  .format(item=item, price=price))
@@ -938,7 +938,7 @@ def start():
 			global Inventory
 
 			Inventory.basicHealingPotion = Inventory.basicHealingPotion + 1
-			Inventory.damage = 1.05
+			Inventory.damage = 1.10
 			Inventory.sword = 1
 			Scene.current = 2
 			time.sleep(2)
@@ -1288,7 +1288,7 @@ def skipIntro():
 	global Inventory
 	Scene.surroundingsLit = True
 	Inventory.basicHealingPotion = Inventory.basicHealingPotion + 1
-	Inventory.damage = 1.05
+	Inventory.damage = 1.10
 	Inventory.sword = 1
 
 def useSticks():
@@ -1344,9 +1344,39 @@ def endScreen():
 
 	# THIS IS AN EXAMPLE. FEEL FREE TO CHANGE IT!
 
+def creditScreen():
+	try:
+		width = int(os.get_terminal_size().columns)
+	except:
+		width = 54
+	a = int((width - 10) / 2)
+	b = int(width + 10)
+
+	print("".center(a,'-') + Style.BRIGHT + Fore.BLUE + "DungeonCli" + Style.RESET_ALL + "".center(a,'-'))
+	print(Style.DIM + Fore.WHITE + version.center(width,' ') + Style.RESET_ALL)
+	print(" ")
+	print("Simulating the classic command line experience.".center(width,' '))
+	print(" ")
+	print("Made by the awesome DungeonCli team!".center(width,' '))
+	time.sleep(1)
+
+	print("----".center(width, ' '))
+	printScan("Programming - Daniel071, Xenthio".center(width,' '))
+	printScan("Sound effects - Xenthio".center(width,' '))
+	printScan("Music - Sine".center(width,' '))
+	print("----".center(width, ' '))
+	time.sleep(1)
+
+	print(("Sine's Youtube channel: " + Fore.CYAN + "https://www.youtube.com/channel/UCAK1pG_qcgqJd9d7BnayRtg" +
+	Style.RESET_ALL).center(b - 1,' '))
+	print("-".center(width,'-'))
+	print(" ")
+	time.sleep(1)
+
+
 def exit():
 	global mainLoop
-	print(Style.BRIGHT + "==> " + Style.RESET_ALL + "Closing DungeonCli...")
+	print(Style.BRIGHT + Fore.YELLOW + "==> " + Style.RESET_ALL + "Closing DungeonCli...")
 	time.sleep(0.2)
 	printScan("See you next time.\n")
 	time.sleep(0.5)
@@ -1465,6 +1495,8 @@ def main():
 	elif command in ("about", "us", "about us", "info"):
 		endScreen()
 
+	elif command in ("credits", "contributers", "people"):
+		creditScreen()
 
 	else:
 		invalidCommand()
