@@ -1043,10 +1043,10 @@ def start():
 			Scene.current = 7
 
 		elif Scene.current == 7:
-			Scene.description = "This room is rather empty, but an old and dried up fountain lays ahead.\nA few coins lay scattered across the bottom, maybe you can pick them up? But however a single loose red brick in the wall north to you catches your eye..."
 			randomEvent()
 			Scene.canProgress = False
 			Scene.current = 8
+			Scene.description = "This room is rather empty, but an old and dried up fountain lays ahead.\nA few coins lay scattered across the bottom, maybe you can pick them up? But however a single loose red brick in the wall north to you catches your eye..."
 
 		elif Scene.current == 8:
 			printScan(action + "You walk towards the massive door, slightly nervous"
@@ -1195,7 +1195,8 @@ def randomEnemy():
 	# names = [["Unidentified", 25, 5, 10], ["Wizard", 40, 10, 20],
 	#		 ["Giant Spider", 25, 5, 15], ["Bob", 100, 1, 1]]
 
-	enemies = [Enemy("Unidentified", 25, 5, 10), Enemy("Wizard", 40, 10, 20)]
+	enemies = [Enemy("Unidentified", 25, 5, 10), Enemy("Wizard", 40, 7, 15),
+	Enemy("Dark Wizard", 5, 25, 40), Enemy("Small Spider", 10, 4, 7)]
 
 	enemy = random.choice(enemies)
 	enemy.startBattle()
