@@ -12,6 +12,7 @@ import json
 import time
 import random
 import os
+import sys
 import playsound # type: ignore
 from sys import stdout
 from defKey import defKey
@@ -372,6 +373,7 @@ def gameover():
 	time.sleep(5)
 	clear()
 	exit()
+	sys.exit()
 
 
 def addCoins(add):
