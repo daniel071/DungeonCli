@@ -1,3 +1,4 @@
+"In need of coins, eh? I mean i could let you have some of my precious coins, but ya gotta know the secret code" - Money Grinch
 # DungeonCli
 **What is it?**
 
