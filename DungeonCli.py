@@ -12,6 +12,7 @@ import json
 import time
 import random
 import os
+import sys
 import playsound # type: ignore
 from sys import stdout
 from defKey import defKey
@@ -35,25 +36,31 @@ from colorama import init  # type: ignore
 # --------------------------
 # |		Version!		|
 # --------------------------
-version = "Development Version 0.4.1"
+version = "Development Version 0.4.7"
 # --------------------------
 
 
 # Define variables here:
 
-# Used to prevent cheating:
 all_processes = []
+
+# Used to prevent cheating:
 devPassword = "hackerman"
 developer = 0
 
+<<<<<<< HEAD
+=======
+playMusic = True
+>>>>>>> d401c14d203b0f64626bedc0fa9755d6d42c2c4b
 invalidCommands = 0
 mainLoop = 1
 coins = 0  # fucking poor cunt lmao.
 hp = 100
 # Events used for random stuff:
 
-
-events = ["store", "randomFight", "none", "bombTrap"]
+# TODO: when 'wizardThatWantsToKillYou' is done, add it here
+events = ["store", "store", "randomFight", "none", "bombTrap",
+"treasure",]
 
 
 
@@ -61,24 +68,26 @@ events = ["store", "randomFight", "none", "bombTrap"]
 # You deal more damage with the better sword you have, for example,
 # having a stone sword deals 10% more damage then no sword.
 # 0 = No Sword = 0% Extra damage
-# 1 = Wooden Sword = 5% Extra damage
-# 2 = Stone Sword = 10% Extra damage
-# 3 = Iron Sword = 20% Extra damage
-# 4 = Diamond Sword = 35% Extra damgage
+# 1 = Wooden Sword = 10% Extra damage
+# 2 = Stone Sword = 20% Extra damage
+# 3 = Iron Sword = 40% Extra damage
+# 4 = Diamond Sword = 60% Extra damage
 
 # Armour absorbs a percentage of damage, for example having copper armour
 # absorbs 10% damage, so if you get 50 damage, you only get 45
 
 # 0 = No Armour = 1 x Damage taken
-# 1 = Copper Armour = 0.9 x Damage taken
-# 2 = Iron Armour = 0.8 x Damage taken
-# 3 = Platinum Armour = 0.7 x Damage taken
-# 4 = Diamond Armour = 0.6 x Damage taken
+# 1 = Copper Armour = 0.8 x Damage taken
+# 2 = Iron Armour = 0.6 x Damage taken
+# 3 = Platinum Armour = 0.4 x Damage taken
+# 4 = Diamond Armour = 0.2 x Damage taken
 
 
 
 CSSOptions = [["Matches", 10], ["Basic Healing Potion", 20],
-			  ["Copper Armour", 100], ["Stone Sword", 80]]
+			  ["Copper Armour", 75], ["Stone Sword", 60], ["Advanced Healing Potion", 70]]
+
+battleSongs = ["Music/milkywayBattle.mp3", "Music/rockmenBattle.mp3"]
 
 # 1 x Matches.
 # 3 x Sticks.
@@ -99,7 +108,8 @@ quote = Style.BRIGHT + Fore.WHITE + '"'
 info = Style.BRIGHT + Fore.WHITE + "==> " + Style.RESET_ALL
 askPrompt = Style.BRIGHT + Fore.CYAN
 
-
+# theCombatHasNotFinished! alsoICanTalkInCamelCaseMakesSenseRight?
+hasCombatFinished = "no."
 hasSeenAStore = False
 
 # Define classes here:
@@ -120,21 +130,27 @@ class Item:
 class Inventory:
 	matches = 1
 	sticks = 3
+
+	# Basic healing potion heals 20 health
 	basicHealingPotion = 0
+
+	# Advanced healing potion heals 50 health
+	advancedHealingPotion = 0
 
 
 	sword = 0
-	damage = 0
+	damage = 1.0
 
 
 	armour = 0
-	absorbtion = 0
+	absorbtion = 1.0
 
 
 class Scene:
 	canProgress = True
 	current = 1 # the current scene
 	surroundingsLit = False # bro idk but the wizard must be able to see in the dark or something.
+							# maybe the wizard has nightvision goggles :)
 	hasStore = False
 	hasCoins = False
 	storeSelected = []
@@ -232,7 +248,7 @@ def invalidCommand():
 
 def useBrick():  # temp function called when in a specific room
 	global Scene
-	if Scene.current == 5:
+	if Scene.current == 8:
 		printScan(action + "You pull out the brick however, quickly drop it as a massive spider lay on it.")
 		time.sleep(0.7)
 		printScan("You hear a latch go *click!* and the sound of Bricks on Bricks"
@@ -242,7 +258,7 @@ def useBrick():  # temp function called when in a specific room
 		Scene.description = "A massive door is upon your sight. You should probably check it out"
 		Scene.canProgress = True
 	else:
-		printScan("There are no bricks nearby...")
+		printScan(error + "There are no bricks nearby!\n")
 
 
 def passwordPrompt():
@@ -331,12 +347,17 @@ class soundThread(threading.Thread):
 
 
 def playSound(path, ifLoop):
-	theSoundThread = soundThread(path, ifLoop)
+	if playMusic == True:
+		theSoundThread = soundThread(path, ifLoop)
+	else:
+		return "No music played"
+
+
 
 
 def gameover():
 	endThreads()
-
+	playSound("Music/gameOver.ogg", False)
 	clear()
 	printScan(rip + "Your body is torn into shreads...")
 	time.sleep(2)
@@ -361,9 +382,10 @@ def gameover():
 
 	printScan(Style.BRIGHT + Fore.WHITE +
 		  randomDialog.gameoverText(randomDialog))
-	time.sleep(5)
+	time.sleep(4)
 	clear()
-	exit()
+	endThreads()
+	sys.exit()
 
 
 def addCoins(add):
@@ -437,7 +459,7 @@ def ask3(funcQuestion, answer1, answer2, answer3):
 def damage(value):
 	global hp
 	hp = hp - value
-	printScan(rip + ("You lost " + str(value) + " health! \n"))
+	printScan(rip + ("You lost " + str(round(value)) + " health! \n"))
 	isDead()
 
 
@@ -449,69 +471,170 @@ def heal(value):
 		hp = 100
 
 
+def bombTrapScene():
+	global Scene
+
+	Scene.description = "The room looked very charred after the explosion. you should probably proceed."
+
+	printScan(action + "It is odly quiet here... you begin to look around... \n")
+	time.sleep(2)
+
+	playSound("Sounds/explosion.wav", False)
+	printScan(rip + "BANG!")
+	time.sleep(1)
+	printScan(randomDialog.bombExplodes(randomDialog))
+	damage(random.randint(5, 15) * Inventory.absorbtion)
+	time.sleep(1)
+
+
+
 def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
+	# NOTE: I, Daniel will overhaul this to use PyInquirer instead,
+	# NOTE: display HP, fix the bugs and add extra commands such as
+	# NOTE: sparing and using items!
 	global hp
-	printScan(rip + "You get in a battle with {enemy}!\n".format(enemy=enemy))
+	global Inventory
+	global combatEnemyHP
+	global hasCombatFinished
+
+	hasCombatFinished = "no."
+
+
+	def finishUpMusic():
+		endThreads()
+		playSound("Music/federation.mp3", True)
+
+
+
+	def enemyDealDamage(multiplyer):
+		global hp
+		isMiss = random.randint(1,6)
+		if isMiss == 5:
+			printScan(action + "{name} missed!".format(name=enemy))
+			printScan(success + "You took no damage!\n")
+		else:
+			enemyDamage = random.randint(enemyMinDamage, enemyMaxDamage) * Inventory.absorbtion * multiplyer
+			hp = hp - enemyDamage
+
+			printScan(rip + "{name} deals {damage} damage!"
+			.format(damage=round(enemyDamage), name=enemy))
+			time.sleep(0.4)
+			if hp < 0:
+				combatLoop == False
+
+			isDead()
+
+
+	def playerDealDamage(enemyHP):
+		# for some reason this function couldn't use enemyhp???? so I made
+		# a seperate one so it would work... :)
+
+		global hasCombatFinished
+		global hp
+		global combatLoop
+
+		isMiss = random.randint(1,7)
+		if isMiss == 5:
+			printScan(action + "You missed!")
+			printScan(rip + "You dealt no damage!\n")
+
+
+		else:
+			playerDamage = random.randint(5, 10)
+			playerDamage = playerDamage * Inventory.damage
+			enemyHP = enemyHP - playerDamage
+
+			printScan(success + "You deal {damage} damage!".format(damage=round(playerDamage)))
+			time.sleep(0.2)
+
+			if enemyHP < 0:
+				combatLoop = False
+				printScan(success + "You successfully killed {name}\n"
+				.format(name=enemy))
+
+				time.sleep(0.4)
+
+				extraCoins = random.randint(25, 35)
+				addCoins(extraCoins)
+
+				combatLoop = False
+
+				finishUpMusic()
+
+				hasCombatFinished = "killed"
+
+		return enemyHP
+
+
+	endThreads()
+	songToPlay = random.choice(battleSongs)
+	playSound(songToPlay, True)
+
+	global hp
+	printScan(rip + "You get in a battle with {enemy}!\n".format(enemy=enemy) + Style.RESET_ALL)
 	time.sleep(0.5)
+
+	questions = [
+		{
+			'type': 'list',
+			'name': 'userChoice',
+					'choices': ['Fight',
+								'Flee',
+								'Use item',
+								'Check HP'],
+			'message': 'What would you like to do?',
+		}
+	]
 
 	combatLoop = True
 	while combatLoop:
-		time.sleep(0.8)
+		if hasCombatFinished == "killed":
+			combatLoop = False
+			return "killed"
 
-		userInput = ask("Fight or Flee?", "fight", "flee")
-		if userInput == "fight":
-			# Calculates damage
-			damage = random.randint(5, 10) * Inventory.damage
-			enemyDamage = random.randint(
-				enemyMinDamage, enemyMaxDamage) * Inventory.absorbtion
 
-			# Applies damage
-			hp = hp - enemyDamage
-			enemyHP = enemyHP - damage
+		answers = prompt(questions)
+		userInput = answers['userChoice']
+		if userInput == "Fight":
+			enemyDealDamage(1)
+			enemyHP = playerDealDamage(enemyHP)
 
-			# Displays to user
-			printScan(
-				success + "You deal {damage} damage!".format(damage=round(damage)))
-			printScan(
-				rip + "{name} deals {damage} damage!\n".format(damage=round(enemyDamage), name=enemy))
-			time.sleep(0.8)
-			isDead()
 
-			if enemyHP < 0:
-				printScan(
-					success + "You successfully killed {name}\n".format(name=enemy))
-				time.sleep(0.8)
-				extraCoins = random.randint(10, 25)
-				addCoins(extraCoins)
+		elif userInput == "Flee":
+			attemptFlee = random.randint(1, 2)
+			if attemptFlee == 1:
+				printScan(action + "You tried to flee, but {name} caught you. \n"
+				.format(name=enemy))
+				enemyDealDamage(1.5)
+
+			else:
+				printScan(action + "You run away before {name} could catch you.\n"
+				.format(name=enemy))
 				combatLoop = False
-				return "kill"
+				time.sleep(0.4)
 
-		elif userInput == "flee":
-			chance = random.randint(1, 2)
-			if chance == 1:
-				printScan(
-					action + "You run away before {name} could catch you.\n".format(name=enemy))
-				combatLoop = 0
-				time.sleep(0.8)
+				finishUpMusic()
 
 				return "flee"
 
-			elif chance == 2:
-				printScan(
-					action + "You tried to flee, but {name} caught you. \n".format(name=enemy))
-				time.sleep(1)
+		elif userInput == "Use item":
+			theOutput = healingPotion()
+			if theOutput != 0:
+				i = 0
+				while i < theOutput:
+					enemyDealDamage(1)
+					i = i + 1
 
-				enemyDamage = random.randint(
-					enemyMinDamage, enemyMaxDamage) * 2 * Inventory.absorbtion
-				hp = hp - enemyDamage
-				printScan(rip + "{name} deals {damage} damage!\n"
-					  .format(damage=round(enemyDamage), name=enemy))
-				time.sleep(1)
-				isDead()
+		elif userInput == "Check HP":
+			hpCheck()
+			printScan(action + "The enemy has {amount} hp!\n".format(amount=round(enemyHP)))
+			time.sleep(0.2)
 
+		print("")
 
 # Commands used
 def options():
+	global playMusic
 	questions = [
 		{
 			'type': 'list',
@@ -522,8 +645,6 @@ def options():
 		}
 	]
 
-	printScan(Style.BRIGHT + Fore.WHITE + "NOTE: The store is currently a work"
-	"in progress! Some parts have not been implemented yet!")
 	askLoop = 1
 	while askLoop == 1:
 		answers = prompt(questions)
@@ -535,7 +656,16 @@ def options():
 			printScan(action + "You exited the options menu\n")
 
 		elif userInput == "Toggle Music":
-			printScan("You toggled music to <insert boolean here>")
+			playMusic = not playMusic
+			if playMusic is False:
+				endThreads()
+			else:
+				if Scene.current > 2:
+					playSound("Music/federation.mp3", True)
+				else:
+					playSound("Music/spaceCruise.mp3", True)
+
+			printScan("You toggled music to {value}\n".format(value=playMusic))
 
 
 
@@ -627,6 +757,10 @@ def checkCoins():
 
 def openInventory():
 	printScan(success + "Inventory:")
+
+	printScan(success + "Your damage inflicted multipler is {m}x".format(m=Inventory.damage))
+	printScan(success + "Your damage taken multiplyer is {p}x\n".format(p=Inventory.absorbtion))
+
 	count = 0
 	if Inventory.matches != 0:
 		printScan(str(Inventory.matches) + " x Matches")
@@ -637,12 +771,16 @@ def openInventory():
 	if Inventory.basicHealingPotion != 0:
 		printScan(str(Inventory.basicHealingPotion) + " x Basic Healing Potion")
 
+	if Inventory.advancedHealingPotion !=0:
+		printScan(str(Inventory.advancedHealingPotion) + " x Advanced Healing Potion")
+
 	if Inventory.sword == 1:
 		printScan("Wooden Sword")
-	elif Inventory.sword == 2:
+
+	if Inventory.sword == 2:
 		printScan("Stone Sword")
 
-	if Inventory.armour == 1:
+	elif Inventory.armour == 1:
 		printScan("Copper Armour")
 
 	# This printScan just adds some white space
@@ -654,6 +792,7 @@ def purchase(storeSelected, id):
 	global absorbtion
 	global damageMultiplyer
 	global basicHealingPotion
+	global advancedHealingPotion
 
 	item = storeSelected[id][0]
 	price = storeSelected[id][1]
@@ -662,20 +801,24 @@ def purchase(storeSelected, id):
 			Inventory.matches = Inventory.matches + 1
 		elif item == "Basic Healing Potion":
 			Inventory.basicHealingPotion = Inventory.basicHealingPotion + 1
+
+		elif item == "Advanced Healing Potion":
+			Inventory.advancedHealingPotion = Inventory.advancedHealingPotion + 1
+
 		elif item == "Copper Armour":
 			if Inventory.armour == 1:
 				printScan(error + "You already have this item!\n")
 				return "bruh"
 			else:
 				Inventory.armour = 1
-				Inventory.absorbtion = 0.9
+				Inventory.absorbtion = 0.8
 		elif item == "Stone Sword":
 			if Inventory.sword == 2:
 				printScan(error + "You already have this item!\n")
 				return "bruh"
 			else:
 				Inventory.sword = 2
-				Inventory.damage = 1.1
+				Inventory.damage = 1.2
 
 		printScan(action + "You purchased {item} for {price} coins!\n"
 			  .format(item=item, price=price))
@@ -685,10 +828,12 @@ def purchase(storeSelected, id):
 
 
 def openStore():
+	initStore()
 	printScan("You entered the store!")
 	global CSSOptions
 	global Inventory
 	global coins
+	global Scene
 	printScan("------------------")
 	printScan("	  STORE	   ")
 	printScan("------------------")
@@ -717,6 +862,7 @@ def openStore():
 		if userInput == "Exit":
 			askLoop = 0
 			printScan(action + "You left the store.\n")
+			Scene.storeSelected = []
 
 		elif userInput == Scene.storeSelected[0][0]:
 			purchase(Scene.storeSelected, 0)
@@ -757,7 +903,6 @@ def start():
 	global Scene
 
 	Scene.storeSelected = []
-	initStore()
 
 	if Scene.surroundingsLit == False:
 		printScan("You find yourself in an odd and dark place... \nWhat could this"
@@ -819,7 +964,7 @@ def start():
 			global Inventory
 
 			Inventory.basicHealingPotion = Inventory.basicHealingPotion + 1
-			Inventory.damage = 1.05
+			Inventory.damage = 1.10
 			Inventory.sword = 1
 			Scene.current = 2
 			time.sleep(2)
@@ -845,7 +990,7 @@ def start():
 				  ' a great place to be...\n But then, the rebellion came in'
 				  ' and wiped this place out, everybody either escaped or died.\n'
 				  ' And me, I was the founder of this town." \n')
-			time.sleep(8)
+			time.sleep(4)
 			Scene.description = "This place is in ruins, apparently it's supposed to be a town...\nThere is a door to the next room, something seems to be strung across it."
 
 			printScan(hint + "type an answer)")
@@ -871,28 +1016,23 @@ def start():
 			Scene.current = 3
 
 		elif Scene.current == 3:
-			Scene.description = "The room looked very charred after the explosion. you should probably proceed."
-
-			printScan(action + "After the wizard left, you went into the next room. \n")
-			time.sleep(1.5)
-
-			printScan(action + "It is odly quiet here... you begin to look around... \n")
-			time.sleep(2)
-
-			playSound("Sounds/explosion.wav", False)
-			printScan(rip + "BANG!")
-			time.sleep(1)
-			printScan(randomDialog.bombExplodes(randomDialog))
-			damage(20)
-			time.sleep(1)
+			randomEvent()
 			Scene.current = 4
 
+
 		elif Scene.current == 4:
+			bombTrapScene()
+			Scene.current = 5
+
+		elif Scene.current == 5:
+			randomEvent()
+			Scene.current = 6
+
+
+		elif Scene.current == 6:
 			printScan(
 				action + "You proceed to the next room, being very careful where you step.")
 
-			Scene.description = "This room is rather empty, but an old and dried up fountain lays ahead.\nA few coins lay scattered across the bottom, maybe you can pick them up? But however a single loose red brick in the wall north to you catches your eye..."
-			Scene.canProgress = False
 
 			Scene.hasCoins = True
 			time.sleep(1)
@@ -908,16 +1048,22 @@ def start():
 			time.sleep(1)
 
 			theResult = combat("Unidentified", 25, 5, 10)
-			if theResult == "kill":
+			if theResult == "killed":
 				printScan(
 					action + "You killed the unknown person however, you can't stop feeling bad. \n")
 
 			elif theResult == "flee":
 				printScan(action + "You quickly ran away, you're safe now. \n")
 
-			Scene.current = 5
+			Scene.current = 7
 
-		elif Scene.current == 5:
+		elif Scene.current == 7:
+			randomEvent()
+			Scene.canProgress = False
+			Scene.current = 8
+			Scene.description = "This room is rather empty, but an old and dried up fountain lays ahead.\nA few coins lay scattered across the bottom, maybe you can pick them up? But however a single loose red brick in the wall north to you catches your eye..."
+
+		elif Scene.current == 8:
 			printScan(action + "You walk towards the massive door, slightly nervous"
 			" about what you'll find there.")
 			time.sleep(1.5)
@@ -925,9 +1071,62 @@ def start():
 			time.sleep(0.7)
 			printScan(rip + "The spider spit acid on you!")
 			time.sleep(0.6)
-			damage(20)
+			damage(15)
 			time.sleep(0.5)
-			# Start battle with 'Giant Spider'
+			printScan(action + "There's nothing you can do other than fight!")
+			spiderLoop = True
+			while spiderLoop == True:
+				# Start battle with 'Giant Spider'
+				# NOTE: The spider is VERY op is unfair, I should fix that
+				theResult = combat("Giant Spider", 35, 8, 12)
+				if theResult == "killed":
+					printScan(action + "Phew! That was hard! You prepare to move on... \n")
+					spiderLoop = False
+
+				elif theResult == "flee":
+					printScan(action + "You've escaped, but the spider is determined to catch you!")
+					time.sleep(1)
+					printScan(action + "You try to run away from the spider however, you reach a dead end.")
+					time.sleep(1)
+					printScan(action + "You're forced into another battle!")
+					time.sleep(1)
+
+			Scene.current = 9
+
+		elif Scene.current == 9:
+			printScan(action + "You meet the wizard once again.")
+			time.sleep(1)
+			printScan(quote + 'JESUS! How did you survive like that?"')
+			time.sleep(1)
+			printScan(action + "The wizard cast a spell on you that restored all your health.")
+			time.sleep(0.5)
+			heal(100)
+			time.sleep(0.5)
+
+			printScan(quote + "Anyways, I'm going to need someone to help me"
+			" reconstruct the town however, \nthere's all of these dark wizards"
+			" preventing me from doing so, \nthe only way I can defeat them"
+			" is by obtaining the Great Stone of Knowledge.\"\n")
+			time.sleep(0.5)
+			printScan(quote + "I'm depending on you for this, I'm too weak"
+			" to do it myself\"")
+			time.sleep(0.7)
+			printScan(Style.BRIGHT + "Gylore stated\n")
+			printScan(quote + "Here, take this, it should help you buy the"
+			" resources you need.")
+			time.sleep(1)
+			addCoins(50)
+
+			Scene.current = 10
+
+		elif Scene.current == 10:
+			randomEvent()
+			Scene.current = 11
+
+		elif Scene.current == 11:
+			randomEvent()
+			Scene.current = 12
+
 
 
 def hpCheck():
@@ -951,41 +1150,98 @@ def hpCheck():
 
 
 def randomEvent():
-	printScan("This is a randomly generated event! The stories in here have not been completed yet.")
-
 	global events
 	global hasSeenAStore
 	global Scene
 	global storeSelected
 	randomLoop = True
 
+	printScan(action + "You proceed into the next room...\n")
+
 	if len(events) > 0:
 		selection = random.choice(events)
 		if selection == "store":
-			Scene.description = Scene.description + \
-				" There is a store nearby, they might sell something useful..."
-			if hasSeenAStore == False:
-				printScan(hint + "There is a store in this room! you can buy items from them, however you might have to \"look around\" to find it!")
-			storeOptions = CSSOptions.copy()
-
-			Scene.hasStore = True
+			printScan(action + "You find a small store setup here")
+			printScan(action + "Maybe they'll have something useful here..")
+			openStore()
 
 		elif selection == "randomFight":
+			printScan(action + "You hear a movement -- you freeze")
+			time.sleep(0.6)
+			printScan(action + "Someone is trying to attack you,")
+			time.sleep(0.6)
+			printScan(action + "It's too late to avoid a fight now!\n")
+			time.sleep(0.6)
 			randomEnemy()
 
 		elif selection == "none":
-			printScan("")
+			printScan(action + "You find absolutely nothing in this room...")
+			printScan(action + "Perhaps you should move on...\n")
+
 		elif selection == "bombTrap":
-			playSound("Sounds/explosion.wav", False)
-			printScan(rip + "BANG!")
-			time.sleep(1)
-			printScan(randomDialog.bombExplodes())
-			damage(20)
-			Scene.description = Scene.description + " The room looked very charred after the explosion."
+			bombTrapScene()
+
 		elif selection == "wizardThatWantsToKillYou":
+			#TODO: Finish this!
 			printScan(quote + 'You. You have the information you need.\n'
 				  '')
 			pass
+
+		elif selection == "treasure":
+			printScan(action + "You find what seems to be an enourmous amount of gold...")
+			time.sleep(1)
+			printScan(action + "However, it seems to be locked in a vault...")
+			time.sleep(1)
+			printScan(action + "Perhaps you could try break into it...\n")
+			time.sleep(1)
+			questions = [
+				{
+					'type': 'confirm',
+					'name': 'promptChoice',
+					'message': 'Will you try break into the vault of gold?',
+				}
+			]
+
+			theAnswer = prompt(questions)
+			theDecision = theAnswer['promptChoice']
+
+			if theDecision is False:
+				print("")
+				printScan(action + "You think this is too risky and proceed to move on.\n")
+			else:
+				theLuck = random.randint(1, 3)
+				if theLuck == 1:
+					printScan(action + "You spent several minutes trying to unlock the vault...")
+					time.sleep(2)
+					printScan(success + "You somehow unlock it!\n")
+					time.sleep(0.6)
+					printScan(action + "You walk into the vault but you are"
+					" disappointed as it looks like someone has cleared out"
+					" all the gold.\n")
+					time.sleep(1)
+
+				elif theLuck == 2:
+					printScan(action + "You spent several minutes trying to unlock the vault...")
+					time.sleep(2)
+					printScan(success + "You somehow unlock it!\n")
+					time.sleep(0.6)
+					printScan(success + "You walk into the vault and you find"
+					" hundreds of coins! You pick up as much as you can...")
+					addCoins(50)
+
+				elif theLuck == 3:
+					printScan(action + "You spent several minutes trying to unlock the vault...")
+					time.sleep(2)
+					printScan(action + "You seem to be out of luck, however"
+					" you've been spotted!\n")
+					time.sleep(0.6)
+					printScan(quote + 'YOU! STOP RIGHT THERE! YOU THIEF!"')
+					printScan(Style.BRIGHT + "The Money Grinch shouted.\n")
+					time.sleep(0.6)
+
+					combat("Money Grinch", 30, 1, 30)
+
+
 
 		events = removeFromList(events, selection)
 
@@ -1036,7 +1292,8 @@ def randomEnemy():
 	# names = [["Unidentified", 25, 5, 10], ["Wizard", 40, 10, 20],
 	#		 ["Giant Spider", 25, 5, 15], ["Bob", 100, 1, 1]]
 
-	enemies = [Enemy("Unidentified", 25, 5, 10), Enemy("Wizard", 40, 10, 20)]
+	enemies = [Enemy("Unidentified", 25, 5, 10), Enemy("Wizard", 40, 7, 15),
+	Enemy("Dark Wizard", 5, 25, 40), Enemy("Small Spider", 10, 4, 7)]
 
 	enemy = random.choice(enemies)
 	enemy.startBattle()
@@ -1051,7 +1308,7 @@ def pickCoins():
 	global Scene
 
 	if Scene.hasCoins == True:
-		amount = random.randint(4, 6)
+		amount = random.randint(10, 12)
 		printScan(action + randomDialog.collectCoins(randomDialog))
 		time.sleep(0.8)
 
@@ -1063,28 +1320,73 @@ def pickCoins():
 
 
 def healingPotion():
-	if Inventory.basicHealingPotion > 0:
-		askLoop = 1
-		printScan(success + "[1] You have {amount} basic healing potions\n"
-			  .format(amount=Inventory.basicHealingPotion))
+	global Inventory
+	theResult = 0
 
-		while askLoop:
-			userInput = input(
-				question + "Which potion would you like to use? ")
-			if userInput == "1":
-				# Displays to user
-				printScan("You have selected the basic healing potion\n")
-				time.sleep(0.8)
-				printScan(rip + "You used up 1 basic healing potion")
-				# Applies the changes
-				heal(20)
-				time.sleep(0.8)
-				Inventory.basicHealingPotion = Inventory.basicHealingPotion - 1
-				askLoop = 0
-			else:
-				printScan(error + "Answer must be either 1, 1 or 1!\n")
-	else:
+
+	if Inventory.basicHealingPotion != 0:
+		printScan(success + "You have {amount} basic healing potions."
+		.format(amount=Inventory.basicHealingPotion))
+	if Inventory.advancedHealingPotion != 0:
+		printScan(success + "You have {amount} advanced healing potions."
+		.format(amount=Inventory.advancedHealingPotion))
+
+	if Inventory.basicHealingPotion == 0 and Inventory.advancedHealingPotion == 0:
 		printScan(error + "You don't have any potions!\n")
+		askLoop = False
+		return "notUsed"
+
+
+	# Adds a new line
+	print("")
+
+
+	questions = [
+		{
+			'type': 'list',
+			'name': 'itemChoice',
+					'choices': ["Basic Healing Potion",
+								"Advanced Healing Potion",
+								'Exit'],
+			'message': 'What potion would you like to use?',
+		}
+	]
+
+	askLoop = True
+	while askLoop:
+		theAnswer = prompt(questions)
+		userInput = theAnswer['itemChoice']
+
+
+		if userInput == "Exit":
+			printScan("")
+			askLoop = False
+			return theResult
+
+
+		elif userInput == "Basic Healing Potion":
+			if Inventory.basicHealingPotion > 0:
+				theResult = theResult + 1
+				printScan(rip + "You used up 1 basic healing potion")
+				Inventory.basicHealingPotion = Inventory.basicHealingPotion - 1
+				heal(20)
+				time.sleep(0.4)
+
+			else:
+				printScan(error + "You don't have any basic healing potions!\n")
+
+
+		elif userInput == "Advanced Healing Potion":
+			if Inventory.advancedHealingPotion > 0:
+				theResult = theResult + 1
+				printScan(rip + "You used up 1 advanced healing potion")
+				Inventory.advancedHealingPotion = Inventory.advancedHealingPotion - 1
+				heal(50)
+				time.sleep(0.4)
+
+			else:
+				printScan(error + "You don't have any advanced healing potions!\n")
+
 
 def skipIntro():
 	Scene.current = 3
@@ -1098,7 +1400,7 @@ def skipIntro():
 	global Inventory
 	Scene.surroundingsLit = True
 	Inventory.basicHealingPotion = Inventory.basicHealingPotion + 1
-	Inventory.damage = 1.05
+	Inventory.damage = 1.10
 	Inventory.sword = 1
 
 def useSticks():
@@ -1154,9 +1456,39 @@ def endScreen():
 
 	# THIS IS AN EXAMPLE. FEEL FREE TO CHANGE IT!
 
+def creditScreen():
+	try:
+		width = int(os.get_terminal_size().columns)
+	except:
+		width = 54
+	a = int((width - 10) / 2)
+	b = int(width + 10)
+
+	print("".center(a,'-') + Style.BRIGHT + Fore.BLUE + "DungeonCli" + Style.RESET_ALL + "".center(a,'-'))
+	print(Style.DIM + Fore.WHITE + version.center(width,' ') + Style.RESET_ALL)
+	print(" ")
+	print("Simulating the classic command line experience.".center(width,' '))
+	print(" ")
+	print("Made by the awesome DungeonCli team!".center(width,' '))
+	time.sleep(1)
+
+	print("----".center(width, ' '))
+	printScan("Programming - Daniel071, Xenthio, Ezray".center(width,' '))
+	printScan("Sound effects - Xenthio".center(width,' '))
+	printScan("Music - Sine".center(width,' '))
+	print("----".center(width, ' '))
+	time.sleep(1)
+
+	print(("Sine's Youtube channel: " + Fore.CYAN + "https://www.youtube.com/channel/UCAK1pG_qcgqJd9d7BnayRtg" +
+	Style.RESET_ALL).center(b - 1,' '))
+	print("-".center(width,'-'))
+	print(" ")
+	time.sleep(1)
+
+
 def exit():
 	global mainLoop
-	print(Style.BRIGHT + "==> " + Style.RESET_ALL + "Closing DungeonCli...")
+	print(Style.BRIGHT + Fore.YELLOW + "==> " + Style.RESET_ALL + "Closing DungeonCli...")
 	time.sleep(0.2)
 	printScan("See you next time.\n")
 	time.sleep(0.5)
@@ -1171,9 +1503,11 @@ def nextScene():
 
 		start()
 	else:
-		printScan("Progress through where? there are no visible exits!\n")
+		printScan("Progress through where? there are no visible exits!")
+		printScan(hint + "maybe try 'look' and see what you find...)\n" + Style.RESET_ALL)
 
 def main():
+	global Inventory
 	detect_system()
 
 	command = input(askPrompt + "[Action] " + Style.RESET_ALL)
@@ -1249,7 +1583,7 @@ def main():
 		printScan(quote + "In need of coins, eh? I mean i could let you have some of my precious coins, but ya gotta know the secret code.\"")
 		printScan(" he said grouchingly\n")
 		time.sleep(2)
-		printScan(quote + "Go ahead. I'm waiting...\n")
+		printScan(quote + "Go ahead. I'm waiting...\" \n")
 		time.sleep(1)
 
 		if passwordPrompt() == "granted":
@@ -1273,14 +1607,35 @@ def main():
 	elif command in ("about", "us", "about us", "info"):
 		endScreen()
 
+	elif command in ("credits", "contributers", "people"):
+		creditScreen()
+
+	elif command in ("plsop", "please make me OP"):
+		if passwordPrompt() == "granted":
+			addCoins(1000)
+			Inventory.basicHealingPotion = 50
+			Inventory.advancedHealingPotion = 50
+			Inventory.sword = 2
+			Inventory.damage = 100.0
+			Inventory.armour = 1
+			Inventory.absorbtion = 0.2
 
 	else:
 		invalidCommand()
 
 
 detect_system()
+
 if __name__ == '__main__':
+	# Play moosic
+	playSound("Music/spaceCruise.mp3", True)
 	multiprocessing.freeze_support()
+<<<<<<< HEAD
+=======
+
+	defKey.start()
+	print("\r")
+>>>>>>> d401c14d203b0f64626bedc0fa9755d6d42c2c4b
 	clear()
 	try:
 		width = int(os.get_terminal_size().columns)
@@ -1289,7 +1644,12 @@ if __name__ == '__main__':
 	a = int((width - 10) / 2)
 
 	print("".center(a,'-') + Style.BRIGHT + Fore.BLUE + "DungeonCli" + Style.RESET_ALL + "".center(a,'-'))
+<<<<<<< HEAD
 	playSound("Music/spaceCruise.mp3", True) # DANIEL USE THREADS PLEAASE :)
+=======
+	print("\r")
+
+>>>>>>> d401c14d203b0f64626bedc0fa9755d6d42c2c4b
 	# Introduce the user:
 	printScan(Style.RESET_ALL + Style.BRIGHT + "Welcome to " + Fore.BLUE + "DungeonCli" + Style.RESET_ALL + "")
 
@@ -1298,7 +1658,6 @@ if __name__ == '__main__':
 	printScan("Type 'h' for help or 's' to start!")
 
 	# Run those functions here:
-	initStore()
 	while mainLoop == 1:
 		main()
 
