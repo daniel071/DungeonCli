@@ -206,7 +206,7 @@ def skipDialog():
 	global printspeed
 	printspeed = 0.00001
 
-
+defKey.bind("z", skipDialog)
 # NOTE: Scrolling text is really broken at the moment, so I've commented
 # NOTE: it out. Fix it when you can.
 print_lock = Lock()
@@ -214,22 +214,19 @@ print_lock = Lock()
 def printScan(toPrint):
 	global printspeed
 	printspeed = defprntspd
-	defKey.start()
-	defKey.bind("z", skipDialog)
-	for letter in toPrint:
 
+	for letter in toPrint:
 		print(letter, end='', flush=True)
 		time.sleep(printspeed)
 
-	defKey.stop()
-	print("\r", flush=True)
 
+	print("\r", flush=True)
 
 
 
 def endThreads():
 	for process in all_processes:
-		process.stop()
+		process.terminate()
 
 
 def invalidCommand():
@@ -318,24 +315,24 @@ def isDead():
 		gameover()
 
 # This is really bad implementation, but it works
-class soundThread(threading.Thread):
+class soundThread (threading.Thread):
 	def __init__(self, directory, theLoop):
 		global all_processes
 		self.dir = directory
 		self.loop = theLoop
 
 		if self.loop == True:
-			process = threading.Thread(target=self.playLoop)
+			process = multiprocessing.Process(target=self.playLoop)
 		else:
-			process = threading.Thread(target=playsound.playsound, args=(directory,))
+			process = multiprocessing.Process(target=playsound.playsound, args=(directory,))
 
 		process.start()
 		all_processes.append(process)
 		self.dir = directory
 
 
-	def stop(self):
-		stop()
+	def run(self):
+		threadPlaySound(self.dir)
 
 
 	def playLoop(self):
@@ -1437,7 +1434,7 @@ def endScreen():
 		width = 54
 	a = int((width - 10) / 2)
 	b = int(width + 10)
-	print("\r", flush=True)
+
 	print("".center(a,'-') + Style.BRIGHT + Fore.BLUE + "DungeonCli" + Style.RESET_ALL + "".center(a,'-'))
 	print(Style.DIM + Fore.WHITE + version.center(width,' ') + Style.RESET_ALL)
 	print(" ")
@@ -1506,8 +1503,9 @@ def nextScene():
 def main():
 	global Inventory
 	detect_system()
-
+	defKey.stop()
 	command = input(askPrompt + "[Action] " + Style.RESET_ALL)
+	defKey.start()
 	if command in ("check money", "check coins", "coins", "money", "c"):
 		checkCoins()
 
@@ -1641,10 +1639,10 @@ if __name__ == '__main__':
 	print("\r")
 
 	# Introduce the user:
-	printScan(Style.RESET_ALL + Style.BRIGHT + "Welcome to " + Fore.BLUE + "DungeonCli" + Style.RESET_ALL + "")
+	printScan(Style.RESET_ALL + Style.BRIGHT + "Welcome to " + Fore.BLUE + "DungeonCli" + Style.RESET_ALL + " ")
 
 	printScan(Style.DIM + Fore.WHITE + "==> " + version + "" + Style.RESET_ALL)
-	print(" ")
+	print("")
 	printScan("Type 'h' for help or 's' to start!")
 
 	# Run those functions here:
