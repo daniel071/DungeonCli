@@ -150,6 +150,7 @@ class Scene:
 							# maybe the wizard has nightvision goggles :)
 	hasStore = False
 	hasCoins = False
+	hasVault = False
 	storeSelected = []
 	# description of current room, called by observe and look around
 	description = "You haven't started yet! Type 's' to start."
@@ -217,6 +218,7 @@ def skipDialog():
 # NOTE: it out. Fix it when you can.
 print_lock = Lock()
 
+# FIXME: press z to skip text is broken and hacky.
 def printScan(toPrint):
 	global printspeed
 	printspeed = defprntspd
@@ -1166,6 +1168,7 @@ def randomEvent():
 			printScan(action + "You find a small store setup here")
 			printScan(action + "Maybe they'll have something useful here..")
 			openStore()
+			# IDEA: make it so this event doesn't force you into the shop, instead it adds it into the scene.
 
 		elif selection == "randomFight":
 			printScan(action + "You hear a movement -- you freeze")
@@ -1190,58 +1193,14 @@ def randomEvent():
 			pass
 
 		elif selection == "treasure":
+			global Scene
 			printScan(action + "You find what seems to be an enourmous amount of gold...")
 			time.sleep(1)
 			printScan(action + "However, it seems to be locked in a vault...")
 			time.sleep(1)
 			printScan(action + "Perhaps you could try break into it...\n")
-			time.sleep(1)
-			questions = [
-				{
-					'type': 'confirm',
-					'name': 'promptChoice',
-					'message': 'Will you try break into the vault of gold?',
-				}
-			]
+			Scene.hasVault = True
 
-			theAnswer = prompt(questions)
-			theDecision = theAnswer['promptChoice']
-
-			if theDecision is False:
-				print("")
-				printScan(action + "You think this is too risky and proceed to move on.\n")
-			else:
-				theLuck = random.randint(1, 3)
-				if theLuck == 1:
-					printScan(action + "You spent several minutes trying to unlock the vault...")
-					time.sleep(2)
-					printScan(success + "You somehow unlock it!\n")
-					time.sleep(0.6)
-					printScan(action + "You walk into the vault but you are"
-					" disappointed as it looks like someone has cleared out"
-					" all the gold.\n")
-					time.sleep(1)
-
-				elif theLuck == 2:
-					printScan(action + "You spent several minutes trying to unlock the vault...")
-					time.sleep(2)
-					printScan(success + "You somehow unlock it!\n")
-					time.sleep(0.6)
-					printScan(success + "You walk into the vault and you find"
-					" hundreds of coins! You pick up as much as you can...")
-					addCoins(50)
-
-				elif theLuck == 3:
-					printScan(action + "You spent several minutes trying to unlock the vault...")
-					time.sleep(2)
-					printScan(action + "You seem to be out of luck, however"
-					" you've been spotted!\n")
-					time.sleep(0.6)
-					printScan(quote + 'YOU! STOP RIGHT THERE! YOU THIEF!"')
-					printScan(Style.BRIGHT + "The Money Grinch shouted.\n")
-					time.sleep(0.6)
-
-					combat("Money Grinch", 30, 1, 30)
 
 
 
@@ -1250,7 +1209,41 @@ def randomEvent():
 	else:
 		printScan("There are no more unvisited events left!")
 
+def openVault():
+	if Scene.hasVault == True:
+		theLuck = random.randint(1, 3)
+		if theLuck == 1:
+			printScan(action + "You spent several minutes trying to unlock the vault...")
+			time.sleep(2)
+			printScan(success + "You somehow unlock it!\n")
+			time.sleep(0.6)
+			printScan(action + "You walk into the vault but you are"
+			" disappointed as it looks like someone has cleared out"
+			" all the gold.\n")
+			time.sleep(1)
 
+		elif theLuck == 2:
+			printScan(action + "You spent several minutes trying to unlock the vault...")
+			time.sleep(2)
+			printScan(success + "You somehow unlock it!\n")
+			time.sleep(0.6)
+			printScan(success + "You walk into the vault and you find"
+			" hundreds of coins! You pick up as much as you can...")
+			addCoins(50)
+
+		elif theLuck == 3:
+			printScan(action + "You spent several minutes trying to unlock the vault...")
+			time.sleep(2)
+			printScan(action + "You seem to be out of luck, however"
+			" you've been spotted!\n")
+			time.sleep(0.6)
+			printScan(quote + 'YOU! STOP RIGHT THERE! YOU THIEF!"')
+			printScan(Style.BRIGHT + "The Money Grinch shouted.\n")
+			time.sleep(0.6)
+
+			combat("Money Grinch", 30, 1, 30)
+	else:
+		printScan("There is no vault in this room...")
 def initStore():
 	global Scene
 	storeOptions = CSSOptions.copy()
@@ -1626,7 +1619,8 @@ def main():
 
 	elif command in ("credits", "contributers", "people"):
 		creditScreen()
-
+	elif command in ("open the vault", "vault"):
+		openVault()
 	elif command in ("plsop", "please make me OP"):
 		if passwordPrompt() == "granted":
 			addCoins(1000)
