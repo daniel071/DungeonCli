@@ -185,7 +185,8 @@ class randomDialog:
 
 	def roomDescription(self):
 		dialog=["The ceiling in this room hangs really low. Seeing it is a strange sight for sure.",
-		"It's oddly ambient in here, water trickles down the walls. It's rather relaxing."]
+		"It's oddly ambient in here, water trickles down the walls. It's rather relaxing.",
+		"This room is massive."]
 		return random.choice(dialog)
 
 printspeed = 0.015
