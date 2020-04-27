@@ -189,8 +189,8 @@ class randomDialog:
 		"This room is massive."]
 		return random.choice(dialog)
 
-printspeed = 0.015
-defprntspd = 0.015
+printspeed = 0.013
+defprntspd = 0.013
 
 
 # class inputDetector:
