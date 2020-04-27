@@ -1090,7 +1090,7 @@ def start():
 		elif Scene.current == 9:
 			printScan(action + "You meet the wizard once again.")
 			time.sleep(1)
-			printScan(quote + 'JESUS! How did you survive like that?"')
+			printScan(quote + 'MERLIN! how did you survive that!?"')
 			time.sleep(1)
 			printScan(action + "The wizard cast a spell on you that restored all your health.")
 			time.sleep(0.5)
@@ -1105,7 +1105,7 @@ def start():
 			printScan(quote + "I'm depending on you for this, I'm too weak"
 			" to do it myself\"")
 			time.sleep(0.7)
-			printScan(Style.BRIGHT + "Gylore stated\n")
+			printScan(Style.BRIGHT + "the Wizard stated\n") # Gylore? you don't find his name anywhere though...
 			printScan(quote + "Here, take this, it should help you buy the"
 			" resources you need.")
 			time.sleep(1)
@@ -1114,10 +1114,12 @@ def start():
 			Scene.current = 10
 
 		elif Scene.current == 10:
+			Scene.description = "This room is cold and empty. There isn't much but a door ahead."
 			randomEvent()
 			Scene.current = 11
 
 		elif Scene.current == 11:
+			Scene.description = "It looks to be brighter in here than the other rooms."
 			randomEvent()
 			Scene.current = 12
 
