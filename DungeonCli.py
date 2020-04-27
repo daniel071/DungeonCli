@@ -1460,23 +1460,37 @@ def creditScreen():
 
 	print("".center(a,'-') + Style.BRIGHT + Fore.BLUE + "DungeonCli" + Style.RESET_ALL + "".center(a,'-'))
 	print(Style.DIM + Fore.WHITE + version.center(width,' ') + Style.RESET_ALL)
-	print(" ")
-	print("Simulating the classic command line experience.".center(width,' '))
-	print(" ")
-	print("Made by the awesome DungeonCli team!".center(width,' '))
+	printScan(" ")
+	printScan("Simulating the classic command line experience.".center(width,' '))
+	printScan(" ")
+	printScan("Made by the awesome DungeonCli team!".center(width,' '))
 	time.sleep(1)
 
 	print("----".center(width, ' '))
-	printScan("Programming - Daniel071, Xenthio, Ezray".center(width,' '))
-	printScan("Sound effects - Xenthio".center(width,' '))
+	printScan("General Programming - Daniel071".center(width,' '))
+	printScan("General Programming - Ethan \"Xenthio\" Cardwell".center(width,' '))
+	printScan("General Programming - Mega27 (MCT32)".center(width,' '))
+	printScan("General Programming - Ezray ".center(width,' '))
+	printScan("Story - Daniel071".center(width,' '))
+	printScan("Story - Ethan \"Xenthio\" Cardwell".center(width,' '))
+	printScan("Sound effects - Ethan \"Xenthio\" Cardwell".center(width,' '))
 	printScan("Music - Sine".center(width,' '))
 	print("----".center(width, ' '))
-	time.sleep(1)
+	printScan("Developers Note".center(width,' '))
+	printScan("Thanks so much Daniel for letting me help on this project!".center(width,' '))
+	printScan("it was a blast to make. a great way for me to get back into python".center(width,' '))
+	printScan("Thank you so much - Ethan".center(width,' '))
 
-	print(("Sine's Youtube channel: " + Fore.CYAN + "https://www.youtube.com/channel/UCAK1pG_qcgqJd9d7BnayRtg" +
-	Style.RESET_ALL).center(b - 1,' '))
+
+	time.sleep(1)
+	print("----".center(width, ' '))
+	printScan("Self Promotion from Sine.".center(width,' '))
+	printScan(("Youtube: " + Fore.CYAN + "https://www.youtube.com/channel/UCAK1pG_qcgqJd9d7BnayRtg" +
+	Style.RESET_ALL).center(b - 1,' ')) # SELF PROMO LOOLLL
+
+
 	print("-".center(width,'-'))
-	print(" ")
+	printScan(" ")
 	time.sleep(1)
 
 
