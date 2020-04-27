@@ -59,9 +59,6 @@ hp = 100
 events = ["store", "store", "randomFight", "none", "bombTrap",
 "treasure",]
 
-
-
-
 # You deal more damage with the better sword you have, for example,
 # having a stone sword deals 10% more damage then no sword.
 # 0 = No Sword = 0% Extra damage
@@ -1170,7 +1167,6 @@ def randomEvent():
 		selection = random.choice(events)
 		if selection == "store":
 			printScan(action + "You find a small store setup here")
-<<<<<<< HEAD
 			printScan(action + "Maybe they'll have something useful here..\n")
 			questions = [
 				{
@@ -1183,15 +1179,32 @@ def randomEvent():
 			theSelection = theAnswer['promptChoice']
 			if theSelection is True:
 				# TODO: Make it so theres a chance the store is a trap
+				theLuck = random.randint(1, 4)
+				if theLuck == 1:
+					printScan(action + 'You knock on the door and ask to enter...')
+					time.sleep(2)
 
-				openStore()
+					printScan(action + "Nobody responds...")
+					time.sleep(0.8)
+					printScan(action + "As you begin to walk away, you hear a slight hissing sound")
+					time.sleep(0.8)
+					printScan(rip + "A snake is trying to bite you!\n")
+					time.sleep(0.8)
+					combat("Snake", 20, 5, 15)
+
+				else:
+					printScan(action + 'You knock on the door and ask to enter...')
+					time.sleep(2)
+
+					printScan(quote + 'Greetings! This place is in ruins however,'
+					' I was able to setup a small store from the remains!"')
+					time.sleep(0.8)
+					openStore()
+
+
+
 			else:
 				printScan(action + "This seems too risky... you prepare to leave...\n")
-=======
-			printScan(action + "Maybe they'll have something useful here..")
-			openStore()
-			# IDEA: make it so this event doesn't force you into the shop, instead it adds it into the scene.
->>>>>>> 103d8b773ef583ff64d473a492f5f37f211dd37a
 
 		elif selection == "randomFight":
 			printScan(action + "You hear a movement -- you freeze")
@@ -1714,5 +1727,3 @@ if __name__ == '__main__':
 # ░█████▀▀████▄▄░░░░░░░░▄█████░░░░
 # ░████▀░░░▀▀█████▄▄▄▄█████████▄░░
 # ░░▀▀░░░░░░░░░▀▀██████▀▀░░░▀▀██░░
-
-# what the fuck is the bottom of this document.
