@@ -989,7 +989,7 @@ def start():
 				  ' thriving, there were plenty of stores, lots of jobs, it was'
 				  ' a great place to be...\n But then, the rebellion came in'
 				  ' and wiped this place out, everybody either escaped or died.\n'
-				  ' And me, I was the founder of this town." \n')
+				  ' And me, my name is Gylore, I was the founder of this town." \n')
 			time.sleep(4)
 			Scene.description = "This place is in ruins, apparently it's supposed to be a town...\nThere is a door to the next room, something seems to be strung across it."
 
@@ -1111,7 +1111,7 @@ def start():
 			printScan(quote + "I'm depending on you for this, I'm too weak"
 			" to do it myself\"")
 			time.sleep(0.7)
-			printScan(Style.BRIGHT + "the Wizard stated\n") # Gylore? you don't find his name anywhere though...
+			printScan(Style.BRIGHT + "Gylore stated\n") # Gylore? you don't find his name anywhere though...
 			printScan(quote + "Here, take this, it should help you buy the"
 			" resources you need.")
 			time.sleep(1)
@@ -1475,11 +1475,11 @@ def creditScreen():
 	time.sleep(1)
 
 	print("----".center(width, ' '))
-	printScan("Main Programming - Daniel071".center(width,' '))
+	printScan("Main Programming - Daniel Pavela (Daniel071)".center(width,' '))
 	printScan("Main Programming - Ethan \"Xenthio\" Cardwell".center(width,' '))
 	printScan("General Programming - Mega27 (MCT32)".center(width,' '))
 	printScan("General Programming - Ezray ".center(width,' '))
-	printScan("Story - Daniel071".center(width,' '))
+	printScan("Story - Daniel Pavela (Daniel071)".center(width,' '))
 	printScan("Story - Ethan \"Xenthio\" Cardwell".center(width,' '))
 	printScan("Sound effects - Ethan \"Xenthio\" Cardwell".center(width,' '))
 	printScan("Music - Sine".center(width,' '))
