@@ -183,6 +183,11 @@ class randomDialog:
 		"Maybe next time, you'll remember that you are mortal...\n"]
 		return random.choice(dialog)
 
+	def roomDescription(self):
+		dialog=["The ceiling in this room hangs really low. Seeing it is a strange sight for sure.",
+		"It's oddly ambient in here, water trickles down the walls. It's rather relaxing."]
+		return random.choice(dialog)
+
 printspeed = 0.015
 defprntspd = 0.015
 
