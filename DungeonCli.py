@@ -1467,8 +1467,8 @@ def creditScreen():
 	time.sleep(1)
 
 	print("----".center(width, ' '))
-	printScan("General Programming - Daniel071".center(width,' '))
-	printScan("General Programming - Ethan \"Xenthio\" Cardwell".center(width,' '))
+	printScan("Main Programming - Daniel071".center(width,' '))
+	printScan("Main Programming - Ethan \"Xenthio\" Cardwell".center(width,' '))
 	printScan("General Programming - Mega27 (MCT32)".center(width,' '))
 	printScan("General Programming - Ezray ".center(width,' '))
 	printScan("Story - Daniel071".center(width,' '))
