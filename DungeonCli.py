@@ -1129,6 +1129,10 @@ def start():
 			randomEvent()
 			Scene.current = 12
 
+		elif Scene.current == 12:
+			randomEvent()
+			Scene.current = 13
+
 
 
 def hpCheck():
@@ -1164,8 +1168,22 @@ def randomEvent():
 		selection = random.choice(events)
 		if selection == "store":
 			printScan(action + "You find a small store setup here")
-			printScan(action + "Maybe they'll have something useful here..")
-			openStore()
+			printScan(action + "Maybe they'll have something useful here..\n")
+			questions = [
+				{
+					'type': 'confirm',
+					'name': 'promptChoice',
+					'message': 'Will you enter the store?',
+				}
+			]
+			theAnswer = prompt(questions)
+			theSelection = theAnswer['promptChoice']
+			if theSelection is True:
+				# TODO: Make it so theres a chance the store is a trap
+
+				openStore()
+			else:
+				printScan(action + "This seems too risky... you prepare to leave...\n")
 
 		elif selection == "randomFight":
 			printScan(action + "You hear a movement -- you freeze")
@@ -1242,7 +1260,6 @@ def randomEvent():
 					time.sleep(0.6)
 
 					combat("Money Grinch", 30, 1, 30)
-
 
 
 		events = removeFromList(events, selection)
@@ -1671,6 +1688,9 @@ if __name__ == '__main__':
 	while mainLoop == 1:
 		main()
 
+# This is the end of the code!
+# Enjoy the meme corner  below!
+
 # FUCK YOU WHORE, WE LIKE FORTNITE, WE LIKE FORTNIE
 # FUCK YOU WHORE, WE LIKE FORTNITE, WE LIKE FORTNIE
 # FUCK YOU WHORE, WE LIKE FORTNITE, WE LIKE FORTNIE
@@ -1681,7 +1701,7 @@ if __name__ == '__main__':
 # https://www.youtube.com/watch?v=GGmuA7PK-cc
 
 # Our code is so THICC (:
-# ░░░░░░░░░░▀▀▀██████▄▄▄░░░░░░░░░░ 
+# ░░░░░░░░░░▀▀▀██████▄▄▄░░░░░░░░░░
 # ░░░░░░░░░░░░░░░░░▀▀▀████▄░░░░░░░
 # ░░░░░░░░░░▄███████▀░░░▀███▄░░░░░
 # ░░░░░░░░▄███████▀░░░░░░░▀███▄░░░
