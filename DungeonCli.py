@@ -1015,11 +1015,13 @@ def start():
 			Scene.current = 3
 
 		elif Scene.current == 3:
+			Scene.description = randomDialog.roomDescription()
 			randomEvent()
 			Scene.current = 4
 
 
 		elif Scene.current == 4:
+			Scene.description = randomDialog.roomDescription()
 			bombTrapScene()
 			Scene.current = 5
 
@@ -1057,10 +1059,11 @@ def start():
 			Scene.current = 7
 
 		elif Scene.current == 7:
-			randomEvent()
+			# randomEvent() # random event here made some things confusing to a tester.
+			print("This room is rather large. you should take a look around it.")
 			Scene.canProgress = False
 			Scene.current = 8
-			Scene.description = "This room is rather empty, but an old and dried up fountain lays ahead.\nA few coins lay scattered across the bottom, maybe you can pick them up? But however a single loose red brick in the wall north to you catches your eye..."
+			Scene.description = "This room large and empty, but an old and dried up fountain lays ahead.\nA few coins lay scattered across the bottom, maybe you can pick them up? But however a single loose red brick in the wall north to you catches your eye..."
 
 		elif Scene.current == 8:
 			printScan(action + "You walk towards the massive door, slightly nervous"
