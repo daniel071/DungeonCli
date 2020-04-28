@@ -1252,6 +1252,11 @@ def randomEvent():
 
 		elif selection == "treasure":
 			global Scene
+			printScan(action + "A massive Vault stands in this room.")
+			time.sleep(1)
+			printScan(action + "Something useful might be in it...")
+			time.sleep(1)
+			printScan(action + "Perhaps you could try break into it...\n")
 			time.sleep(1)
 			questions = [
 				{
