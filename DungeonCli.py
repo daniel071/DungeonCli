@@ -78,7 +78,7 @@ events = ["store", "store", "store", "randomFight", "none", "none", "none", "bom
 
 
 
-CSSOptions = [["Matches", 10], ["Basic Healing Potion", 20],
+CSSOptions = [["Matches", 5], ["Basic Healing Potion", 20],
 			  ["Copper Armour", 75], ["Stone Sword", 60], ["Advanced Healing Potion", 70]]
 
 battleSongs = ["Music/milkywayBattle.mp3", "Music/rockmenBattle.mp3"]
@@ -205,7 +205,7 @@ def initRandomRoom():
 	b = random.randint(1,10)
 	if b == 2:
 		Scene.surroundingsLit == False
-	
+
 
 
 
