@@ -56,9 +56,9 @@ hp = 100
 # Events used for random stuff:
 
 # TODO: when 'wizardThatWantsToKillYou' is done, add it here
-events = ["store", "store", "randomFight", "none", "bombTrap",
-"treasure",]
-
+# events = ["store", "store", "randomFight", "none", "bombTrap",
+# "treasure",]
+events = ["treasure"]
 # You deal more damage with the better sword you have, for example,
 # having a stone sword deals 10% more damage then no sword.
 # 0 = No Sword = 0% Extra damage
@@ -1657,7 +1657,7 @@ def main():
 
 	elif command in ("credits", "contributers", "people"):
 		creditScreen()
-	elif command in ("open the vault", "vault"):
+	elif command in ("open the vault", "vault", "open vault", "use vault", "break in", "try to break in"):
 		openVault()
 	elif command in ("plsop", "please make me OP"):
 		if passwordPrompt() == "granted":
