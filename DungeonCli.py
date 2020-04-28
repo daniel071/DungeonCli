@@ -182,7 +182,7 @@ class randomDialog:
 		return random.choice(dialog)
 
 	def roomDescription(self):
-		dialog=["The ceiling in this room hangs really low. Seeing it is a strange sight for sure.",
+		dialog=["The ceiling in this room hangs really low. Seeing it is truly a strange sight.",
 		"It's oddly ambient in here, water trickles down the walls. It's rather relaxing.",
 		"This room is massive."]
 		return random.choice(dialog)
@@ -191,6 +191,11 @@ class randomDialog:
 		dialog=["There are some coins on the floor.",
 		"Some coins are scattered on the ground.",
 		"There are some coins nearby."]
+		return random.choice(dialog)
+	def store(self):
+		dialog=["There is a store in this room.",
+		"And old store is setup in here..",
+		"An old shack with the letters \'Store\' is nearby."]
 		return random.choice(dialog)
 printspeed = 0.013
 defprntspd = 0.013
@@ -1195,6 +1200,7 @@ def randomEvent():
 		if selection == "store":
 			printScan(action + "You find a small store setup here")
 			printScan(action + "Maybe they'll have something useful here..\n")
+			Scene.description = Scene.description + " " + randomDialog.store(randomDialog)
 			questions = [
 				{
 					'type': 'confirm',
@@ -1256,7 +1262,7 @@ def randomEvent():
 			pass
 
 		elif selection == "treasure":
-			global Scene
+
 			printScan(action + "A massive Vault stands in this room.")
 			time.sleep(1)
 			printScan(action + "Something useful might be in it...")
