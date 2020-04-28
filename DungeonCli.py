@@ -1657,7 +1657,7 @@ def main():
 
 	elif command in ("credits", "contributers", "people"):
 		creditScreen()
-	elif command in ("open the vault", "vault", "open vault", "use vault", "break in", "try to break in"):
+	elif command in ("open the vault", "vault", "open vault", "use vault", "use the vault" "break in", "try to break in"):
 		openVault()
 	elif command in ("plsop", "please make me OP"):
 		if passwordPrompt() == "granted":
