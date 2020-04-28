@@ -202,6 +202,11 @@ def initRandomRoom():
 	if a == 2:
 		Scene.hasCoins == True
 		Scene.description == Scene.description + " " + randomDialog.coinsOnFloor(randomDialog)
+	b = random.randint(1,10)
+	if b == 2:
+		Scene.surroundingsLit == False
+	
+
 
 
 
