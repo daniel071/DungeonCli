@@ -1252,12 +1252,25 @@ def randomEvent():
 
 		elif selection == "treasure":
 			global Scene
-			printScan(action + "You find what seems to be an enourmous amount of gold...")
 			time.sleep(1)
-			printScan(action + "However, it seems to be locked in a vault...")
-			time.sleep(1)
-			printScan(action + "Perhaps you could try break into it...\n")
-			Scene.hasVault = True
+			questions = [
+				{
+					'type': 'confirm',
+					'name': 'promptChoice',
+					'message': 'Will you try break into the vault of gold?',
+				}
+			]
+
+			theAnswer = prompt(questions)
+			theDecision = theAnswer['promptChoice']
+
+			if theDecision is False:
+				print("")
+				printScan(action + "You think this is too risky and proceed to move on.\n")
+			else:
+				Scene.hasVault = True
+				openVault()
+				Scene.hasVault = False
 
 
 
@@ -1676,8 +1689,10 @@ def main():
 
 	elif command in ("credits", "contributers", "people"):
 		creditScreen()
-	elif command in ("open the vault", "vault", "open vault"):
-		openVault()
+	elif command in ("open the vault", "vault", "open vault", "use vault", "use the vault" "break in", "try to break in"):
+		pass
+		# openVault()
+
 	elif command in ("plsop", "please make me OP"):
 		if passwordPrompt() == "granted":
 			addCoins(1000)
