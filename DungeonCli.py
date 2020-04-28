@@ -1689,7 +1689,7 @@ def main():
 	elif command in ("o", "options"):
 		options()
 
-	elif command in ("create torch", "make torch")
+	elif command in ("create torch", "make torch"):
 		printScan(error + "You cannot do that! The sticks are too wet...\n")
 	elif command in ("about", "us", "about us", "info"):
 		endScreen()
