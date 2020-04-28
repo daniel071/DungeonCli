@@ -56,8 +56,8 @@ hp = 100
 # Events used for random stuff:
 
 # TODO: when 'wizardThatWantsToKillYou' is done, add it here
-events = ["store", "store", "randomFight", "none", "bombTrap",
-"treasure",]
+events = ["store", "store", "store", "randomFight", "none", "none", "none", "bombTrap",
+"treasure", "treasure"]
 
 # You deal more damage with the better sword you have, for example,
 # having a stone sword deals 10% more damage then no sword.
@@ -187,8 +187,25 @@ class randomDialog:
 		"This room is massive."]
 		return random.choice(dialog)
 
+	def coinsOnFloor(self):
+		dialog=["There are some coins on the floor.",
+		"Some coins are scattered on the ground.",
+		"There are some coins nearby."]
+		return random.choice(dialog)
 printspeed = 0.013
 defprntspd = 0.013
+
+def initRandomRoom():
+	global Scene
+	a = random.randint(1,2)
+	Scene.description = randomDialog.roomDescription(randomDialog)
+	if a == 2:
+		Scene.hasCoins == True
+		Scene.description == Scene.description + " " + randomDialog.coinsOnFloor(randomDialog)
+
+
+
+
 
 
 # class inputDetector:
@@ -1015,17 +1032,18 @@ def start():
 			Scene.current = 3
 
 		elif Scene.current == 3:
-			Scene.description = randomDialog.roomDescription()
+			initRandomRoom()
 			randomEvent()
 			Scene.current = 4
 
 
 		elif Scene.current == 4:
-			Scene.description = randomDialog.roomDescription()
+			initRandomRoom()
 			bombTrapScene()
 			Scene.current = 5
 
 		elif Scene.current == 5:
+			initRandomRoom()
 			randomEvent()
 			Scene.current = 6
 
@@ -1063,7 +1081,7 @@ def start():
 			print("This room is rather large. you should take a look around it.")
 			Scene.canProgress = False
 			Scene.current = 8
-			Scene.description = "This room large and empty, but an old and dried up fountain lays ahead.\nA few coins lay scattered across the bottom, maybe you can pick them up? But however a single loose red brick in the wall north to you catches your eye..."
+			Scene.description = "This room large and bare, but an old and dried up fountain lays ahead.\nA few coins lay scattered across the bottom, maybe you can pick them up? But however a single loose red brick in the wall north to you catches your eye..."
 
 		elif Scene.current == 8:
 			printScan(action + "You walk towards the massive door, slightly nervous"
@@ -1132,6 +1150,7 @@ def start():
 			Scene.current = 12
 
 		elif Scene.current == 12:
+			initRandomRoom()
 			randomEvent()
 			Scene.current = 13
 
@@ -1219,8 +1238,8 @@ def randomEvent():
 			randomEnemy()
 
 		elif selection == "none":
-			printScan(action + "You find absolutely nothing in this room...")
-			printScan(action + "Perhaps you should move on...\n")
+			#printScan(action + "You find absolutely nothing in this room...")
+			printScan("", end="")
 
 		elif selection == "bombTrap":
 			bombTrapScene()
@@ -1657,7 +1676,7 @@ def main():
 
 	elif command in ("credits", "contributers", "people"):
 		creditScreen()
-	elif command in ("open the vault", "vault"):
+	elif command in ("open the vault", "vault", "open vault"):
 		openVault()
 	elif command in ("plsop", "please make me OP"):
 		if passwordPrompt() == "granted":
