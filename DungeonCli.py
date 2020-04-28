@@ -1063,7 +1063,7 @@ def start():
 			print("This room is rather large. you should take a look around it.")
 			Scene.canProgress = False
 			Scene.current = 8
-			Scene.description = "This room large and empty, but an old and dried up fountain lays ahead.\nA few coins lay scattered across the bottom, maybe you can pick them up? But however a single loose red brick in the wall north to you catches your eye..."
+			Scene.description = "This is room large and empty, but an old and dried up fountain lays ahead.\nA few coins lay scattered across the bottom, maybe you can pick them up? But however a single loose red brick in the wall north to you catches your eye..."
 
 		elif Scene.current == 8:
 			printScan(action + "You walk towards the massive door, slightly nervous"
