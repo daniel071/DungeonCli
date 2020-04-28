@@ -1257,7 +1257,7 @@ def randomEvent():
 				{
 					'type': 'confirm',
 					'name': 'promptChoice',
-					'message': 'Will you try break into the vault of gold?',
+					'message': 'Will you try break into the vault?',
 				}
 			]
 
