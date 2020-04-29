@@ -36,7 +36,7 @@ from colorama import init  # type: ignore
 # --------------------------
 # |		Version!		|
 # --------------------------
-version = "Development Version 0.4.9"
+version = "Development Version 0.4.10"
 # --------------------------
 
 
@@ -1232,7 +1232,7 @@ def start():
 				printScan(action + "The guard called Gylore and has a conversation with him.")
 				time.sleep(0.7)
 				printScan(quote + "I see, I will let you through. Good luck"
-				" with your journey.\n")
+				" with your journey.\"\n")
 				Scene.current = Scene.current + 1
 				time.sleep(0.7)
 
@@ -1266,7 +1266,39 @@ def start():
 					" other option but trying again.\n")
 
 		elif Scene.current == 15:
-			printScan(action + "You enter the town....")
+			printScan(action + "You enter the town, birds are chirping,"
+			" flowers are blooming, the rivers are flowing...")
+			time.sleep(0.7)
+			printScan(action + "It truly is a sight to behold!\n")
+			time.sleep(0.7)
+
+			printScan(action + "You look for the town hall, and begin to walk to it...")
+			time.sleep(0.7)
+			printScan(action + "Once you enter the town hall, a person asks you,")
+			time.sleep(0.7)
+			printScan(quote + "Welcome new visitor! How did you get here?\"")
+			time.sleep(0.7)
+			printScan(action + "You told them everything you saw.\n")
+			time.sleep(0.7)
+
+			printScan(action + "You ask them how this part of the town is"
+			" thriving whereas the rest of the town was crippled.")
+			time.sleep(0.7)
+			printScan(quote + "Ah, you see, we've found the Rebellion's"
+			" weakness, thorium!\nThorium is a highly radioactive material"
+			" that the rebellion cannot withstand however, thorium is very"
+			" difficult to obtain.\"\n")
+			time.sleep(3)
+
+			printScan(quote + "Good luck with your journey!\"\n")
+			Scene.current = Scene.current + 1
+
+		elif Scene.current == 16:
+			printScan(success + "Thanks for testing DungeonCli!" + Fore.WHITE)
+			printScan("We haven't finished this scene.")
+			printScan("If you want to help us improve, feel free to send a screenshot or video of you")
+			printScan("playing the game, at the discord server:")
+			printScan(Style.BRIGHT + Fore.BLUE + "https://discord.gg/eAUqKKe\n")
 
 
 def hpCheck():
@@ -1860,7 +1892,7 @@ if __name__ == '__main__':
 		main()
 
 # This is the end of the code!
-# Enjoy the meme corner  below!
+# Enjoy the meme corner below!
 
 # FUCK YOU WHORE, WE LIKE FORTNITE, WE LIKE FORTNIE
 # FUCK YOU WHORE, WE LIKE FORTNITE, WE LIKE FORTNIE
