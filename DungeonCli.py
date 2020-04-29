@@ -464,34 +464,6 @@ def ask(funcQuestion, answer1, answer2):
 				  "{answer1} or {answer2}!\n".format(answer1=answer1, answer2=answer2))
 
 
-def ask3(funcQuestion, answer1, answer2, answer3):
-	askLoop = 1
-	while askLoop == 1:
-			# Asks the user a question
-		userInput = input(question + "{funcQuestion} [{answer1}/{answer2}/{answer3}] "
-						  .format(funcQuestion=funcQuestion, answer1=answer1, answer2=answer2, answer3=answer3)
-						  + Style.RESET_ALL)
-
-		# Checks if it's correct
-		if userInput == answer1:
-			askLoop = 0
-			printScan("")
-			return answer1
-		elif userInput == answer2:
-			askLoop = 0
-			printScan("")
-			return answer2
-		elif userInput == answer3:
-			askLoop = 0
-			printScan("")
-			return answer3
-
-		else:
-			printScan(error + "Answer must be either "
-				  "{answer1}, {answer2} or {answer3}!\n".format(answer1=answer1,
-																answer2=answer2, answer3=answer3))
-
-
 def damage(value):
 	global hp
 	hp = hp - value
