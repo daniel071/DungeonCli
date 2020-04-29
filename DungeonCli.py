@@ -1246,7 +1246,7 @@ def start():
 				theLuck = random.randint(1, 3)
 				if theLuck == 1:
 					printScan(rip + "The guard spotted you!"
-					"You have no time to explain yourself, you have to fight!\n")
+					" You have no time to explain yourself, you have to fight!\n")
 					time.sleep(1)
 					theResult = combat("Guard", 60, 3, 4)
 
