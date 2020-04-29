@@ -122,6 +122,13 @@ class Item:
 
 
 class Inventory:
+	# TODO: Add a money multiplyer!
+	# You can spend coins on a coins multiplyer which will
+	# multiply the amount of coins you get!
+
+	# TODO: Add a evasian multiplyer!
+	# This will increase the change your enemy will miss!
+
 	matches = 1
 	sticks = 3
 
@@ -1115,7 +1122,7 @@ def start():
 
 		elif Scene.current == 7:
 			# randomEvent() # random event here made some things confusing to a tester.
-			print("This room is rather large. you should take a look around it.")
+			print("This room is rather large. you should take a look around it.\n")
 			Scene.canProgress = False
 			Scene.current = Scene.current + 1
 			Scene.description = "This room large and bare, but an old and dried up fountain lays ahead.\nA few coins lay scattered across the bottom, maybe you can pick them up? But however a single loose red brick in the wall north to you catches your eye..."
@@ -1325,6 +1332,7 @@ def randomEvent():
 					printScan(action + 'You knock on the door and ask to enter...')
 					time.sleep(2)
 
+					# printScan(randomDialog.store(randomDialog))
 					printScan(quote + 'Greetings! This place is in ruins however,'
 					' I was able to setup a small store from the remains!"')
 					time.sleep(0.8)
@@ -1345,8 +1353,8 @@ def randomEvent():
 			randomEnemy()
 
 		elif selection == "none":
-			#printScan(action + "You find absolutely nothing in this room...")
-			printScan("", end="")
+			printScan(action + "You find absolutely nothing in this room...\n")
+
 
 		elif selection == "bombTrap":
 			bombTrapScene()
