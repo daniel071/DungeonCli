@@ -36,7 +36,7 @@ from colorama import init  # type: ignore
 # --------------------------
 # |		Version!		|
 # --------------------------
-version = "Development Version 0.4.8"
+version = "Development Version 0.4.9"
 # --------------------------
 
 
@@ -1196,7 +1196,70 @@ def start():
 			Scene.current = Scene.current + 1
 
 		elif Scene.current == 14:
+			printScan(action + "You reach a room with a heavily guarded door.")
+			time.sleep(1)
+			printScan(action + "There is a guard protecting the door.")
+			time.sleep(1)
+			printScan(action + "You can either comfront the guard or wait"
+			" and see if the guard will leave.\n")
+			time.sleep(1)
 
+			questions = [
+				{
+					'type': 'list',
+					'name': 'userChoice',
+							'choices': ["Comfront the guard",
+										"Wait it out",],
+					'message': 'What will you do?',
+				}
+			]
+
+			theAnswer = prompt(questions)
+			userInput = theAnswer['userChoice']
+			print(" ")
+
+			if userInput == "Comfront the guard":
+				printScan(action + "You comfront the guard and tell him about"
+				" the quest you were given by Gylore.")
+				time.sleep(0.7)
+				printScan(action + "The guard called Gylore and has a conversation with him.")
+				time.sleep(0.7)
+				printScan(quote + "I see, I will let you through. Good luck"
+				" with your journey.\n")
+				Scene.current = Scene.current + 1
+				time.sleep(0.7)
+
+				printScan(action + "The door opened, revealing a thriving town.\n")
+				Scene.description = "There is a marvolous, thriving town. It has beautiful lakes, lots of stores and a great community."
+
+			else:
+				printScan(action + "You wait several hours, hiding so the"
+				" guard can't see you...")
+				time.sleep(3)
+				theLuck = random.randint(1, 3)
+				if theLuck == 1:
+					printScan(rip + "The guard spotted you!"
+					"You have no time to explain yourself, you have to fight!\n")
+					time.sleep(1)
+					theResult = combat("Guard", 60, 3, 4)
+
+					if theResult == "killed":
+						printScan(action + "Now that there is no guard protecting"
+						" the door, you can enter the next room.\n")
+						time.sleep(1)
+						Scene.current = Scene.current + 1
+						Scene.description = "There is a marvolous, thriving town. It has beautiful lakes, lots of stores and a great community."
+
+					elif theResult == "flee":
+						printScan(action + "You ran away to the previous room.\n"
+						"The only way you can proceed is by trying again.\n")
+
+				else:
+					printScan(action + "The guard doesn't leave. You have no"
+					" other option but trying again.\n")
+
+		elif Scene.current == 15:
+			printScan(action + "You enter the town....")
 
 
 def hpCheck():
