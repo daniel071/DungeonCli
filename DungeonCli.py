@@ -601,6 +601,7 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 			return "killed"
 
 
+		print(Style.RESET_ALL)
 		answers = prompt(questions)
 		userInput = answers['userChoice']
 		if userInput == "Fight":
@@ -655,6 +656,7 @@ def options():
 
 	askLoop = 1
 	while askLoop == 1:
+		print(Style.RESET_ALL)
 		answers = prompt(questions)
 		# printScan_json(answers)
 		userInput = answers['selection']
@@ -863,6 +865,7 @@ def openStore():
 
 	askLoop = 1
 	while askLoop == 1:
+		print(Style.RESET_ALL)
 		answers = prompt(questions)
 		# printScan_json(answers)
 		userInput = answers['itemChoice']
@@ -936,6 +939,7 @@ def start():
 					'message': 'Will you continue to the next room?',
 				}
 			]
+			print(Style.RESET_ALL)
 			theNewAnswer = prompt(questions)
 			theNewResult = theNewAnswer['promptChoice']
 			if theNewResult is True:
@@ -1193,6 +1197,7 @@ def start():
 				}
 			]
 
+			print(Style.RESET_ALL)
 			theAnswer = prompt(questions)
 			userInput = theAnswer['userChoice']
 			print(" ")
@@ -1315,6 +1320,8 @@ def randomEvent():
 					'message': 'Will you enter the store?',
 				}
 			]
+
+			print(Style.RESET_ALL)
 			theAnswer = prompt(questions)
 			theSelection = theAnswer['promptChoice']
 			if theSelection is True:
@@ -1385,6 +1392,7 @@ def randomEvent():
 				}
 			]
 
+			print(Style.RESET_ALL)
 			theAnswer = prompt(questions)
 			theDecision = theAnswer['promptChoice']
 
@@ -1543,6 +1551,7 @@ def healingPotion():
 
 	askLoop = True
 	while askLoop:
+		print(Style.RESET_ALL)
 		theAnswer = prompt(questions)
 		userInput = theAnswer['itemChoice']
 
