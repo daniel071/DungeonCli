@@ -122,7 +122,7 @@ class Item:
 
 
 class Inventory:
-	matches = 0
+	matches = 1
 	sticks = 3
 
 	# Basic healing potion heals 20 health
@@ -964,7 +964,6 @@ def start():
 				Scene.surroundingsLit = True
 
 				Scene.current = Scene.current + 1
-				start()
 
 			else:
 				printScan(action + "You do nothing...\n")
