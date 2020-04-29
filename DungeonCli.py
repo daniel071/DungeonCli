@@ -1019,7 +1019,7 @@ def start():
 			Inventory.basicHealingPotion = Inventory.basicHealingPotion + 1
 			Inventory.damage = 1.10
 			Inventory.sword = 1
-			Scene.current = 2
+			Scene.current = Scene.current + 1
 			time.sleep(2)
 
 			# Add a new line
@@ -1066,23 +1066,23 @@ def start():
 			time.sleep(1)
 
 			printScan(action + "He leaves the room and now, you're on your own. \n")
-			Scene.current = 3
+			Scene.current = Scene.current + 1
 
 		elif Scene.current == 3:
 			initRandomRoom()
 			randomEvent()
-			Scene.current = 4
+			Scene.current = Scene.current + 1
 
 
 		elif Scene.current == 4:
 			initRandomRoom()
 			bombTrapScene()
-			Scene.current = 5
+			Scene.current = Scene.current + 1
 
 		elif Scene.current == 5:
 			initRandomRoom()
 			randomEvent()
-			Scene.current = 6
+			Scene.current = Scene.current + 1
 
 
 		elif Scene.current == 6:
@@ -1111,13 +1111,13 @@ def start():
 			elif theResult == "flee":
 				printScan(action + "You quickly ran away, you're safe now. \n")
 
-			Scene.current = 7
+			Scene.current = Scene.current + 1
 
 		elif Scene.current == 7:
 			# randomEvent() # random event here made some things confusing to a tester.
 			print("This room is rather large. you should take a look around it.")
 			Scene.canProgress = False
-			Scene.current = 8
+			Scene.current = Scene.current + 1
 			Scene.description = "This room large and bare, but an old and dried up fountain lays ahead.\nA few coins lay scattered across the bottom, maybe you can pick them up? But however a single loose red brick in the wall north to you catches your eye..."
 
 		elif Scene.current == 8:
@@ -1148,7 +1148,7 @@ def start():
 					printScan(action + "You're forced into another battle!")
 					time.sleep(1)
 
-			Scene.current = 9
+			Scene.current = Scene.current + 1
 
 		elif Scene.current == 9:
 			printScan(action + "You meet the wizard once again.")
@@ -1174,24 +1174,28 @@ def start():
 			time.sleep(1)
 			addCoins(50)
 
-			Scene.current = 10
+			Scene.current = Scene.current + 1
 
 		elif Scene.current == 10:
 			Scene.description = "This room is cold and empty. There isn't much but a door ahead."
 			randomEvent()
-			Scene.current = 11
+			Scene.current = Scene.current + 1
 
 		elif Scene.current == 11:
 			Scene.description = "It looks to be brighter in here than the other rooms."
 			randomEvent()
-			Scene.current = 12
+			Scene.current = Scene.current + 1
 
 		elif Scene.current == 12:
 			initRandomRoom()
 			randomEvent()
-			Scene.current = 13
+			Scene.current = Scene.current + 1
+
 		elif Scene.current == 13:
 			randomEvent()
+			Scene.current = Scene.current + 1
+
+		elif Scene.current == 14:
 
 
 
