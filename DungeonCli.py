@@ -122,7 +122,7 @@ class Item:
 
 
 class Inventory:
-	matches = 1
+	matches = 0
 	sticks = 3
 
 	# Basic healing potion heals 20 health
@@ -201,6 +201,9 @@ printspeed = 0.013
 defprntspd = 0.013
 
 def initRandomRoom():
+	# Not my code but what I think it does is
+	# has a 50% chance of placing coins in the room.
+	# Also, there would be a 1 in 10 chance of the room not being lit
 	global Scene
 	a = random.randint(1,2)
 	Scene.description = randomDialog.roomDescription(randomDialog)
@@ -927,6 +930,7 @@ def useMatch():
 
 def start():
 	global Scene
+	global Inventory
 
 	Scene.storeSelected = []
 
@@ -939,6 +943,32 @@ def start():
 		printScan(
 			"Check your Inventory, you might have something to \nimprove your vision...\n")
 		time.sleep(1)
+		if Inventory.matches < 1:
+			printScan(rip + "You don't have any matches left!")
+			time.sleep(1)
+			printScan(rip + "There's no way to light this room.")
+			time.sleep(1)
+			printScan(action + "The only thing you can do is proceed to the next room...\n")
+			time.sleep(1)
+			questions = [
+				{
+					'type': 'confirm',
+					'name': 'promptChoice',
+					'message': 'Will you continue to the next room?',
+				}
+			]
+			theNewAnswer = prompt(questions)
+			theNewResult = theNewAnswer['promptChoice']
+			if theNewResult is True:
+				printScan(action + "You proceed to the next room...\n")
+				Scene.surroundingsLit = True
+
+				Scene.current = Scene.current + 1
+				start()
+
+			else:
+				printScan(action + "You do nothing...\n")
+
 		# combat("Bob", 69)
 		# printScan("Maybe I should use a match to light this place up...") # too straight forward.
 
@@ -986,8 +1016,6 @@ def start():
 			printScan(success + "You recieved a basic Sword.")
 			printScan(success + "You recieved a basic Healing Potion.")
 			addCoins(50)
-
-			global Inventory
 
 			Inventory.basicHealingPotion = Inventory.basicHealingPotion + 1
 			Inventory.damage = 1.10
@@ -1137,10 +1165,10 @@ def start():
 			" reconstruct the town however, \nthere's all of these dark wizards"
 			" preventing me from doing so, \nthe only way I can defeat them"
 			" is by obtaining the Great Stone of Knowledge.\"\n")
-			time.sleep(0.5)
+			time.sleep(2)
 			printScan(quote + "I'm depending on you for this, I'm too weak"
 			" to do it myself\"")
-			time.sleep(0.7)
+			time.sleep(1.5)
 			printScan(Style.BRIGHT + "Gylore stated\n") # Gylore? you don't find his name anywhere though...
 			printScan(quote + "Here, take this, it should help you buy the"
 			" resources you need.")
@@ -1163,6 +1191,8 @@ def start():
 			initRandomRoom()
 			randomEvent()
 			Scene.current = 13
+		elif Scene.current == 13:
+			randomEvent()
 
 
 
@@ -1212,7 +1242,7 @@ def randomEvent():
 			theSelection = theAnswer['promptChoice']
 			if theSelection is True:
 				# TODO: Make it so theres a chance the store is a trap
-				theLuck = random.randint(1, 4)
+				theLuck = random.randint(1, 5)
 				if theLuck == 1:
 					printScan(action + 'You knock on the door and ask to enter...')
 					time.sleep(2)
