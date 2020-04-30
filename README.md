@@ -11,19 +11,11 @@ There is another depreciated version, made with swift at the `swift-rewrite` bra
 
 
 ## Installation:
-### With Python
-1. Download the .zip file and extract it or type
-
-	`git clone http://119.17.132.38:3000/Daniel/DungeonCli.git`
-2. Make sure you have Python 3.8.2 installed. If you don't, you
-can install it from www.python.org
-3. Make sure you have the dependencies installed with `pip install -r requirements.txt`
-4. Open the terminal in the directory and type `python DungeonCli.py`
-
 ### From binaries
-###### Note: This method only works only on Linux / Unix systems!
-If you're on Windows, you'll must install using Python or compile yourself.
+#### On windows:
+Download the .exe file from the releases page and run it.
 
+#### On *nix based systems:
 1. Go to the releases page and download the binary for your operating system
 2. Give the binary executable permissions and run it
 
@@ -34,6 +26,29 @@ Give it priviledges with `chmod +X ./DungeonCli_Linux` then run it with
 **On MacOS:**
 Give it priviledges with `chmod +X ./DungeonCli_osx` then run it with
 `./DungeonCli_osx`
+
+
+### With Python
+You **MUST** have ffmpeg installed in order for the music to work. On MacOS and Linux it should be already installed, if not, please use your package manager.
+
+##### How to install ffmpeg in windows:
+1. Download the build from here:
+https://ffmpeg.zeranoe.com/builds/win64/static/ffmpeg-4.2.2-win64-static.zip
+2. Extract the zip somewhere and copy the `\bin` directory
+3. Add that directory to your path, if you don't know how to,
+Search 'path' in the start menu and press 'enter' -> Click on 'Environment variables' -> On System Variables, click on 'Path' and click 'Edit' -> Click 'New' and paste in the directory -> Click OK on everything -> **RESTART**
+
+
+
+##### How to install DungeonCli:
+
+1. Download the .zip file and extract it or type
+
+	`git clone http://119.17.132.38:3000/Daniel/DungeonCli.git`
+2. Make sure you have Python 3.8.2 installed. If you don't, you
+can install it from www.python.org
+3. Make sure you have the dependencies installed with `pip install -r requirements.txt`
+4. Open the terminal in the directory and type `python DungeonCli.py`
 
 
 ## Compiling:
