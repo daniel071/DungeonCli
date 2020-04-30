@@ -84,7 +84,7 @@ events = ["store", "store", "store", "randomFight", "none", "none", "none", "bom
 CSSOptions = [["Matches", 5], ["Basic Healing Potion", 20],
 			  ["Copper Armour", 75], ["Stone Sword", 60], ["Advanced Healing Potion", 70]]
 
-battleSongs = ["Music/milkywayBattle.mp3", "Music/rockmenBattle.mp3"]
+battleSongs = ["Music/milkywayBattle.ogg", "Music/rockmenBattle.ogg"]
 
 # 1 x Matches.
 # 3 x Sticks.
@@ -364,9 +364,9 @@ def playSound(path, ifLoop):
 	global all_process
 	if playMusic == True:
 		if ifLoop is True:
-			playback = _play_with_simpleaudio(pydub.AudioSegment.from_mp3(path) * 20)
+			playback = _play_with_simpleaudio(pydub.AudioSegment.from_ogg(path) * 20)
 		else:
-			playback = _play_with_simpleaudio(pydub.AudioSegment.from_mp3(path))
+			playback = _play_with_simpleaudio(pydub.AudioSegment.from_ogg(path))
 
 		all_processes.append(playback)
 	else:
@@ -375,7 +375,7 @@ def playSound(path, ifLoop):
 
 def gameover():
 	endThreads()
-	playSound("Music/gameOver.mp3", False)
+	playSound("Music/gameOver.ogg", False)
 	clear()
 	printScan(rip + "Your body is torn into shreads...")
 	time.sleep(2)
@@ -469,7 +469,7 @@ def bombTrapScene():
 	printScan(action + "It is odly quiet here... you begin to look around... \n")
 	time.sleep(2)
 
-	playSound("Sounds/explosion.mp3", False)
+	playSound("Sounds/explosion.ogg", False)
 	printScan(rip + "BANG!")
 	time.sleep(1)
 	printScan(randomDialog.bombExplodes(randomDialog))
@@ -492,7 +492,7 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 
 	def finishUpMusic():
 		endThreads()
-		playSound("Music/federation.mp3", True)
+		playSound("Music/federation.ogg", True)
 
 
 
@@ -653,9 +653,9 @@ def options():
 				endThreads()
 			else:
 				if Scene.current > 2:
-					playSound("Music/federation.mp3", True)
+					playSound("Music/federation.ogg", True)
 				else:
-					playSound("Music/spaceCruise.mp3", True)
+					playSound("Music/intro.ogg", True)
 
 			printScan("You toggled music to {value}\n".format(value=playMusic))
 
@@ -1024,7 +1024,7 @@ def start():
 
 			printScan(quote + 'Good luck." \n')
 			endThreads()
-			playSound("Music/federation.mp3", True)
+			playSound("Music/federation.ogg", True)
 			printScan(hint + "This song isn't mine and I don't own any rights to it.)")
 			printScan(hint + "Ben Prunty made this song, it's called 'Federation'.)")
 			printScan(hint + "I will remove this later when I get another song.)" + Style.RESET_ALL)
@@ -1572,7 +1572,7 @@ def skipIntro():
 	Scene.current = 3
 	endThreads()
 
-	playSound("Music/federation.mp3", True)
+	playSound("Music/federation.ogg", True)
 	printScan(success + "You recieved a basic Sword.")
 	printScan(success + "You recieved a basic Healing Potion.")
 	addCoins(50)
@@ -1831,7 +1831,7 @@ detect_system()
 
 if __name__ == '__main__':
 	# Play moosic
-	playSound("Music/spaceCruise.mp3", True)
+	playSound("Music/intro.ogg", True)
 
 	#defKey.start()
 	print("\r")
