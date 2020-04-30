@@ -363,7 +363,7 @@ def playSound(path, ifLoop):
 	global all_process
 	if playMusic == True:
 		if ifLoop is True:
-			playback = _play_with_simpleaudio(pydub.AudioSegment.from_mp3(path) * 10)
+			playback = _play_with_simpleaudio(pydub.AudioSegment.from_mp3(path) * 20)
 		else:
 			playback = _play_with_simpleaudio(pydub.AudioSegment.from_mp3(path))
 
