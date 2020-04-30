@@ -13,12 +13,14 @@ import time
 import random
 import os
 import sys
-import playsound # type: ignore
+from pydub import generators
+from pydub.playback import _play_with_simpleaudio
+import pydub
 from sys import stdout
 # from defKey import defKey
 from sys import platform
 from threading import Lock
-import multiprocessing # DANIEL YOU CUNK :) PLS USE THREADS!!
+# import multiprocessing # DANIEL YOU CUNK :) PLS USE THREADS!!
 					   # ONCE I FIGURE OUT HOW TO END THREADS, XENTHIO!
 					   # You know how hard it is?
 					   # YES I NEEDED TO DO THE SAME THING! BUT YOU KNOW THREADS END AFTER THE FUNCTION FINISHES, RIGHT?
@@ -36,7 +38,7 @@ from colorama import init  # type: ignore
 # --------------------------
 # |		Version!		|
 # --------------------------
-version = "Release Version 0.5.0"
+version = "Release Version 0.5.1"
 # --------------------------
 
 
@@ -268,7 +270,7 @@ def printScan(toPrint):
 
 def endThreads():
 	for process in all_processes:
-		process.terminate()
+		process.stop()
 
 
 def invalidCommand():
@@ -356,39 +358,18 @@ def isDead():
 	if hp < 0:
 		gameover()
 
-# This is really bad implementation, but it works
-class soundThread (threading.Thread):
-	def __init__(self, directory, theLoop):
-		global all_processes
-		self.dir = directory
-		self.loop = theLoop
-
-		if self.loop == True:
-			process = multiprocessing.Process(target=self.playLoop)
-		else:
-			process = multiprocessing.Process(target=playsound.playsound, args=(directory,))
-
-		process.start()
-		all_processes.append(process)
-		self.dir = directory
-
-
-	def run(self):
-		threadPlaySound(self.dir)
-
-
-	def playLoop(self):
-		while True:
-			playsound.playsound(self.dir)
-
 
 def playSound(path, ifLoop):
+	global all_process
 	if playMusic == True:
-		theSoundThread = soundThread(path, ifLoop)
+		if ifLoop is True:
+			playback = _play_with_simpleaudio(pydub.AudioSegment.from_mp3(path) * 10)
+		else:
+			playback = _play_with_simpleaudio(pydub.AudioSegment.from_mp3(path))
+
+		all_processes.append(playback)
 	else:
 		return "No music played"
-
-
 
 
 def gameover():
