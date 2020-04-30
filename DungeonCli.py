@@ -468,7 +468,7 @@ def bombTrapScene():
 	printScan(action + "It is odly quiet here... you begin to look around... \n")
 	time.sleep(2)
 
-	playSound("Sounds/explosion.wav", False)
+	playSound("Sounds/explosion.mp3", False)
 	printScan(rip + "BANG!")
 	time.sleep(1)
 	printScan(randomDialog.bombExplodes(randomDialog))
