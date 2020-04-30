@@ -12,6 +12,8 @@ There is another depreciated version, made with swift at the `swift-rewrite` bra
 
 ## Installation:
 ### From binaries
+**(Recommended method)**
+
 #### On windows:
 Download the .exe file from the releases page and run it.
 
@@ -28,6 +30,9 @@ Give it priviledges with `chmod +X ./DungeonCli_osx` then run it with
 `./DungeonCli_osx`
 
 
+---
+
+
 ### With Python
 You **MUST** have ffmpeg installed in order for the music to work. On MacOS and Linux it should be already installed, if not, please use your package manager.
 
@@ -39,9 +44,7 @@ https://ffmpeg.zeranoe.com/builds/win64/static/ffmpeg-4.2.2-win64-static.zip
 Search 'path' in the start menu and press 'enter' -> Click on 'Environment variables' -> On System Variables, click on 'Path' and click 'Edit' -> Click 'New' and paste in the directory -> Click OK on everything -> **RESTART**
 
 
-
 ##### How to install DungeonCli:
-
 1. Download the .zip file and extract it or type
 
 	`git clone http://119.17.132.38:3000/Daniel/DungeonCli.git`
@@ -51,7 +54,12 @@ can install it from www.python.org
 4. Open the terminal in the directory and type `python DungeonCli.py`
 
 
+---
+
+
 ## Compiling:
+**(Only for experienced users!)**
+
 1. Download the .zip file and extract it or type
 
 	`git clone http://119.17.132.38:3000/Daniel/DungeonCli.git`
@@ -64,6 +72,9 @@ can install it from www.python.org
 	If you're on Linux / Unix, make sure to give compile.sh executable
 priviledges with `chmod +X ./compile.sh` then run it with `./compile.sh`
 If you're on Windows, run `compilewindows.bat`
+
+
+---
 
 
 ## Screenshots:
@@ -87,11 +98,12 @@ If you're on Windows, run `compilewindows.bat`
 
 ![The Store](http://119.17.132.38:3000/Daniel/DungeonCli/raw/branch/master/Screenshots/v0.3.0%20store.png)
 
+---
 
 ## Usage:
 Type 'h' or 'help' to get a help screen
 
-
+---
 
 ## Contributing:
 If you would like to make a change to the code, you can fork this, make changes
@@ -106,6 +118,8 @@ You can always help with translations, currently, they are not implemented
 but if you are interested in helping translate a language, we will implement
 that. If you want to translate, just let us know by opening up an issue.
 
+---
+
 ## To Do!
 - [ ] Neat and text based engine.
 - [x] Make text easy to read by having it scan in.
@@ -118,6 +132,9 @@ that. If you want to translate, just let us know by opening up an issue.
 - [ ] Make extra swords that deal extra damage
 - [ ] Add more Armour which absorbs a percentage of damage
 - [x] Fix bug where if you die while in combat, the combat function persists
+
+---
+
 ## What to do next?
 Congratulations! You got to the end, perhaps you'd like to join the official
 discord server?
