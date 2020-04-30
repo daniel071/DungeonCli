@@ -34,6 +34,7 @@ from threading import Lock
 
 from colorama import init  # type: ignore
 
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 # --------------------------
 # |		Version!		|
