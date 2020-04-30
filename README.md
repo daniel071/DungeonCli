@@ -103,7 +103,7 @@ If you're on Windows, run `compilewindows.bat`
 ## Usage:
 Type 'h' or 'help' to get a help screen
 
----
+<br>
 
 ## Contributing:
 If you would like to make a change to the code, you can fork this, make changes
@@ -118,7 +118,7 @@ You can always help with translations, currently, they are not implemented
 but if you are interested in helping translate a language, we will implement
 that. If you want to translate, just let us know by opening up an issue.
 
----
+<br>
 
 ## To Do!
 - [ ] Neat and text based engine.
@@ -133,7 +133,7 @@ that. If you want to translate, just let us know by opening up an issue.
 - [ ] Add more Armour which absorbs a percentage of damage
 - [x] Fix bug where if you die while in combat, the combat function persists
 
----
+<br>
 
 ## What to do next?
 Congratulations! You got to the end, perhaps you'd like to join the official
