@@ -374,7 +374,7 @@ def playSound(path, ifLoop):
 
 def gameover():
 	endThreads()
-	playSound("Music/gameOver.ogg", False)
+	playSound("Music/gameOver.mp3", False)
 	clear()
 	printScan(rip + "Your body is torn into shreads...")
 	time.sleep(2)
