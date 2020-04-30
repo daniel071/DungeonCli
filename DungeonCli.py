@@ -1838,6 +1838,9 @@ def main():
 			Inventory.armour = 1
 			Inventory.absorbtion = 0.2
 
+	elif command in ("cls", "clear", "clear screen"):
+		clear()
+
 	else:
 		invalidCommand()
 
