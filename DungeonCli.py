@@ -13,6 +13,8 @@ import time
 import random
 import os
 import sys
+import simpleaudio
+from simpleaudio import _simpleaudio
 from pydub import generators
 from pydub.playback import _play_with_simpleaudio
 import pydub
