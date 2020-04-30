@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# Add to compile executables for each OS, so that Python isn't required
-# python DungeonCli.py
 mkdir bin.build
 python3 -m nuitka --follow-imports --plugin-enable=multiprocessing DungeonCli.py
 if [[ "$OSTYPE" == "darwin"* ]]; then

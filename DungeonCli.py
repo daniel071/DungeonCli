@@ -654,7 +654,7 @@ def options():
 				if Scene.current > 2:
 					playSound("Music/federation.mp3", True)
 				else:
-					playSound("Music/spaceCruise.mp3", True)
+					playSound("Music/intro.mp3", True)
 
 			printScan("You toggled music to {value}\n".format(value=playMusic))
 
@@ -1830,7 +1830,7 @@ detect_system()
 
 if __name__ == '__main__':
 	# Play moosic
-	playSound("Music/spaceCruise.mp3", True)
+	playSound("Music/intro.mp3", True)
 
 	#defKey.start()
 	print("\r")

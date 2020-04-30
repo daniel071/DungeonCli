@@ -6,10 +6,13 @@ I will replace these songs once I get my own ones, these are just placeholders.
 
 
 **Made by Ben Prunty:**
+
 federation.mp3,
 milkywayBattle.mp3
 rockmenBattle.mp3
-spaceCruise.mp3
 
 **Made by Sine:**
-gameOver.ogg
+These songs were made specifically for this game,
+
+gameOver.mp3
+intro.mp3
