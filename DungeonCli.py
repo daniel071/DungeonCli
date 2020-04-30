@@ -1831,7 +1831,6 @@ detect_system()
 if __name__ == '__main__':
 	# Play moosic
 	playSound("Music/spaceCruise.mp3", True)
-	multiprocessing.freeze_support()
 
 	#defKey.start()
 	print("\r")
