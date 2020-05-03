@@ -83,8 +83,9 @@ events = ["store", "store", "store", "randomFight", "none", "none", "none", "bom
 
 
 
-CSSOptions = [["Matches", 5], ["Basic Healing Potion", 20],
-			  ["Copper Armour", 75], ["Stone Sword", 60], ["Advanced Healing Potion", 70]]
+CSSOptions = [["Matches", 5], ["Basic Healing Potion", 15],
+			  ["Copper Armour", 75], ["Stone Sword", 60],
+			  ["Advanced Healing Potion", 60], ["Poison Potion", 20]]
 
 battleSongs = ["Music/milkywayBattle.ogg", "Music/rockmenBattle.ogg"]
 
@@ -143,6 +144,8 @@ class Inventory:
 	# Advanced healing potion heals 50 health
 	advancedHealingPotion = 0
 
+	# Posion potion deals 30 damage * Damage multiplyer
+	poisonPotion = 0
 
 	sword = 0
 	damage = 1.0
@@ -768,6 +771,9 @@ def openInventory():
 	if Inventory.advancedHealingPotion !=0:
 		printScan(str(Inventory.advancedHealingPotion) + " x Advanced Healing Potion")
 
+	if Inventory.poisonPotion !=0:
+		printScan(str(Inventory.advancedHealingPotion) + " x Poison Healing Potion")
+
 	if Inventory.sword == 1:
 		printScan("Wooden Sword")
 
@@ -785,8 +791,6 @@ def purchase(storeSelected, id):
 	global coins
 	global absorbtion
 	global damageMultiplyer
-	global basicHealingPotion
-	global advancedHealingPotion
 
 	item = storeSelected[id][0]
 	price = storeSelected[id][1]
@@ -798,6 +802,10 @@ def purchase(storeSelected, id):
 
 		elif item == "Advanced Healing Potion":
 			Inventory.advancedHealingPotion = Inventory.advancedHealingPotion + 1
+		elif item == "Poison Potion":
+			Inventory.poisonPotion = Inventory.poisonPotion + 1
+
+
 
 		elif item == "Copper Armour":
 			if Inventory.armour == 1:
@@ -1508,6 +1516,7 @@ def healingPotion():
 	if Inventory.basicHealingPotion != 0:
 		printScan(success + "You have {amount} basic healing potions."
 		.format(amount=Inventory.basicHealingPotion))
+
 	if Inventory.advancedHealingPotion != 0:
 		printScan(success + "You have {amount} advanced healing potions."
 		.format(amount=Inventory.advancedHealingPotion))
@@ -1817,6 +1826,7 @@ def main():
 			addCoins(1000)
 			Inventory.basicHealingPotion = 50
 			Inventory.advancedHealingPotion = 50
+			Inventory.poisonPotion = 50
 			Inventory.sword = 2
 			Inventory.damage = 100.0
 			Inventory.armour = 1
