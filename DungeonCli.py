@@ -41,7 +41,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 # --------------------------
 # |		Version!		|
 # --------------------------
-version = "Development Version 0.5.2"
+version = "Development Version 0.5.3"
 # --------------------------
 
 
@@ -144,7 +144,7 @@ class Inventory:
 	# Advanced healing potion heals 50 health
 	advancedHealingPotion = 0
 
-	# Posion potion deals 30 damage * Damage multiplyer
+	# Posion potion deals (a lot of damage) * Damage multiplyer
 	poisonPotion = 0
 
 	sword = 0
@@ -614,7 +614,7 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 				return "flee"
 
 		elif userInput == "Use item":
-			theAnswer = potionQuestion = [
+			potionQuestion = [
 				{
 					'type': 'list',
 					'name': 'userChoice',
@@ -623,20 +623,24 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 					'message': 'What potion type would you like to use?',
 				}
 			]
+
+			theAnswer = prompt(potionQuestion)
 			theEpicOption = theAnswer['userChoice']
+
 			if theEpicOption == "Healing Potion":
 				theOutput = healingPotion()
+				if theOutput != 0:
+					i = 0
+					while i < theOutput:
+						enemyDealDamage(1)
+						i = i + 1
 
-			elif theEpicOption == "Poison":
-				# Use poisonPotion() when made
-				theOutput = healingPotion()
 
+			elif theEpicOption == "Poison Potion":
+				theOutput = usePoisonPotion()
+				if theOutput != 0:
+					playerDealDamage(1 + theOutput)
 
-			if theOutput != 0:
-				i = 0
-				while i < theOutput:
-					enemyDealDamage(1)
-					i = i + 1
 
 		elif userInput == "Check HP":
 			hpCheck()
@@ -819,10 +823,9 @@ def purchase(storeSelected, id):
 
 		elif item == "Advanced Healing Potion":
 			Inventory.advancedHealingPotion = Inventory.advancedHealingPotion + 1
+
 		elif item == "Poison Potion":
 			Inventory.poisonPotion = Inventory.poisonPotion + 1
-
-
 
 		elif item == "Copper Armour":
 			if Inventory.armour == 1:
@@ -1523,6 +1526,46 @@ def pickCoins():
 
 	else:
 		printScan(error + "There are no coins to pick up! \n")
+
+
+def usePoisonPotion():
+	global Inventory
+	theResult = 0
+	if Inventory.poisonPotion != 0:
+		printScan(success + "You have {amount} poison potions."
+		.format(amount=Inventory.poisonPotion))
+
+	questions = [
+		{
+			'type': 'list',
+			'name': 'itemChoice',
+					'choices': ["Poison Potion",
+								"Exit",],
+			'message': 'What potion would you like to use?',
+		}
+	]
+
+	askLoop = True
+	while askLoop:
+		print(Style.RESET_ALL)
+		theAnswer = prompt(questions)
+		userInput = theAnswer['itemChoice']
+
+		if userInput == "Exit":
+			printScan("")
+			askLoop = False
+			return theResult
+
+
+		elif userInput == "Poison Potion":
+			if Inventory.poisonPotion > 0:
+				theResult = theResult + 1
+				printScan(rip + "You used up 1 poison potion")
+				Inventory.poisonPotion = Inventory.poisonPotion - 1
+				time.sleep(0.4)
+
+			else:
+				printScan(error + "You don't have any poison potions!\n")
 
 
 def healingPotion():
