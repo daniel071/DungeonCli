@@ -614,7 +614,24 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 				return "flee"
 
 		elif userInput == "Use item":
-			theOutput = healingPotion()
+			theAnswer = potionQuestion = [
+				{
+					'type': 'list',
+					'name': 'userChoice',
+							'choices': ['Healing Potion',
+										'Poison Potion',],
+					'message': 'What potion type would you like to use?',
+				}
+			]
+			theEpicOption = theAnswer['userChoice']
+			if theEpicOption == "Healing Potion":
+				theOutput = healingPotion()
+
+			elif theEpicOption == "Poison":
+				# Use poisonPotion() when made
+				theOutput = healingPotion()
+
+
 			if theOutput != 0:
 				i = 0
 				while i < theOutput:
@@ -1865,8 +1882,20 @@ if __name__ == '__main__':
 	printScan("Type 'h' for help or 's' to start!")
 
 	# Run those functions here:
-	while mainLoop == 1:
-		main()
+	try:
+		while mainLoop == 1:
+			main()
+	except:
+		printScan(error + "An error has occured!")
+		print(Fore.WHITE)
+		time.sleep(0.3)
+		printScan("Please copy this error and open up a new issue on Gitea!")
+		time.sleep(0.3)
+		printScan(Fore.BLUE + "Here: http://pavela.net:3000/Daniel/DungeonCli")
+		time.sleep(1)
+		print(Style.RESET_ALL + Fore.RED)
+		raise
+
 
 # This is the end of the code!
 # Enjoy the meme corner below!
