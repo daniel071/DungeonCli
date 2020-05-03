@@ -639,7 +639,11 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 			elif theEpicOption == "Poison Potion":
 				theOutput = usePoisonPotion()
 				if theOutput != 0:
-					playerDealDamage(1 + theOutput)
+					# Saves current damage, multiplies it by 3 then sets it back.
+					originalDamage = Inventory.damage
+					Inventory.damage = Inventory.damage * 3
+					playerDealDamage(enemyHP)
+					Inventory.damage = originalDamage
 
 
 		elif userInput == "Check HP":
@@ -793,7 +797,7 @@ def openInventory():
 		printScan(str(Inventory.advancedHealingPotion) + " x Advanced Healing Potion")
 
 	if Inventory.poisonPotion !=0:
-		printScan(str(Inventory.advancedHealingPotion) + " x Poison Healing Potion")
+		printScan(str(Inventory.poisonPotion) + " x Poison Healing Potion")
 
 	if Inventory.sword == 1:
 		printScan("Wooden Sword")
