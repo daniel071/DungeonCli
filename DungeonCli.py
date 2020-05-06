@@ -1949,6 +1949,7 @@ if __name__ == '__main__':
 	try:
 		playSound("Music/intro.ogg", True)
 	except:
+		clear()
 		printScan(error + "You need to have a ffmpeg installed for the music to work!")
 		askLoop = True
 		questions = [
