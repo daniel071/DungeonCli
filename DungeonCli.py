@@ -1947,7 +1947,6 @@ detect_system()
 if __name__ == '__main__':
 	# Play moosic
 	try:
-		print(1 + "asiofdj")
 		playSound("Music/intro.ogg", True)
 	except:
 		printScan(error + "You need to have a ffmpeg installed!")
@@ -1982,7 +1981,7 @@ if __name__ == '__main__':
 				playMusic = False
 				askLoop = False
 				printScan(success + "Successfully disabled music.")
-				
+
 
 	#defKey.start()
 	print("\r")
