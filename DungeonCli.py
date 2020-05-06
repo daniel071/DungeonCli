@@ -1494,6 +1494,8 @@ def openVault():
 			combat("Money Grinch", 30, 1, 30)
 	else:
 		printScan("There is no vault in this room...")
+
+
 def initStore():
 	global Scene
 	storeOptions = CSSOptions.copy()
@@ -1945,12 +1947,42 @@ detect_system()
 if __name__ == '__main__':
 	# Play moosic
 	try:
+		print(1 + "asiofdj")
 		playSound("Music/intro.ogg", True)
 	except:
 		printScan(error + "You need to have a ffmpeg installed!")
-		printScan(question + "Would you like to install it automatically? (Y/n)")
-		# TODO: Use pyinquirer for this!
-		# TODO: Make an automated install script!
+		askLoop = True
+		questions = [
+			{
+				'type': 'list',
+				'name': 'userChoice',
+						'choices': ['Install FFMPEG',
+									'Disable Music',],
+				'message': 'What would you like to do?',
+			}
+		]
+
+		while askLoop:
+			theAnswer = prompt(questions)
+			theValue = theAnswer['userChoice']
+			if theValue == "Install FFMPEG":
+				if operatingsystem == 'windows':
+					# TODO: Make an automated install script!
+					print("Downloading FFMPEG - 1/3")
+					print("Extracting FFMPEG - 2/3")
+					print("Adding FFMPEG to Registry - 3/3")
+					askLoop = False
+				else:
+					printScan(error + "This script is not made for unix systems,"
+					" if you have issues with music, please open an issue on github.")
+					time.sleep(1)
+					printScan(hint + "MacOS and most linux distros have FFMPEG pre-installed.\n")
+
+			if theValue == "Disable Music":
+				playMusic = False
+				askLoop = False
+				printScan(success + "Successfully disabled music.")
+				
 
 	#defKey.start()
 	print("\r")
