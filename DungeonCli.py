@@ -1967,9 +1967,15 @@ if __name__ == '__main__':
 			if theValue == "Install FFMPEG":
 				if operatingsystem == 'windows':
 					# TODO: Make an automated install script!
-					print("Downloading FFMPEG - 1/3")
-					print("Extracting FFMPEG - 2/3")
-					print("Adding FFMPEG to Registry - 3/3")
+					print("Downloading FFMPEG - 1/3...")
+					os.system('tree')
+					print("\nExtracting FFMPEG - 2/3...")
+					os.system('tree')
+					print("\nAdding FFMPEG to Registry - 3/3...")
+					os.system('tree')
+
+					printScan(success + "Successfully install FFMPEG!")
+					playSound("Music/intro.ogg", True)
 					askLoop = False
 				else:
 					printScan(error + "This script is not made for unix systems,"
