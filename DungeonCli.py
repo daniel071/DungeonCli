@@ -1,4 +1,5 @@
 # NOTE: JOIN THE DISCORD: https://discord.gg/eAUqKKe
+
 # DungeonCli is a terminal based program where you get to explore places and
 # earn coins. You can spend those coins on various items, have fun!
 
@@ -157,7 +158,7 @@ class Inventory:
 
 class Scene:
 	canProgress = True
-	current = 1 # the current scene
+	current = 16 # the current scene
 	surroundingsLit = False # bro idk but the wizard must be able to see in the dark or something.
 							# maybe the wizard has nightvision goggles :)
 	hasStore = False
@@ -167,6 +168,23 @@ class Scene:
 	# description of current room, called by observe and look around
 	description = "You haven't started yet! Type 's' to start."
 	soundDescription = "You haven't started yet! Type 's' to start."
+
+
+class quest:
+	def __init__(self):
+		self.quests = []
+
+	def add(self, newQuest):
+		self.quests.append(newQuest)
+
+	def list(self):
+		printScan(success + "Your current quests:")
+		for theQuest in self.quests:
+			printScan(Style.BRIGHT + Fore.CYAN + theQuest)
+
+		print(Style.RESET_ALL)
+
+
 
 class randomDialog:
 	def bombExplodes(self):
@@ -1048,6 +1066,8 @@ def start():
 			printScan(hint + "type an answer)")
 			input(Style.RESET_ALL + quote + 'Would you like to recieve a quest?" \n'
 				  + Style.RESET_ALL)
+			q = quest()
+			q.add("Obtain the Great Stone of Knowledge.")
 			printScan(action + "You said yes. \n")
 			time.sleep(0.8)
 
@@ -1287,6 +1307,21 @@ def start():
 			Scene.current = Scene.current + 1
 
 		elif Scene.current == 16:
+			printScan(action + "You quickly realise that this town"
+			" is very small. There is not mcuh space to expand.\n")
+			time.sleep(2)
+			printScan(action + "You ask them why it is so small, they"
+			" explain to you that they have ran out of thorium and at"
+			" any moment, the rebellion can tear us to pieces.")
+			time.sleep(2)
+			printScan(quote + "There is a small deposit of Thorium nearby"
+			" however, it is heavily guarded.")
+			printScan(success + "You recieved a new quest!")
+			q = quest()
+			q.add("Delivier thorium to the town.")
+
+
+		elif Scene.current == 17:
 			printScan(success + "Thanks for testing DungeonCli!" + Fore.WHITE)
 			printScan("We haven't finished this scene.")
 			printScan("If you want to help us improve, feel free to send a screenshot or video of you")
@@ -1657,6 +1692,8 @@ def skipIntro():
 	Inventory.basicHealingPotion = Inventory.basicHealingPotion + 1
 	Inventory.damage = 1.10
 	Inventory.sword = 1
+	q = quest()
+	q.add("Obtain the Great Stone of Knowledge.")
 
 def useSticks():
 	# i'm gonna make this interesting and do something at some point.
@@ -1898,6 +1935,11 @@ def main():
 
 	elif command in ("cls", "clear", "clear screen"):
 		clear()
+
+	elif command in ("quest", "check quests", "quests"):
+		q = quest()
+		q.list()
+
 
 	else:
 		invalidCommand()
