@@ -1963,16 +1963,17 @@ if __name__ == '__main__':
 		]
 
 		while askLoop:
+			print(Style.RESET_ALL)
 			theAnswer = prompt(questions)
 			theValue = theAnswer['userChoice']
 			if theValue == "Install FFMPEG":
 				if operatingsystem == 'windows':
 					# TODO: Make an automated install script!
-					print("Downloading FFMPEG - 1/3...")
+					print(Style.RESET_ALL + "==> Downloading FFMPEG - 1/3...")
 					os.system('tree')
-					print("\nExtracting FFMPEG - 2/3...")
+					print("\n==> Extracting FFMPEG - 2/3...")
 					os.system('tree')
-					print("\nAdding FFMPEG to Registry - 3/3...")
+					print("\n==>Adding FFMPEG to Registry - 3/3...")
 					os.system('tree')
 
 					printScan(success + "Successfully install FFMPEG!")
