@@ -158,7 +158,7 @@ class Inventory:
 
 class Scene:
 	canProgress = True
-	current = 16 # the current scene
+	current = 1 # the current scene
 	surroundingsLit = False # bro idk but the wizard must be able to see in the dark or something.
 							# maybe the wizard has nightvision goggles :)
 	hasStore = False
@@ -171,15 +171,14 @@ class Scene:
 
 
 class quest:
-	def __init__(self):
-		self.quests = []
+	quests = []
 
-	def add(self, newQuest):
-		self.quests.append(newQuest)
+	def add(newQuest):
+		quest.quests.append(newQuest)
 
-	def list(self):
+	def list():
 		printScan(success + "Your current quests:")
-		for theQuest in self.quests:
+		for theQuest in quest.quests:
 			printScan(Style.BRIGHT + Fore.CYAN + theQuest)
 
 		print(Style.RESET_ALL)
@@ -1066,8 +1065,7 @@ def start():
 			printScan(hint + "type an answer)")
 			input(Style.RESET_ALL + quote + 'Would you like to recieve a quest?" \n'
 				  + Style.RESET_ALL)
-			q = quest()
-			q.add("Obtain the Great Stone of Knowledge.")
+			quest.add("Obtain the Great Stone of Knowledge.")
 			printScan(action + "You said yes. \n")
 			time.sleep(0.8)
 
@@ -1309,16 +1307,15 @@ def start():
 		elif Scene.current == 16:
 			printScan(action + "You quickly realise that this town"
 			" is very small. There is not mcuh space to expand.\n")
-			time.sleep(2)
+			time.sleep(1)
 			printScan(action + "You ask them why it is so small, they"
 			" explain to you that they have ran out of thorium and at"
 			" any moment, the rebellion can tear us to pieces.")
-			time.sleep(2)
+			time.sleep(1)
 			printScan(quote + "There is a small deposit of Thorium nearby"
-			" however, it is heavily guarded.")
-			printScan(success + "You recieved a new quest!")
-			q = quest()
-			q.add("Delivier thorium to the town.")
+			" however, it is heavily guarded.\"\n")
+			printScan(success + "You recieved a new quest!\n")
+			quest.add("Delivier thorium to the town.")
 
 
 		elif Scene.current == 17:
@@ -1692,8 +1689,7 @@ def skipIntro():
 	Inventory.basicHealingPotion = Inventory.basicHealingPotion + 1
 	Inventory.damage = 1.10
 	Inventory.sword = 1
-	q = quest()
-	q.add("Obtain the Great Stone of Knowledge.")
+	quest.add("Obtain the Great Stone of Knowledge.")
 
 def useSticks():
 	# i'm gonna make this interesting and do something at some point.
@@ -1937,8 +1933,7 @@ def main():
 		clear()
 
 	elif command in ("quest", "check quests", "quests"):
-		q = quest()
-		q.list()
+		quest.list()
 
 
 	else:
@@ -1949,7 +1944,13 @@ detect_system()
 
 if __name__ == '__main__':
 	# Play moosic
-	playSound("Music/intro.ogg", True)
+	try:
+		playSound("Music/intro.ogg", True)
+	except:
+		printScan(error + "You need to have a ffmpeg installed!")
+		printScan(question + "Would you like to install it automatically? (Y/n)")
+		# TODO: Use pyinquirer for this!
+		# TODO: Make an automated install script!
 
 	#defKey.start()
 	print("\r")
