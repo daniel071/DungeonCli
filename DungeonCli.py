@@ -501,9 +501,7 @@ def bombTrapScene():
 
 
 def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
-	# NOTE: I, Daniel will overhaul this to use PyInquirer instead,
-	# NOTE: display HP, fix the bugs and add extra commands such as
-	# NOTE: sparing and using items!
+	# TODO: Add a change for a critical attack. When lucky, you deal double damage.
 	global hp
 	global Inventory
 	global combatEnemyHP
@@ -1373,7 +1371,6 @@ def randomEvent():
 			theAnswer = prompt(questions)
 			theSelection = theAnswer['promptChoice']
 			if theSelection is True:
-				# TODO: Make it so theres a chance the store is a trap
 				theLuck = random.randint(1, 5)
 				if theLuck == 1:
 					printScan(action + 'You knock on the door and ask to enter...')
