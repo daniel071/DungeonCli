@@ -132,6 +132,7 @@ that. If you want to translate, just let us know by opening up an issue.
 - [ ] Make extra swords that deal extra damage
 - [ ] Add more Armour which absorbs a percentage of damage
 - [x] Fix bug where if you die while in combat, the combat function persists
+- [ ] Add critical shots, where there is a chance that you can get double the damage
 
 <br>
 
