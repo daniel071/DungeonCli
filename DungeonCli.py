@@ -273,8 +273,6 @@ def skipDialog():
 	printspeed = 0.00001
 
 #defKey.bind("z", skipDialog)
-# NOTE: Scrolling text is really broken at the moment, so I've commented
-# NOTE: it out. Fix it when you can.
 print_lock = Lock()
 
 # FIXME: press z to skip text is broken and hacky.
