@@ -16,9 +16,21 @@ opening a pull request.
 
 Please try and use Python PEP8 styling and camelCase for variables, functions
 and class names. Use intuitive names and make sure that your
-feature doesn't break anything else.
+feature doesn't break anything else. Try to include code comments in
+your code so others can understand it easier. 
 
 For people with write permission to the master branch, feel free to
 commit directly to master for small changes and bug fixes however,
 if you are adding a major feature or update, it is recommended to
 create a pull request instead so others can review your code.
+
+### Some useful stuff
+Some of our code comments may help with you understanding the code, some may not.
+Here is a explanation of some main parts:
+
+#### main()
+The function that asks for a command and then runs another function based on
+the command typed.
+
+#### start()
+This is where all the scenes and story happens.
