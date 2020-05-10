@@ -499,7 +499,6 @@ def bombTrapScene():
 
 
 def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
-	# TODO: Add a change for a critical attack. When lucky, you deal double damage.
 	global hp
 	global Inventory
 	global combatEnemyHP
@@ -542,7 +541,8 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 		global combatLoop
 
 		isMiss = random.randint(1,7)
-		if isMiss == 5:
+		isCritical = random.randint(1, 5)
+		if isMiss == 1:
 			printScan(action + "You missed!")
 			printScan(rip + "You dealt no damage!\n")
 
@@ -551,6 +551,11 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 			playerDamage = random.randint(5, 10)
 			playerDamage = playerDamage * Inventory.damage
 			enemyHP = enemyHP - playerDamage
+
+			if isCritical == 1:
+				printScan(success + "Critical hit!")
+				printScan(success + "You deal double damage!\n")
+				playerDamage = playerDamage * 2
 
 			printScan(success + "You deal {damage} damage!".format(damage=round(playerDamage)))
 			time.sleep(0.2)
