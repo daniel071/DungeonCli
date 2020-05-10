@@ -123,7 +123,7 @@ that. If you want to translate, just let us know by opening up an issue.
 ## To Do!
 - [ ] Neat and text based engine.
 - [x] Make text easy to read by having it scan in.
-- [ ] Convince Daniel to use threads (I do want to use threads!! I can't figure out how to kill threads tho!!)
+- [x] Convince Daniel to use threads (Edit: After we switched to pydub, everything works flawlessly!)
 - [ ] Write more story
 - [x] Basic Gameplay mechanics
 - [ ] Real 'bin' format save files. not the fake stuff.
