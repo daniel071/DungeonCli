@@ -1152,7 +1152,6 @@ def start():
 			spiderLoop = True
 			while spiderLoop == True:
 				# Start battle with 'Giant Spider'
-				# NOTE: The spider is VERY op is unfair, I should fix that
 				theResult = combat("Giant Spider", 35, 8, 12)
 				if theResult == "killed":
 					printScan(action + "Phew! That was hard! You prepare to move on... \n")
@@ -1969,19 +1968,20 @@ if __name__ == '__main__':
 			if theValue == "Install FFMPEG":
 				if operatingsystem == 'windows':
 					# TODO: Make an automated install script!
-					printScan("We haven't made an installation script yet,"
-					" please check the readme for instructions on how to install"
-					" ffmpeg, thanks! - The DungeonCli team (Daniel)")
-					# print(Style.RESET_ALL + "==> Downloading FFMPEG - 1/3...")
-					# os.system('tree')
-					# print("\n==> Extracting FFMPEG - 2/3...")
-					# os.system('tree')
-					# print("\n==>Adding FFMPEG to Registry - 3/3...")
-					# os.system('tree')
-					#
-					# printScan(success + "Successfully install FFMPEG!")
-					# playSound("Music/intro.ogg", True)
-					# askLoop = False
+					# printScan("We haven't made an installation script yet,"
+					# " please check the readme for instructions on how to install"
+					# " ffmpeg, thanks! - The DungeonCli team (Daniel)")
+
+					print(Style.RESET_ALL + "==> Creating directories - 1/3...")
+					os.system('md "c:\\Program Files\\ffmpeg')
+					print(Style.RESET_ALL + "==> Downloading FFMPEG - 2/3...")
+					os.system('certutil.exe -urlcache -split -f "https://ffmpeg.zeranoe.com/builds/win64/static/ffmpeg-4.2.2-win64-static.zip" "c:\\Program Files\\ffmpeg"')
+					print("\n==>Adding FFMPEG to Path - 3/3...")
+					os.system('set PATH=%PATH%;"c:\\Program Files\\ffmpeg\\"')
+
+					printScan(success + "Successfully install FFMPEG!")
+					playSound("Music/intro.ogg", True)
+					askLoop = False
 				else:
 					printScan(error + "This script is not made for unix systems,"
 					" if you have issues with music, please open an issue on github.")
