@@ -1956,7 +1956,8 @@ if __name__ == '__main__':
 				'type': 'list',
 				'name': 'userChoice',
 						'choices': ['Install FFMPEG',
-									'Disable Music',],
+									'Disable Music',
+									'Exit'],
 				'message': 'What would you like to do?',
 			}
 		]
@@ -2007,10 +2008,13 @@ if __name__ == '__main__':
 					time.sleep(1)
 					printScan(hint + "MacOS and most linux distros have FFMPEG pre-installed.\n")
 
-			if theValue == "Disable Music":
+			elif theValue == "Disable Music":
 				playMusic = False
 				askLoop = False
 				printScan(success + "Successfully disabled music.")
+
+			elif theValue == "Exit":
+				exit()
 
 
 	#defKey.start()
