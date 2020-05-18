@@ -1969,16 +1969,24 @@ if __name__ == '__main__':
 				if operatingsystem == 'windows':
 					# TODO: Make an automated install script!
 					printScan("NOTE: This installation requires Administrative priviledges"
-					" because it needs to add ffmpeg to the path!")
+					" because it needs to add ffmpeg to the path!\n")
 
-					print(Style.RESET_ALL + "==> Creating directories - 1/3...")
+					print(action + "==> Creating directories - 1/3...")
 					os.system('md "%userprofile%\\ffmpeg')
-					print(Style.RESET_ALL + "==> Downloading FFMPEG - 2/3...")
+
+					print(" ")
+					print(action + "==> Downloading FFMPEG - 2/3...")
+					print(action + "File 1 out of 3...")
 					os.system('certutil.exe -urlcache -split -f "https://github.com/daniel071/ffmpeg-builds/releases/download/v1.0.0/ffmpeg.exe" "%userprofile%\\ffmpeg\\ffmpeg.exe"')
+
+					print(action + "File 2 out of 3...")
 					os.system('certutil.exe -urlcache -split -f "https://github.com/daniel071/ffmpeg-builds/releases/download/v1.0.0/ffplay.exe" "%userprofile%\\ffmpeg\\ffplay.exe"')
+
+					print(action + "File 3 out of 3...")
 					os.system('certutil.exe -urlcache -split -f "https://github.com/daniel071/ffmpeg-builds/releases/download/v1.0.0/ffprobe.exe" "%userprofile%\\ffmpeg\\ffprobe.exe"')
 
-					print("\n==>Adding FFMPEG to Path - 3/3...")
+					print(" ")
+					print(action + "\n==>Adding FFMPEG to Path - 3/3...")
 					os.system('setx /M path "%userprofile%\\ffmpeg\\ffprobe.exe"')
 
 					printScan(success + "Successfully installed FFMPEG!")
