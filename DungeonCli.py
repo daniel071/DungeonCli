@@ -1999,7 +1999,7 @@ if __name__ == '__main__':
 					shell.ShellExecuteEx(lpVerb='runas', lpFile='cmd.exe', lpParameters='/c '+commands)
 
 					printScan(success + "Successfully installed FFMPEG!")
-					printScan(Style.BRIGHT + Fore.BLUE + "NOTE: You must restart your computer"
+					printScan(Style.BRIGHT + Fore.BLUE + "NOTE: You must restart the command prompt"
 					" so that the path would update!")
 				else:
 					printScan(error + "This script is not made for unix systems,"
