@@ -540,6 +540,7 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 		global hasCombatFinished
 		global hp
 		global combatLoop
+		global inventory
 
 		isMiss = random.randint(1,7)
 		isCritical = random.randint(1, 5)
