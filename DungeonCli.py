@@ -1979,7 +1979,7 @@ if __name__ == '__main__':
 					os.system('certutil.exe -urlcache -split -f "https://github.com/daniel071/ffmpeg-builds/releases/download/v1.0.0/ffprobe.exe" "%userprofile%\\ffmpeg\\ffprobe.exe"')
 
 					print("\n==>Adding FFMPEG to Path - 3/3...")
-					os.system('set PATH=%PATH%;"%userprofile%\\ffmpeg\\"')
+					os.system('setx /M path "%userprofile%\\ffmpeg\\ffprobe.exe"')
 
 					printScan(success + "Successfully installed FFMPEG!")
 					playSound("Music/intro.ogg", True)
