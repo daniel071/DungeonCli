@@ -42,7 +42,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 # --------------------------
 # |		Version!		|
 # --------------------------
-version = "Development Version 0.5.6"
+version = "Development Version 0.5.7"
 # --------------------------
 
 
@@ -88,7 +88,7 @@ CSSOptions = [["Matches", 5], ["Basic Healing Potion", 15],
 			  ["Copper Armour", 75], ["Stone Sword", 60],
 			  ["Advanced Healing Potion", 60], ["Poison Potion", 20]]
 
-battleSongs = ["Music/milkywayBattle.ogg", "Music/rockmenBattle.ogg"]
+battleSongs = ["Music/Ambient_fight_1.ogg", "Music/interstellar_space_dryer_2.ogg"]
 
 # 1 x Matches.
 # 3 x Sticks.
@@ -1770,6 +1770,7 @@ def creditScreen():
 	printScan("Story - Ethan \"Xenthio\" Cardwell".center(width,' '))
 	printScan("Sound effects - Ethan \"Xenthio\" Cardwell".center(width,' '))
 	printScan("Music - Sine".center(width,' '))
+	printScan("Music - AsianPotato77".center(width,' '))
 	print("----".center(width, ' '))
 	printScan("Developers Note".center(width,' '))
 	printScan("Thanks so much Daniel for letting me help on this project!".center(width,' '))

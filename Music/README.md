@@ -16,3 +16,8 @@ These songs were made specifically for this game,
 
 gameOver.mp3
 intro.mp3
+
+**Made by AsianPotato77:**
+These songs were also made specifically for this game,
+Ambient_fight_1.ogg
+interstellar_space_dryer_2.ogg
