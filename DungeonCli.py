@@ -2016,6 +2016,8 @@ if __name__ == '__main__':
 			elif theValue == "Exit":
 				askLoop = False
 				exit()
+				quit()
+
 
 
 	#defKey.start()
