@@ -49,6 +49,7 @@ version = "Development Version 0.5.7"
 # Define variables here:
 
 all_processes = []
+combatOverrideMusic = True
 
 # Used to prevent cheating:
 devPassword = "hackerman"
@@ -579,9 +580,10 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 		return enemyHP
 
 
-	endThreads()
-	songToPlay = random.choice(battleSongs)
-	playSound(songToPlay, True)
+	if combatOverrideMusic == True:
+		endThreads()
+		songToPlay = random.choice(battleSongs)
+		playSound(songToPlay, True)
 
 	global hp
 	printScan(rip + "You get in a battle with {enemy}!\n".format(enemy=enemy) + Style.RESET_ALL)
@@ -672,6 +674,42 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 		print("")
 
 # Commands used
+def bossBattle():
+	global combatOverrideMusic
+	global defprntspd
+	endThreads()
+	clear()
+
+	defprntspd = 0.05
+
+	printScan(action + "The door behind you closes. There is no escape.")
+	time.sleep(2)
+	printScan(quote + "I've been expecting you. Any last words?\"\n")
+	time.sleep(2)
+	printScan(quote + "Nothing eh? You're too weak to defeat me,"
+	" and there's nothing that can stop me.\"\n")
+
+	playSound("Music/bossBattle.ogg", True)
+
+	defprntspd = 0.8
+	printScan(quote + "goodbye.\"\n")
+	defprntspd = 0.013
+
+	combatOverrideMusic = False
+	bossLoop = True
+	while bossLoop == True:
+		theResult = combat("Boss", 25000, 1000, 1500)
+		if theResult == "killed":
+			success()
+
+		elif theResult == "flee":
+			printScan(quote + "You think you can runaway from me? \"")
+			time.sleep(1)
+			printScan(quote + "Think again.\"")
+			time.sleep(1)
+
+
+
 def options():
 	global playMusic
 	questions = [
@@ -1937,6 +1975,9 @@ def main():
 	elif command in ("quest", "check quests", "quests"):
 		quest.list()
 
+	elif command in ("boss battle", "plsboss"):
+		if passwordPrompt() == "granted":
+			bossBattle()
 
 	else:
 		invalidCommand()

@@ -21,3 +21,4 @@ intro.mp3
 These songs were also made specifically for this game,
 Ambient_fight_1.ogg
 interstellar_space_dryer_2.ogg
+bossBattle.ogg
