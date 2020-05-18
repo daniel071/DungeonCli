@@ -578,6 +578,11 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 
 				hasCombatFinished = "killed"
 
+		if combatOverrideMusic == False:
+			regenerated = random.randint(1000, 2000)
+			enemyHP = enemyHP + regenerated
+			printScan(rip + "The boss regenerated {amount} hp!".format(amount=regenerated))
+
 		return enemyHP
 
 
@@ -693,7 +698,8 @@ def bossBattle():
 	playSound("Music/bossBattle.ogg", True)
 
 	defprntspd = 0.7
-	printScan(quote + "goodbye.\"\n")
+	print(Style.BRIGHT + Fore.WHITE)
+	printScan("\"goodbye.\"\n")
 	defprntspd = 0.013
 
 	combatOverrideMusic = False
@@ -704,10 +710,13 @@ def bossBattle():
 			bossSuccess()
 
 		elif theResult == "flee":
-			printScan(quote + "You think you can runaway from me? \"")
+			printScan(quote + "You think you can run away from me?\"")
 			time.sleep(1)
 			printScan(quote + "Think again.\"")
 			time.sleep(1)
+
+		endThreads()
+		playSound("Music/bossBattle.ogg", True)
 
 
 def bossSuccess():
@@ -724,7 +733,7 @@ def bossSuccess():
 	  | | (_) | |_| |  \ V  V /| | | | |_|
 	  |_|\___/ \__,_|   \_/\_/ |_|_| |_(_)
 	"""
-	printScan(message)
+	printScan(Fore.GREEN + Style.BRIGHT + message)
 
 	time.sleep(2)
 	printScan(Style.BRIGHT + Fore.CYAN + "Once the boss was destroyed,"
