@@ -1969,16 +1969,19 @@ if __name__ == '__main__':
 			if theValue == "Install FFMPEG":
 				if operatingsystem == 'windows':
 					# TODO: Make an automated install script!
-					print(Style.RESET_ALL + "==> Downloading FFMPEG - 1/3...")
-					os.system('tree')
-					print("\n==> Extracting FFMPEG - 2/3...")
-					os.system('tree')
-					print("\n==>Adding FFMPEG to Registry - 3/3...")
-					os.system('tree')
-
-					printScan(success + "Successfully install FFMPEG!")
-					playSound("Music/intro.ogg", True)
-					askLoop = False
+					printScan("We haven't made an installation script yet,"
+					" please check the readme for instructions on how to install"
+					" ffmpeg, thanks! - The DungeonCli team (Daniel)")
+					# print(Style.RESET_ALL + "==> Downloading FFMPEG - 1/3...")
+					# os.system('tree')
+					# print("\n==> Extracting FFMPEG - 2/3...")
+					# os.system('tree')
+					# print("\n==>Adding FFMPEG to Registry - 3/3...")
+					# os.system('tree')
+					#
+					# printScan(success + "Successfully install FFMPEG!")
+					# playSound("Music/intro.ogg", True)
+					# askLoop = False
 				else:
 					printScan(error + "This script is not made for unix systems,"
 					" if you have issues with music, please open an issue on github.")
