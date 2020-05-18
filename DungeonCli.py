@@ -1974,12 +1974,12 @@ if __name__ == '__main__':
 					print(Style.RESET_ALL + "==> Creating directories - 1/3...")
 					os.system('md "%userprofile%\\ffmpeg')
 					print(Style.RESET_ALL + "==> Downloading FFMPEG - 2/3...")
-					os.system('bitsadmin /transfer ffmpegDownload /download /priority normal "http://pavela.net:3000/Daniel/DungeonCli/raw/branch/master/ffmpeg/ffmpeg.exe" "%userprofile%\\ffmpeg.exe"')
-					os.system('bitsadmin /transfer ffmplayDownload /download /priority normal "http://pavela.net:3000/Daniel/DungeonCli/raw/branch/master/ffmpeg/ffmplay.exe" "%userprofile%\\ffmplay.exe"')
-					os.system('bitsadmin /transfer ffmprobeDownload /download /priority normal "http://pavela.net:3000/Daniel/DungeonCli/raw/branch/master/ffmpeg/ffmprobe.exe" "%userprofile%\\ffmprobe.exe"')
+					os.system('bitsadmin /transfer ffmpegDownload /download /priority normal "http://pavela.net:3000/Daniel/DungeonCli/raw/branch/master/ffmpeg/ffmpeg.exe" "%userprofile%\\ffmpeg\\ffmpeg.exe"')
+					os.system('bitsadmin /transfer ffmplayDownload /download /priority normal "http://pavela.net:3000/Daniel/DungeonCli/raw/branch/master/ffmpeg/ffmplay.exe" "%userprofile%\\ffmpeg\\ffmplay.exe"')
+					os.system('bitsadmin /transfer ffmprobeDownload /download /priority normal "http://pavela.net:3000/Daniel/DungeonCli/raw/branch/master/ffmpeg/ffmprobe.exe" "%userprofile%\\ffmpeg\\ffmprobe.exe"')
 
 					print("\n==>Adding FFMPEG to Path - 3/3...")
-					os.system('set PATH=%PATH%;"c:\\Program Files\\ffmpeg\\"')
+					os.system('set PATH=%PATH%;"%userprofile%\\ffmpeg\\"')
 
 					printScan(success + "Successfully installed FFMPEG!")
 					playSound("Music/intro.ogg", True)
