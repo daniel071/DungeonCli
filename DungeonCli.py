@@ -2014,6 +2014,7 @@ if __name__ == '__main__':
 				printScan(success + "Successfully disabled music.")
 
 			elif theValue == "Exit":
+				askLoop = False
 				exit()
 
 
