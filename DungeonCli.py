@@ -691,7 +691,7 @@ def bossBattle():
 
 	playSound("Music/bossBattle.ogg", True)
 
-	defprntspd = 0.8
+	defprntspd = 0.7
 	printScan(quote + "goodbye.\"\n")
 	defprntspd = 0.013
 
@@ -700,13 +700,40 @@ def bossBattle():
 	while bossLoop == True:
 		theResult = combat("Boss", 25000, 1000, 1500)
 		if theResult == "killed":
-			success()
+			bossSuccess()
 
 		elif theResult == "flee":
 			printScan(quote + "You think you can runaway from me? \"")
 			time.sleep(1)
 			printScan(quote + "Think again.\"")
 			time.sleep(1)
+
+
+def bossSuccess():
+	global defprntspd
+
+	endThreads()
+	clear()
+	playSound("Music/endCredits.ogg", False)
+
+	message = """
+	__   __                     _       _ 
+	\ \ / /__  _   _  __      _(_)_ __ | |
+	 \ V / _ \| | | | \ \ /\ / / | '_ \| |
+	  | | (_) | |_| |  \ V  V /| | | | |_|
+	  |_|\___/ \__,_|   \_/\_/ |_|_| |_(_)
+	"""
+	printScan(message)
+
+	time.sleep(2)
+	printScan(Style.BRIGHT + Fore.CYAN + "Once the boss was destroyed,"
+	" the rebellion was dismantled, letting the town recover!\n" + Style.RESET_ALL)
+	time.sleep(2)
+
+	defprntspd = 0.008
+	creditScreen()
+	time.sleep(2)
+	exit()
 
 
 
@@ -1978,6 +2005,10 @@ def main():
 	elif command in ("boss battle", "plsboss"):
 		if passwordPrompt() == "granted":
 			bossBattle()
+
+	elif command in ("success", "plswin"):
+		bossSuccess()
+
 
 	else:
 		invalidCommand()
