@@ -717,7 +717,7 @@ def bossSuccess():
 	playSound("Music/endCredits.ogg", False)
 
 	message = """
-	__   __                     _       _ 
+	__   __                     _       _
 	\ \ / /__  _   _  __      _(_)_ __ | |
 	 \ V / _ \| | | | \ \ /\ / / | '_ \| |
 	  | | (_) | |_| |  \ V  V /| | | | |_|
@@ -1865,6 +1865,7 @@ def exit():
 	endThreads()
 	mainLoop = 0
 	endScreen()
+	quit()
 
 def nextScene():
 	if Scene.canProgress == True:
@@ -1992,9 +1993,9 @@ def main():
 			Inventory.advancedHealingPotion = 50
 			Inventory.poisonPotion = 50
 			Inventory.sword = 2
-			Inventory.damage = 100.0
+			Inventory.damage = 1000.0
 			Inventory.armour = 1
-			Inventory.absorbtion = 0.2
+			Inventory.absorbtion = 0.01
 
 	elif command in ("cls", "clear", "clear screen"):
 		clear()
