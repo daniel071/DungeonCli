@@ -1989,7 +1989,13 @@ if __name__ == '__main__':
 
 					print(" ")
 					print(action + "\n==>Adding FFMPEG to Path - 3/3..." + Style.RESET_ALL)
-					os.system('setx /M path "%userprofile%\\ffmpeg\\ffprobe.exe"')
+
+					print(action + "\nInstalling dependencies..." + Style.RESET_ALL)
+					os.system('pip install pywin32')
+
+					print(action + "\nAdding to path..." + Style.RESET_ALL)
+					commands = 'setx /M path "%userprofile%\\ffmpeg\\ffprobe.exe"'
+					shell.ShellExecuteEx(lpVerb='runas', lpFile='cmd.exe', lpParameters='/c '+commands)
 
 					printScan(success + "Successfully installed FFMPEG!")
 					playSound("Music/intro.ogg", True)
