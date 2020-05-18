@@ -1995,7 +1995,7 @@ if __name__ == '__main__':
 
 					print(action + "Adding to path..." + Style.RESET_ALL)
 					import win32com.shell.shell as shell
-					commands = 'setx /M path "%userprofile%\\ffmpeg\\ffprobe.exe"'
+					commands = 'setx /M path "%path%;%userprofile%\\ffmpeg\\"'
 					shell.ShellExecuteEx(lpVerb='runas', lpFile='cmd.exe', lpParameters='/c '+commands)
 
 					printScan(success + "Successfully installed FFMPEG!")
