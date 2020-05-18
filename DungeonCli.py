@@ -1968,14 +1968,16 @@ if __name__ == '__main__':
 			if theValue == "Install FFMPEG":
 				if operatingsystem == 'windows':
 					# TODO: Make an automated install script!
-					# printScan("We haven't made an installation script yet,"
-					# " please check the readme for instructions on how to install"
-					# " ffmpeg, thanks! - The DungeonCli team (Daniel)")
+					printScan("NOTE: This installation requires Administrative priviledges"
+					" because it needs to add ffmpeg to the path!")
 
 					print(Style.RESET_ALL + "==> Creating directories - 1/3...")
 					os.system('md "c:\\Program Files\\ffmpeg')
 					print(Style.RESET_ALL + "==> Downloading FFMPEG - 2/3...")
-					os.system('certutil.exe -urlcache -split -f "http://pavela.net:3000/Daniel/DungeonCli/raw/branch/master/ffmpeg/ffmpeg.exe" "c:\\Program Files\\ffmpeg"')
+					os.system('bitsadmin /transfer ffmpegDownload /download /priority normal "http://pavela.net:3000/Daniel/DungeonCli/raw/branch/master/ffmpeg/ffmpeg.exe" "c:\\Program Files\\ffmpeg.exe"')
+					os.system('bitsadmin /transfer ffmpegDownload /download /priority normal "http://pavela.net:3000/Daniel/DungeonCli/raw/branch/master/ffmpeg/ffmplay.exe" "c:\\Program Files\\ffmplay.exe"')
+					os.system('bitsadmin /transfer ffmpegDownload /download /priority normal "http://pavela.net:3000/Daniel/DungeonCli/raw/branch/master/ffmpeg/ffmprobe.exe" "c:\\Program Files\\ffmprobe.exe"')
+
 					print("\n==>Adding FFMPEG to Path - 3/3...")
 					os.system('set PATH=%PATH%;"c:\\Program Files\\ffmpeg\\"')
 
