@@ -11,6 +11,12 @@ There is another depreciated version, made with swift at the `swift-rewrite` bra
 
 
 ## Installation:
+### NOTE:
+You **MUST** have ffmpeg installed in order for the music to work. On MacOS and Linux it should be already installed, if not, please use your package manager. **Windows does not come with ffmpeg preinstalled however,
+I have created an installation script that will do install it for you. It is built in to
+DungeonCli.py**
+
+
 ### From binaries
 **(Recommended method)**
 
@@ -34,15 +40,6 @@ Give it priviledges with `chmod +X ./DungeonCli_osx` then run it with
 
 
 ### With Python
-You **MUST** have ffmpeg installed in order for the music to work. On MacOS and Linux it should be already installed, if not, please use your package manager.
-
-##### How to install ffmpeg in windows:
-1. Download the build from here:
-https://ffmpeg.zeranoe.com/builds/win64/static/ffmpeg-4.2.2-win64-static.zip
-2. Extract the zip somewhere and copy the `\bin` directory
-3. Add that directory to your path, if you don't know how to,
-Search 'path' in the start menu and press 'enter' -> Click on 'Environment variables' -> On System Variables, click on 'Path' and click 'Edit' -> Click 'New' and paste in the directory -> Click OK on everything -> **RESTART**
-
 
 ##### How to install DungeonCli:
 1. Download the .zip file and extract it or type
