@@ -2018,7 +2018,8 @@ def main():
 			bossBattle()
 
 	elif command in ("success", "plswin"):
-		bossSuccess()
+		if passwordPrompt() == "granted":
+			bossSuccess()
 
 
 	else:
