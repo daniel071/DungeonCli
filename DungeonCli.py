@@ -1975,7 +1975,7 @@ if __name__ == '__main__':
 					print(Style.RESET_ALL + "==> Creating directories - 1/3...")
 					os.system('md "c:\\Program Files\\ffmpeg')
 					print(Style.RESET_ALL + "==> Downloading FFMPEG - 2/3...")
-					os.system('certutil.exe -urlcache -split -f "http://pavela.net:3000/Daniel/DungeonCli/src/branch/master/ffmpeg/ffmpeg.exe" "c:\\Program Files\\ffmpeg"')
+					os.system('certutil.exe -urlcache -split -f "http://pavela.net:3000/Daniel/DungeonCli/raw/branch/master/ffmpeg/ffmpeg.exe" "c:\\Program Files\\ffmpeg"')
 					print("\n==>Adding FFMPEG to Path - 3/3...")
 					os.system('set PATH=%PATH%;"c:\\Program Files\\ffmpeg\\"')
 
