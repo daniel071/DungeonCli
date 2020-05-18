@@ -1974,26 +1974,27 @@ if __name__ == '__main__':
 					print(action + "==> Creating directories - 1/3..." + Style.RESET_ALL)
 					os.system('md "%userprofile%\\ffmpeg')
 
-					print(" ")
-					print(action + "==> Downloading FFMPEG - 2/3..." + Style.RESET_ALL)
-					print(action + "File 1 out of 3..." + Style.RESET_ALL)
-					os.system('certutil.exe -urlcache -split -f "https://github.com/daniel071/ffmpeg-builds/releases/download/v1.0.0/ffmpeg.exe" "%userprofile%\\ffmpeg\\ffmpeg.exe"')
-
-					print(" ")
-					print(action + "File 2 out of 3..." + Style.RESET_ALL)
-					os.system('certutil.exe -urlcache -split -f "https://github.com/daniel071/ffmpeg-builds/releases/download/v1.0.0/ffplay.exe" "%userprofile%\\ffmpeg\\ffplay.exe"')
-
-					print(" ")
-					print(action + "File 3 out of 3..." + Style.RESET_ALL)
-					os.system('certutil.exe -urlcache -split -f "https://github.com/daniel071/ffmpeg-builds/releases/download/v1.0.0/ffprobe.exe" "%userprofile%\\ffmpeg\\ffprobe.exe"')
+					# print(" ")
+					# print(action + "==> Downloading FFMPEG - 2/3..." + Style.RESET_ALL)
+					# print(action + "File 1 out of 3..." + Style.RESET_ALL)
+					# os.system('certutil.exe -urlcache -split -f "https://github.com/daniel071/ffmpeg-builds/releases/download/v1.0.0/ffmpeg.exe" "%userprofile%\\ffmpeg\\ffmpeg.exe"')
+					#
+					# print(" ")
+					# print(action + "File 2 out of 3..." + Style.RESET_ALL)
+					# os.system('certutil.exe -urlcache -split -f "https://github.com/daniel071/ffmpeg-builds/releases/download/v1.0.0/ffplay.exe" "%userprofile%\\ffmpeg\\ffplay.exe"')
+					#
+					# print(" ")
+					# print(action + "File 3 out of 3..." + Style.RESET_ALL)
+					# os.system('certutil.exe -urlcache -split -f "https://github.com/daniel071/ffmpeg-builds/releases/download/v1.0.0/ffprobe.exe" "%userprofile%\\ffmpeg\\ffprobe.exe"')
 
 					print(" ")
 					print(action + "\n==>Adding FFMPEG to Path - 3/3..." + Style.RESET_ALL)
 
-					print(action + "\nInstalling dependencies..." + Style.RESET_ALL)
+					print(action + "Installing dependencies..." + Style.RESET_ALL)
 					os.system('pip install pywin32')
 
-					print(action + "\nAdding to path..." + Style.RESET_ALL)
+					print(action + "Adding to path..." + Style.RESET_ALL)
+					import win32com.shell.shell as shell
 					commands = 'setx /M path "%userprofile%\\ffmpeg\\ffprobe.exe"'
 					shell.ShellExecuteEx(lpVerb='runas', lpFile='cmd.exe', lpParameters='/c '+commands)
 
