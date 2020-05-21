@@ -75,7 +75,7 @@ events = ["store", "store", "store", "randomFight", "none", "none", "none", "bom
 # 4 = Diamond Sword = 60% Extra damage
 
 # Armour absorbs a percentage of damage, for example having copper armour
-# absorbs 10% damage, so if you get 50 damage, you only get 45
+# absorbs 20% damage, so if you get 50 damage, you only get 40
 
 # 0 = No Armour = 1 x Damage taken
 # 1 = Copper Armour = 0.8 x Damage taken
