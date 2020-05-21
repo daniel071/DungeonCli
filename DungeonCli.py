@@ -86,7 +86,7 @@ events = ["store", "store", "store", "randomFight", "none", "none", "none", "bom
 
 
 CSSOptions = [["Matches", 5], ["Basic Healing Potion", 15],
-			  ["Copper Armour", 75], ["Stone Sword", 60],
+			  ["Copper Armour", 75], ["Iron Armour", 125], ["Stone Sword", 60],
 			  ["Advanced Healing Potion", 60], ["Poison Potion", 20]]
 
 battleSongs = ["Music/Ambient_fight_1.ogg", "Music/interstellar_space_dryer_2.ogg"]
@@ -899,6 +899,10 @@ def openInventory():
 	elif Inventory.armour == 1:
 		printScan("Copper Armour")
 
+	elif Inventory.armour == 2:
+		printScan("Iron Armour")
+
+
 	# This printScan just adds some white space
 	printScan(" ")
 
@@ -929,6 +933,15 @@ def purchase(storeSelected, id):
 			else:
 				Inventory.armour = 1
 				Inventory.absorbtion = 0.8
+
+		elif item == "Iron Armour":
+			if Inventory.armour == 2:
+				printScan(error + "You already have this item!\n")
+				return "bruh"
+			else:
+				Inventory.armour = 2
+				Inventory.absorbtion = 0.6
+
 		elif item == "Stone Sword":
 			if Inventory.sword == 2:
 				printScan(error + "You already have this item!\n")
@@ -1387,8 +1400,17 @@ def start():
 			printScan(success + "You recieved a new quest!\n")
 			quest.add("Delivier thorium to the town.")
 
+			Scene.current = Scene.current + 1
 
 		elif Scene.current == 17:
+			printScan(action + "You leave this small town and further explore the dungeon.")
+			printScan(action + "You feel a sense of danger, something is coming for you.\n")
+
+			# aaaa idk what to put here
+
+			Scene.current = Scene.current + 1
+
+		else:
 			printScan(success + "Thanks for testing DungeonCli!" + Fore.WHITE)
 			printScan("We haven't finished this scene.")
 			printScan("If you want to help us improve, feel free to send a screenshot or video of you")
