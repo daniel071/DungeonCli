@@ -14,6 +14,7 @@ rockmenBattle.mp3
 **Made by Sine:**
 These songs were made specifically for this game,
 
+quest.ogg
 gameOver.mp3
 intro.mp3
 

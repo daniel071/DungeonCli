@@ -1,5 +1,5 @@
 # NOTE: JOIN THE DISCORD: https://discord.gg/eAUqKKe
- 
+
 # DungeonCli is a terminal based program where you get to explore places and
 # earn coins. You can spend those coins on various items, have fun!
 
@@ -96,8 +96,6 @@ battleSongs = ["Music/Ambient_fight_1.ogg", "Music/interstellar_space_dryer_2.og
 # (no sword)
 # No healing potions
 # No Armour
-
-
 
 
 success = Style.BRIGHT + Fore.GREEN + "==> "
@@ -510,7 +508,7 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 
 	def finishUpMusic():
 		endThreads()
-		playSound("Music/federation.ogg", True)
+		playSound("Music/quest.ogg", True)
 
 
 
@@ -776,7 +774,7 @@ def options():
 				endThreads()
 			else:
 				if Scene.current > 2:
-					playSound("Music/federation.ogg", True)
+					playSound("Music/quest.ogg", True)
 				else:
 					playSound("Music/intro.ogg", True)
 
@@ -1152,10 +1150,7 @@ def start():
 
 			printScan(quote + 'Good luck." \n')
 			endThreads()
-			playSound("Music/federation.ogg", True)
-			printScan(hint + "This song isn't mine and I don't own any rights to it.)")
-			printScan(hint + "Ben Prunty made this song, it's called 'Federation'.)")
-			printScan(hint + "I will remove this later when I get another song.)" + Style.RESET_ALL)
+			playSound("Music/quest.ogg", True)
 			time.sleep(1)
 
 			printScan(action + "He leaves the room and now, you're on your own. \n")
@@ -1755,7 +1750,7 @@ def skipIntro():
 	Scene.current = 3
 	endThreads()
 
-	playSound("Music/federation.ogg", True)
+	playSound("Music/quest.ogg", True)
 	printScan(success + "You recieved a basic Sword.")
 	printScan(success + "You recieved a basic Healing Potion.")
 	addCoins(50)
