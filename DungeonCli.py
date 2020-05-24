@@ -653,11 +653,12 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 
 			if theEpicOption == "Healing Potion":
 				theOutput = healingPotion()
-				if theOutput != 0:
-					i = 0
-					while i < theOutput:
-						enemyDealDamage(1)
-						i = i + 1
+				if theOutput != "notUsed":
+					if theOutput != 0:
+						i = 0
+						while i < theOutput:
+							enemyDealDamage(1)
+							i = i + 1
 
 
 			elif theEpicOption == "Poison Potion":
