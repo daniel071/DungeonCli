@@ -1893,7 +1893,7 @@ def exit():
 	endThreads()
 	mainLoop = 0
 	endScreen()
-	quit()
+	os._exit(1)
 
 def nextScene():
 	if Scene.canProgress == True:
@@ -2119,7 +2119,7 @@ if __name__ == '__main__':
 			elif theValue == "Exit":
 				askLoop = False
 				exit()
-				quit()
+				os._exit(1)
 
 
 
