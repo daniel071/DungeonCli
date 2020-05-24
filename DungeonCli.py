@@ -1695,7 +1695,7 @@ def usePoisonPotion():
 				time.sleep(0.4)
 
 			else:
-				printScan(error + "You don't have any poison potions!\n")
+				printScan(error + "You don't have any poison potions!")
 
 
 def healingPotion():
@@ -1712,7 +1712,7 @@ def healingPotion():
 		.format(amount=Inventory.advancedHealingPotion))
 
 	if Inventory.basicHealingPotion == 0 and Inventory.advancedHealingPotion == 0:
-		printScan(error + "You don't have any potions!\n")
+		printScan(error + "You don't have any potions!")
 		askLoop = False
 		return "notUsed"
 
