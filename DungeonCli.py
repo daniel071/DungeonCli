@@ -544,7 +544,7 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 		isCritical = random.randint(1, 5)
 		if isMiss == 1:
 			printScan(action + "You missed!")
-			printScan(rip + "You dealt no damage!\n")
+			printScan(rip + "You dealt no damage!")
 
 
 		else:
