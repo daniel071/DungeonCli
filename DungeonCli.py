@@ -42,7 +42,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 # --------------------------
 # |		Version!		|
 # --------------------------
-version = "Release Version 0.5.11"
+version = "Development Version 0.5.12"
 # --------------------------
 
 
@@ -67,12 +67,12 @@ events = ["store", "store", "store", "randomFight", "none", "none", "none", "bom
 "treasure", "treasure"]
 
 # You deal more damage with the better sword you have, for example,
-# having a stone sword deals 10% more damage then no sword.
+# having a stone sword deals 40% more damage then no sword.
 # 0 = No Sword = 0% Extra damage
-# 1 = Wooden Sword = 10% Extra damage
-# 2 = Stone Sword = 20% Extra damage
-# 3 = Iron Sword = 40% Extra damage
-# 4 = Diamond Sword = 60% Extra damage
+# 1 = Wooden Sword = 20% Extra damage
+# 2 = Stone Sword = 40% Extra damage
+# 3 = Iron Sword = 70% Extra damage
+# 4 = Diamond Sword = 100% Extra damage
 
 # Armour absorbs a percentage of damage, for example having copper armour
 # absorbs 20% damage, so if you get 50 damage, you only get 40
@@ -87,6 +87,7 @@ events = ["store", "store", "store", "randomFight", "none", "none", "none", "bom
 
 CSSOptions = [["Matches", 5], ["Basic Healing Potion", 15],
 			  ["Copper Armour", 75], ["Iron Armour", 125], ["Stone Sword", 60],
+			  ["Iron Sword", 90],
 			  ["Advanced Healing Potion", 60], ["Poison Potion", 20]]
 
 battleSongs = ["Music/Ambient_fight_1.ogg", "Music/interstellar_space_dryer_2.ogg"]
@@ -897,6 +898,9 @@ def openInventory():
 	if Inventory.sword == 2:
 		printScan("Stone Sword")
 
+	if Inventory.sword == 3:
+		printScan("Iron Sword")
+
 	elif Inventory.armour == 1:
 		printScan("Copper Armour")
 
@@ -949,7 +953,16 @@ def purchase(storeSelected, id):
 				return "bruh"
 			else:
 				Inventory.sword = 2
-				Inventory.damage = 1.2
+				Inventory.damage = 1.4
+
+		elif item == "Iron Sword":
+			if Inventory.sword == 3:
+				printScan(error + "You already have this item!\n")
+				return "bruh"
+			else:
+				Inventory.sword = 3
+				Inventory.damage = 1.7
+
 
 		printScan(action + "You purchased {item} for {price} coins!\n"
 			  .format(item=item, price=price))
@@ -1121,7 +1134,7 @@ def start():
 			addCoins(50)
 
 			Inventory.basicHealingPotion = Inventory.basicHealingPotion + 1
-			Inventory.damage = 1.10
+			Inventory.damage = 1.2
 			Inventory.sword = 1
 			Scene.current = Scene.current + 1
 			time.sleep(2)
@@ -1774,14 +1787,12 @@ def skipIntro():
 	endThreads()
 
 	playSound("Music/quest.ogg", True)
-	printScan(success + "You recieved a basic Sword.")
-	printScan(success + "You recieved a basic Healing Potion.")
 	addCoins(50)
 
 	global Inventory
 	Scene.surroundingsLit = True
 	Inventory.basicHealingPotion = Inventory.basicHealingPotion + 1
-	Inventory.damage = 1.10
+	Inventory.damage = 1.2
 	Inventory.sword = 1
 	quest.add("Obtain the Great Stone of Knowledge.")
 
