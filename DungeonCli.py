@@ -2060,6 +2060,8 @@ def main():
 detect_system()
 
 if __name__ == '__main__':
+	richPrecense.init()
+
 	# Play moosic
 	try:
 		playSound("Music/intro.ogg", True)
