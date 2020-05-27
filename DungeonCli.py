@@ -16,6 +16,7 @@ import os
 import sys
 import simpleaudio
 from src import richPrecense
+from src import multiplayer
 from simpleaudio import _simpleaudio
 from pydub import generators
 from pydub.playback import _play_with_simpleaudio
@@ -43,7 +44,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 # --------------------------
 # |		Version!		|
 # --------------------------
-version = "Development Version 0.5.13"
+version = "Development Version 0.5.14"
 # --------------------------
 
 
@@ -2055,7 +2056,8 @@ def main():
 	elif command in ("success", "plswin"):
 		if passwordPrompt() == "granted":
 			bossSuccess()
-
+	elif command in ("chat", "multiplayer"):
+		multiplayer.runMe()
 
 	else:
 		invalidCommand()
