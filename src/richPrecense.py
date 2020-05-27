@@ -11,4 +11,4 @@ def init():
 
 def present(sceneNumber):
 	global RPC
-	RPC.update(state="Scene {scene}".format(scene=sceneNumber), details="A terminal-based dungeon crawler game!", large_text="pavela.net:3000/Daniel/DungeonCli", 		large_image="epicTerminal.png")  # Set the presence
+	RPC.update(small_image="epicTerminal.png", state="Scene {scene}".format(scene=sceneNumber), details="A terminal-based dungeon crawler game!", small_text="pavela.net:3000/Daniel/DungeonCli",)  # Set the presence
