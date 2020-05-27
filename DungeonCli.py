@@ -1885,6 +1885,7 @@ def creditScreen():
 	printScan("Developers Note".center(width,' '))
 	printScan("Thanks so much Daniel for letting me help on this project!".center(width,' '))
 	printScan("it was a blast to make. a great way for me to get back into python".center(width,' '))
+	printScan("(I still prefer swift hahaha)".center(width,' '))
 	printScan("Thank you so much - Ethan".center(width,' '))
 
 
