@@ -1,5 +1,6 @@
 # oh boi here we go
 import sys
+import threading
 sys.path.append('../')
 
 from colorama import Fore, Back, Style
@@ -31,13 +32,19 @@ yourUserName = answers['username']
 
 
 r = RethinkDB()
-r.connect(serverIP, 28015).repl()
+def checkMessages():
+	r.connect(serverIP, 28015).repl()
+	cursor = r.table("chat").changes().run()
+	for document in cursor:
+		username = document['new_val']['username']
+		message = document['new_val']['message']
 
-cursor = r.table("chat").changes().run()
-for document in cursor:
-	username = document['new_val']['username']
-	message = document['new_val']['message']
+		print(Style.BRIGHT + Fore.YELLOW + "[{username}]: ".format(username=username)
+		+ Style.RESET_ALL + "{message}".format(message=message))
+		print(document)
 
-	print(Style.BRIGHT + Fore.YELLOW + "[{username}]: ".format(username=username)
-	+ Style.RESET_ALL + "{message}".format(message=message))
-	print(document)
+checkThread = threading.Thread(target=checkMessages)
+checkThread.start()
+# To stop thread: checkThread.join()
+
+print("do you see me here:")
