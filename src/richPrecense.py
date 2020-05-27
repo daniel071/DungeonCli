@@ -7,8 +7,8 @@ RPC.connect() # Start the handshake loop
 
 
 def init():
-	RPC.update(state="Scene 0", details="A terminal-based dungeon game!", large_text="pavela.net:3000/Daniel/DungeonCli", large_image="epicTerminal.png")  # Set the presence
+	RPC.update(state="Scene 0", details="A terminal-based dungeon game!", large_text="pavela.net:3000/Daniel/DungeonCli", large_image="epicterminal")  # Set the presence
 
 def present(sceneNumber):
 	global RPC
-	RPC.update(small_image="epicTerminal.png", state="Scene {scene}".format(scene=sceneNumber), details="A terminal-based dungeon crawler game!", small_text="pavela.net:3000/Daniel/DungeonCli",)  # Set the presence
+	RPC.update(large_image="epicterminal", state="Scene {scene}".format(scene=sceneNumber), details="A terminal-based dungeon game!", large_text="pavela.net:3000/Daniel/DungeonCli",)  # Set the presence
