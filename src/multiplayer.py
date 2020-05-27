@@ -3,6 +3,7 @@ import sys
 import threading
 sys.path.append('../')
 
+import json
 from colorama import Fore, Back, Style
 from colorama import init
 from PyInquirer import prompt, print_json
@@ -30,11 +31,12 @@ serverIP = answers['serverIP']
 yourUserName = answers['username']
 
 
-r = RethinkDB()
-connection = r.connect(serverIP, 28015)
+r1 = RethinkDB()
+r2 = RethinkDB()
+
 def checkMessages():
-	connection.repl()
-	cursor = r.table("chat").changes().run()
+	r1.connect(serverIP, 28015).repl()
+	cursor = r1.table("chat").changes().run()
 	for document in cursor:
 		username = document['new_val']['username']
 		message = document['new_val']['message']
@@ -50,11 +52,13 @@ checkThread.start()
 questions = [
 	{
 		'type': 'input',
-		'message': 'Enter message',
+		'message': '>',
 		'name': 'yourMessage',
 	},
 ]
-answers = prompt(questions)
-yourMessage = answers['yourMessage']
-connection.repl()
-r.table('chat').insert({'username':yourUserName, 'message':yourMessage}).run()
+while True:
+	answers = prompt(questions)
+	yourMessage = answers['yourMessage']
+	sys.stdout.write("\033[F") # Clears the text above
+	r2.connect(serverIP, 28015).repl()
+	r2.table('chat').insert([{"username":yourUserName, "message":yourMessage}]).run()
