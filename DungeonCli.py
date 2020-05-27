@@ -1029,7 +1029,7 @@ def useMatch():
 		printScan(error + "You don't have any matches!\n")
 	elif Scene.surroundingsLit == True:
 		Inventory.matches = Inventory.matches - 1
-		playSound("Sounds/explosion.ogg", False)
+		playSound("Sounds/matchUse.ogg", False)
 		time.sleep(0.3)
 		printScan("You light a match. it begins to burn away.")
 		printScan(rip + "You used up one match. \n")
@@ -1038,7 +1038,7 @@ def useMatch():
 		Scene.description = "This place is in ruins, and it's possibly been like that for decades."
 		Inventory.matches = Inventory.matches - 1
 		Scene.surroundingsLit = True
-		playSound("Sounds/explosion.ogg", False)
+		playSound("Sounds/matchUse.ogg", False)
 		time.sleep(0.3)
 		printScan("You Light a match, your surroundings fill up with light. "
 			  "you can now see!")
