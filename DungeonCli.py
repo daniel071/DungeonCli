@@ -15,6 +15,7 @@ import random
 import os
 import sys
 import simpleaudio
+from src import richPrecense
 from simpleaudio import _simpleaudio
 from pydub import generators
 from pydub.playback import _play_with_simpleaudio
@@ -42,7 +43,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 # --------------------------
 # |		Version!		|
 # --------------------------
-version = "Development Version 0.5.12"
+version = "Development Version 0.5.13"
 # --------------------------
 
 
@@ -1943,6 +1944,7 @@ def main():
 		openStore()
 
 	elif command in ("s", "start", "next", "proceed", "next room", "forth", "enter door", "go through door", "n"):
+		richPrecense.present(Scene.current)
 		nextScene()
 
 	elif command in ("listen", "listen for sounds"):
