@@ -1,5 +1,5 @@
 # NOTE: JOIN THE DISCORD: https://discord.gg/eAUqKKe
- 
+
 # DungeonCli is a terminal based program where you get to explore places and
 # earn coins. You can spend those coins on various items, have fun!
 
@@ -15,6 +15,7 @@ import random
 import os
 import sys
 import simpleaudio
+from src import richPrecense
 from simpleaudio import _simpleaudio
 from pydub import generators
 from pydub.playback import _play_with_simpleaudio
@@ -42,7 +43,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 # --------------------------
 # |		Version!		|
 # --------------------------
-version = "Development Version 0.5.8"
+version = "Development Version 0.5.13"
 # --------------------------
 
 
@@ -67,15 +68,15 @@ events = ["store", "store", "store", "randomFight", "none", "none", "none", "bom
 "treasure", "treasure"]
 
 # You deal more damage with the better sword you have, for example,
-# having a stone sword deals 10% more damage then no sword.
+# having a stone sword deals 40% more damage then no sword.
 # 0 = No Sword = 0% Extra damage
-# 1 = Wooden Sword = 10% Extra damage
-# 2 = Stone Sword = 20% Extra damage
-# 3 = Iron Sword = 40% Extra damage
-# 4 = Diamond Sword = 60% Extra damage
+# 1 = Wooden Sword = 20% Extra damage
+# 2 = Stone Sword = 40% Extra damage
+# 3 = Iron Sword = 70% Extra damage
+# 4 = Diamond Sword = 100% Extra damage
 
 # Armour absorbs a percentage of damage, for example having copper armour
-# absorbs 10% damage, so if you get 50 damage, you only get 45
+# absorbs 20% damage, so if you get 50 damage, you only get 40
 
 # 0 = No Armour = 1 x Damage taken
 # 1 = Copper Armour = 0.8 x Damage taken
@@ -86,7 +87,8 @@ events = ["store", "store", "store", "randomFight", "none", "none", "none", "bom
 
 
 CSSOptions = [["Matches", 5], ["Basic Healing Potion", 15],
-			  ["Copper Armour", 75], ["Stone Sword", 60],
+			  ["Copper Armour", 75], ["Iron Armour", 125], ["Stone Sword", 60],
+			  ["Iron Sword", 90],
 			  ["Advanced Healing Potion", 60], ["Poison Potion", 20]]
 
 battleSongs = ["Music/Ambient_fight_1.ogg", "Music/interstellar_space_dryer_2.ogg"]
@@ -96,8 +98,6 @@ battleSongs = ["Music/Ambient_fight_1.ogg", "Music/interstellar_space_dryer_2.og
 # (no sword)
 # No healing potions
 # No Armour
-
-
 
 
 success = Style.BRIGHT + Fore.GREEN + "==> "
@@ -510,7 +510,7 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 
 	def finishUpMusic():
 		endThreads()
-		playSound("Music/federation.ogg", True)
+		playSound("Music/quest.ogg", True)
 
 
 
@@ -546,7 +546,7 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 		isCritical = random.randint(1, 5)
 		if isMiss == 1:
 			printScan(action + "You missed!")
-			printScan(rip + "You dealt no damage!\n")
+			printScan(rip + "You dealt no damage!")
 
 
 		else:
@@ -655,11 +655,12 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 
 			if theEpicOption == "Healing Potion":
 				theOutput = healingPotion()
-				if theOutput != 0:
-					i = 0
-					while i < theOutput:
-						enemyDealDamage(1)
-						i = i + 1
+				if theOutput != "notUsed":
+					if theOutput != 0:
+						i = 0
+						while i < theOutput:
+							enemyDealDamage(1)
+							i = i + 1
 
 
 			elif theEpicOption == "Poison Potion":
@@ -776,7 +777,7 @@ def options():
 				endThreads()
 			else:
 				if Scene.current > 2:
-					playSound("Music/federation.ogg", True)
+					playSound("Music/quest.ogg", True)
 				else:
 					playSound("Music/intro.ogg", True)
 
@@ -898,8 +899,15 @@ def openInventory():
 	if Inventory.sword == 2:
 		printScan("Stone Sword")
 
+	if Inventory.sword == 3:
+		printScan("Iron Sword")
+
 	elif Inventory.armour == 1:
 		printScan("Copper Armour")
+
+	elif Inventory.armour == 2:
+		printScan("Iron Armour")
+
 
 	# This printScan just adds some white space
 	printScan(" ")
@@ -931,13 +939,31 @@ def purchase(storeSelected, id):
 			else:
 				Inventory.armour = 1
 				Inventory.absorbtion = 0.8
+
+		elif item == "Iron Armour":
+			if Inventory.armour == 2:
+				printScan(error + "You already have this item!\n")
+				return "bruh"
+			else:
+				Inventory.armour = 2
+				Inventory.absorbtion = 0.6
+
 		elif item == "Stone Sword":
 			if Inventory.sword == 2:
 				printScan(error + "You already have this item!\n")
 				return "bruh"
 			else:
 				Inventory.sword = 2
-				Inventory.damage = 1.2
+				Inventory.damage = 1.4
+
+		elif item == "Iron Sword":
+			if Inventory.sword == 3:
+				printScan(error + "You already have this item!\n")
+				return "bruh"
+			else:
+				Inventory.sword = 3
+				Inventory.damage = 1.7
+
 
 		printScan(action + "You purchased {item} for {price} coins!\n"
 			  .format(item=item, price=price))
@@ -1109,7 +1135,7 @@ def start():
 			addCoins(50)
 
 			Inventory.basicHealingPotion = Inventory.basicHealingPotion + 1
-			Inventory.damage = 1.10
+			Inventory.damage = 1.2
 			Inventory.sword = 1
 			Scene.current = Scene.current + 1
 			time.sleep(2)
@@ -1152,10 +1178,7 @@ def start():
 
 			printScan(quote + 'Good luck." \n')
 			endThreads()
-			playSound("Music/federation.ogg", True)
-			printScan(hint + "This song isn't mine and I don't own any rights to it.)")
-			printScan(hint + "Ben Prunty made this song, it's called 'Federation'.)")
-			printScan(hint + "I will remove this later when I get another song.)" + Style.RESET_ALL)
+			playSound("Music/quest.ogg", True)
 			time.sleep(1)
 
 			printScan(action + "He leaves the room and now, you're on your own. \n")
@@ -1392,8 +1415,17 @@ def start():
 			printScan(success + "You recieved a new quest!\n")
 			quest.add("Delivier thorium to the town.")
 
+			Scene.current = Scene.current + 1
 
 		elif Scene.current == 17:
+			printScan(action + "You leave this small town and further explore the dungeon.")
+			printScan(action + "You feel a sense of danger, something is coming for you.\n")
+
+			# aaaa idk what to put here
+
+			Scene.current = Scene.current + 1
+
+		else:
 			printScan(success + "Thanks for testing DungeonCli!" + Fore.WHITE)
 			printScan("We haven't finished this scene.")
 			printScan("If you want to help us improve, feel free to send a screenshot or video of you")
@@ -1677,7 +1709,7 @@ def usePoisonPotion():
 				time.sleep(0.4)
 
 			else:
-				printScan(error + "You don't have any poison potions!\n")
+				printScan(error + "You don't have any poison potions!")
 
 
 def healingPotion():
@@ -1694,7 +1726,7 @@ def healingPotion():
 		.format(amount=Inventory.advancedHealingPotion))
 
 	if Inventory.basicHealingPotion == 0 and Inventory.advancedHealingPotion == 0:
-		printScan(error + "You don't have any potions!\n")
+		printScan(error + "You don't have any potions!")
 		askLoop = False
 		return "notUsed"
 
@@ -1755,15 +1787,13 @@ def skipIntro():
 	Scene.current = 3
 	endThreads()
 
-	playSound("Music/federation.ogg", True)
-	printScan(success + "You recieved a basic Sword.")
-	printScan(success + "You recieved a basic Healing Potion.")
+	playSound("Music/quest.ogg", True)
 	addCoins(50)
 
 	global Inventory
 	Scene.surroundingsLit = True
 	Inventory.basicHealingPotion = Inventory.basicHealingPotion + 1
-	Inventory.damage = 1.10
+	Inventory.damage = 1.2
 	Inventory.sword = 1
 	quest.add("Obtain the Great Stone of Knowledge.")
 
@@ -1875,7 +1905,7 @@ def exit():
 	endThreads()
 	mainLoop = 0
 	endScreen()
-	quit()
+	os._exit(1)
 
 def nextScene():
 	if Scene.canProgress == True:
@@ -1914,6 +1944,7 @@ def main():
 		openStore()
 
 	elif command in ("s", "start", "next", "proceed", "next room", "forth", "enter door", "go through door", "n"):
+		richPrecense.present(Scene.current)
 		nextScene()
 
 	elif command in ("listen", "listen for sounds"):
@@ -2029,6 +2060,8 @@ def main():
 detect_system()
 
 if __name__ == '__main__':
+	richPrecense.init()
+
 	# Play moosic
 	try:
 		playSound("Music/intro.ogg", True)
@@ -2101,7 +2134,7 @@ if __name__ == '__main__':
 			elif theValue == "Exit":
 				askLoop = False
 				exit()
-				quit()
+				os._exit(1)
 
 
 
