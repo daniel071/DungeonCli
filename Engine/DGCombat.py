@@ -3,6 +3,7 @@
 from . import DGText
 from . import DGScene
 from . import DGMain
+from . import DGPlayer
 from colorama import Fore, Back, Style
 from colorama import init
 from PyInquirer import prompt, print_json
