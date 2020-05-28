@@ -667,7 +667,7 @@ def purchase(storeSelected, id):
 
 		DGText.printScan(action + "You purchased {item} for {price} coins!\n"
 			  .format(item=item, price=price))
-		coins = coins - price
+		DGPlayer.coins = DGPlayer.coins - price
 	else:
 		DGText.printScan(error + "You do not have enough coins to purchase this item!\n")
 
@@ -677,12 +677,11 @@ def openStore():
 	DGText.printScan("You entered the store!")
 	global CSSOptions
 	global DGPlayer
-	global coins
 	global Scene
 	DGText.printScan("------------------")
 	DGText.printScan("	  STORE	   ")
 	DGText.printScan("------------------")
-	DGText.printScan(DGText.success + "You have $" + str(coins))
+	DGText.printScan(DGText.success + "You have $" + str(DGPlayer.coins))
 	for i in Scene.storeSelected:
 		DGText.printScan(Fore.WHITE + "{name} -- {price}".format(name=i[0], price=i[1]))
 	DGText.printScan("")
