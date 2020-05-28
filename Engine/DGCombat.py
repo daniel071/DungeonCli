@@ -31,7 +31,7 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 		global DGPlayer
 		isMiss = random.randint(1,6)
 		if isMiss == 5:
-			DGText.printScan(action + "{name} missed!".format(name=enemy))
+			DGText.printScan(DGText.action + "{name} missed!".format(name=enemy))
 			DGText.printScan(DGText.success + "You took no damage!\n")
 		else:
 			enemyDamage = random.randint(enemyMinDamage, enemyMaxDamage) * DGPlayer.Inventory.absorbtion * multiplyer
@@ -76,13 +76,13 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 
 			if enemyHP < 0:
 				combatLoop = False
-				DGText.printScan(DGText.success + "You DGText.successfully killed {name}\n"
+				DGText.printScan(DGText.success + "You successfully killed {name}\n"
 				.format(name=enemy))
 
 				time.sleep(0.4)
 
 				extraCoins = random.randint(25, 35)
-				addCoins(extraCoins)
+				DGMain.addCoins(extraCoins)
 
 				combatLoop = False
 
@@ -137,12 +137,12 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 		elif userInput == "Flee":
 			attemptFlee = random.randint(1, 2)
 			if attemptFlee == 1:
-				DGText.printScan(action + "You tried to flee, but {name} caught you. \n"
+				DGText.printScan(DGText.action + "You tried to flee, but {name} caught you. \n"
 				.format(name=enemy))
 				enemyDealDamage(1.5)
 
 			else:
-				DGText.printScan(action + "You run away before {name} could catch you.\n"
+				DGText.printScan(DGText.action + "You run away before {name} could catch you.\n"
 				.format(name=enemy))
 				combatLoop = False
 				time.sleep(0.4)
@@ -186,8 +186,8 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 
 
 		elif userInput == "Check HP":
-			hpCheck()
-			DGText.printScan(action + "The enemy has {amount} hp!\n".format(amount=round(enemyHP)))
+			DGMain.hpCheck()
+			DGText.printScan(DGText.action + "The enemy has {amount} hp!\n".format(amount=round(enemyHP)))
 			time.sleep(0.2)
 
 		print("")

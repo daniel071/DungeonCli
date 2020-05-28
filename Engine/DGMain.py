@@ -12,6 +12,7 @@ from pydub.playback import _play_with_simpleaudio
 import pydub
 from . import DGText
 from . import DGMain
+from . import DGPlayer
 
 playMusic = True
 all_processes = []
@@ -65,3 +66,39 @@ def DGExit():
 def isDead():
 	if DGPlayer.hp < 0:
 		gameover()
+
+def hpCheck():
+	# Displays different colour depending on hp
+	global DGPlayer
+	if DGPlayer.hp > 100:
+		DGPlayer.hp = 100
+
+	DGPlayer.hp = round(DGPlayer.hp)
+
+	if DGPlayer.hp > 70:
+		DGText.printScan(
+			DGText.success + "You have {hp} out of {max} HP! \n".format(hp=DGPlayer.hp, max=100))
+
+	elif DGPlayer.hp > 35:
+		DGText.printScan(
+			DGText.action + "You have {hp} out of {max} HP! \n".format(hp=DGPlayer.hp, max=100))
+
+	else:
+		DGText.printScan(rip + "You have {hp} out of {max} HP! \n".format(hp=DGPlayer.hp, max=100))
+
+def addCoins(add):
+	global DGPLayer
+	DGPlayer.coins = DGPlayer.coins + add
+	DGText.printScan(DGText.success + ("You pocketed " + str(add) + " coins! \n"))
+
+
+def removeCoins(value):
+	global DGPlayer
+	DGPlayer.coins = DGPlayer.coins - value
+	DGText.printScan(DGText.rip + ("You dropped " + str(value) + " coins! \n"))
+
+
+def spendCoins(value):
+	global DGPlayer
+	DGPlayer.coins = DGPlayer.coins + value
+	DGText.printScan(DGText.success + ("You spent " + str(value) + " coins! \n"))

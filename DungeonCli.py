@@ -304,23 +304,6 @@ def gameover():
 	sys.exit()
 
 
-def addCoins(add):
-	global DGPLayer
-	DGPlayer.coins = DGPlayer.coins + add
-	DGText.printScan(DGText.success + ("You pocketed " + str(add) + " coins! \n"))
-
-
-def removeCoins(value):
-	global DGPlayer
-	DGPlayer.coins = DGPlayer.coins - value
-	DGText.printScan(rip + ("You dropped " + str(value) + " coins! \n"))
-
-
-def spendCoins(value):
-	global DGPlayer
-	DGPlayer.coins = DGPlayer.coins + value
-	DGText.printScan(DGText.success + ("You spent " + str(value) + " coins! \n"))
-
 
 def ask(funcQuestion, answer1, answer2):
 	askLoop = 1
@@ -562,7 +545,7 @@ def checkCoins():
 		DGText.printScan(Style.BRIGHT + Fore.WHITE + "You have 0 coins? I feel bad, here"
 			  " take 10 coins!")
 		time.sleep(0.7)
-		addCoins(10)
+		DGMain.addCoins(10)
 		time.sleep(0.7)
 
 
@@ -830,7 +813,7 @@ def start():
 
 			DGText.printScan(DGText.success + "You recieved a basic Sword.")
 			DGText.printScan(DGText.success + "You recieved a basic Healing Potion.")
-			addCoins(50)
+			DGMain.addCoins(50)
 
 			DGPlayer.Inventory.basicHealingPotion = DGPlayer.Inventory.basicHealingPotion + 1
 			DGPlayer.Inventory.damage = 1.2
@@ -985,7 +968,7 @@ def start():
 			DGText.printScan(quote + "Here, take this, it should help you buy the"
 			" resources you need.")
 			time.sleep(1)
-			addCoins(50)
+			DGMain.addCoins(50)
 
 			Scene.current = Scene.current + 1
 
@@ -1131,26 +1114,6 @@ def start():
 			DGText.printScan(Style.BRIGHT + Fore.BLUE + "https://discord.gg/eAUqKKe\n")
 
 
-def hpCheck():
-	# Displays different colour depending on hp
-	global DGPlayer
-	if DGPlayer.hp > 100:
-		DGPlayer.hp = 100
-
-	DGPlayer.hp = round(DGPlayer.hp)
-
-	if DGPlayer.hp > 70:
-		DGText.printScan(
-			DGText.success + "You have {hp} out of {max} HP! \n".format(hp=DGPlayer.hp, max=100))
-
-	elif DGPlayer.hp > 35:
-		DGText.printScan(
-			action + "You have {hp} out of {max} HP! \n".format(hp=DGPlayer.hp, max=100))
-
-	else:
-		DGText.printScan(rip + "You have {hp} out of {max} HP! \n".format(hp=DGPlayer.hp, max=100))
-
-
 def randomEvent():
 	global events
 	global hasSeenAStore
@@ -1283,7 +1246,7 @@ def openVault():
 			time.sleep(0.6)
 			DGText.printScan(DGText.success + "You walk into the vault and you find"
 			" hundreds of coins! You pick up as much as you can...")
-			addCoins(50)
+			DGMain.addCoins(50)
 
 		elif theLuck == 3:
 			DGText.printScan(action + "You spent several minutes trying to unlock the vault...")
@@ -1363,7 +1326,7 @@ def pickCoins():
 		DGText.printScan(action + randomDialog.collectCoins(randomDialog))
 		time.sleep(0.8)
 
-		addCoins(amount)
+		DGMain.addCoins(amount)
 		Scene.hasCoins = False
 
 	else:
@@ -1486,7 +1449,7 @@ def skipIntro():
 	endThreads()
 
 	DGMain.playSound("Music/quest.ogg", True)
-	addCoins(50)
+	DGMain.addCoins(50)
 
 	global DGPlayer
 	Scene.surroundingsLit = True
@@ -1629,7 +1592,7 @@ def main():
 		DGExit()
 
 	elif command in ("hp", "health", "health points"):
-		hpCheck()
+		DGMain.hpCheck()
 
 	elif command in ("goto shop", "goto store", "store", "shop"):
 		openStore()
@@ -1690,7 +1653,7 @@ def main():
 		time.sleep(1)
 
 		if passwordPrompt() == "granted":
-			addCoins(200)
+			DGMain.addCoins(200)
 	elif command in ("cl_skipintro", "plsnointro"):
 		if passwordPrompt() == "granted":
 			skipIntro()
@@ -1720,7 +1683,7 @@ def main():
 
 	elif command in ("plsop", "please make me OP"):
 		if passwordPrompt() == "granted":
-			addCoins(1000)
+			DGMain.addCoins(1000)
 			DGPlayer.Inventory.basicHealingPotion = 50
 			DGPlayer.Inventory.advancedHealingPotion = 50
 			DGPlayer.Inventory.poisonPotion = 50
