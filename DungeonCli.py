@@ -310,20 +310,20 @@ def gameover():
 
 
 def addCoins(add):
-	global coins
-	coins = coins + add
+	global DGPLayer
+	DGPlayer.coins = DGPlayer.coins + add
 	DGText.printScan(DGText.success + ("You pocketed " + str(add) + " coins! \n"))
 
 
 def removeCoins(value):
-	global coins
-	coins = coins - value
+	global DGPlayer
+	DGPlayer.coins = DGPlayer.coins - value
 	DGText.printScan(rip + ("You dropped " + str(value) + " coins! \n"))
 
 
 def spendCoins(value):
-	global coins
-	coins = coins + value
+	global DGPlayer
+	DGPlayer.coins = DGPlayer.coins + value
 	DGText.printScan(DGText.success + ("You spent " + str(value) + " coins! \n"))
 
 
@@ -560,9 +560,9 @@ def load_game():
 
 
 def checkCoins():
-	global coins
-	DGText.printScan(DGText.success + "You have $" + str(coins) + "!\n")
-	if coins == 0:
+	global DGPlayer
+	DGText.printScan(DGText.success + "You have $" + str(DGPlayer.coins) + "!\n")
+	if DGPlayer.coins == 0:
 		time.sleep(0.7)
 		DGText.printScan(Style.BRIGHT + Fore.WHITE + "You have 0 coins? I feel bad, here"
 			  " take 10 coins!")
@@ -614,13 +614,13 @@ def openInventory():
 
 
 def purchase(storeSelected, id):
-	global coins
+	global DGPlayer
 	global absorbtion
 	global damageMultiplyer
 
 	item = storeSelected[id][0]
 	price = storeSelected[id][1]
-	if coins >= price:
+	if DGPlayer.coins >= price:
 		if item == "Matches":
 			DGPlayer.Inventory.matches = DGPlayer.Inventory.matches + 1
 		elif item == "Basic Healing Potion":
