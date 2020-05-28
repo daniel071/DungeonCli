@@ -17,6 +17,7 @@ import sys
 import simpleaudio
 from src import richPrecense
 from src import multiplayer
+from Engine import *
 from simpleaudio import _simpleaudio
 from pydub import generators
 from pydub.playback import _play_with_simpleaudio
@@ -46,7 +47,6 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 version = "Development Version 0.5.15"
 # --------------------------
 
-DGText.printScan("ok")
 # Define variables here:
 
 all_processes = []
