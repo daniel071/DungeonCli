@@ -15,7 +15,10 @@ import random
 import os
 import sys
 import simpleaudio
-from src import richPrecense
+try:
+   from src import richPrecense
+except:
+    print("warning: missing package? or discord isn't running...")
 from src import multiplayer
 from simpleaudio import _simpleaudio
 from pydub import generators
