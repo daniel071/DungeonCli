@@ -408,7 +408,7 @@ def bossBattle():
 	Scene.combatOverrideMusic = False
 	bossLoop = True
 	while bossLoop == True:
-		theResult = combat("Boss", 25000, 1000, 1500)
+		theResult = DGCombat.combat("Boss", 25000, 1000, 1500)
 		if theResult == "killed":
 			bossSuccess()
 
@@ -483,7 +483,7 @@ def options():
 				else:
 					DGMain.playSound("Music/intro.ogg", True)
 
-			DGText.printScan("You toggled music to {value}\n".format(value=DGMain.playMsu))
+			DGText.printScan("You toggled music to {value}\n".format(value=DGMain.playMusic))
 
 
 
@@ -925,7 +925,7 @@ def start():
 				  " it was too late. \n")
 			time.sleep(1)
 
-			theResult = combat("Unidentified", 25, 5, 10)
+			theResult = DGCombat.combat("Unidentified", 25, 5, 10)
 			if theResult == "killed":
 				DGText.printScan(
 					action + "You killed the unknown person however, you can't stop feeling bad. \n")
@@ -956,7 +956,7 @@ def start():
 			spiderLoop = True
 			while spiderLoop == True:
 				# Start battle with 'Giant Spider'
-				theResult = combat("Giant Spider", 35, 8, 12)
+				theResult = DGCombat.combat("Giant Spider", 35, 8, 12)
 				if theResult == "killed":
 					DGText.printScan(action + "Phew! That was hard! You prepare to move on... \n")
 					spiderLoop = False
@@ -1063,7 +1063,7 @@ def start():
 					DGText.printScan(rip + "The guard spotted you!"
 					" You have no time to explain yourself, you have to fight!\n")
 					time.sleep(1)
-					theResult = combat("Guard", 60, 3, 4)
+					theResult = DGCombat.combat("Guard", 60, 3, 4)
 
 					if theResult == "killed":
 						DGText.printScan(action + "Now that there is no guard protecting"
@@ -1197,7 +1197,7 @@ def randomEvent():
 					time.sleep(0.8)
 					DGText.printScan(rip + "A snake is trying to bite you!\n")
 					time.sleep(0.8)
-					combat("Snake", 20, 5, 15)
+					DGCombat.combat("Snake", 20, 5, 15)
 
 				else:
 					DGText.printScan(action + 'You knock on the door and ask to enter...')
@@ -1303,7 +1303,7 @@ def openVault():
 			DGText.printScan(Style.BRIGHT + "The Money Grinch shouted.\n")
 			time.sleep(0.6)
 
-			combat("Money Grinch", 30, 1, 30)
+			DGCombat.combat("Money Grinch", 30, 1, 30)
 	else:
 		DGText.printScan("There is no vault in this room...")
 
@@ -1827,7 +1827,7 @@ if __name__ == '__main__':
 					DGText.printScan(hint + "MacOS and most linux distros have FFMPEG pre-installed.\n")
 
 			elif theValue == "Disable Music":
-				DGMain.playMsu = False
+				DGMain.playMusic = False
 				askLoop = False
 				DGText.printScan(DGText.success + "Successfully disabled music.")
 
