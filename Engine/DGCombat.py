@@ -14,7 +14,6 @@ battleSongs = ["Music/Ambient_fight_1.ogg", "Music/interstellar_space_dryer_2.og
 Scene = DGScene
 
 def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
-	global hp
 	global DGPlayer
 	global combatEnemyHP
 	global hasCombatFinished
@@ -29,22 +28,22 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 
 
 	def enemyDealDamage(multiplyer):
-		global hp
+		global DGPlayer
 		isMiss = random.randint(1,6)
 		if isMiss == 5:
 			DGText.printScan(action + "{name} missed!".format(name=enemy))
 			DGText.printScan(DGText.success + "You took no damage!\n")
 		else:
 			enemyDamage = random.randint(enemyMinDamage, enemyMaxDamage) * DGPlayer.Inventory.absorbtion * multiplyer
-			hp = hp - enemyDamage
+			DGPlayer.hp = DGPlayer.hp - enemyDamage
 
 			DGText.printScan(DGText.rip + "{name} deals {damage} damage!"
 			.format(damage=round(enemyDamage), name=enemy))
 			time.sleep(0.4)
-			if hp < 0:
+			if DGPlayer.hp < 0:
 				combatLoop == False
 
-			isDead()
+			DGMain.isDead()
 
 
 	def playerDealDamage(enemyHP):
@@ -52,7 +51,6 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 		# a seperate one so it would work... :)
 
 		global hasCombatFinished
-		global hp
 		global combatLoop
 		global DGPlayer
 
@@ -105,7 +103,7 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 		songToPlay = random.choice(battleSongs)
 		DGMain.playSound(songToPlay, True)
 
-	global hp
+	global DGPlayer
 	DGText.printScan(DGText.rip + "You get in a battle with {enemy}!\n".format(enemy=enemy) + Style.RESET_ALL)
 	time.sleep(0.5)
 

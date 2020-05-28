@@ -61,3 +61,7 @@ def DGExit():
 	mainLoop = 0
 	EndScreen()
 	os._exit(1)
+
+def isDead():
+	if DGPlayer.hp < 0:
+		gameover()

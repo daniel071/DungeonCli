@@ -271,11 +271,6 @@ def removeFromList(list, removal):
 			index = index + 1
 
 
-def isDead():
-	if DGPlayer.hp < 0:
-		gameover()
-
-
 def gameover():
 	endThreads()
 	DGMain.playSound("Music/gameOver.ogg", False)
@@ -353,7 +348,7 @@ def damage(value):
 	global DGPlayer
 	DGPlayer.hp = DGPlayer.hp - value
 	DGText.printScan(rip + ("You lost " + str(round(value)) + " health! \n"))
-	isDead()
+	DGMain.isDead()
 
 
 def heal(value):
