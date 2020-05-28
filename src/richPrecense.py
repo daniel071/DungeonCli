@@ -1,19 +1,25 @@
 from pypresence import Presence
+from colorama import Fore, Back, Style
+from colorama import init
 import time
 
-client_id = '714997150941053028'  # Fake ID, put your real one here
+client_id = '714997150941053028'  # Yes, this is our ID.
+error = Style.BRIGHT + Fore.RED + "[!] "
 
 try:
 	RPC = Presence(client_id)  # Initialize the client class
 	RPC.connect() # Start the handshake loop
 except:
-	print("warning: discord isn't running or missing package?")
+	pass
 
 def init():
 	try:
 		RPC.update(state="Scene 0", details="A terminal-based dungeon game!", large_text="pavela.net:3000/Daniel/DungeonCli", large_image="epicterminal")  # Set the presence
 	except:
-		print("warning: discord isn't running or missing package?")
+		print(error + "There was an error while starting discord rich presence.")
+		print(Fore.WHITE + Style.BRIGHT + "Make sure you have discord open.")
+		time.sleep(1)
+
 def present(sceneNumber):
 	try:
 		global RPC

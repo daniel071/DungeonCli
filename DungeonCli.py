@@ -15,11 +15,7 @@ import random
 import os
 import sys
 import simpleaudio
-from Engine import *
-try:
-   from src import richPrecense
-except:
-    print("warning: missing package? or discord isn't running...")
+from src import richPrecense
 from src import multiplayer
 from simpleaudio import _simpleaudio
 from pydub import generators
@@ -47,7 +43,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 # --------------------------
 # |		Version!		|
 # --------------------------
-version = "Development Version 0.5.14"
+version = "Development Version 0.5.15"
 # --------------------------
 
 DGText.printScan("ok")
