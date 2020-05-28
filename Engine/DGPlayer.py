@@ -8,6 +8,9 @@ class Inventory:
 	# TODO: Add a evasian multiplyer!
 	# This will increase the change your enemy will miss!
 
+	coins = 0  # fucking poor cunt lmao.
+	hp = 100
+
 	matches = 1
 	sticks = 3
 

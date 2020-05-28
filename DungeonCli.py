@@ -52,8 +52,6 @@ developer = 0
 
 invalidCommands = 0
 mainLoop = 1
-coins = 0  # fucking poor cunt lmao.
-hp = 100
 # Events used for random stuff:
 
 # TODO: when 'wizardThatWantsToKillYou' is done, add it here
@@ -274,7 +272,7 @@ def removeFromList(list, removal):
 
 
 def isDead():
-	if hp < 0:
+	if DGPlayer.hp < 0:
 		gameover()
 
 
@@ -352,18 +350,18 @@ def ask(funcQuestion, answer1, answer2):
 
 
 def damage(value):
-	global hp
-	hp = hp - value
+	global DGPlayer
+	DGPlayer.hp = DGPlayer.hp - value
 	DGText.printScan(rip + ("You lost " + str(round(value)) + " health! \n"))
 	isDead()
 
 
 def heal(value):
-	global hp
-	hp = hp + value
+	global DGPlayer
+	DGPlayer.hp = DGPlayer.hp + value
 	DGText.printScan(DGText.success + ("You gained " + str(value) + " health! \n"))
-	if hp > 100:
-		hp = 100
+	if DGPlayer.hp > 100:
+		DGPlayer.hp = 100
 
 
 def bombTrapScene():
@@ -1141,22 +1139,22 @@ def start():
 
 def hpCheck():
 	# Displays different colour depending on hp
-	global hp
-	if hp > 100:
-		hp = 100
+	global DGPlayer
+	if DGPlayer.hp > 100:
+		DGPlayer.hp = 100
 
-	hp = round(hp)
+	DGPlayer.hp = round(DGPlayer.hp)
 
-	if hp > 70:
+	if DGPlayer.hp > 70:
 		DGText.printScan(
-			DGText.success + "You have {hp} out of {max} HP! \n".format(hp=hp, max=100))
+			DGText.success + "You have {hp} out of {max} HP! \n".format(hp=DGPlayer.hp, max=100))
 
-	elif hp > 35:
+	elif DGPlayer.hp > 35:
 		DGText.printScan(
-			action + "You have {hp} out of {max} HP! \n".format(hp=hp, max=100))
+			action + "You have {hp} out of {max} HP! \n".format(hp=DGPlayer.hp, max=100))
 
 	else:
-		DGText.printScan(rip + "You have {hp} out of {max} HP! \n".format(hp=hp, max=100))
+		DGText.printScan(rip + "You have {hp} out of {max} HP! \n".format(hp=DGPlayer.hp, max=100))
 
 
 def randomEvent():
