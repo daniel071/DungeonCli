@@ -1,3 +1,5 @@
+# Some common functions that are used
+
 from colorama import Fore, Back, Style
 from colorama import init
 from sys import platform

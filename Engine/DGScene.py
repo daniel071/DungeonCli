@@ -1,3 +1,4 @@
+# All the info about the scene
 
 canProgress = True
 current = 1 # the current scene

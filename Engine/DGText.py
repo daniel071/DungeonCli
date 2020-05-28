@@ -1,3 +1,5 @@
+# The text engine and various variables for styling messages
+
 import time
 from colorama import Fore, Back, Style
 from colorama import init

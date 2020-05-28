@@ -1,3 +1,5 @@
+# This holds the Inventory of the player
+
 class Inventory:
 	# TODO: Add a money multiplyer!
 	# You can spend coins on a coins multiplyer which will
