@@ -14,14 +14,9 @@ import time
 import random
 import os
 import sys
-import simpleaudio
 from src import richPrecense
 from src import multiplayer
 from Engine import *
-from simpleaudio import _simpleaudio
-from pydub import generators
-from pydub.playback import _play_with_simpleaudio
-import pydub
 from sys import stdout
 # from defKey import defKey
 from threading import Lock
@@ -50,13 +45,11 @@ version = "Development Version 0.5.15"
 # Define variables here:
 
 all_processes = []
-combatOverrideMusic = True
 
 # Used to prevent cheating:
 devPassword = "hackerman"
 developer = 0
 
-playMusic = True
 invalidCommands = 0
 mainLoop = 1
 coins = 0  # fucking poor cunt lmao.
@@ -91,8 +84,6 @@ CSSOptions = [["Matches", 5], ["Basic Healing Potion", 15],
 			  ["Iron Sword", 90],
 			  ["Advanced Healing Potion", 60], ["Poison Potion", 20]]
 
-battleSongs = ["Music/Ambient_fight_1.ogg", "Music/interstellar_space_dryer_2.ogg"]
-
 # 1 x Matches.
 # 3 x Sticks.
 # (no sword)
@@ -111,12 +102,7 @@ hasSeenAStore = False
 # Some useful stuff
 
 
-
-
 Scene = DGScene
-
-
-
 
 
 class quest:
@@ -292,22 +278,9 @@ def isDead():
 		gameover()
 
 
-def playSound(path, ifLoop):
-	global all_process
-	if playMusic == True:
-		if ifLoop is True:
-			playback = _play_with_simpleaudio(pydub.AudioSegment.from_ogg(path) * 20)
-		else:
-			playback = _play_with_simpleaudio(pydub.AudioSegment.from_ogg(path))
-
-		all_processes.append(playback)
-	else:
-		return "No music played"
-
-
 def gameover():
 	endThreads()
-	playSound("Music/gameOver.ogg", False)
+	DGMain.playSound("Music/gameOver.ogg", False)
 	DGMain.DGClear()
 	DGText.printScan(rip + "Your body is torn into shreads...")
 	time.sleep(2)
@@ -401,7 +374,7 @@ def bombTrapScene():
 	DGText.printScan(action + "It is odly quiet here... you begin to look around... \n")
 	time.sleep(2)
 
-	playSound("Sounds/explosion.ogg", False)
+	DGMain.playSound("Sounds/explosion.ogg", False)
 	DGText.printScan(rip + "BANG!")
 	time.sleep(1)
 	DGText.printScan(randomDialog.bombExplodes(randomDialog))
@@ -409,191 +382,9 @@ def bombTrapScene():
 	time.sleep(1)
 
 
-
-def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
-	global hp
-	global DGPlayer
-	global combatEnemyHP
-	global hasCombatFinished
-
-	hasCombatFinished = "no."
-
-
-	def finishUpMusic():
-		endThreads()
-		playSound("Music/quest.ogg", True)
-
-
-
-	def enemyDealDamage(multiplyer):
-		global hp
-		isMiss = random.randint(1,6)
-		if isMiss == 5:
-			DGText.printScan(action + "{name} missed!".format(name=enemy))
-			DGText.printScan(DGText.success + "You took no damage!\n")
-		else:
-			enemyDamage = random.randint(enemyMinDamage, enemyMaxDamage) * DGPlayer.Inventory.absorbtion * multiplyer
-			hp = hp - enemyDamage
-
-			DGText.printScan(rip + "{name} deals {damage} damage!"
-			.format(damage=round(enemyDamage), name=enemy))
-			time.sleep(0.4)
-			if hp < 0:
-				combatLoop == False
-
-			isDead()
-
-
-	def playerDealDamage(enemyHP):
-		# for some reason this function couldn't use enemyhp???? so I made
-		# a seperate one so it would work... :)
-
-		global hasCombatFinished
-		global hp
-		global combatLoop
-		global DGPlayer
-
-		isMiss = random.randint(1,7)
-		isCritical = random.randint(1, 5)
-		if isMiss == 1:
-			DGText.printScan(action + "You missed!")
-			DGText.printScan(rip + "You dealt no damage!")
-
-
-		else:
-			playerDamage = random.randint(5, 10)
-			playerDamage = playerDamage * DGPlayer.Inventory.damage
-			enemyHP = enemyHP - playerDamage
-
-			if isCritical == 1:
-				DGText.printScan(DGText.success + "Critical hit!")
-				DGText.printScan(DGText.success + "You deal double damage!\n")
-				playerDamage = playerDamage * 2
-
-			DGText.printScan(DGText.success + "You deal {damage} damage!".format(damage=round(playerDamage)))
-			time.sleep(0.2)
-
-			if enemyHP < 0:
-				combatLoop = False
-				DGText.printScan(DGText.success + "You DGText.successfully killed {name}\n"
-				.format(name=enemy))
-
-				time.sleep(0.4)
-
-				extraCoins = random.randint(25, 35)
-				addCoins(extraCoins)
-
-				combatLoop = False
-
-				finishUpMusic()
-
-				hasCombatFinished = "killed"
-
-		if combatOverrideMusic == False:
-			regenerated = random.randint(1000, 2000)
-			enemyHP = enemyHP + regenerated
-			DGText.printScan(rip + "The boss regenerated {amount} hp!".format(amount=regenerated))
-
-		return enemyHP
-
-
-	if combatOverrideMusic == True:
-		endThreads()
-		songToPlay = random.choice(battleSongs)
-		playSound(songToPlay, True)
-
-	global hp
-	DGText.printScan(rip + "You get in a battle with {enemy}!\n".format(enemy=enemy) + Style.RESET_ALL)
-	time.sleep(0.5)
-
-	questions = [
-		{
-			'type': 'list',
-			'name': 'userChoice',
-					'choices': ['Fight',
-								'Flee',
-								'Use item',
-								'Check HP'],
-			'message': 'What would you like to do?',
-		}
-	]
-
-	combatLoop = True
-	while combatLoop:
-		if hasCombatFinished == "killed":
-			combatLoop = False
-			return "killed"
-
-
-		print(Style.RESET_ALL)
-		answers = prompt(questions)
-		userInput = answers['userChoice']
-		if userInput == "Fight":
-			enemyDealDamage(1)
-			enemyHP = playerDealDamage(enemyHP)
-
-
-		elif userInput == "Flee":
-			attemptFlee = random.randint(1, 2)
-			if attemptFlee == 1:
-				DGText.printScan(action + "You tried to flee, but {name} caught you. \n"
-				.format(name=enemy))
-				enemyDealDamage(1.5)
-
-			else:
-				DGText.printScan(action + "You run away before {name} could catch you.\n"
-				.format(name=enemy))
-				combatLoop = False
-				time.sleep(0.4)
-
-				finishUpMusic()
-
-				return "flee"
-
-		elif userInput == "Use item":
-			potionQuestion = [
-				{
-					'type': 'list',
-					'name': 'userChoice',
-							'choices': ['Healing Potion',
-										'Poison Potion',],
-					'message': 'What potion type would you like to use?',
-				}
-			]
-
-			theAnswer = prompt(potionQuestion)
-			theEpicOption = theAnswer['userChoice']
-
-			if theEpicOption == "Healing Potion":
-				theOutput = healingPotion()
-				if theOutput != "notUsed":
-					if theOutput != 0:
-						i = 0
-						while i < theOutput:
-							enemyDealDamage(1)
-							i = i + 1
-
-
-			elif theEpicOption == "Poison Potion":
-				theOutput = usePoisonPotion()
-				if theOutput != 0:
-					# Saves current damage, multiplies it by 3 then sets it back.
-					originalDamage = DGPlayer.Inventory.damage
-					DGPlayer.Inventory.damage = DGPlayer.Inventory.damage * 3
-					playerDealDamage(enemyHP)
-					DGPlayer.Inventory.damage = originalDamage
-
-
-		elif userInput == "Check HP":
-			hpCheck()
-			DGText.printScan(action + "The enemy has {amount} hp!\n".format(amount=round(enemyHP)))
-			time.sleep(0.2)
-
-		print("")
-
 # Commands used
 def bossBattle():
-	global combatOverrideMusic
+	global Scene
 	global defprntspd
 	endThreads()
 	DGClear()
@@ -607,14 +398,14 @@ def bossBattle():
 	DGText.printScan(quote + "Nothing eh? You're too weak to defeat me,"
 	" and there's nothing that can stop me.\"\n")
 
-	playSound("Music/bossBattle.ogg", True)
+	DGMain.playSound("Music/bossBattle.ogg", True)
 
 	defprntspd = 0.7
 	print(Style.BRIGHT + Fore.WHITE)
 	DGText.printScan("\"goodbye.\"\n")
 	defprntspd = 0.013
 
-	combatOverrideMusic = False
+	Scene.combatOverrideMusic = False
 	bossLoop = True
 	while bossLoop == True:
 		theResult = combat("Boss", 25000, 1000, 1500)
@@ -628,7 +419,7 @@ def bossBattle():
 			time.sleep(1)
 
 		endThreads()
-		playSound("Music/bossBattle.ogg", True)
+		DGMain.playSound("Music/bossBattle.ogg", True)
 
 
 def bossSuccess():
@@ -636,7 +427,7 @@ def bossSuccess():
 
 	endThreads()
 	DGClear()
-	playSound("Music/endCredits.ogg", False)
+	DGMain.playSound("Music/endCredits.ogg", False)
 
 	message = """
 	__   __                     _       _
@@ -660,7 +451,7 @@ def bossSuccess():
 
 
 def options():
-	global playMusic
+	global DGMain
 	questions = [
 		{
 			'type': 'list',
@@ -683,16 +474,16 @@ def options():
 			DGText.printScan(action + "You exited the options menu\n")
 
 		elif userInput == "Toggle Music":
-			playMusic = not playMusic
-			if playMusic is False:
+			DGMain.playMusic = not DGMain.playMusic
+			if DGMain.playMusic is False:
 				endThreads()
 			else:
 				if Scene.current > 2:
-					playSound("Music/quest.ogg", True)
+					DGMain.playSound("Music/quest.ogg", True)
 				else:
-					playSound("Music/intro.ogg", True)
+					DGMain.playSound("Music/intro.ogg", True)
 
-			DGText.printScan("You toggled music to {value}\n".format(value=playMusic))
+			DGText.printScan("You toggled music to {value}\n".format(value=DGMain.playMsu))
 
 
 
@@ -940,7 +731,7 @@ def useMatch():
 		DGText.printScan(error + "You don't have any matches!\n")
 	elif Scene.surroundingsLit == True:
 		DGPlayer.Inventory.matches = DGPlayer.Inventory.matches - 1
-		playSound("Sounds/matchUse.ogg", False)
+		DGMain.playSound("Sounds/matchUse.ogg", False)
 		time.sleep(0.3)
 		DGText.printScan("You light a match. it begins to burn away.")
 		DGText.printScan(rip + "You used up one match. \n")
@@ -949,7 +740,7 @@ def useMatch():
 		Scene.description = "This place is in ruins, and it's possibly been like that for decades."
 		DGPlayer.Inventory.matches = DGPlayer.Inventory.matches - 1
 		Scene.surroundingsLit = True
-		playSound("Sounds/matchUse.ogg", False)
+		DGMain.playSound("Sounds/matchUse.ogg", False)
 		time.sleep(0.3)
 		DGText.printScan("You Light a match, your surroundings fill up with light. "
 			  "you can now see!")
@@ -1093,7 +884,7 @@ def start():
 
 			DGText.printScan(quote + 'Good luck." \n')
 			endThreads()
-			playSound("Music/quest.ogg", True)
+			DGMain.playSound("Music/quest.ogg", True)
 			time.sleep(1)
 
 			DGText.printScan(action + "He leaves the room and now, you're on your own. \n")
@@ -1550,7 +1341,7 @@ class Enemy:
 		del self
 
 	def startBattle(self):
-		combat(self.name, self.health, self.minDamage, self.maxDamage)
+		DGCombat.combat(self.name, self.health, self.minDamage, self.maxDamage)
 
 
 
@@ -1702,7 +1493,7 @@ def skipIntro():
 	Scene.current = 3
 	endThreads()
 
-	playSound("Music/quest.ogg", True)
+	DGMain.playSound("Music/quest.ogg", True)
 	addCoins(50)
 
 	global DGPlayer
@@ -1973,7 +1764,7 @@ if __name__ == '__main__':
 
 	# Play moosic
 	try:
-		playSound("Music/intro.ogg", True)
+		DGMain.playSound("Music/intro.ogg", True)
 	except:
 		DGClear()
 		DGText.printScan(error + "You need to have a ffmpeg installed for the music to work!")
@@ -2036,7 +1827,7 @@ if __name__ == '__main__':
 					DGText.printScan(hint + "MacOS and most linux distros have FFMPEG pre-installed.\n")
 
 			elif theValue == "Disable Music":
-				playMusic = False
+				DGMain.playMsu = False
 				askLoop = False
 				DGText.printScan(DGText.success + "Successfully disabled music.")
 

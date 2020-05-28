@@ -1,5 +1,6 @@
 # All the info about the scene
 
+combatOverrideMusic = True
 canProgress = True
 current = 1 # the current scene
 surroundingsLit = False # bro idk but the wizard must be able to see in the dark or something.
