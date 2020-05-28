@@ -4,6 +4,7 @@ from . import DGText
 from . import DGScene
 from . import DGMain
 from . import DGPlayer
+from . import DGPotion
 from colorama import Fore, Back, Style
 from colorama import init
 from PyInquirer import prompt, print_json
@@ -166,7 +167,7 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 			theEpicOption = theAnswer['userChoice']
 
 			if theEpicOption == "Healing Potion":
-				theOutput = healingPotion()
+				theOutput = DGPotion.healingPotion()
 				if theOutput != "notUsed":
 					if theOutput != 0:
 						i = 0
@@ -176,7 +177,7 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 
 
 			elif theEpicOption == "Poison Potion":
-				theOutput = usePoisonPotion()
+				theOutput = DGPotion.usePoisonPotion()
 				if theOutput != 0:
 					# Saves current damage, multiplies it by 3 then sets it back.
 					originalDamage = DGPlayer.Inventory.damage
