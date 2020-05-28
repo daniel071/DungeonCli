@@ -1,4 +1,4 @@
-class inventory:
+class Inventory:
 	# TODO: Add a money multiplyer!
 	# You can spend coins on a coins multiplyer which will
 	# multiply the amount of coins you get!
@@ -17,7 +17,7 @@ class inventory:
 
 	# Posion potion deals (a lot of damage) * Damage multiplyer
 	poisonPotion = 0
-	
+
 	sword = 0
 	damage = 1.0
 

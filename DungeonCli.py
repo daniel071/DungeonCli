@@ -405,14 +405,14 @@ def bombTrapScene():
 	DGText.printScan(rip + "BANG!")
 	time.sleep(1)
 	DGText.printScan(randomDialog.bombExplodes(randomDialog))
-	damage(random.randint(5, 15) * Inventory.absorbtion)
+	damage(random.randint(5, 15) * DGPlayer.Inventory.absorbtion)
 	time.sleep(1)
 
 
 
 def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 	global hp
-	global Inventory
+	global DGPlayer
 	global combatEnemyHP
 	global hasCombatFinished
 
@@ -432,7 +432,7 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 			DGText.printScan(action + "{name} missed!".format(name=enemy))
 			DGText.printScan(DGText.success + "You took no damage!\n")
 		else:
-			enemyDamage = random.randint(enemyMinDamage, enemyMaxDamage) * Inventory.absorbtion * multiplyer
+			enemyDamage = random.randint(enemyMinDamage, enemyMaxDamage) * DGPlayer.Inventory.absorbtion * multiplyer
 			hp = hp - enemyDamage
 
 			DGText.printScan(rip + "{name} deals {damage} damage!"
@@ -451,7 +451,7 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 		global hasCombatFinished
 		global hp
 		global combatLoop
-		global inventory
+		global DGPlayer
 
 		isMiss = random.randint(1,7)
 		isCritical = random.randint(1, 5)
@@ -462,7 +462,7 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 
 		else:
 			playerDamage = random.randint(5, 10)
-			playerDamage = playerDamage * Inventory.damage
+			playerDamage = playerDamage * DGPlayer.Inventory.damage
 			enemyHP = enemyHP - playerDamage
 
 			if isCritical == 1:
@@ -578,10 +578,10 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 				theOutput = usePoisonPotion()
 				if theOutput != 0:
 					# Saves current damage, multiplies it by 3 then sets it back.
-					originalDamage = Inventory.damage
-					Inventory.damage = Inventory.damage * 3
+					originalDamage = DGPlayer.Inventory.damage
+					DGPlayer.Inventory.damage = DGPlayer.Inventory.damage * 3
 					playerDealDamage(enemyHP)
-					Inventory.damage = originalDamage
+					DGPlayer.Inventory.damage = originalDamage
 
 
 		elif userInput == "Check HP":
@@ -739,7 +739,7 @@ def load_game():
 	global coins
 	global Sword
 	global armour
-	global Inventory
+	global DGPlayer
 	global events
 	global Scene
 	global surroundingsLit
@@ -785,38 +785,38 @@ def checkCoins():
 def openInventory():
 	DGText.printScan(DGText.success + "Inventory:")
 
-	DGText.printScan(DGText.success + "Your damage inflicted multipler is {m}x".format(m=Inventory.damage))
-	DGText.printScan(DGText.success + "Your damage taken multiplyer is {p}x\n".format(p=Inventory.absorbtion))
+	DGText.printScan(DGText.success + "Your damage inflicted multipler is {m}x".format(m=DGPlayer.Inventory.damage))
+	DGText.printScan(DGText.success + "Your damage taken multiplyer is {p}x\n".format(p=DGPlayer.Inventory.absorbtion))
 
 	count = 0
-	if Inventory.matches != 0:
-		DGText.printScan(str(Inventory.matches) + " x Matches")
+	if DGPlayer.Inventory.matches != 0:
+		DGText.printScan(str(DGPlayer.Inventory.matches) + " x Matches")
 
-	if Inventory.sticks != 0:
-		DGText.printScan(str(Inventory.sticks) + " x Sticks")
+	if DGPlayer.Inventory.sticks != 0:
+		DGText.printScan(str(DGPlayer.Inventory.sticks) + " x Sticks")
 
-	if Inventory.basicHealingPotion != 0:
-		DGText.printScan(str(Inventory.basicHealingPotion) + " x Basic Healing Potion")
+	if DGPlayer.Inventory.basicHealingPotion != 0:
+		DGText.printScan(str(DGPlayer.Inventory.basicHealingPotion) + " x Basic Healing Potion")
 
-	if Inventory.advancedHealingPotion !=0:
-		DGText.printScan(str(Inventory.advancedHealingPotion) + " x Advanced Healing Potion")
+	if DGPlayer.Inventory.advancedHealingPotion !=0:
+		DGText.printScan(str(DGPlayer.Inventory.advancedHealingPotion) + " x Advanced Healing Potion")
 
-	if Inventory.poisonPotion !=0:
-		DGText.printScan(str(Inventory.poisonPotion) + " x Poison Healing Potion")
+	if DGPlayer.Inventory.poisonPotion !=0:
+		DGText.printScan(str(DGPlayer.Inventory.poisonPotion) + " x Poison Healing Potion")
 
-	if Inventory.sword == 1:
+	if DGPlayer.Inventory.sword == 1:
 		DGText.printScan("Wooden Sword")
 
-	if Inventory.sword == 2:
+	if DGPlayer.Inventory.sword == 2:
 		DGText.printScan("Stone Sword")
 
-	if Inventory.sword == 3:
+	if DGPlayer.Inventory.sword == 3:
 		DGText.printScan("Iron Sword")
 
-	elif Inventory.armour == 1:
+	elif DGPlayer.Inventory.armour == 1:
 		DGText.printScan("Copper Armour")
 
-	elif Inventory.armour == 2:
+	elif DGPlayer.Inventory.armour == 2:
 		DGText.printScan("Iron Armour")
 
 
@@ -833,47 +833,47 @@ def purchase(storeSelected, id):
 	price = storeSelected[id][1]
 	if coins >= price:
 		if item == "Matches":
-			Inventory.matches = Inventory.matches + 1
+			DGPlayer.Inventory.matches = DGPlayer.Inventory.matches + 1
 		elif item == "Basic Healing Potion":
-			Inventory.basicHealingPotion = Inventory.basicHealingPotion + 1
+			DGPlayer.Inventory.basicHealingPotion = DGPlayer.Inventory.basicHealingPotion + 1
 
 		elif item == "Advanced Healing Potion":
-			Inventory.advancedHealingPotion = Inventory.advancedHealingPotion + 1
+			DGPlayer.Inventory.advancedHealingPotion = DGPlayer.Inventory.advancedHealingPotion + 1
 
 		elif item == "Poison Potion":
-			Inventory.poisonPotion = Inventory.poisonPotion + 1
+			DGPlayer.Inventory.poisonPotion = DGPlayer.Inventory.poisonPotion + 1
 
 		elif item == "Copper Armour":
-			if Inventory.armour == 1:
+			if DGPlayer.Inventory.armour == 1:
 				DGText.printScan(error + "You already have this item!\n")
 				return "bruh"
 			else:
-				Inventory.armour = 1
-				Inventory.absorbtion = 0.8
+				DGPlayer.Inventory.armour = 1
+				DGPlayer.Inventory.absorbtion = 0.8
 
 		elif item == "Iron Armour":
-			if Inventory.armour == 2:
+			if DGPlayer.Inventory.armour == 2:
 				DGText.printScan(error + "You already have this item!\n")
 				return "bruh"
 			else:
-				Inventory.armour = 2
-				Inventory.absorbtion = 0.6
+				DGPlayer.Inventory.armour = 2
+				DGPlayer.Inventory.absorbtion = 0.6
 
 		elif item == "Stone Sword":
-			if Inventory.sword == 2:
+			if DGPlayer.Inventory.sword == 2:
 				DGText.printScan(error + "You already have this item!\n")
 				return "bruh"
 			else:
-				Inventory.sword = 2
-				Inventory.damage = 1.4
+				DGPlayer.Inventory.sword = 2
+				DGPlayer.Inventory.damage = 1.4
 
 		elif item == "Iron Sword":
-			if Inventory.sword == 3:
+			if DGPlayer.Inventory.sword == 3:
 				DGText.printScan(error + "You already have this item!\n")
 				return "bruh"
 			else:
-				Inventory.sword = 3
-				Inventory.damage = 1.7
+				DGPlayer.Inventory.sword = 3
+				DGPlayer.Inventory.damage = 1.7
 
 
 		DGText.printScan(action + "You purchased {item} for {price} coins!\n"
@@ -887,7 +887,7 @@ def openStore():
 	initStore()
 	DGText.printScan("You entered the store!")
 	global CSSOptions
-	global Inventory
+	global DGPlayer
 	global coins
 	global Scene
 	DGText.printScan("------------------")
@@ -932,14 +932,14 @@ def openStore():
 
 
 def useMatch():
-	global Inventory
+	global DGPlayer
 	global surroundingsLit
 	global Scene
 
-	if Inventory.matches == 0:
+	if DGPlayer.Inventory.matches == 0:
 		DGText.printScan(error + "You don't have any matches!\n")
 	elif Scene.surroundingsLit == True:
-		Inventory.matches = Inventory.matches - 1
+		DGPlayer.Inventory.matches = DGPlayer.Inventory.matches - 1
 		playSound("Sounds/matchUse.ogg", False)
 		time.sleep(0.3)
 		DGText.printScan("You light a match. it begins to burn away.")
@@ -947,7 +947,7 @@ def useMatch():
 
 	elif Scene.surroundingsLit == False:
 		Scene.description = "This place is in ruins, and it's possibly been like that for decades."
-		Inventory.matches = Inventory.matches - 1
+		DGPlayer.Inventory.matches = DGPlayer.Inventory.matches - 1
 		Scene.surroundingsLit = True
 		playSound("Sounds/matchUse.ogg", False)
 		time.sleep(0.3)
@@ -962,7 +962,7 @@ def useMatch():
 
 def start():
 	global Scene
-	global Inventory
+	global DGPlayer
 
 	Scene.storeSelected = []
 
@@ -975,7 +975,7 @@ def start():
 		DGText.printScan(
 			"Check your Inventory, you might have something to \nimprove your vision...\n")
 		time.sleep(1)
-		if Inventory.matches < 1:
+		if DGPlayer.Inventory.matches < 1:
 			DGText.printScan(rip + "You don't have any matches left!")
 			time.sleep(1)
 			DGText.printScan(rip + "There's no way to light this room.")
@@ -1049,8 +1049,8 @@ def start():
 			DGText.printScan(DGText.success + "You recieved a basic Healing Potion.")
 			addCoins(50)
 
-			Inventory.basicHealingPotion = Inventory.basicHealingPotion + 1
-			Inventory.damage = 1.2
+			DGPlayer.Inventory.basicHealingPotion = DGPlayer.Inventory.basicHealingPotion + 1
+			DGPlayer.Inventory.damage = 1.2
 			Inventory.sword = 1
 			Scene.current = Scene.current + 1
 			time.sleep(2)
@@ -1588,11 +1588,11 @@ def pickCoins():
 
 
 def usePoisonPotion():
-	global Inventory
+	global DGPlayer
 	theResult = 0
-	if Inventory.poisonPotion != 0:
+	if DGPlayer.Inventory.poisonPotion != 0:
 		DGText.printScan(DGText.success + "You have {amount} poison potions."
-		.format(amount=Inventory.poisonPotion))
+		.format(amount=DGPlayer.Inventory.poisonPotion))
 
 	questions = [
 		{
@@ -1617,10 +1617,10 @@ def usePoisonPotion():
 
 
 		elif userInput == "Poison Potion":
-			if Inventory.poisonPotion > 0:
+			if DGPlayer.Inventory.poisonPotion > 0:
 				theResult = theResult + 1
 				DGText.printScan(rip + "You used up 1 poison potion")
-				Inventory.poisonPotion = Inventory.poisonPotion - 1
+				DGPlayer.Inventory.poisonPotion = DGPlayer.Inventory.poisonPotion - 1
 				time.sleep(0.4)
 
 			else:
@@ -1628,19 +1628,19 @@ def usePoisonPotion():
 
 
 def healingPotion():
-	global Inventory
+	global DGPlayer
 	theResult = 0
 
 
-	if Inventory.basicHealingPotion != 0:
+	if DGPlayer.Inventory.basicHealingPotion != 0:
 		DGText.printScan(DGText.success + "You have {amount} basic healing potions."
-		.format(amount=Inventory.basicHealingPotion))
+		.format(amount=DGPlayer.Inventory.basicHealingPotion))
 
-	if Inventory.advancedHealingPotion != 0:
+	if DGPlayer.Inventory.advancedHealingPotion != 0:
 		DGText.printScan(DGText.success + "You have {amount} advanced healing potions."
-		.format(amount=Inventory.advancedHealingPotion))
+		.format(amount=DGPlayer.Inventory.advancedHealingPotion))
 
-	if Inventory.basicHealingPotion == 0 and Inventory.advancedHealingPotion == 0:
+	if DGPlayer.Inventory.basicHealingPotion == 0 and DGPlayer.Inventory.advancedHealingPotion == 0:
 		DGText.printScan(DGText.error + "You don't have any potions!")
 		askLoop = False
 		return "notUsed"
@@ -1675,10 +1675,10 @@ def healingPotion():
 
 
 		elif userInput == "Basic Healing Potion":
-			if Inventory.basicHealingPotion > 0:
+			if DGPlayer.Inventory.basicHealingPotion > 0:
 				theResult = theResult + 1
 				DGText.printScan(rip + "You used up 1 basic healing potion")
-				Inventory.basicHealingPotion = Inventory.basicHealingPotion - 1
+				DGPlayer.Inventory.basicHealingPotion = DGPlayer.Inventory.basicHealingPotion - 1
 				heal(20)
 				time.sleep(0.4)
 
@@ -1687,10 +1687,10 @@ def healingPotion():
 
 
 		elif userInput == "Advanced Healing Potion":
-			if Inventory.advancedHealingPotion > 0:
+			if DGPlayer.Inventory.advancedHealingPotion > 0:
 				theResult = theResult + 1
 				DGText.printScan(rip + "You used up 1 advanced healing potion")
-				Inventory.advancedHealingPotion = Inventory.advancedHealingPotion - 1
+				DGPlayer.Inventory.advancedHealingPotion = DGPlayer.Inventory.advancedHealingPotion - 1
 				heal(50)
 				time.sleep(0.4)
 
@@ -1705,11 +1705,11 @@ def skipIntro():
 	playSound("Music/quest.ogg", True)
 	addCoins(50)
 
-	global Inventory
+	global DGPlayer
 	Scene.surroundingsLit = True
-	Inventory.basicHealingPotion = Inventory.basicHealingPotion + 1
-	Inventory.damage = 1.2
-	Inventory.sword = 1
+	DGPlayer.Inventory.basicHealingPotion = DGPlayer.Inventory.basicHealingPotion + 1
+	DGPlayer.Inventory.damage = 1.2
+	DGPlayer.Inventory.sword = 1
 	quest.add("Obtain the Great Stone of Knowledge.")
 
 def useSticks():
@@ -1825,7 +1825,7 @@ def nextScene():
 		DGText.printScan(hint + "maybe try 'look' and see what you find...)\n" + Style.RESET_ALL)
 
 def main():
-	global Inventory
+	global DGPlayer
 	detect_system()
 	#defKey.stop()
 	command = input(DGText.askPrompt + "[Action] " + Style.RESET_ALL)
@@ -1938,13 +1938,13 @@ def main():
 	elif command in ("plsop", "please make me OP"):
 		if passwordPrompt() == "granted":
 			addCoins(1000)
-			Inventory.basicHealingPotion = 50
-			Inventory.advancedHealingPotion = 50
-			Inventory.poisonPotion = 50
-			Inventory.sword = 2
-			Inventory.damage = 1000.0
-			Inventory.armour = 1
-			Inventory.absorbtion = 0.01
+			DGPlayer.Inventory.basicHealingPotion = 50
+			DGPlayer.Inventory.advancedHealingPotion = 50
+			DGPlayer.Inventory.poisonPotion = 50
+			DGPlayer.Inventory.sword = 2
+			DGPlayer.Inventory.damage = 1000.0
+			DGPlayer.Inventory.armour = 1
+			DGPlayer.Inventory.absorbtion = 0.01
 
 	elif command in ("cls", "clear", "clear screen"):
 		DGClear()
