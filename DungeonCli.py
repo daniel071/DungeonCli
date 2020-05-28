@@ -361,11 +361,11 @@ def bombTrapScene():
 # Commands used
 def bossBattle():
 	global Scene
-	global defprntspd
+	global DGText
 	endThreads()
 	DGClear()
 
-	defprntspd = 0.05
+	DGText.printspeed = 0.05
 
 	DGText.printScan(action + "The door behind you closes. There is no escape.")
 	time.sleep(2)
@@ -376,10 +376,10 @@ def bossBattle():
 
 	DGMain.playSound("Music/bossBattle.ogg", True)
 
-	defprntspd = 0.7
+	DGText.printspeed = 0.7
 	print(Style.BRIGHT + Fore.WHITE)
 	DGText.printScan("\"goodbye.\"\n")
-	defprntspd = 0.013
+	DGText.printspeed = 0.013
 
 	Scene.combatOverrideMusic = False
 	bossLoop = True

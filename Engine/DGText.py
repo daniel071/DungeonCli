@@ -4,6 +4,7 @@ import time
 from colorama import Fore, Back, Style
 from colorama import init
 
+printspeed = 0.013
 success = Style.BRIGHT + Fore.GREEN + "==> "
 rip = Style.BRIGHT + Fore.RED + "==> "
 question = Style.BRIGHT + Fore.YELLOW + "[?] "
@@ -15,7 +16,7 @@ info = Style.BRIGHT + Fore.WHITE + "==> " + Style.RESET_ALL
 askPrompt = Style.BRIGHT + Fore.CYAN
 
 def printScan(toPrint):
-	printspeed = 0.013
+	global printspeed
 
 	for letter in toPrint:
 		print(letter, end='', flush=True)
