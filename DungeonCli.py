@@ -367,7 +367,7 @@ def bossBattle():
 
 
 def bossSuccess():
-	global defprntspd
+	global DGText
 
 	endThreads()
 	DGClear()
@@ -387,7 +387,7 @@ def bossSuccess():
 	" the rebellion was dismantled, letting the town recover!\n" + Style.RESET_ALL)
 	time.sleep(2)
 
-	defprntspd = 0.008
+	DGText.printspeed
 	creditScreen()
 	time.sleep(2)
 	DGExit()
