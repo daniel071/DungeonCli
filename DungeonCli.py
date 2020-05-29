@@ -18,7 +18,6 @@ from src import richPrecense
 from src import multiplayer
 from Engine import *
 from sys import stdout
-# from defKey import defKey
 from threading import Lock
 # import multiprocessing # DANIEL YOU CUNK :) PLS USE THREADS!!
 					   # ONCE I FIGURE OUT HOW TO END THREADS, XENTHIO!
@@ -39,7 +38,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 # --------------------------
 # |		Version!		|
 # --------------------------
-version = "Development Version 0.5.15"
+version = "Development Version 0.5.16"
 # --------------------------
 
 # Define variables here:
@@ -88,9 +87,6 @@ CSSOptions = [["Matches", 5], ["Basic Healing Potion", 15],
 # No healing potions
 # No Armour
 
-
-
-
 # theCombatHasNotFinished! alsoICanTalkInCamelCaseMakesSenseRight?
 hasCombatFinished = "no."
 hasSeenAStore = False
@@ -99,9 +95,7 @@ hasSeenAStore = False
 
 # Some useful stuff
 
-
 Scene = DGScene
-
 
 class quest:
 	quests = []
@@ -115,7 +109,6 @@ class quest:
 			DGText.printScan(Style.BRIGHT + Fore.CYAN + theQuest)
 
 		print(Style.RESET_ALL)
-
 
 
 class randomDialog:
@@ -178,31 +171,6 @@ def initRandomRoom():
 	b = random.randint(1,10)
 	if b == 2:
 		Scene.surroundingsLit == False
-
-
-
-
-
-
-
-
-# class inputDetector:
-# 	def __init__(self):
-# 		self._running = True
-#
-# 	def terminate(self):
-# 		self._running = False
-#
-# 	def run(self, n):
-# 		while self._running and n > 0:
-# 			global printspeed
-# 			if kbhit() == true:
-# 				printspeed = 0.00001
-# Define functions here:
-
-
-
-
 
 
 def invalidCommand():
@@ -1281,11 +1249,6 @@ class Enemy:
 		self.name = name
 		self.minDamage = minDamage
 		self.maxDamage = maxDamage
-
-	# NOTE: This code would run, even if you would've fleed or died.
-	# NOTE: That's why I've commented this out.
-	# def __del__(self):
-	# 	DGText.printScan("%s has died" % (self.name))
 
 	def takeDamage(self, damage):
 		self.health -= damage
