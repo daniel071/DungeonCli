@@ -387,7 +387,7 @@ def bossSuccess():
 	" the rebellion was dismantled, letting the town recover!\n" + Style.RESET_ALL)
 	time.sleep(2)
 
-	DGText.printspeed = 0.008
+	DGText.printspeed = 0.007
 	creditScreen()
 	time.sleep(2)
 	DGExit()
