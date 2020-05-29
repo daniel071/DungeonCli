@@ -1575,7 +1575,7 @@ if __name__ == '__main__':
 		DGMain.playSound("Music/intro.ogg", True)
 	except:
 		DGClear()
-		DGText.printScan(error + "You need to have a ffmpeg installed for the music to work!")
+		DGText.printScan(DGText.error + "You need to have a ffmpeg installed for the music to work!")
 		askLoop = True
 		questions = [
 			{
@@ -1598,29 +1598,29 @@ if __name__ == '__main__':
 					DGText.printScan("NOTE: This installation requires Administrative priviledges"
 					" because it needs to add ffmpeg to the path!\n")
 
-					print(action + "Creating directories - 1/3..." + Style.RESET_ALL)
+					print(DGText.action + "Creating directories - 1/3..." + Style.RESET_ALL)
 					os.system('md "%userprofile%\\ffmpeg')
 
 					print(" ")
-					print(action + "Downloading FFMPEG - 2/3..." + Style.RESET_ALL)
-					print(action + "File 1 out of 3..." + Style.RESET_ALL)
+					print(DGText.action + "Downloading FFMPEG - 2/3..." + Style.RESET_ALL)
+					print(DGText.action + "File 1 out of 3..." + Style.RESET_ALL)
 					os.system('certutil.exe -urlcache -split -f "https://github.com/daniel071/ffmpeg-builds/releases/download/v1.0.0/ffmpeg.exe" "%userprofile%\\ffmpeg\\ffmpeg.exe"')
 
 					print(" ")
-					print(action + "File 2 out of 3..." + Style.RESET_ALL)
+					print(DGText.action + "File 2 out of 3..." + Style.RESET_ALL)
 					os.system('certutil.exe -urlcache -split -f "https://github.com/daniel071/ffmpeg-builds/releases/download/v1.0.0/ffplay.exe" "%userprofile%\\ffmpeg\\ffplay.exe"')
 
 					print(" ")
-					print(action + "File 3 out of 3..." + Style.RESET_ALL)
+					print(DGText.action + "File 3 out of 3..." + Style.RESET_ALL)
 					os.system('certutil.exe -urlcache -split -f "https://github.com/daniel071/ffmpeg-builds/releases/download/v1.0.0/ffprobe.exe" "%userprofile%\\ffmpeg\\ffprobe.exe"')
 
 					print(" ")
-					print(action + "Adding FFMPEG to Path - 3/3..." + Style.RESET_ALL)
+					print(DGText.action + "Adding FFMPEG to Path - 3/3..." + Style.RESET_ALL)
 
-					print(action + "Installing dependencies..." + Style.RESET_ALL)
+					print(DGText.action + "Installing dependencies..." + Style.RESET_ALL)
 					os.system('pip install pywin32')
 
-					print(action + "Adding to path..." + Style.RESET_ALL)
+					print(DGText.action + "Adding to path..." + Style.RESET_ALL)
 					import win32com.shell.shell as shell
 					commands = 'setx path "%path%;%userprofile%\\ffmpeg\\"'
 					shell.ShellExecuteEx(lpVerb='runas', lpFile='cmd.exe', lpParameters='/c '+commands)
@@ -1629,10 +1629,10 @@ if __name__ == '__main__':
 					DGText.printScan(Style.BRIGHT + Fore.BLUE + "NOTE: You must restart the command prompt"
 					" so that the path would update!")
 				else:
-					DGText.printScan(error + "This script is not made for unix systems,"
-					" if you have issues with music, please open an issue on github.")
+					DGText.printScan(DGText.error + "This script is not made for unix systems,"
+					" if you have issues with music, please open an issue on gitea.")
 					time.sleep(1)
-					DGText.printScan(hint + "MacOS and most linux distros have FFMPEG pre-installed.\n")
+					DGText.printScan(DGText.hint + "MacOS and most linux distros have FFMPEG pre-installed.\n")
 
 			elif theValue == "Disable Music":
 				DGMain.playMusic = False
