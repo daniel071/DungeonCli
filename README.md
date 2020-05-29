@@ -12,10 +12,10 @@ There is another depreciated version, made with swift at the `swift-rewrite` bra
 ## Installation:
 
 For Installation instructions, look at
-[here](/Installation.md)
+[here](http://pavela.net:3000/Daniel/DungeonCli/src/branch/master/Docs/Installation.md)
 
 For Server setup, look at
-[here](/Severs.md)
+[here](http://pavela.net:3000/Daniel/DungeonCli/src/branch/master/Docs/Servers.md)
 
 
 ---
