@@ -57,25 +57,25 @@ def healingPotion():
 		elif userInput == "Basic Healing Potion":
 			if DGPlayer.Inventory.basicHealingPotion > 0:
 				theResult = theResult + 1
-				DGText.printScan(rip + "You used up 1 basic healing potion")
+				DGText.printScan(DGText.rip + "You used up 1 basic healing potion")
 				DGPlayer.Inventory.basicHealingPotion = DGPlayer.Inventory.basicHealingPotion - 1
 				heal(20)
 				time.sleep(0.4)
 
 			else:
-				DGText.printScan(error + "You don't have any basic healing potions!\n")
+				DGText.printScan(DGText.error + "You don't have any basic healing potions!\n")
 
 
 		elif userInput == "Advanced Healing Potion":
 			if DGPlayer.Inventory.advancedHealingPotion > 0:
 				theResult = theResult + 1
-				DGText.printScan(rip + "You used up 1 advanced healing potion")
+				DGText.printScan(DGText.rip + "You used up 1 advanced healing potion")
 				DGPlayer.Inventory.advancedHealingPotion = DGPlayer.Inventory.advancedHealingPotion - 1
 				heal(50)
 				time.sleep(0.4)
 
 			else:
-				DGText.printScan(error + "You don't have any advanced healing potions!\n")
+				DGText.printScan(DGText.error + "You don't have any advanced healing potions!\n")
 
 
 def usePoisonPotion():
@@ -110,9 +110,9 @@ def usePoisonPotion():
 		elif userInput == "Poison Potion":
 			if DGPlayer.Inventory.poisonPotion > 0:
 				theResult = theResult + 1
-				DGText.printScan(rip + "You used up 1 poison potion")
+				DGText.printScan(DGText.rip + "You used up 1 poison potion")
 				DGPlayer.Inventory.poisonPotion = DGPlayer.Inventory.poisonPotion - 1
 				time.sleep(0.4)
 
 			else:
-				DGText.printScan(error + "You don't have any poison potions!")
+				DGText.printScan(DGText.error + "You don't have any poison potions!")
