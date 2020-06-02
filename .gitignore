@@ -6,4 +6,5 @@ builds
 *.build
 *.dist
 .Builds/DungeonCli_osx
-__pycache__ 
+__pycache__
+projectfile
