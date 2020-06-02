@@ -1402,9 +1402,11 @@ def creditScreen():
 
 	time.sleep(1)
 	print("----".center(width, ' '))
-	DGText.printScan("Self Promotion from Sine.".center(width,' '))
+	DGText.printScan("Self Promotion from Sine:".center(width,' '))
 	DGText.printScan(("Youtube: " + Fore.CYAN + "https://www.youtube.com/channel/UCAK1pG_qcgqJd9d7BnayRtg" +
 	Style.RESET_ALL).center(b - 1,' ')) # SELF PROMO LOOLLL
+	DGText.printScan("Self Promotion from AsianPotato77:".center(b - 1,' '))
+	DGText.printScan(("SoundCloud:" + Fore.CYAN + "https://soundcloud.com/s-z-174676229").center(b - 1,' ') + Style.RESET_ALL)
 
 
 	print("-".center(width,'-'))
