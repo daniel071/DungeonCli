@@ -1244,7 +1244,7 @@ def randomEvent():
 					DGText.printScan(DGText.rip + "You open the chest and find nothing.")
 					DGText.printScan(DGText.action + "You move on...\n")
 
-				else
+				else:
 					# It's a bomb!
 					DGText.printScan(DGText.action + "You open the chest and find nothing.")
 					DGText.printScan(DGText.action + "You hear a sound...")
