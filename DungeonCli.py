@@ -880,7 +880,7 @@ def start():
 
 		elif Scene.current == 7:
 			# randomEvent() # random event here made some things confusing to a tester.
-			print("This room is rather large. you should take a look around it.\n")
+			DGText.printScan(Style.BRIGHT + Fore.WHITE + "This room is rather large. you should take a look around it.\n")
 			Scene.canProgress = False
 			Scene.current = Scene.current + 1
 			Scene.description = "This room large and bare, but an old and dried up fountain lays ahead.\nA few coins lay scattered across the bottom, maybe you can pick them up? But however a single loose red brick in the wall north to you catches your eye..."
