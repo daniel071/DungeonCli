@@ -1,4 +1,4 @@
-# NOTE: JOIN THE DISCORD: https://discord.gg/eAUqKKe 
+# NOTE: JOIN THE DISCORD: https://discord.gg/eAUqKKe
 
 # DungeonCli is a terminal based program where you get to explore places and
 # earn coins. You can spend those coins on various items, have fun!
@@ -55,7 +55,7 @@ mainLoop = 1
 
 # TODO: when 'wizardThatWantsToKillYou' is done, add it here
 events = ["store", "store", "store", "randomFight", "none", "none", "none", "bombTrap",
-"treasure", "treasure"]
+"treasure", "treasure", "unknownCrate"]
 
 # You deal more damage with the better sword you have, for example,
 # having a stone sword deals 40% more damage then no sword.
@@ -886,16 +886,16 @@ def start():
 			Scene.description = "This room large and bare, but an old and dried up fountain lays ahead.\nA few coins lay scattered across the bottom, maybe you can pick them up? But however a single loose red brick in the wall north to you catches your eye..."
 
 		elif Scene.current == 8:
-			DGText.printScan(action + "You walk towards the massive door, slightly nervous"
+			DGText.printScan(DGText.action + "You walk towards the massive door, slightly nervous"
 			" about what you'll find there.")
 			time.sleep(1.5)
-			DGText.printScan(action + "A giant spider appears!")
+			DGText.printScan(DGText.action + "A giant spider appears!")
 			time.sleep(0.7)
-			DGText.printScan(rip + "The spider spit acid on you!")
+			DGText.printScan(DGText.rip + "The spider spit acid on you!")
 			time.sleep(0.6)
 			damage(15)
 			time.sleep(0.5)
-			DGText.printScan(action + "There's nothing you can do other than fight!")
+			DGText.printScan(DGText.action + "There's nothing you can do other than fight!")
 			spiderLoop = True
 			while spiderLoop == True:
 				# Start battle with 'Giant Spider'
@@ -1094,8 +1094,8 @@ def randomEvent():
 	if len(events) > 0:
 		selection = random.choice(events)
 		if selection == "store":
-			DGText.printScan(action + "You find a small store setup here")
-			DGText.printScan(action + "Maybe they'll have something useful here..\n")
+			DGText.printScan(DGText.action + "You find a small store setup here")
+			DGText.printScan(DGText.action + "Maybe they'll have something useful here..\n")
 			Scene.description = Scene.description + " " + randomDialog.store(randomDialog)
 			questions = [
 				{
@@ -1111,23 +1111,23 @@ def randomEvent():
 			if theSelection is True:
 				theLuck = random.randint(1, 5)
 				if theLuck == 1:
-					DGText.printScan(action + 'You knock on the door and ask to enter...')
+					DGText.printScan(DGText.action + 'You knock on the door and ask to enter...')
 					time.sleep(2)
 
-					DGText.printScan(action + "Nobody responds...")
+					DGText.printScan(DGText.action + "Nobody responds...")
 					time.sleep(0.8)
-					DGText.printScan(action + "As you begin to walk away, you hear a slight hissing sound")
+					DGText.printScan(DGText.action + "As you begin to walk away, you hear a slight hissing sound")
 					time.sleep(0.8)
-					DGText.printScan(rip + "A snake is trying to bite you!\n")
+					DGText.printScan(DGText.rip + "A snake is trying to bite you!\n")
 					time.sleep(0.8)
 					DGCombat.combat("Snake", 20, 5, 15)
 
 				else:
-					DGText.printScan(action + 'You knock on the door and ask to enter...')
+					DGText.printScan(DGText.action + 'You knock on the door and ask to enter...')
 					time.sleep(2)
 
 					# DGText.printScan(randomDialog.store(randomDialog))
-					DGText.printScan(quote + 'Greetings! This place is in ruins however,'
+					DGText.printScan(DGText.quote + 'Greetings! This place is in ruins however,'
 					' I was able to setup a small store from the remains!"')
 					time.sleep(0.8)
 					openStore()
@@ -1135,14 +1135,14 @@ def randomEvent():
 
 
 			else:
-				DGText.printScan(action + "This seems too risky... you prepare to leave...\n")
+				DGText.printScan(DGText.action + "This seems too risky... you prepare to leave...\n")
 
 		elif selection == "randomFight":
-			DGText.printScan(action + "You hear a movement -- you freeze")
+			DGText.printScan(DGText.action + "You hear a movement -- you freeze")
 			time.sleep(0.6)
-			DGText.printScan(action + "Someone is trying to attack you,")
+			DGText.printScan(DGText.action + "Someone is trying to attack you,")
 			time.sleep(0.6)
-			DGText.printScan(action + "It's too late to avoid a fight now!\n")
+			DGText.printScan(DGText.action + "It's too late to avoid a fight now!\n")
 			time.sleep(0.6)
 			randomEnemy()
 
@@ -1155,17 +1155,17 @@ def randomEvent():
 
 		elif selection == "wizardThatWantsToKillYou":
 			#TODO: Finish this!
-			DGText.printScan(quote + 'You. You have the information you need.\n'
+			DGText.printScan(DGText.quote + 'You. You have the information you need.\n'
 				  '')
 			pass
 
 		elif selection == "treasure":
 
-			DGText.printScan(action + "A massive Vault stands in this room.")
+			DGText.printScan(DGText.action + "A massive Vault stands in this room.")
 			time.sleep(1)
-			DGText.printScan(action + "Something useful might be in it...")
+			DGText.printScan(DGText.action + "Something useful might be in it...")
 			time.sleep(1)
-			DGText.printScan(action + "Perhaps you could try break into it...\n")
+			DGText.printScan(DGText.action + "Perhaps you could try break into it...\n")
 			time.sleep(1)
 			questions = [
 				{
@@ -1181,12 +1181,74 @@ def randomEvent():
 
 			if theDecision is False:
 				print("")
-				DGText.printScan(action + "You think this is too risky and proceed to move on.\n")
+				DGText.printScan(DGText.action + "You think this is too risky and proceed to move on.\n")
 			else:
 				Scene.hasVault = True
 				openVault()
 				Scene.hasVault = False
 
+
+		elif selection == "unknownCrate":
+			global DGPlayer
+
+			DGText.printScan(DGText.action + "You find a mysterious crate...")
+
+			questions = [
+				{
+					'type': 'confirm',
+					'name': 'promptChoice',
+					'message': 'Will you open it?',
+				}
+			]
+
+			print(Style.RESET_ALL)
+			theAnswer = prompt(questions)
+			theDecision = theAnswer['promptChoice']
+
+			if theDecision is False:
+				print("")
+				DGText.printScan(DGText.action + "You think this is too risky and proceed to move on.\n")
+
+			else:
+				areYaLucky = random.randint(1, 5)
+				if areYaLucky == 1:
+					# You get free loot
+					lootGoodies = ["Stone sword", "Iron armour"]
+					chosenGoodies = random.choice(lootGoodies)
+
+					DGText.printScan(DGText.success + "You open the chest and find {item}!"
+					.format(item=chosenGoodies))
+					if chosenGoodies == "Stone sword":
+						if DGPlayer.Inventory.sword >= 3:
+							DGText.printScan(error + "You already have this item!\n")
+						else:
+							DGPlayer.Inventory.sword = 3
+							DGPlayer.Inventory.damage = 1.7
+
+					elif chosenGoodies == "Iron armour":
+						if DGPlayer.Inventory.armour >= 2:
+							DGText.printScan(error + "You already have this item!\n")
+						else:
+							DGPlayer.Inventory.armour = 2
+							DGPlayer.Inventory.absorbtion = 0.6
+
+
+
+				elif areYaLucky == 2:
+					# You get free gold
+					DGText.printScan(DGText.success + "You open the chest and you find free gold!")
+					DGMain.addCoins(random.randint(100, 120))
+
+				elif areYaLucky == 3:
+					# You get nothing
+					DGText.printScan(DGText.rip + "You open the chest and find nothing.")
+					DGText.printScan(DGText.action + "You move on...\n")
+
+				else
+					# It's a bomb!
+					DGText.printScan(DGText.action + "You open the chest and find nothing.")
+					DGText.printScan(DGText.action + "You hear a sound...")
+					bombTrap()
 
 
 		events = removeFromList(events, selection)
@@ -1198,17 +1260,17 @@ def openVault():
 	if Scene.hasVault == True:
 		theLuck = random.randint(1, 3)
 		if theLuck == 1:
-			DGText.printScan(action + "You spent several minutes trying to unlock the vault...")
+			DGText.printScan(DGText.action + "You spent several minutes trying to unlock the vault...")
 			time.sleep(2)
 			DGText.printScan(DGText.success + "You somehow unlock it!\n")
 			time.sleep(0.6)
-			DGText.printScan(action + "You walk into the vault but you are"
+			DGText.printScan(DGText.action + "You walk into the vault but you are"
 			" disappointed as it looks like someone has cleared out"
 			" all the gold.\n")
 			time.sleep(1)
 
 		elif theLuck == 2:
-			DGText.printScan(action + "You spent several minutes trying to unlock the vault...")
+			DGText.printScan(DGText.action + "You spent several minutes trying to unlock the vault...")
 			time.sleep(2)
 			DGText.printScan(DGText.success + "You somehow unlock it!\n")
 			time.sleep(0.6)
@@ -1217,12 +1279,12 @@ def openVault():
 			DGMain.addCoins(50)
 
 		elif theLuck == 3:
-			DGText.printScan(action + "You spent several minutes trying to unlock the vault...")
+			DGText.printScan(DGText.action + "You spent several minutes trying to unlock the vault...")
 			time.sleep(2)
-			DGText.printScan(action + "You seem to be out of luck, however"
+			DGText.printScan(DGText.action + "You seem to be out of luck, however"
 			" you've been spotted!\n")
 			time.sleep(0.6)
-			DGText.printScan(quote + 'YOU! STOP RIGHT THERE! YOU THIEF!"')
+			DGText.printScan(DGText.quote + 'YOU! STOP RIGHT THERE! YOU THIEF!"')
 			DGText.printScan(Style.BRIGHT + "The Money Grinch shouted.\n")
 			time.sleep(0.6)
 
