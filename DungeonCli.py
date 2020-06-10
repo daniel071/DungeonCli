@@ -38,7 +38,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 # --------------------------
 # |		Version!		|
 # --------------------------
-version = "Development Version 0.5.16"
+version = "Development Version 0.5.17"
 # --------------------------
 
 # Define variables here:
@@ -54,7 +54,7 @@ mainLoop = 1
 # Events used for random stuff:
 
 # TODO: when 'wizardThatWantsToKillYou' is done, add it here
-events = ["store", "store", "store", "randomFight", "none", "none", "none", "bombTrap",
+events = ["store", "store", "store", "randomFight", "none", "none", "bombTrap",
 "treasure", "treasure", "unknownCrate"]
 
 # You deal more damage with the better sword you have, for example,
@@ -1218,6 +1218,7 @@ def randomEvent():
 
 					DGText.printScan(DGText.success + "You open the chest and find {item}!"
 					.format(item=chosenGoodies))
+
 					if chosenGoodies == "Stone sword":
 						if DGPlayer.Inventory.sword >= 3:
 							DGText.printScan(error + "You already have this item!\n")
@@ -1231,8 +1232,6 @@ def randomEvent():
 						else:
 							DGPlayer.Inventory.armour = 2
 							DGPlayer.Inventory.absorbtion = 0.6
-
-
 
 				elif areYaLucky == 2:
 					# You get free gold
@@ -1248,7 +1247,7 @@ def randomEvent():
 					# It's a bomb!
 					DGText.printScan(DGText.action + "You open the chest and find nothing.")
 					DGText.printScan(DGText.action + "You hear a sound...")
-					bombTrap()
+					bombTrapScene()
 
 
 		events = removeFromList(events, selection)
