@@ -1502,7 +1502,19 @@ def main():
 		useMatch()
 
 	elif command in ("h", "help", "umm", "asdfghjkl", "qwertyuiop"):
-		DGText.printScan("Help menu \n")
+		DGText.printScan(Fore.BLUE + Style.BRIGHT + "Thanks for testing DungeonCli!")
+		DGText.printScan(Fore.GREEN + "Here are some common commands:\n")
+		DGText.printScan(Style.RESET_ALL + "--------\n" + Style.BRIGHT)
+
+		DGText.printScan(Fore.BLUE + "hp: " + Fore.WHITE + "Checks your current health")
+		DGText.printScan(Fore.BLUE + "coins: " + Fore.WHITE + "Checks your current balance")
+		DGText.printScan(Fore.BLUE + "start: " + Fore.WHITE + "Proceeds to next scene")
+		DGText.printScan(Fore.BLUE + "inventory: " + Fore.WHITE + "Shows your stats in inventory")
+		DGText.printScan(Fore.BLUE + "potion: " + Fore.WHITE + "Lets you use a healing potion")
+		DGText.printScan(Fore.BLUE + "hp: " + Fore.WHITE + "Checks your current health")
+		DGText.printScan(Fore.BLUE + "quests: " + Fore.WHITE + "Shows your current quests")
+		DGText.printScan(Fore.BLUE + "credits: " + Fore.WHITE + "Info about the developers")
+		DGText.printScan(Fore.BLUE + "about: " + Fore.WHITE + "About the game")
 
 	elif command in ("e", "exit", "close", "alt-f4"):
 		DGExit()
@@ -1588,11 +1600,13 @@ def main():
 
 	elif command in ("create torch", "make torch"):
 		DGText.printScan(error + "You cannot do that! The sticks are too wet...\n")
+
 	elif command in ("about", "us", "about us", "info"):
 		endScreen()
 
 	elif command in ("credits", "contributers", "people"):
 		creditScreen()
+
 	elif command in ("open the vault", "vault", "open vault", "use vault", "use the vault" "break in", "try to break in"):
 		pass
 		# openVault()
