@@ -694,21 +694,19 @@ def useMatch():
 			time.sleep(1)
 			start()
 
-
 def start():
 	global Scene
-	global DGPlayer
+	global Inventory
 
 	Scene.storeSelected = []
 
 	if Scene.surroundingsLit == False:
-		DGText.printScan("You find yourself in an odd and dark place... \nWhat could this"
-			  " possibly be?\n")
-		Scene.description = "This place is extremely dark, you can't see anything..."
+		DGText.printScan("You are lying down, the cold, wet floor pressed against your face... \nWhere are you?\n")
+		Scene.description = "It is extremely dark and cold \n(however that could be because of your wet clothes), but despite that you can't see a single thing..."
 		time.sleep(1)
 
 		DGText.printScan(
-			"Check your Inventory, you might have something to \nimprove your vision...\n")
+			"You get up, your footsteps echo through out the room. It's Extremely dark.\nCheck your Inventory, you might have something to improve your vision...\n")
 		time.sleep(1)
 		if DGPlayer.Inventory.matches < 1:
 			DGText.printScan(rip + "You don't have any matches left!")
@@ -716,77 +714,30 @@ def start():
 			DGText.printScan(rip + "There's no way to light this room.")
 			time.sleep(1)
 			DGText.printScan(action + "The only thing you can do is proceed to the next room...\n")
-			time.sleep(1)
-			questions = [
-				{
-					'type': 'confirm',
-					'name': 'promptChoice',
-					'message': 'Will you continue to the next room?',
-				}
-			]
-			print(Style.RESET_ALL)
-			theNewAnswer = prompt(questions)
-			theNewResult = theNewAnswer['promptChoice']
-			if theNewResult is True:
-				DGText.printScan(action + "You proceed to the next room...\n")
-				Scene.surroundingsLit = True
-
-				Scene.current = Scene.current + 1
-
-			else:
-				DGText.printScan(action + "You do nothing...\n")
+			Scene.canProgress == True
 
 		# combat("Bob", 69)
-		# DGText.printScan("Maybe I should use a match to light this place up...") # too straight forward.
+		# printScan("Maybe I should use a match to light this place up...") # too straight forward.
 
-		# DGText.printScan(hint + "type 'm' to use a match)\n" + Style.RESET_ALL) # too straight forward.
+		# printScan(hint + "type 'm' to use a match)\n" + Style.RESET_ALL) # too straight forward.
 	else:
 		if Scene.current == 1:
 			# NOTE: describe this 'place'!
-			DGText.printScan(Style.RESET_ALL + "This place looks like it's been abandoned decades ago...")
+			DGText.printScan(Style.RESET_ALL + "The Light is bright enough to see where you are walking, no walls are nearby.")
 			# NOTE: describe this 'creature'! e.g. this oddly hunched over creature
-			DGText.printScan(action + "An odd creature begins to walk up to you... \n")
-			answer = ask("Should you hide or confront them?", "h", "c")
-			if answer == "c":
-				# User selected confront
-				# Nothing special happens, it is passed on to the next part
-				pass
-
-			elif answer == "h":
-				# User selected hide
-				DGText.printScan(action + "You tried to hide, but there was nowhere to go, "
-					  "the figure began to confront you.")
-				time.sleep(1.5)
-
-			DGText.printScan(action + "The odd figure got close enough until you "
+			DGText.printScan(action + "While being scared, you think it is probably safe enough to \nwander about your surroundings a bit... \n")
+			tempProgressCommand
+		elif Scene.current == 2:
+			DGText.printScan(action + "You start to take a small wander and look around.")
+			DGText.printScan(action + "After wandering around for some time, you find a wooden chest."
 				  "could see it.")  # NOTE: so is this a creature or figure
 			time.sleep(1)
 
-			DGText.printScan(action + "The figure looked like an ancient wizard. \n")
-			time.sleep(1)
+		elif Scene.current == 3:
 
-			DGText.printScan(hint + "type an answer)")
-			input(Style.RESET_ALL + quote + 'Greetings, it seems you are new here,'
-				  ' is that true?"\n' + Style.RESET_ALL) # this is kinda fucking retarded... the user doesn't even know its an input.
-				  										 # I gave a hint to the user
-			# NOTE: maybe. give the user a choice to say something.
-			DGText.printScan(action + "You said yes. \n")
-			time.sleep(0.7)
-
-			DGText.printScan(quote + "I see, this is a dangerous place, so tread"
-				  ' carefully..."')  # ITS DANGEROUS TO GO ALONE.
-			time.sleep(1)
-
-			DGText.printScan(quote + 'Here, take this, it will help you defend yourself."')
-			time.sleep(2)  # TAKE THIS.
-
-			DGText.printScan(DGText.success + "You recieved a basic Sword.")
-			DGText.printScan(DGText.success + "You recieved a basic Healing Potion.")
-			DGMain.addCoins(50)
-
-			DGPlayer.Inventory.basicHealingPotion = DGPlayer.Inventory.basicHealingPotion + 1
+			DGPlayer.Inventory.basicHealingPotion = Inventory.basicHealingPotion + 1
 			DGPlayer.Inventory.damage = 1.2
-			Inventory.sword = 1
+			DGPlayer.Inventory.sword = 1
 			Scene.current = Scene.current + 1
 			time.sleep(2)
 
@@ -794,293 +745,13 @@ def start():
 			print("")
 			start()
 
-		elif Scene.current == 2:
-			DGText.printScan(action + "You ask the ancient wizard:")
-			time.sleep(1)
-
-			DGText.printScan(Style.RESET_ALL + "Who are you?")
-			time.sleep(1)
-			DGText.printScan("What is this place? \n")
-			time.sleep(1)
-
-			DGText.printScan(action + "The wizard responds \n")
-			time.sleep(1.5)
-
-			DGText.printScan(quote + 'This place is an underground town, it used to be'
-				  ' thriving, there were plenty of stores, lots of jobs, it was'
-				  ' a great place to be...\n But then, the rebellion came in'
-				  ' and wiped this place out, everybody either escaped or died.\n'
-				  ' And me, my name is Gylore, I was the founder of this town." \n')
-			time.sleep(4)
-			Scene.description = "This place is in ruins, apparently it's supposed to be a town...\nThere is a door to the next room, something seems to be strung across it."
-
-			DGText.printScan(hint + "type an answer)")
-			input(Style.RESET_ALL + quote + 'Would you like to recieve a quest?" \n'
-				  + Style.RESET_ALL)
-			quest.add("Obtain the Great Stone of Knowledge.")
-			DGText.printScan(action + "You said yes. \n")
-			time.sleep(0.8)
-
-			DGText.printScan(quote + 'Try and recover the Great Stone of Knowledge,'
-				  ' it is located in the north-east room, however it is guarded'
-				  ' by very powerful Almogates." \n')
-			time.sleep(3)
-
-			DGText.printScan(quote + 'Good luck." \n')
-			endThreads()
-			DGMain.playSound("Music/quest.ogg", True)
-			time.sleep(1)
-
-			DGText.printScan(action + "He leaves the room and now, you're on your own. \n")
-			Scene.current = Scene.current + 1
-
-		elif Scene.current == 3:
-			initRandomRoom()
-			randomEvent()
-			Scene.current = Scene.current + 1
-
-
-		elif Scene.current == 4:
-			initRandomRoom()
-			bombTrapScene()
-			Scene.current = Scene.current + 1
-
-		elif Scene.current == 5:
-			initRandomRoom()
-			randomEvent()
-			Scene.current = Scene.current + 1
-
-
-		elif Scene.current == 6:
-			DGText.printScan(
-				action + "You proceed to the next room, being very careful where you step.")
-
-
-			Scene.hasCoins = True
-			time.sleep(1)
-
-			DGText.printScan(action + "You quickly hear a movement and freeze...\n")
-			time.sleep(1)
-
-			DGText.printScan(quote + 'IT WAS YOU WHO DID IT! Y-YOU WERE THE ONE WHO KILLED ALL M'
-				  '-MY F-F-FRIENDS!"\n')
-			time.sleep(1.5)
-			DGText.printScan(action + "You try to explain that they were mistaken but"
-				  " it was too late. \n")
-			time.sleep(1)
-
-			theResult = DGCombat.combat("Unidentified", 25, 5, 10)
-			if theResult == "killed":
-				DGText.printScan(
-					action + "You killed the unknown person however, you can't stop feeling bad. \n")
-
-			elif theResult == "flee":
-				DGText.printScan(action + "You quickly ran away, you're safe now. \n")
-
-			Scene.current = Scene.current + 1
-
-		elif Scene.current == 7:
-			# randomEvent() # random event here made some things confusing to a tester.
-			DGText.printScan(Style.BRIGHT + Fore.WHITE + "This room is rather large. you should take a look around it.\n")
-			Scene.canProgress = False
-			Scene.current = Scene.current + 1
-			Scene.description = "This room large and bare, but an old and dried up fountain lays ahead.\nA few coins lay scattered across the bottom, maybe you can pick them up? But however a single loose red brick in the wall north to you catches your eye..."
-
-		elif Scene.current == 8:
-			DGText.printScan(DGText.action + "You walk towards the massive door, slightly nervous"
-			" about what you'll find there.")
-			time.sleep(1.5)
-			DGText.printScan(DGText.action + "A giant spider appears!")
-			time.sleep(0.7)
-			DGText.printScan(DGText.rip + "The spider spit acid on you!")
-			time.sleep(0.6)
-			damage(15)
-			time.sleep(0.5)
-			DGText.printScan(DGText.action + "There's nothing you can do other than fight!")
-			spiderLoop = True
-			while spiderLoop == True:
-				# Start battle with 'Giant Spider'
-				theResult = DGCombat.combat("Giant Spider", 35, 8, 12)
-				if theResult == "killed":
-					DGText.printScan(action + "Phew! That was hard! You prepare to move on... \n")
-					spiderLoop = False
-
-				elif theResult == "flee":
-					DGText.printScan(action + "You've escaped, but the spider is determined to catch you!")
-					time.sleep(1)
-					DGText.printScan(action + "You try to run away from the spider however, you reach a dead end.")
-					time.sleep(1)
-					DGText.printScan(action + "You're forced into another battle!")
-					time.sleep(1)
-
-			Scene.current = Scene.current + 1
-
-		elif Scene.current == 9:
-			DGText.printScan(action + "You meet the wizard once again.")
-			time.sleep(1)
-			DGText.printScan(quote + 'MERLIN! how did you survive that!?"')
-			time.sleep(1)
-			DGText.printScan(action + "The wizard cast a spell on you that restored all your health.")
-			time.sleep(0.5)
-			heal(100)
-			time.sleep(0.5)
-
-			DGText.printScan(quote + "Anyways, I'm going to need someone to help me"
-			" reconstruct the town however, \nthere's all of these dark wizards"
-			" preventing me from doing so, \nthe only way I can defeat them"
-			" is by obtaining the Great Stone of Knowledge.\"\n")
-			time.sleep(2)
-			DGText.printScan(quote + "I'm depending on you for this, I'm too weak"
-			" to do it myself\"")
-			time.sleep(1.5)
-			DGText.printScan(Style.BRIGHT + "Gylore stated\n") # Gylore? you don't find his name anywhere though...
-			DGText.printScan(quote + "Here, take this, it should help you buy the"
-			" resources you need.")
-			time.sleep(1)
-			DGMain.addCoins(50)
-
-			Scene.current = Scene.current + 1
-
-		elif Scene.current == 10:
-			Scene.description = "This room is cold and empty. There isn't much but a door ahead."
-			randomEvent()
-			Scene.current = Scene.current + 1
-
-		elif Scene.current == 11:
-			Scene.description = "It looks to be brighter in here than the other rooms."
-			randomEvent()
-			Scene.current = Scene.current + 1
-
-		elif Scene.current == 12:
-			initRandomRoom()
-			randomEvent()
-			Scene.current = Scene.current + 1
-
-		elif Scene.current == 13:
-			randomEvent()
-			Scene.current = Scene.current + 1
-
-		elif Scene.current == 14:
-			DGText.printScan(action + "You reach a room with a heavily guarded door.")
-			time.sleep(1)
-			DGText.printScan(action + "There is a guard protecting the door.")
-			time.sleep(1)
-			DGText.printScan(action + "You can either comfront the guard or wait"
-			" and see if the guard will leave.\n")
-			time.sleep(1)
-
-			questions = [
-				{
-					'type': 'list',
-					'name': 'userChoice',
-							'choices': ["Comfront the guard",
-										"Wait it out",],
-					'message': 'What will you do?',
-				}
-			]
-
-			print(Style.RESET_ALL)
-			theAnswer = prompt(questions)
-			userInput = theAnswer['userChoice']
-			print(" ")
-
-			if userInput == "Comfront the guard":
-				DGText.printScan(action + "You comfront the guard and tell him about"
-				" the quest you were given by Gylore.")
-				time.sleep(0.7)
-				DGText.printScan(action + "The guard called Gylore and has a conversation with him.")
-				time.sleep(0.7)
-				DGText.printScan(quote + "I see, I will let you through. Good luck"
-				" with your journey.\"\n")
-				Scene.current = Scene.current + 1
-				time.sleep(0.7)
-
-				DGText.printScan(action + "The door opened, revealing a thriving town.\n")
-				Scene.description = "There is a marvolous, thriving town. It has beautiful lakes, lots of stores and a great community."
-
-			else:
-				DGText.printScan(action + "You wait several hours, hiding so the"
-				" guard can't see you...")
-				time.sleep(3)
-				theLuck = random.randint(1, 3)
-				if theLuck == 1:
-					DGText.printScan(rip + "The guard spotted you!"
-					" You have no time to explain yourself, you have to fight!\n")
-					time.sleep(1)
-					theResult = DGCombat.combat("Guard", 60, 3, 4)
-
-					if theResult == "killed":
-						DGText.printScan(action + "Now that there is no guard protecting"
-						" the door, you can enter the next room.\n")
-						time.sleep(1)
-						Scene.current = Scene.current + 1
-						Scene.description = "There is a marvolous, thriving town. It has beautiful lakes, lots of stores and a great community."
-
-					elif theResult == "flee":
-						DGText.printScan(action + "You ran away to the previous room.\n"
-						"The only way you can proceed is by trying again.\n")
-
-				else:
-					DGText.printScan(action + "The guard doesn't leave. You have no"
-					" other option but trying again.\n")
-
-		elif Scene.current == 15:
-			DGText.printScan(action + "You enter the town, birds are chirping,"
-			" flowers are blooming, the rivers are flowing...")
-			time.sleep(0.7)
-			DGText.printScan(action + "It truly is a sight to behold!\n")
-			time.sleep(0.7)
-
-			DGText.printScan(action + "You look for the town hall, and begin to walk to it...")
-			time.sleep(0.7)
-			DGText.printScan(action + "Once you enter the town hall, a person asks you,")
-			time.sleep(0.7)
-			DGText.printScan(quote + "Welcome new visitor! How did you get here?\"")
-			time.sleep(0.7)
-			DGText.printScan(action + "You told them everything you saw.\n")
-			time.sleep(0.7)
-
-			DGText.printScan(action + "You ask them how this part of the town is"
-			" thriving whereas the rest of the town was crippled.")
-			time.sleep(0.7)
-			DGText.printScan(quote + "Ah, you see, we've found the Rebellion's"
-			" weakness, thorium!\nThorium is a highly radioactive material"
-			" that the rebellion cannot withstand however, thorium is very"
-			" difficult to obtain.\"\n")
-			time.sleep(3)
-
-			DGText.printScan(quote + "Good luck with your journey!\"\n")
-			Scene.current = Scene.current + 1
-
-		elif Scene.current == 16:
-			DGText.printScan(action + "You quickly realise that this town"
-			" is very small. There is not mcuh space to expand.\n")
-			time.sleep(1)
-			DGText.printScan(action + "You ask them why it is so small, they"
-			" explain to you that they have ran out of thorium and at"
-			" any moment, the rebellion can tear us to pieces.")
-			time.sleep(1)
-			DGText.printScan(quote + "There is a small deposit of Thorium nearby"
-			" however, it is heavily guarded.\"\n")
-			DGText.printScan(DGText.success + "You recieved a new quest!\n")
-			quest.add("Delivier thorium to the town.")
-
-			Scene.current = Scene.current + 1
-
-		elif Scene.current == 17:
-			DGText.printScan(action + "You leave this small town and further explore the dungeon.")
-			DGText.printScan(action + "You feel a sense of danger, something is coming for you.\n")
-
-			# aaaa idk what to put here
-
-			Scene.current = Scene.current + 1
-
 		else:
-			DGText.printScan(DGText.success + "Thanks for testing DungeonCli!" + Fore.WHITE)
+			DGText.printScan(success + "Thanks for testing DungeonCli!" + Fore.WHITE)
 			DGText.printScan("We haven't finished this scene.")
 			DGText.printScan("If you want to help us improve, feel free to send a screenshot or video of you")
 			DGText.printScan("playing the game, at the discord server:")
 			DGText.printScan(Style.BRIGHT + Fore.BLUE + "https://discord.gg/eAUqKKe\n")
+
 
 
 def randomEvent():
