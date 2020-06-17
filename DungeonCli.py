@@ -504,6 +504,7 @@ def load_game():
 
 	DGText.printScan(DGText.success + "Successfully loaded save file!\n")
 
+#TODO: Move these into DGPLayer as a player actions class.!
 
 def checkCoins():
 	global DGPlayer
