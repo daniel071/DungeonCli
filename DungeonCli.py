@@ -696,6 +696,8 @@ def useMatch():
 
 
 def start():
+	# FIXME: This broke because of the refacetring (i dont know how to spell lol)
+
 	global Scene
 	global DGPlayer
 
@@ -1470,6 +1472,9 @@ def creditScreen():
 	#DGText.printScan("Self Promotion from AsianPotato77:".center(b - 1,' '))
 	#DGText.printScan(("SoundCloud:" + Fore.CYAN + "https://soundcloud.com/s-z-174676229").center(b - 1,' ') + Style.RESET_ALL)
 	# STOP THE SELF PROMOTIONS! IT LOOKS DUMB! ALSO IM GONNA DO THE STORY CHANGE SOON I KEEP FORGETTING!!
+	# Daniel - The artists made the song and I think if people are interested
+	# Daniel - in listening to their music they can visit it,
+	# Daniel - Also why are we talking in comments?
 
 	print("-".center(width,'-'))
 	DGText.printScan(" ")
