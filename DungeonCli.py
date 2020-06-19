@@ -722,21 +722,16 @@ def start():
 			DGText.printScan(action + "The only thing you can do is proceed to the next room...\n")
 			Scene.canProgress == True
 
-		# combat("Bob", 69)
-		# printScan("Maybe I should use a match to light this place up...") # too straight forward.
-
-		# printScan(hint + "type 'm' to use a match)\n" + Style.RESET_ALL) # too straight forward.
 	else:
 		if Scene.current == 1:
-			# NOTE: describe this 'place'!
 			DGText.printScan(Style.RESET_ALL + "The Light is bright enough to see where you are walking, no walls are nearby.")
-			# NOTE: describe this 'creature'! e.g. this oddly hunched over creature
 			DGText.printScan(action + "While being scared, you think it is probably safe enough to \nwander about your surroundings a bit... \n")
 			tempProgressCommand
+
 		elif Scene.current == 2:
 			DGText.printScan(action + "You start to take a small wander and look around.")
 			DGText.printScan(action + "After wandering around for some time, you find a wooden chest."
-				  "could see it.")  # NOTE: so is this a creature or figure
+				  "could see it.")
 			time.sleep(1)
 
 		elif Scene.current == 3:
