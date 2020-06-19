@@ -6,6 +6,7 @@ from sys import platform
 import os
 import time
 import simpleaudio
+import sys
 from simpleaudio import _simpleaudio
 from pydub import generators
 from pydub.playback import _play_with_simpleaudio
