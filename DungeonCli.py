@@ -115,63 +115,20 @@ class quest:
 		print(Style.RESET_ALL)
 
 
-class randomDialog:
-	def bombExplodes(self):
-		dialog=["A small bomb exploded, it was a trap!\n",
-		"Ouch! You tripped a small Bomb trap!\n",
-		"You attempted to avoid the obvious trap, however it set off a small bomb!\n"]
-
-		return random.choice(dialog)
-
-
-	def collectCoins(self):
-		dialog=["You reach out and grab all the coins.",
-		"You stuff your pockets with the coins.",
-		"You reach out in awe to consieve all the coins."]
-		return random.choice(dialog)
-
-
-	def gameoverText(self):
-		dialog=["Maybe next time, you might be a bit more lucky...\n",
-		"Maybe next time, things might be in your favour...\n",
-		"Maybe next time, you'll be more careful...\n",
-		"Maybe next time, you might not be where you are now...\n",
-		"Maybe next time, you'll be more wise...\n",
-		"Maybe next time, you'll choose the right option...\n",
-		"Maybe next time, you won't be so careless...\n",
-		"Maybe next time, things might actually go right...\n",
-		"Maybe next time, you'll remember that you are mortal...\n"]
-		return random.choice(dialog)
-
-	def roomDescription(self):
-		dialog=["The ceiling in this room hangs really low. Seeing it is truly a strange sight.",
-		"It's oddly ambient in here, water trickles down the walls. It's rather relaxing.",
-		"This room is massive."]
-		return random.choice(dialog)
-
-	def coinsOnFloor(self):
-		dialog=["There are some coins on the floor.",
-		"Some coins are scattered on the ground.",
-		"There are some coins nearby."]
-		return random.choice(dialog)
-	def store(self):
-		dialog=["There is a store in this room.",
-		"And old store is setup in here..",
-		"An old shack with the letters \'Store\' is nearby."]
-		return random.choice(dialog)
 printspeed = 0.013
 defprntspd = 0.013
 
 def initRandomRoom():
+	global DGDialog
 	# Not my code but what I think it does is
 	# has a 50% chance of placing coins in the room.
 	# Also, there would be a 1 in 10 chance of the room not being lit
 	global Scene
 	a = random.randint(1,2)
-	Scene.description = randomDialog.roomDescription(randomDialog)
+	Scene.description = DGDialog.randomDialog.roomDescription(DGDialog.randomDialog)
 	if a == 2:
 		Scene.hasCoins == True
-		Scene.description == Scene.description + " " + randomDialog.coinsOnFloor(randomDialog)
+		Scene.description == Scene.description + " " + DGDialog.randomDialog.coinsOnFloor(DGDialog.randomDialog)
 	b = random.randint(1,10)
 	if b == 2:
 		Scene.surroundingsLit == False
@@ -284,6 +241,7 @@ def heal(value):
 
 def bombTrapScene():
 	global Scene
+	global DGDialog
 
 	Scene.description = "The room looked very charred after the explosion. you should probably proceed."
 
@@ -293,7 +251,7 @@ def bombTrapScene():
 	DGMain.playSound("Sounds/explosion.ogg", False)
 	DGText.printScan(rip + "BANG!")
 	time.sleep(1)
-	DGText.printScan(randomDialog.bombExplodes(randomDialog))
+	DGText.printScan(DGDialog.randomDialog.bombExplodes(randomDialog))
 	damage(random.randint(5, 15) * DGPlayer.Inventory.absorbtion)
 	time.sleep(1)
 
@@ -728,6 +686,7 @@ def randomEvent():
 	global hasSeenAStore
 	global Scene
 	global storeSelected
+	global DGDialog
 	randomLoop = True
 
 	DGText.printScan(action + "You proceed into the next room...\n")
@@ -737,7 +696,7 @@ def randomEvent():
 		if selection == "store":
 			DGText.printScan(DGText.action + "You find a small store setup here")
 			DGText.printScan(DGText.action + "Maybe they'll have something useful here..\n")
-			Scene.description = Scene.description + " " + randomDialog.store(randomDialog)
+			Scene.description = Scene.description + " " + DGDialog.randomDialog.store(DGDialog.randomDialog)
 			questions = [
 				{
 					'type': 'confirm',
@@ -988,7 +947,7 @@ def pickCoins():
 
 	if Scene.hasCoins == True:
 		amount = random.randint(10, 12)
-		DGText.printScan(action + randomDialog.collectCoins(randomDialog))
+		DGText.printScan(action + DGDialog.randomDialog.collectCoins(DGDialog.randomDialog))
 		time.sleep(0.8)
 
 		DGMain.addCoins(amount)

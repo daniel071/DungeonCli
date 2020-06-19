@@ -13,6 +13,7 @@ import pydub
 from . import DGText
 from . import DGMain
 from . import DGPlayer
+from . import DGDialog
 
 playMusic = True
 all_processes = []
@@ -130,7 +131,7 @@ def gameover():
 	time.sleep(2)
 
 	DGText.printScan(Style.BRIGHT + Fore.WHITE +
-		  randomDialog.gameoverText(randomDialog))
+		  DGDialog.randomDialog.gameoverText(DGDialog.randomDialog))
 	time.sleep(4)
 	DGClear()
 	endThreads()
