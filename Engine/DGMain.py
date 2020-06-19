@@ -102,3 +102,36 @@ def spendCoins(value):
 	global DGPlayer
 	DGPlayer.coins = DGPlayer.coins + value
 	DGText.printScan(DGText.success + ("You spent " + str(value) + " coins! \n"))
+
+
+def gameover():
+	endThreads()
+	DGMain.playSound("Music/gameOver.ogg", False)
+	DGMain.DGClear()
+	DGText.printScan(rip + "Your body is torn into shreads...")
+	time.sleep(2)
+	DGText.printScan(Style.BRIGHT + Fore.YELLOW + ".")
+	time.sleep(1)
+	DGText.printScan("..")
+	time.sleep(1)
+	DGText.printScan("...\n")
+	time.sleep(1)
+
+	DGText.printScan(Style.BRIGHT + Fore.WHITE +
+
+		  "   _____					   _\n"
+		  " / ____|					  | |\n"
+		  "| |  __  __ _ _ __ ___   ___	_____   _____ _ __| |\n"
+		  "| | |_ |/ _` | '_ ` _ \ / _ \  / _ \ \ / / _ \ '__| |\n"
+		  "| |__| | (_| | | | | | |  __/ | (_) \ V /  __/ |  |_|\n"
+		  " \_____|\__,_|_| |_| |_|\___|  \___/ \_/ \___|_|  (_)\n"
+		  )
+
+	time.sleep(2)
+
+	DGText.printScan(Style.BRIGHT + Fore.WHITE +
+		  randomDialog.gameoverText(randomDialog))
+	time.sleep(4)
+	DGClear()
+	endThreads()
+	sys.exit()

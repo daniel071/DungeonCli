@@ -243,38 +243,6 @@ def removeFromList(list, removal):
 			index = index + 1
 
 
-def gameover():
-	endThreads()
-	DGMain.playSound("Music/gameOver.ogg", False)
-	DGMain.DGClear()
-	DGText.printScan(rip + "Your body is torn into shreads...")
-	time.sleep(2)
-	DGText.printScan(Style.BRIGHT + Fore.YELLOW + ".")
-	time.sleep(1)
-	DGText.printScan("..")
-	time.sleep(1)
-	DGText.printScan("...\n")
-	time.sleep(1)
-
-	DGText.printScan(Style.BRIGHT + Fore.WHITE +
-
-		  "   _____					   _\n"
-		  " / ____|					  | |\n"
-		  "| |  __  __ _ _ __ ___   ___	_____   _____ _ __| |\n"
-		  "| | |_ |/ _` | '_ ` _ \ / _ \  / _ \ \ / / _ \ '__| |\n"
-		  "| |__| | (_| | | | | | |  __/ | (_) \ V /  __/ |  |_|\n"
-		  " \_____|\__,_|_| |_| |_|\___|  \___/ \_/ \___|_|  (_)\n"
-		  )
-
-	time.sleep(2)
-
-	DGText.printScan(Style.BRIGHT + Fore.WHITE +
-		  randomDialog.gameoverText(randomDialog))
-	time.sleep(4)
-	DGClear()
-	endThreads()
-	sys.exit()
-
 
 
 def ask(funcQuestion, answer1, answer2):
@@ -1278,7 +1246,7 @@ def main():
 		load_game()
 	elif command in ("plsdie", "plskill"):
 		if passwordPrompt() == "granted":
-			gameover()
+			DGMain.gameover()
 
 	elif command in ("o", "options"):
 		options()
