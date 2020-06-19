@@ -1167,8 +1167,11 @@ def nextScene():
 		DGText.printScan("Progress through where? there are no visible exits!")
 		DGText.printScan(hint + "maybe try 'look' and see what you find...)\n" + Style.RESET_ALL)
 
+
 def main():
 	global DGPlayer
+	global tempProgressCommand
+
 	detect_system()
 	#defKey.stop()
 	command = input(DGText.askPrompt + "[Action] " + Style.RESET_ALL)
