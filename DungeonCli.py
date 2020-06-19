@@ -1,4 +1,4 @@
-# NOTE: JOIN THE DISCORD: https://discord.gg/eAUqKKe 
+# NOTE: JOIN THE DISCORD: https://discord.gg/eAUqKKe
 
 # DungeonCli is a terminal based program where you get to explore places and
 # earn coins. You can spend those coins on various items, have fun!
@@ -51,6 +51,7 @@ developer = 0
 
 invalidCommands = 0
 mainLoop = 1
+tempProgressCommand = ["nil"] #change to something else or check for nil, as user can just type nil to skip to next scene anytime they want.
 # Events used for random stuff:
 
 # TODO: when 'wizardThatWantsToKillYou' is done, add it here
@@ -1169,7 +1170,11 @@ def main():
 	#defKey.stop()
 	command = input(DGText.askPrompt + "[Action] " + Style.RESET_ALL)
 	#defKey.start()
-	if command in ("check money", "check coins", "coins", "money", "c"):
+	if command in tempProgressCommand:
+		richPrecense.present(Scene.current)
+		tempProgressCommand = ["nil"]
+		nextScene()
+	elif command in ("check money", "check coins", "coins", "money", "c"):
 		checkCoins()
 
 	elif command in ("open inventory", "open inv", "inventory", "inv", "i", "check inventory", "check inv", "pockets", "check pocket", "check pockets", "search pockets", "search pocket", "open pockets", "open pocket", "look in pocket", "look in pockets"):
