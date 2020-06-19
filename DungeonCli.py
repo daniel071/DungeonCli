@@ -105,9 +105,12 @@ class quest:
 		quest.quests.append(newQuest)
 
 	def list():
-		DGText.printScan(DGText.success + "Your current quests:")
-		for theQuest in quest.quests:
-			DGText.printScan(Style.BRIGHT + Fore.CYAN + theQuest)
+		if len(quest.quests) < 1:
+			printScan(DGText.error + "You don't have any quests so far")
+		else:
+			DGText.printScan(DGText.success + "Your current quests:")
+			for theQuest in quest.quests:
+				DGText.printScan(Style.BRIGHT + Fore.CYAN + theQuest)
 
 		print(Style.RESET_ALL)
 
