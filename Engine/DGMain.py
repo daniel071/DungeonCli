@@ -108,7 +108,7 @@ def gameover():
 	endThreads()
 	DGMain.playSound("Music/gameOver.ogg", False)
 	DGMain.DGClear()
-	DGText.printScan(rip + "Your body is torn into shreads...")
+	DGText.printScan(DGText.rip + "Your body is torn into shreads...")
 	time.sleep(2)
 	DGText.printScan(Style.BRIGHT + Fore.YELLOW + ".")
 	time.sleep(1)
