@@ -1,4 +1,4 @@
-# NOTE: JOIN THE DISCORD: https://discord.gg/eAUqKKe 
+# NOTE: JOIN THE DISCORD: https://discord.gg/eAUqKKe
 
 # DungeonCli is a terminal based program where you get to explore places and
 # earn coins. You can spend those coins on various items, have fun!
@@ -104,9 +104,12 @@ class quest:
 		quest.quests.append(newQuest)
 
 	def list():
-		DGText.printScan(DGText.success + "Your current quests:")
-		for theQuest in quest.quests:
-			DGText.printScan(Style.BRIGHT + Fore.CYAN + theQuest)
+		if len(quest.quests) < 1:
+			printScan(DGText.error + "You don't have any quests so far")
+		else:
+			DGText.printScan(DGText.success + "Your current quests:")
+			for theQuest in quest.quests:
+				DGText.printScan(Style.BRIGHT + Fore.CYAN + theQuest)
 
 		print(Style.RESET_ALL)
 
