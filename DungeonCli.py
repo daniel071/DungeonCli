@@ -677,12 +677,22 @@ def start():
 
 			# Add a new line
 			print("")
-			start()
 
 
 		elif Scene.current == 4:
-			print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+			DGText.printScan(DGText.action + "You carefully proceed into the next room...")
+			time.sleep(1)
+			DGText.printScan(Style.RESET_ALL + "It is completely empty. There is no sound except"
+			" the water dripping...\n")
+			time.sleep(1)
+			DGText.printScan(DGText.rip + "Suddenly, a goblin bursts through"
+			" the other door!")
+			time.sleep(0.5)
+			DGText.printScan(DGText.rip + "There's nothing you can do other than"
+			" fight!\n")
+			time.sleep(0.2)
 
+			DGCombat.combat("Anomynous Goblin", 20, 3, 5)
 
 		else:
 			DGText.printScan(success + "Thanks for testing DungeonCli!" + Fore.WHITE)
