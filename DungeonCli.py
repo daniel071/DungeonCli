@@ -57,35 +57,12 @@ tempProgressCommand = ["nil"]
 events = ["store", "store", "store", "randomFight", "none", "none", "bombTrap",
 "treasure", "treasure", "unknownCrate"]
 
-# You deal more damage with the better sword you have, for example,
-# having a stone sword deals 40% more damage then no sword.
-# 0 = No Sword = 0% Extra damage
-# 1 = Wooden Sword = 20% Extra damage
-# 2 = Stone Sword = 40% Extra damage
-# 3 = Iron Sword = 70% Extra damage
-# 4 = Diamond Sword = 100% Extra damage
-
-# Armour absorbs a percentage of damage, for example having copper armour
-# absorbs 20% damage, so if you get 50 damage, you only get 40
-
-# 0 = No Armour = 1 x Damage taken
-# 1 = Copper Armour = 0.8 x Damage taken
-# 2 = Iron Armour = 0.6 x Damage taken
-# 3 = Platinum Armour = 0.4 x Damage taken
-# 4 = Diamond Armour = 0.2 x Damage taken
-
-
-
 CSSOptions = [["Matches", 5], ["Basic Healing Potion", 15],
 			  ["Copper Armour", 75], ["Iron Armour", 125], ["Stone Sword", 60],
 			  ["Iron Sword", 90],
-			  ["Advanced Healing Potion", 60], ["Poison Potion", 20]]
+			  ["Advanced Healing Potion", 60], ["Poison Potion", 20],
+			  ["Lucky Coin", 550]]
 
-# 1 x Matches.
-# 3 x Sticks.
-# (no sword)
-# No healing potions
-# No Armour
 
 # theCombatHasNotFinished! alsoICanTalkInCamelCaseMakesSenseRight?
 hasCombatFinished = "no."
@@ -451,7 +428,8 @@ def openInventory():
 	DGText.printScan(DGText.success + "Inventory:")
 
 	DGText.printScan(DGText.success + "Your damage inflicted multipler is {m}x".format(m=DGPlayer.Inventory.damage))
-	DGText.printScan(DGText.success + "Your damage taken multiplyer is {p}x\n".format(p=DGPlayer.Inventory.absorbtion))
+	DGText.printScan(DGText.success + "Your damage taken multiplyer is {p}x".format(p=DGPlayer.Inventory.absorbtion))
+	DGText.printScan(DGText.success + "Your money multiplyer is {p}x\n".format(p=DGPlayer.Inventory.moneyMultiplyer))
 
 	count = 0
 	if DGPlayer.Inventory.matches != 0:
@@ -539,6 +517,14 @@ def purchase(storeSelected, id):
 			else:
 				DGPlayer.Inventory.sword = 3
 				DGPlayer.Inventory.damage = 1.7
+
+		elif item == "Lucky Coin":
+			if DGPlayer.Inventory.moneyMultiplyer == 2:
+				DGText.printScan(error + "You already have this item!\n")
+				return "bruh"
+			else:
+				DGPlayer.Inventory.moneyMultiplyer = 2
+
 
 
 		DGText.printScan(action + "You purchased {item} for {price} coins!\n"
@@ -1219,7 +1205,8 @@ def main():
 		time.sleep(1)
 
 		if passwordPrompt() == "granted":
-			DGMain.addCoins(200)
+			DGMain.addCoins(2000)
+
 	elif command in ("cl_skipintro", "plsnointro"):
 		if passwordPrompt() == "granted":
 			skipIntro()

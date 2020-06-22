@@ -90,6 +90,8 @@ def hpCheck():
 
 def addCoins(add):
 	global DGPLayer
+	toAdd = add * DGPlayer.Inventory.moneyMultiplyer
+
 	DGPlayer.coins = DGPlayer.coins + add
 	DGText.printScan(DGText.success + ("You pocketed " + str(add) + " coins! \n"))
 
