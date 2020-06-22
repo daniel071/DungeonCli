@@ -675,7 +675,6 @@ def start():
 			DGPlayer.Inventory.basicHealingPotion = DGPlayer.Inventory.basicHealingPotion + 1
 			DGPlayer.Inventory.damage = 1.2
 			DGPlayer.Inventory.sword = 1
-			Scene.current = Scene.current + 1
 			time.sleep(2)
 
 			# Add a new line
@@ -695,6 +694,7 @@ def start():
 			" fight!\n")
 			time.sleep(0.2)
 
+			Scene.current = Scene.current + 1
 			DGCombat.combat("Anomynous Goblin", 20, 3, 5)
 
 		else:
