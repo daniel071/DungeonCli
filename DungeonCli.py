@@ -625,10 +625,6 @@ def useMatch():
 			start()
 
 def start():
-	# FIXME: This broke because of the refacetring (I don't know how to spell, lol.).
-	# HUH? No idea what "refacetring" means??!
-	# I meant "Refactoring", it's fixed anyway so I'll remove this ¯\_(ツ)_/¯
-
 	global Scene
 	global Inventory
 	global tempProgressCommand
@@ -694,7 +690,6 @@ def start():
 			DGText.printScan("If you want to help us improve, feel free to send a screenshot or video of you")
 			DGText.printScan("playing the game, at the discord server:")
 			DGText.printScan(Style.BRIGHT + Fore.BLUE + "https://discord.gg/eAUqKKe\n")
-
 
 
 def randomEvent():
@@ -1111,13 +1106,13 @@ def main():
 	global tempProgressCommand
 
 	detect_system()
-	#defKey.stop()
 	command = input(DGText.askPrompt + "[Action] " + Style.RESET_ALL)
-	#defKey.start()
+
 	if command in tempProgressCommand and command != "nil":
 		richPrecense.present(Scene.current)
 		tempProgressCommand = ["nil"]
 		nextScene()
+
 	elif command in ("check money", "check coins", "coins", "money", "c"):
 		checkCoins()
 
@@ -1350,8 +1345,6 @@ if __name__ == '__main__':
 				os._exit(1)
 
 
-
-	#defKey.start()
 	print("\r")
 	DGClear()
 	try:
