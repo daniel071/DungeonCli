@@ -631,6 +631,7 @@ def start():
 
 	global Scene
 	global Inventory
+	global tempProgressCommand
 
 	Scene.storeSelected = []
 
