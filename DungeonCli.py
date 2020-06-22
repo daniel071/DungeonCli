@@ -38,7 +38,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 # --------------------------
 # |		Version!		|
 # --------------------------
-version = "Development Version 0.5.17"
+version = "Development Version 0.5.18"
 # --------------------------
 
 # Define variables here:
@@ -627,6 +627,7 @@ def useMatch():
 def start():
 	# FIXME: This broke because of the refacetring (I don't know how to spell, lol.).
 	# HUH? No idea what "refacetring" means??!
+	# I meant "Refactoring", it's fixed anyway so I'll remove this ¯\_(ツ)_/¯
 
 	global Scene
 	global Inventory
@@ -634,12 +635,13 @@ def start():
 	Scene.storeSelected = []
 
 	if Scene.surroundingsLit == False:
-		DGText.printScan("You are lying down, the cold, wet floor pressed against your face... \nWhere are you?\n")
+		DGText.printScan(DGText.action + "You are lying down, the cold, wet floor pressed"
+		" against your face..." + Style.RESET_ALL + "\nWhere are you?\n")
 		Scene.description = "It is extremely dark and cold \n(however that could be because of your wet clothes), but despite that you can't see a single thing..."
 		time.sleep(1)
 
-		DGText.printScan(
-			"You get up, your footsteps echo through out the room. It's Extremely dark.\nCheck your Inventory, you might have something to improve your vision...\n")
+		DGText.printScan(DGText.action + "You get up, your footsteps echo through out the room. It's Extremely dark.")
+		DGText.printScan(Style.RESET_ALL + "Check your Inventory, you might have something to improve your vision...\n")
 		time.sleep(1)
 		if DGPlayer.Inventory.matches < 1:
 			DGText.printScan(rip + "You don't have any matches left!")
@@ -651,19 +653,25 @@ def start():
 
 	else:
 		if Scene.current == 1:
-			DGText.printScan(Style.RESET_ALL + "The Light is bright enough to see where you are walking, no walls are nearby.")
-			DGText.printScan(action + "While being scared, you think it is probably safe enough to \nwander about your surroundings a bit... \n")
+			DGText.printScan(Style.RESET_ALL + "The Light is bright enough to "
+			"see where you are walking, no walls are nearby.")
+			DGText.printScan(action + "While being scared, you think it is "
+			"probably safe enough to \nwander about your surroundings a bit... \n")
 			tempProgressCommand = ["walk around", "wander", "walk"]
 
+
 		elif Scene.current == 2:
-			DGText.printScan("You start to take a small wander and look around.")
-			DGText.printScan("After wandering around for some time, something shiny catches your attention.")
-			DGText.printScan("it's a lock, it hangs losely on a chest. It's extremely rusted to the point where the fact that\nit's shine caught your eye is astounding.")
+			DGText.printScan(DGText.action + "You start to take a small wander and look around.")
+			DGText.printScan(DGText.action + "After wandering around for some time, something shiny catches your attention.")
+			DGText.printScan("It's a lock, it hangs losely on a chest. It's extremely "
+			"rusted to the point where the fact that\nit's shine caught your eye is astounding.")
 			tempProgressCommand = ["break lock", "attempt to open", "open", "open chest"]
 			time.sleep(1)
 
 		elif Scene.current == 3:
-			DGText.printScan("The lock snaps off. you gently lift up the lid and take what is inside.")
+			DGText.printScan(DGText.action + "The lock snaps off. you gently lift up the lid and take what is inside.")
+			DGText.printScan(success + "You pickup a basic healing potion and"
+			" an wooden sword.")
 			DGPlayer.Inventory.basicHealingPotion = Inventory.basicHealingPotion + 1
 			DGPlayer.Inventory.damage = 1.2
 			DGPlayer.Inventory.sword = 1
@@ -673,6 +681,11 @@ def start():
 			# Add a new line
 			print("")
 			start()
+
+
+		elif Scene.current == 4:
+			print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+
 
 		else:
 			DGText.printScan(success + "Thanks for testing DungeonCli!" + Fore.WHITE)
