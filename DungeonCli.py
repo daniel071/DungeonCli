@@ -51,7 +51,7 @@ developer = 0
 
 invalidCommands = 0
 mainLoop = 1
-tempProgressCommand = ["nil"] #change to something else or check for nil, as user can just type nil to skip to next scene anytime they want.
+tempProgressCommand = ["nil"] #FIXME: change to something else or check for nil, as user can just type nil to skip to next scene anytime they want.
 # Events used for random stuff:
 
 # TODO: when 'wizardThatWantsToKillYou' is done, add it here
@@ -625,8 +625,8 @@ def useMatch():
 			start()
 
 def start():
-	# FIXME: This broke because of the refacetring (i dont know how to spell lol)
-	# HUH? no idea what "refacetring" means??!
+	# FIXME: This broke because of the refacetring (I don't know how to spell, lol.).
+	# HUH? No idea what "refacetring" means??!
 
 	global Scene
 	global Inventory
@@ -653,16 +653,17 @@ def start():
 		if Scene.current == 1:
 			DGText.printScan(Style.RESET_ALL + "The Light is bright enough to see where you are walking, no walls are nearby.")
 			DGText.printScan(action + "While being scared, you think it is probably safe enough to \nwander about your surroundings a bit... \n")
-			tempProgressCommand
+			tempProgressCommand = ["walk around", "wander", "walk"]
 
 		elif Scene.current == 2:
-			DGText.printScan(action + "You start to take a small wander and look around.")
-			DGText.printScan(action + "After wandering around for some time, you find a wooden chest."
-				  "could see it.")
+			DGText.printScan("You start to take a small wander and look around.")
+			DGText.printScan("After wandering around for some time, something shiny catches your attention.")
+			DGText.printScan("it's a lock, it hangs losely on a chest. It's extremely rusted to the point where the fact that\nit's shine caught your eye is astounding.")
+			tempProgressCommand = ["break lock", "attempt to open", "open", "open chest"]
 			time.sleep(1)
 
 		elif Scene.current == 3:
-
+			DGText.printScan("The lock snaps off. you gently lift up the lid and take what is inside.")
 			DGPlayer.Inventory.basicHealingPotion = Inventory.basicHealingPotion + 1
 			DGPlayer.Inventory.damage = 1.2
 			DGPlayer.Inventory.sword = 1
@@ -1099,7 +1100,7 @@ def main():
 	#defKey.stop()
 	command = input(DGText.askPrompt + "[Action] " + Style.RESET_ALL)
 	#defKey.start()
-	if command in tempProgressCommand:
+	if command in tempProgressCommand and command != "nil":
 		richPrecense.present(Scene.current)
 		tempProgressCommand = ["nil"]
 		nextScene()
