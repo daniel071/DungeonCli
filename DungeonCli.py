@@ -38,7 +38,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 # --------------------------
 # |		Version!		|
 # --------------------------
-version = "Development Version 0.5.18"
+version = "Development Version 0.5.19"
 # --------------------------
 
 # Define variables here:
@@ -51,8 +51,7 @@ developer = 0
 
 invalidCommands = 0
 mainLoop = 1
-tempProgressCommand = ["nil"] #FIXME: change to something else or check for nil, as user can just type nil to skip to next scene anytime they want.
-# Events used for random stuff:
+tempProgressCommand = ["nil"]
 
 # TODO: when 'wizardThatWantsToKillYou' is done, add it here
 events = ["store", "store", "store", "randomFight", "none", "none", "bombTrap",
@@ -626,7 +625,7 @@ def useMatch():
 
 def start():
 	global Scene
-	global Inventory
+	global DGPlayer
 	global tempProgressCommand
 
 	Scene.storeSelected = []
@@ -662,7 +661,7 @@ def start():
 			time.sleep(0.75)
 			DGText.printScan(DGText.action + "After wandering around for some time, something shiny catches your attention.\n")
 			time.sleep(0.75)
-			
+
 			DGText.printScan(Style.RESET_ALL + "It's a lock, it hangs losely on a chest. It's extremely "
 			"rusted to the point where the fact that\nit's shine caught your eye is astounding.\n")
 			tempProgressCommand = ["break lock", "attempt to open", "open",
@@ -672,8 +671,8 @@ def start():
 		elif Scene.current == 3:
 			DGText.printScan(DGText.action + "The lock snaps off. you gently lift up the lid and take what is inside.")
 			DGText.printScan(success + "You pickup a basic healing potion and"
-			" an wooden sword.")
-			DGPlayer.Inventory.basicHealingPotion = Inventory.basicHealingPotion + 1
+			" a wooden sword.")
+			DGPlayer.Inventory.basicHealingPotion = DGPlayer.Inventory.basicHealingPotion + 1
 			DGPlayer.Inventory.damage = 1.2
 			DGPlayer.Inventory.sword = 1
 			Scene.current = Scene.current + 1
@@ -1124,7 +1123,7 @@ def main():
 	detect_system()
 	command = input(DGText.askPrompt + "[Action] " + Style.RESET_ALL)
 
-	if command in tempProgressCommand:
+	if command in tempProgressCommand and command != "nil":
 		richPrecense.present(Scene.current)
 		tempProgressCommand = ["nil"]
 		nextScene()
@@ -1277,8 +1276,9 @@ def main():
 	elif command in ("chat", "multiplayer"):
 		multiplayer.runMe()
 
-	elif command in ("debugTemp", "tempProgressCommand"):
-		print(tempProgressCommand)
+	elif command in ("debug", "devDebug"):
+		print("Current scene:", DGScene.current)
+		print("Temp Progress Command:",  tempProgressCommand)
 
 
 	else:
