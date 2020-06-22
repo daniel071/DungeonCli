@@ -659,10 +659,14 @@ def start():
 
 		elif Scene.current == 2:
 			DGText.printScan(DGText.action + "You start to take a small wander and look around.")
-			DGText.printScan(DGText.action + "After wandering around for some time, something shiny catches your attention.")
-			DGText.printScan("It's a lock, it hangs losely on a chest. It's extremely "
-			"rusted to the point where the fact that\nit's shine caught your eye is astounding.")
-			tempProgressCommand = ["break lock", "attempt to open", "open", "open chest"]
+			time.sleep(0.75)
+			DGText.printScan(DGText.action + "After wandering around for some time, something shiny catches your attention.\n")
+			time.sleep(0.75)
+			
+			DGText.printScan(Style.RESET_ALL + "It's a lock, it hangs losely on a chest. It's extremely "
+			"rusted to the point where the fact that\nit's shine caught your eye is astounding.\n")
+			tempProgressCommand = ["break lock", "attempt to open", "open",
+			"open chest", "unlock", "unlock chest"]
 			time.sleep(1)
 
 		elif Scene.current == 3:
