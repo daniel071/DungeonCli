@@ -1,3 +1,6 @@
+# The random dialog class. It contains multiple lists of possible dialogs for
+# an event.
+
 import random
 
 class randomDialog:
