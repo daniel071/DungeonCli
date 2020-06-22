@@ -654,7 +654,7 @@ def start():
 			"see where you are walking, no walls are nearby.")
 			DGText.printScan(action + "While being scared, you think it is "
 			"probably safe enough to \nwander about your surroundings a bit... \n")
-			tempProgressCommand = ["walk around", "wander", "walk"]
+			tempProgressCommand = ["walk around", "wander", "walk", "wonder"]
 
 
 		elif Scene.current == 2:
@@ -1102,9 +1102,11 @@ def creditScreen():
 
 
 def nextScene():
+	global Scene
+
 	if Scene.canProgress == True:
 		Scene.hasStore = False
-
+		Scene.current = Scene.current + 1
 		start()
 	else:
 		DGText.printScan("Progress through where? there are no visible exits!")
@@ -1118,7 +1120,7 @@ def main():
 	detect_system()
 	command = input(DGText.askPrompt + "[Action] " + Style.RESET_ALL)
 
-	if command in tempProgressCommand and command != "nil":
+	if command in tempProgressCommand:
 		richPrecense.present(Scene.current)
 		tempProgressCommand = ["nil"]
 		nextScene()
@@ -1270,6 +1272,10 @@ def main():
 			bossSuccess()
 	elif command in ("chat", "multiplayer"):
 		multiplayer.runMe()
+
+	elif command in ("debugTemp", "tempProgressCommand"):
+		print(tempProgressCommand)
+
 
 	else:
 		invalidCommand()
