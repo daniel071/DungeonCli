@@ -626,6 +626,7 @@ def useMatch():
 
 def start():
 	# FIXME: This broke because of the refacetring (i dont know how to spell lol)
+	# HUH? no idea what "refacetring" means??!
 
 	global Scene
 	global Inventory
