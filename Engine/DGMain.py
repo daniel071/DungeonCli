@@ -1,4 +1,6 @@
 # Some common functions that are used
+# Usually we just dump stuff here that are related to the main function of
+# the engine
 
 from colorama import Fore, Back, Style
 from colorama import init
