@@ -699,7 +699,7 @@ def start():
 			"It's simple yet hard,\n"
 			"Defeat the guard.\"\n")
 
-			printspeed = 0.013
+			DGText.printspeed = 0.013
 
 		# elif Scene.current == 6:
 
