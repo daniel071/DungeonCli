@@ -612,6 +612,7 @@ def useMatch():
 def start():
 	global Scene
 	global DGPlayer
+	global DGText
 	global tempProgressCommand
 
 	Scene.storeSelected = []
@@ -686,8 +687,23 @@ def start():
 		elif Scene.current == 5:
 			DGText.printScan(DGText.action + "You find a small outpost here. There are unknown creatures"
 			" scattered across the place")
-			DGText.printScan(Style.BRIGHT + Fore.WHITE + "Theres a sign on a dusty wall, it reads," +
-			DGText.quote + "{insert poem about town getting destroyed by the rebellion}")
+			time.sleep(1)
+			DGText.printScan(Style.BRIGHT + Fore.WHITE + "Theres a sign on a dusty wall, it reads,\n")
+
+			DGText.printspeed = 0.05
+
+			DGText.printScan(DGText.quote +
+			"It used to be a great place here,\n"
+			"But then, the rebellion wiped us clear,\n"
+			"There's only one way back,\n"
+			"It's simple yet hard,\n"
+			"Defeat the guard.\"\n")
+
+			printspeed = 0.013
+
+		# elif Scene.current == 6:
+
+
 
 
 		else:
