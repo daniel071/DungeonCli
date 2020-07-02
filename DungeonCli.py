@@ -38,7 +38,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 # --------------------------
 # |		Version!		|
 # --------------------------
-version = "Development Version 0.5.19"
+version = "Development Version 0.5.20"
 # --------------------------
 
 # Define variables here:
@@ -651,7 +651,7 @@ def start():
 			DGText.printScan(Style.RESET_ALL + "It's a lock, it hangs losely on a chest. It's extremely "
 			"rusted to the point where the fact that\nit's shine caught your eye is astounding.\n")
 			tempProgressCommand = ["break lock", "attempt to open", "open",
-			"open chest", "unlock", "unlock chest"]
+			"open chest", "unlock", "unlock chest", "pick", "pick lock"]
 			time.sleep(1)
 
 		elif Scene.current == 3:
@@ -680,8 +680,15 @@ def start():
 			" fight!\n")
 			time.sleep(0.2)
 
-			Scene.current = Scene.current + 1
 			DGCombat.combat("Anomynous Goblin", 20, 3, 5)
+
+
+		elif Scene.current == 5:
+			DGText.printScan(DGText.action + "You find a small outpost here. There are unknown creatures"
+			" scattered across the place")
+			DGText.printScan(Style.BRIGHT + Fore.WHITE + "Theres a sign on a dusty wall, it reads," +
+			DGText.quote + "{insert poem about town getting destroyed by the rebellion}")
+
 
 		else:
 			DGText.printScan(success + "Thanks for testing DungeonCli!" + Fore.WHITE)
