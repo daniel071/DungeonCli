@@ -38,7 +38,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 # --------------------------
 # |		Version!		|
 # --------------------------
-version = "Development Version 0.5.20"
+version = "Development Version 0.5.21"
 # --------------------------
 
 # Define variables here:
