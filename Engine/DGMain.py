@@ -136,7 +136,7 @@ def gameover():
 	time.sleep(2)
 
 	DGText.printScan(Style.BRIGHT + Fore.WHITE +
-		  DGDialog.randomDialog.gameoverText(DGDialog.randomDialog))
+		  DGDialog.randomDialog.gameoverText())
 	time.sleep(4)
 	DGClear()
 	endThreads()
