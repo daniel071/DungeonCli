@@ -101,10 +101,10 @@ def initRandomRoom():
 	# Also, there would be a 1 in 10 chance of the room not being lit
 	global Scene
 	a = random.randint(1,2)
-	Scene.description = DGDialog.randomDialog.roomDescription(DGDialog.randomDialog)
+	Scene.description = DGDialog.randomDialog.roomDescription()
 	if a == 2:
 		Scene.hasCoins == True
-		Scene.description == Scene.description + " " + DGDialog.randomDialog.coinsOnFloor(DGDialog.randomDialog)
+		Scene.description == Scene.description + " " + DGDialog.randomDialog.coinsOnFloor()
 	b = random.randint(1,10)
 	if b == 2:
 		Scene.surroundingsLit == False
@@ -221,13 +221,10 @@ def bombTrapScene():
 
 	Scene.description = "The room looked very charred after the explosion. you should probably proceed."
 
-	DGText.printScan(action + "It is odly quiet here... you begin to look around... \n")
-	time.sleep(2)
-
 	DGMain.playSound("Sounds/explosion.ogg", False)
 	DGText.printScan(rip + "BANG!")
 	time.sleep(1)
-	DGText.printScan(DGDialog.randomDialog.bombExplodes(randomDialog))
+	DGText.printScan(DGDialog.randomDialog.bombExplodes())
 	damage(random.randint(5, 15) * DGPlayer.Inventory.absorbtion)
 	time.sleep(1)
 
@@ -462,6 +459,9 @@ def openInventory():
 	elif DGPlayer.Inventory.armour == 2:
 		DGText.printScan("Iron Armour")
 
+	if DGPlayer.Inventory.secretKey == 1:
+		DGText.printScan("Random Key?")
+
 
 	# This DGText.printScan just adds some white space
 	DGText.printScan(" ")
@@ -687,13 +687,15 @@ def start():
 		elif Scene.current == 5:
 			DGText.printScan(DGText.action + "You find a small outpost here. There are unknown creatures"
 			" scattered across the place")
+			DGText.printScan(Style.RESET_ALL + "The outpost seems to be in ruins,"
+			" blood scattered across the wall of burned down houses.\n")
 			time.sleep(1)
 			DGText.printScan(Style.BRIGHT + Fore.WHITE + "Theres a sign on a dusty wall, it reads,\n")
 
 			DGText.printspeed = 0.05
 
 			DGText.printScan(DGText.quote +
-			"It used to be a great place here,\n"
+			"It used to be great here,\n"
 			"But then, the rebellion wiped us clear,\n"
 			"There's only one way back,\n"
 			"It's simple yet hard,\n"
@@ -701,10 +703,42 @@ def start():
 
 			DGText.printspeed = 0.013
 
+			time.sleep(1)
+			DGText.printScan(DGText.action + "Suddenly, some sort of 'creature'"
+			" comes up to you. It can't speak English, but it's pointing towards"
+			" a trapdoor.")
+
+			questions = [
+				{
+					'type': 'confirm',
+					'name': 'promptChoice',
+					'message': 'Will you climb down onto the trapdoor?',
+				}
+			]
+
+			print(Style.RESET_ALL)
+			theAnswer = prompt(questions)
+			theSelection = theAnswer['promptChoice']
+			if theSelection is True:
+				DGText.printScan(DGText.success + "You climb down onto the trapdoor."
+				" Once you reach the bottom, you found a key!")
+				DGText.printScan(DGText.action + "You don't know what this key is for,"
+				" but you take it anyway.\n")
+				DGPlayer.Inventory.secretKey = 1
+
+				time.sleep(2)
+
+				DGText.printScan(Style.RESET_ALL + "As you begin to exit the trapdoor...\n")
+
+				bombTrapScene()
+
+
+			else:
+				DGText.printScan(DGText.action + "You decide it is too risky and"
+				" prepare to move on.")
+
+
 		# elif Scene.current == 6:
-
-
-
 
 		else:
 			DGText.printScan(success + "Thanks for testing DungeonCli!" + Fore.WHITE)
@@ -729,7 +763,7 @@ def randomEvent():
 		if selection == "store":
 			DGText.printScan(DGText.action + "You find a small store setup here")
 			DGText.printScan(DGText.action + "Maybe they'll have something useful here..\n")
-			Scene.description = Scene.description + " " + DGDialog.randomDialog.store(DGDialog.randomDialog)
+			Scene.description = Scene.description + " " + DGDialog.randomDialog.store()
 			questions = [
 				{
 					'type': 'confirm',
@@ -784,6 +818,8 @@ def randomEvent():
 
 
 		elif selection == "bombTrap":
+			DGText.printScan(action + "It is odly quiet here... you begin to look around... \n")
+			time.sleep(2)
 			bombTrapScene()
 
 		elif selection == "wizardThatWantsToKillYou":
@@ -980,7 +1016,7 @@ def pickCoins():
 
 	if Scene.hasCoins == True:
 		amount = random.randint(10, 12)
-		DGText.printScan(action + DGDialog.randomDialog.collectCoins(DGDialog.randomDialog))
+		DGText.printScan(action + DGDialog.randomDialog.collectCoins())
 		time.sleep(0.8)
 
 		DGMain.addCoins(amount)

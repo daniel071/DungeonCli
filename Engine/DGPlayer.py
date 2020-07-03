@@ -53,3 +53,6 @@ class Inventory:
 
 	armour = 0
 	absorbtion = 1.0
+
+	# ????
+	secretKey = 0
