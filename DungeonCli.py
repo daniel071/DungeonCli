@@ -285,14 +285,16 @@ def bossSuccess():
 	"""
 	DGText.printScan(Fore.GREEN + Style.BRIGHT + message)
 
-	time.sleep(2)
+	DGText.printspeed = 0.020
+
+	time.sleep(2.5)
 	DGText.printScan(Style.BRIGHT + Fore.CYAN + "Once the boss was destroyed,"
 	" the rebellion was dismantled, letting the town recover!\n" + Style.RESET_ALL)
-	time.sleep(2)
+	time.sleep(2.5)
 
 	DGText.printspeed = 0.007
 	creditScreen()
-	time.sleep(2)
+	time.sleep(2.5)
 	DGExit()
 
 
