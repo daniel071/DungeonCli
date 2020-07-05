@@ -9,7 +9,8 @@ DungeonCli.py**
 **(Recommended method)**
 
 #### On Windows:
-Download the .exe file from the releases page and run it.
+Download the Windows .zip file, extract it and run *DungeonCli.exe*
+##### NOTE: Make sure to keep the exe file in the folder it came with otherwise it won't run!
 
 #### On Unix based systems:
 1. Go to the releases page and download the binary for your operating system
