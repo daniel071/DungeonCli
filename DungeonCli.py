@@ -17,6 +17,10 @@ import sys
 from src import richPrecense
 from src import multiplayer
 from Engine import *
+
+# What??? this import fixed my error???
+from Engine import DGSave
+
 from sys import stdout
 from threading import Lock
 # import multiprocessing # DANIEL YOU CUNK :) PLS USE THREADS!!
@@ -38,7 +42,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 # --------------------------
 # |		Version!		|
 # --------------------------
-version = "Release Version 0.6.0"
+version = "Development Version 0.6.1"
 # --------------------------
 
 # Define variables here:
@@ -409,7 +413,7 @@ def load_game():
 
 	DGText.printScan(DGText.success + "Successfully loaded save file!\n")
 
-#TODO: Move these into DGPLayer as a player actions class.!
+# TODO: Move these into DGPLayer as a player actions class.!
 
 def checkCoins():
 	global DGPlayer
@@ -737,12 +741,10 @@ def start():
 
 			else:
 				DGText.printScan(DGText.action + "You decide it is too risky and"
-				" prepare to move on.")
+				" prepare to move on.\n")
 
 
 		# elif Scene.current == 6:
-
-
 
 		else:
 			DGText.printScan(success + "Thanks for testing DungeonCli!" + Fore.WHITE)
@@ -1167,6 +1169,7 @@ def nextScene():
 
 def main():
 	global DGPlayer
+	global DGSave
 	global tempProgressCommand
 
 	detect_system()
@@ -1275,10 +1278,11 @@ def main():
 			skipIntro()
 
 	elif command in ("save", "save game"):
-		save_game()
+		DGSave.save()
 
 	elif command in ("load", "load game"):
 		load_game()
+
 	elif command in ("plsdie", "plskill"):
 		if passwordPrompt() == "granted":
 			DGMain.gameover()
