@@ -13,3 +13,5 @@ fi
 
 cp -r ./Music ./bin.build/DungeonCli.dist/
 cp -r ./Sounds ./bin.build/DungeonCli.dist/
+
+zip DungeonCli.zip ./bin.build/DungeonCli.dist/
