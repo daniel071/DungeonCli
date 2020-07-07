@@ -16,7 +16,7 @@ pipeline {
 
     stage('Archive artifacts') {
       steps {
-        archiveArtifacts 'bin.build/DungeonCli.dist'
+        archiveArtifacts 'DungeonCli.zip'
       }
     }
 
