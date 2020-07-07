@@ -8,6 +8,14 @@ DungeonCli.py**
 ### From binaries
 **(Recommended method)**
 
+##### There are 2 different places where you can download binaries.
+
+[Stable builds](http://pavela.net:3000/Daniel/DungeonCli/releases) | [Nightly builds](http://pavela.net:8090/blue/organizations/jenkins/DungeonCI/activity)
+------------ | -------------
+Stable builds are major milestones that are not released frequently. <br>These have been manually compiled and have been tested to work. | Nightly builds are released every day. They have the latest updates however, are not tested. <br>NOTE: Currently we only have linux nightly builds. <br>We are working on getting Windows nightly builds working and if you use MacOS, you're out of luck.
+
+
+
 #### On Windows:
 Download the Windows .zip file, extract it and run *DungeonCli.exe*
 ##### NOTE: Make sure to keep the exe file in the folder it came with otherwise it won't run!
