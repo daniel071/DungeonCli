@@ -1,7 +1,7 @@
 #!/bin/bash
 
 mkdir bin.build
-python3 -m nuitka --standalone --remove-output --show-progress --show-memory --output-dir=bin.build --file-reference-choice=runtime DungeonCli.py
+python3 -m nuitka --standalone --remove-output --show-progress --show-memory --show-scons --output-dir=bin.build --file-reference-choice=runtime DungeonCli.py
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	mv ./DungeonCli.bin ./bin.build/DungeonCli_osx
 	sudo codesign -f -s - ./bin.build/DungeonCli.dist/Python
