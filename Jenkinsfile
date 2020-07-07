@@ -3,6 +3,8 @@ pipeline {
   stages {
     stage('Install Dependencies') {
       steps {
+				sh `PATH=${PATH}:/usr/local/bin`
+				sh `sudo easy_install pip`
         sh 'python -m pip3 install -r requirements.txt'
       }
     }
