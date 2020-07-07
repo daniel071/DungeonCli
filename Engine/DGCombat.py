@@ -24,7 +24,7 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 
 	def finishUpMusic():
 		DGMain.endThreads()
-		DGMain.playSound("Music/quest.ogg", True)
+		DGMain.playSound("Music/intro.ogg", True)
 
 
 

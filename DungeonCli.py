@@ -33,7 +33,7 @@ from threading import Lock
 
 from colorama import init  # type: ignore
 
-os.chdir(os.path.dirname(os.path.abspath(__file__))) 
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 # --------------------------
 # |		Version!		|
@@ -741,6 +741,8 @@ def start():
 
 
 		# elif Scene.current == 6:
+
+
 
 		else:
 			DGText.printScan(success + "Thanks for testing DungeonCli!" + Fore.WHITE)
