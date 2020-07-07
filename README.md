@@ -1,5 +1,7 @@
 "In need of coins, eh? I mean i could let you have some of my precious coins, but ya gotta know the secret code" - Money Grinch
 # DungeonCli
+[![Build Status](http://pavela.net:8090/buildStatus/icon?job=DungeonCI%2Fmaster)](http://pavela.net:8090/blue/organizations/jenkins/DungeonCI/branches)
+
 **What is it?**
 
 DungeonCli is a terminal based program where you get to explore
