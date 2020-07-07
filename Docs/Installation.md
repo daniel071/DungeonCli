@@ -58,9 +58,9 @@ can install it from www.python.org
 
 	`git clone http://119.17.132.38:3000/Daniel/DungeonCli.git`
 2. Make sure you have the dependencies installed. These include:
-- Python 3.8.2 (https://www.python.org/downloads/)
-- Nuitka (https://nuitka.net/pages/download.html)
-- Mingw (https://osdn.net/projects/mingw/releases/)
+- [Python 3.8.2](https://www.python.org/downloads/)
+- [Nuitka](https://nuitka.net/pages/download.html)
+- [MinGW](https://osdn.net/projects/mingw/releases/) (Only required on Windows)
 3. Run the compile script:
 
 	If you're on Linux / Unix, make sure to give compile.sh executable
