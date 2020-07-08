@@ -2,7 +2,6 @@ colorama==0.4.3
 prompt-toolkit==1.0.14
 PyInquirer==1.0.3
 readchar==2.0.1
-defKey==1.0.1
 simpleaudio==1.0.4
 pydub==0.23.1
 pypresence==4.0.0

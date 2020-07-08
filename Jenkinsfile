@@ -6,8 +6,8 @@ pipeline {
   stages {
     stage('Install Dependencies') {
       steps {
-        sh 'python -m pip install -r requirements.txt'
-        sh 'python -m pip install nuitka'
+        sh 'python3 -m pip install -r requirements.txt'
+        sh 'python3 -m pip install nuitka'
       }
     }
 
