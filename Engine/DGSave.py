@@ -6,11 +6,10 @@ from colorama import Fore, Back, Style
 from colorama import init
 import time
 import json
+import inspect
 
-# FIXME: Save system is a buggy mess
 
 def save():
-	# TODO: Make the save function actually work
 	questions = [
 		{
 
@@ -20,9 +19,40 @@ def save():
 		}
 	]
 	answers = prompt(questions)
-	userInput = answers['location']
+	directory = answers['location']
 
-	print(userInput)
+	saveFile = {
+		"DGPlayer": {
+			"coins": DGPlayer.coins,
+			"hp": DGPlayer.hp,
+			"moneyMultiplyer": DGPlayer.Inventory.moneyMultiplyer,
+			"matches": DGPlayer.Inventory.matches,
+			"sticks": DGPlayer.Inventory.sticks,
+			"basicHealingPotion": DGPlayer.Inventory.basicHealingPotion,
+			"advancedHealingPotion": DGPlayer.Inventory.advancedHealingPotion,
+			"poisonPotion": DGPlayer.Inventory.poisonPotion,
+			"sword": DGPlayer.Inventory.sword,
+			"damage": DGPlayer.Inventory.damage,
+			"armour": DGPlayer.Inventory.armour,
+			"absorbtion": DGPlayer.Inventory.absorbtion,
+			"secretKey": DGPlayer.Inventory.secretKey,
+		},
+		"DGScene": {
+			"canProgress": DGScene.canProgress,
+			"current": DGScene.current,
+			"surroundingsLit": DGScene.surroundingsLit,
+			"hasStore": DGScene.hasStore,
+			"hasCoins": DGScene.hasCoins,
+			"hasVault": DGScene.hasVault,
+			"description": DGScene.description,
+			"soundDescription": DGScene.soundDescription,
+		}
+	}
+
+	with open(directory, 'w', encoding='utf-8') as f:
+		json.dump(saveFile, f, ensure_ascii=False, indent=4)
+
+	DGText.printScan(DGText.success + "Successfully saved to {dir}!\n".format(dir=directory))
 
 
 def load():
@@ -37,9 +67,10 @@ def load():
 		}
 	]
 	answers = prompt(questions)
-	userInput = answers['location']
-
-	print(userInput)
+	directory = answers['location']
 
 	with open(directory, 'r', encoding='utf-8') as f:
 		saveFile = json.load(f)
+
+	for i in saveFile:
+		print(i)
