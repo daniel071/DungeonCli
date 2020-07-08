@@ -2,7 +2,7 @@ pipeline {
   agent none
 
 	triggers {
-        cron('H 0 * * *')
+        cron('20 0 * * *')
   }
   stages {
     stage('Install Dependencies') {
