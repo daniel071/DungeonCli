@@ -8,6 +8,7 @@ pipeline {
     stage('Install Dependencies') {
 			agent any
       steps {
+        sh 'python3 -m venv ~/Jenkins/venv'
         sh 'python3 -m pip install -r requirements.txt --user'
         sh 'python3 -m pip install nuitka --user'
       }
