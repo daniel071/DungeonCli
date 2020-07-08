@@ -3,7 +3,7 @@ You **MUST** have ffmpeg installed in order for the music to work. On MacOS and 
 I have created an installation script that will do install it for you. It is built in to
 DungeonCli.py**
 
----
+<br>
 
 ### From binaries
 **(Recommended method)**
@@ -13,7 +13,7 @@ DungeonCli.py**
 [Stable builds](http://pavela.net:3000/Daniel/DungeonCli/releases) | [Nightly builds](http://pavela.net:8090/blue/organizations/jenkins/DungeonCI/activity)
 ------------ | -------------
 <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Windows_logo_-_2012.svg" alt="Windows 10 Logo" width="100"/> <img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Tux.png" alt="Linux Logo" width="100"/> <img src="https://upload.wikimedia.org/wikipedia/commons/2/22/MacOS_logo_%282017%29.svg" alt="MacOS Logo" width="100"/>| <img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Tux.png" alt="Linux Logo" width="100"/> <img src="https://upload.wikimedia.org/wikipedia/commons/2/22/MacOS_logo_%282017%29.svg" alt="MacOS Logo" width="100"/>
-Stable builds are major milestones that are not released frequently. <br>These have been manually compiled and have been tested to work. | Nightly builds are released every day. They have the latest updates however, are not tested. <br>NOTE: Currently we only have Linux and MacOS nightly builds. <br>We are working on getting Windows nightly builds working.
+Stable builds are major milestones that are not released frequently. <br>These have been manually compiled and have been tested to work. | Nightly builds are released every day. They have the latest updates however, are not tested. <br>NOTE: Currently we only have Linux and MacOS nightly builds. <br>Windows builds will be available as soon as we get a Windows server.
 
 
 
@@ -22,17 +22,14 @@ Download the Windows .zip file, extract it and run *DungeonCli.exe*
 ##### NOTE: Make sure to keep the exe file in the folder it came with otherwise it won't run!
 
 #### On Unix based systems:
-1. Go to the releases page and download the binary for your operating system
+1. Download the binary for your operating system
 2. Give the binary executable permissions and run it
 
-**On Linux:**
-Give it priviledges with `chmod +X ./DungeonCli_Linux` then run it with
+**On Linux/MacOS:**
+Give it priviledges with `chmod +X ./DungeonCli` then run it with
 `./DungeonCli_Linux`
 
-**On MacOS:**
-Give it priviledges with `chmod +X ./DungeonCli_osx` then run it with
-`./DungeonCli_osx`
-
+<br>
 
 ---
 
@@ -44,10 +41,11 @@ Give it priviledges with `chmod +X ./DungeonCli_osx` then run it with
 
 	`git clone http://119.17.132.38:3000/Daniel/DungeonCli.git`
 2. Make sure you have Python 3.8.2 installed. If you don't, you
-can install it from www.python.org
+can install it from https://www.python.org
 3. Make sure you have the dependencies installed with `pip install -r requirements.txt`
 4. Open the terminal in the directory and type `python DungeonCli.py`
 
+<br>
 
 ---
 
