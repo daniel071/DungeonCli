@@ -22,31 +22,30 @@ def save():
 	directory = answers['location']
 
 	saveFile = {
-		"DGPlayer": {
-			"coins": DGPlayer.coins,
-			"hp": DGPlayer.hp,
-			"moneyMultiplyer": DGPlayer.Inventory.moneyMultiplyer,
-			"matches": DGPlayer.Inventory.matches,
-			"sticks": DGPlayer.Inventory.sticks,
-			"basicHealingPotion": DGPlayer.Inventory.basicHealingPotion,
-			"advancedHealingPotion": DGPlayer.Inventory.advancedHealingPotion,
-			"poisonPotion": DGPlayer.Inventory.poisonPotion,
-			"sword": DGPlayer.Inventory.sword,
-			"damage": DGPlayer.Inventory.damage,
-			"armour": DGPlayer.Inventory.armour,
-			"absorbtion": DGPlayer.Inventory.absorbtion,
-			"secretKey": DGPlayer.Inventory.secretKey,
-		},
-		"DGScene": {
-			"canProgress": DGScene.canProgress,
-			"current": DGScene.current,
-			"surroundingsLit": DGScene.surroundingsLit,
-			"hasStore": DGScene.hasStore,
-			"hasCoins": DGScene.hasCoins,
-			"hasVault": DGScene.hasVault,
-			"description": DGScene.description,
-			"soundDescription": DGScene.soundDescription,
-		}
+		# Put values in Engine/DGPlayer.py
+		"DGPlayer.coins": DGPlayer.coins,
+		"DGPlayer.hp": DGPlayer.hp,
+		"DGPlayer.Inventory.moneyMultiplyer": DGPlayer.Inventory.moneyMultiplyer,
+		"DGPlayer.Inventory.matches": DGPlayer.Inventory.matches,
+		"DGPlayer.Inventory.sticks": DGPlayer.Inventory.sticks,
+		"DGPlayer.Inventory.basicHealingPotion": DGPlayer.Inventory.basicHealingPotion,
+		"DGPlayer.Inventory.advancedHealingPotion": DGPlayer.Inventory.advancedHealingPotion,
+		"DGPlayer.Inventory.poisonPotion": DGPlayer.Inventory.poisonPotion,
+		"DGPlayer.Inventory.sword": DGPlayer.Inventory.sword,
+		"DGPlayer.Inventory.damage": DGPlayer.Inventory.damage,
+		"DGPlayer.Inventory.armour": DGPlayer.Inventory.armour,
+		"DGPlayer.Inventory.absorbtion": DGPlayer.Inventory.absorbtion,
+		"DGPlayer.Inventory.secretKey": DGPlayer.Inventory.secretKey,
+
+		# Put values in Engine/DGScene.py
+		"DGScene.canProgress": DGScene.canProgress,
+		"DGScene.current": DGScene.current,
+		"DGScene.surroundingsLit": DGScene.surroundingsLit,
+		"DGScene.hasStore": DGScene.hasStore,
+		"DGScene.hasCoins": DGScene.hasCoins,
+		"DGScene.hasVault": DGScene.hasVault,
+		"DGScene.description": DGScene.description,
+		"DGScene.soundDescription": DGScene.soundDescription,
 	}
 
 	with open(directory, 'w', encoding='utf-8') as f:
@@ -56,6 +55,8 @@ def save():
 
 
 def load():
+	global DGPlayer
+	global DGScene
 	# TODO: Make the load function actually work
 
 	questions = [
@@ -72,5 +73,8 @@ def load():
 	with open(directory, 'r', encoding='utf-8') as f:
 		saveFile = json.load(f)
 
-	for i in saveFile:
-		print(i)
+	for key, value in saveFile.items():
+		print(key)
+		print(value)
+
+		exec(key, "=", value)
