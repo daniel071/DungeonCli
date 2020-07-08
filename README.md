@@ -8,9 +8,6 @@ DungeonCli is a terminal based program where you get to explore
 places and earn coins. You can spend those coins on various items,
 have fun!
 
-##### Note: There is also a swift rewrite (depreciated)
-There is another depreciated version, made with swift at the `swift-rewrite` branch
-
 ## Installation:
 
 For Installation instructions, look at
@@ -72,7 +69,7 @@ that. If you want to translate, just let us know by opening up an issue.
 - [x] Convince Daniel to use threads (Edit: After we switched to pydub, everything works flawlessly!)
 - [ ] Write more story
 - [x] Basic Gameplay mechanics
-- [ ] Real 'bin' format save files. not the fake stuff.
+- [x] Real 'bin' format save files. not the fake stuff. (Save system works, but its not real binary yet)
 - [x] Overhaul the combat system, add sparing and using items
 - [x] Fix combat system dealing no damage
 - [ ] Make extra swords that deal extra damage
