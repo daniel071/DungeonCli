@@ -44,8 +44,6 @@ def save():
 		"DGScene.hasStore": DGScene.hasStore,
 		"DGScene.hasCoins": DGScene.hasCoins,
 		"DGScene.hasVault": DGScene.hasVault,
-		"DGScene.description": DGScene.description,
-		"DGScene.soundDescription": DGScene.soundDescription,
 	}
 
 	with open(directory, 'w', encoding='utf-8') as f:
@@ -57,7 +55,6 @@ def save():
 def load():
 	global DGPlayer
 	global DGScene
-	# TODO: Make the load function actually work
 
 	questions = [
 		{
@@ -70,11 +67,15 @@ def load():
 	answers = prompt(questions)
 	directory = answers['location']
 
-	with open(directory, 'r', encoding='utf-8') as f:
-		saveFile = json.load(f)
+	try:
+		with open(directory, 'r', encoding='utf-8') as f:
+			saveFile = json.load(f)
 
-	for key, value in saveFile.items():
-		print(key)
-		print(value)
+		for key, value in saveFile.items():
+			executeMe = "{key} = {value}".format(key=key, value=value)
+			exec(executeMe)
 
-		exec(key, "=", value)
+		DGText.printScan(DGText.success + "Successfully loaded to save!\n".format(dir=directory))
+
+	except FileNotFoundError:
+		DGText.printScan(DGText.error + "Unable to find file \"{dir}\"!".format(dir=directory))
