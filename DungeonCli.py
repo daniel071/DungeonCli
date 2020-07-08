@@ -1281,7 +1281,7 @@ def main():
 		DGSave.save()
 
 	elif command in ("load", "load game"):
-		load_game()
+		DGSave.load()
 
 	elif command in ("plsdie", "plskill"):
 		if passwordPrompt() == "granted":

@@ -11,13 +11,36 @@ import jsonpickle
 # FIXME: Save system is a buggy mess
 
 def save():
-	# TODO: Convert this to PyInquirer
-	DGText.printScan(DGText.hint + "For example, '/home/user/save.json')")
-	directory = input(Style.RESET_ALL + DGText.question + "What is the file that you would "
-					  "like to save in? ")
+	# TODO: Make the save function actually work
+	questions = [
+		{
 
-	for variable in iojsfdiosjf
+			'type': 'input',
+			'message': 'What is the file that you would like to save in?',
+			'name': 'location'
+		}
+	]
+	answers = prompt(questions)
+	userInput = answers['location']
+
+	print(userInput)
 
 
 def load():
-	pass
+	# TODO: Make the load function actually work
+
+	questions = [
+		{
+
+			'type': 'input',
+			'message': 'What is the directory the save file is in?',
+			'name': 'location'
+		}
+	]
+	answers = prompt(questions)
+	userInput = answers['location']
+
+	print(userInput)
+
+	with open(directory, 'r', encoding='utf-8') as f:
+		saveFile = json.load(f)
