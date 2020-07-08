@@ -9,7 +9,7 @@ pipeline {
 			agent any
       steps {
         sh 'python3 -m venv env'
-        sh 'source env/bin/activate"
+        sh 'source env/bin/activate'
         sh 'python3 -m pip install -r requirements.txt --user'
         sh 'python3 -m pip install nuitka --user'
       }
