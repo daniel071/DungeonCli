@@ -1374,7 +1374,7 @@ if __name__ == '__main__':
 		DGText.printScan("Please copy this error and open up a new issue on Gitea!")
 		time.sleep(0.3)
 		DGText.printScan(Fore.BLUE + "Here: http://pavela.net:3000/Daniel/DungeonCli")
-		time.sleep(1)
+		time.sleep(0.3)
 		print(Style.RESET_ALL + Fore.RED)
 		raise
 
