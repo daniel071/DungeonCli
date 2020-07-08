@@ -19,3 +19,6 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 	zip -r DungeonCli_MacOS.zip ./bin.build/DungeonCli.dist/
 elif [[ "$OSTYPE" == "linux-gnu" ]]; then
 	zip -r DungeonCli_Linux.zip ./bin.build/DungeonCli.dist/
+else
+	zip -r DungeonCli_Other.zip ./bin.build/DungeonCli.dist/
+fi
