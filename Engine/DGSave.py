@@ -78,4 +78,4 @@ def load():
 		DGText.printScan(DGText.success + "Successfully loaded to save!\n".format(dir=directory))
 
 	except FileNotFoundError:
-		DGText.printScan(DGText.error + "Unable to find file \"{dir}\"!".format(dir=directory))
+		DGText.printScan(DGText.error + "Unable to find file \"{dir}\"!\n".format(dir=directory))
