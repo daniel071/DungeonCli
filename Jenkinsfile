@@ -12,19 +12,8 @@ pipeline {
     }
 
     stage('Compile') {
-      parallel {
-        stage('Compile Linux') {
-          steps {
-            sh './compile.sh'
-          }
-        }
-
-        stage('Compile MacOS') {
-          steps {
-            sh './compile.sh'
-          }
-        }
-
+      steps {
+        sh './compile.sh'
       }
     }
 
@@ -34,8 +23,5 @@ pipeline {
       }
     }
 
-  }
-  triggers {
-    cron('H 0 * * *')
   }
 }
