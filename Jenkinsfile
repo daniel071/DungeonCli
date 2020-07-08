@@ -19,7 +19,7 @@ pipeline {
 			}
       steps {
         sh './compile.sh'
-				archiveArtifacts 'DungeonCli.zip'
+				archiveArtifacts 'DungeonCli_Linux.zip'
       }
     }
 
@@ -29,7 +29,7 @@ pipeline {
 			}
 			steps {
 				sh './compile.sh'
-				archiveArtifacts 'DungeonCli.zip'
+				archiveArtifacts 'DungeonCli_MacOS.zip'
 			}
 		}
   }

@@ -14,4 +14,8 @@ fi
 cp -r ./Music ./bin.build/DungeonCli.dist/
 cp -r ./Sounds ./bin.build/DungeonCli.dist/
 
-zip -r DungeonCli.zip ./bin.build/DungeonCli.dist/
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+	zip -r DungeonCli_MacOS.zip ./bin.build/DungeonCli.dist/
+elif [[ "$OSTYPE" == "linux-gnu" ]]; then
+	zip -r DungeonCli_Linux.zip ./bin.build/DungeonCli.dist/
