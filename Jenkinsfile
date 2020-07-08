@@ -1,5 +1,5 @@
 pipeline {
-  agent { label 'macos' }
+  agent any
 	triggers {
         cron('H 0 * * *')
   }
