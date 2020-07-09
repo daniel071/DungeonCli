@@ -1293,7 +1293,6 @@ if __name__ == '__main__':
 			theValue = theAnswer['userChoice']
 			if theValue == "Install FFMPEG":
 				if operatingsystem == 'windows':
-					# TODO: Make an automated install script!
 					DGText.printScan("NOTE: This installation requires Administrative priviledges"
 					" because it needs to add ffmpeg to the path!\n")
 
