@@ -9,7 +9,6 @@
 from colorama import Fore, Back, Style# type: ignore
 from PyInquirer import prompt, print_json # type: ignore
 import threading
-import json
 import time
 import random
 import os
