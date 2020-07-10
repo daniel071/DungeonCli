@@ -1,6 +1,6 @@
 ### DungeonCli Soundtrack
 These songs have been specifically been made for this game. Ask the original
-artists before using these. (They're both in the DungeonCli discord server)
+artists before using these. [They're both in the DungeonCli discord server](https://discord.gg/eAUqKKe)
 
 **Made by Sine:**
 
