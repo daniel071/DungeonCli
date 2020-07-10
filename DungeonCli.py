@@ -41,7 +41,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 # --------------------------
 # |		Version!		|
 # --------------------------
-version = "Development Version 0.6.2"
+version = "Development Version 0.6.3"
 # --------------------------
 
 # Define variables here:
@@ -1141,8 +1141,12 @@ def main():
 		openStore()
 
 	elif command in ("s", "start", "next", "proceed", "next room", "forth", "enter door", "go through door", "n"):
-		richPrecense.present(Scene.current)
-		nextScene()
+		if tempProgressCommand[0] == "nil":
+			richPrecense.present(Scene.current)
+			nextScene()
+		else:
+			# FIXME: This may be confusing, but I cant come up with anything better
+			DGText.printScan(DGText.error + "Try something else...\n")
 
 	elif command in ("listen", "listen for sounds"):
 		listen()

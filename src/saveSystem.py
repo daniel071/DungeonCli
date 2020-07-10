@@ -1,3 +1,5 @@
+# NOTE: This is currently unused.
+
 import json
 import os
 
@@ -14,7 +16,7 @@ def create_save(name):
 # Returns dictionary of <name> save file
 def get_save(name):
 	check_data_for_updates(name)
-	
+
 	save_file = open('data/saves/%s' % name, 'r')
 	binary_data = save_file.read()
 
@@ -72,4 +74,3 @@ def delete_save(name):
 # Returns boolean of whether save <name> exists
 def save_exists(name):
 	return os.path.exists('data/saves/%s' % name)
-	

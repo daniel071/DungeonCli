@@ -1,3 +1,5 @@
+# The save system. This includes functions to both save and load.
+
 from . import DGText
 from . import DGScene
 from . import DGPlayer
