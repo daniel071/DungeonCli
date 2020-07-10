@@ -16,6 +16,7 @@ cp -r ./Sounds ./bin.build/DungeonCli.dist/
 
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
+	cp -r /Library/Frameworks/Python.framework ./bin.build/DungeonCli.dist/
 	zip -r DungeonCli_MacOS.zip ./bin.build/DungeonCli.dist/
 elif [[ "$OSTYPE" == "linux-gnu" ]]; then
 	zip -r DungeonCli_Linux.zip ./bin.build/DungeonCli.dist/
