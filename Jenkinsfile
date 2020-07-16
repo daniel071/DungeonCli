@@ -1,9 +1,6 @@
 pipeline {
   agent none
 
-	triggers {
-        cron('20 0 * * *')
-  }
   stages {
     stage('Install Dependencies on Linux') {
 			agent {

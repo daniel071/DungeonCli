@@ -397,7 +397,6 @@ def openInventory():
 	# This DGText.printScan just adds some white space
 	DGText.printScan(" ")
 
-
 def purchase(storeSelected, id):
 	global DGPlayer
 	global absorbtion
