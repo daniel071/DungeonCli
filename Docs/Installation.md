@@ -15,8 +15,6 @@ DungeonCli.py**
 <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Windows_logo_-_2012.svg" alt="Windows 10 Logo" width="100"/> <img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Tux.png" alt="Linux Logo" width="100"/> <img src="https://upload.wikimedia.org/wikipedia/commons/2/22/MacOS_logo_%282017%29.svg" alt="MacOS Logo" width="100"/>| <img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Tux.png" alt="Linux Logo" width="100"/> <img src="https://upload.wikimedia.org/wikipedia/commons/2/22/MacOS_logo_%282017%29.svg" alt="MacOS Logo" width="100"/>
 Stable builds are major milestones that are not released frequently. <br>These have been manually compiled and have been tested to work. | Nightly builds are released every day. They have the latest updates however, are not tested. <br>NOTE: Currently we only have Linux and MacOS nightly builds. <br>Windows builds will be available as soon as we get a Windows server.
 
-<img src="http://pavela.net:3000/Daniel/DungeonCli/raw/branch/master/Images/Logos/stableTerminal.png" alt="Logo" width="150"/>
-
 #### On Windows:
 Download the Windows .zip file, extract it and run *DungeonCli.exe*
 ##### NOTE: Make sure to keep the exe file in the folder it came with otherwise it won't run!
