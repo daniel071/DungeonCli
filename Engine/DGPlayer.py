@@ -1,3 +1,6 @@
+from . import DGText
+from . import DGMain
+
 # This holds the Inventory of the player
 coins = 0  # fucking poor cunt lmao.
 hp = 100
