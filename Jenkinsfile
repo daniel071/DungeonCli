@@ -4,7 +4,7 @@ pipeline {
 	  stage('Install Dependencies') {
 	    parallel {
 	      stage('Install on Linux') {
-	        agent {
+	        node {
 	          label 'linux'
 	        }
 	        steps {
@@ -17,7 +17,7 @@ pipeline {
 
 	      stage('Install on MacOS') {
 	        steps {
-						agent {
+						node {
 							label 'macos'
 						}
 						steps {
@@ -28,14 +28,13 @@ pipeline {
 						}
 	        }
 	      }
-
 	    }
 	  }
 
 	  stage('Compile') {
 	    parallel {
 	      stage('Compile on Linux') {
-	        agent {
+	        node {
 	          label 'linux'
 	        }
 	        steps {
@@ -45,7 +44,7 @@ pipeline {
 	      }
 
 	      stage('Compile on MacOS') {
-					agent {
+					node {
 						label 'macos'
 					}
 					steps {
