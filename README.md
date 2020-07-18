@@ -34,10 +34,11 @@ For Server setup, look at
 ![Common commands](http://pavela.net:3000/Daniel/DungeonCli/raw/branch/master/Images/Screenshots/v0.3.1%20common%20commands.png)
 
 **Healing**
+
 ![Healing](http://pavela.net:3000/Daniel/DungeonCli/raw/branch/master/Images/Screenshots/NewestHealingSystem.gif)
 
 **The combat system**
-<!-- TODO: Update this screenshot! -->
+
 ![The combat system](http://pavela.net:3000/Daniel/DungeonCli/raw/branch/master/Images/Screenshots/NewestCombatSystem.gif)
 
 **The Store**
