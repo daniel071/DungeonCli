@@ -60,7 +60,7 @@ def healingPotion():
 				theResult = theResult + 1
 				DGText.printScan(DGText.rip + "You used up 1 basic healing potion")
 				DGPlayer.Inventory.basicHealingPotion = DGPlayer.Inventory.basicHealingPotion - 1
-				heal(20)
+				DGPlayer.heal(20)
 				time.sleep(0.4)
 
 			else:
@@ -72,7 +72,7 @@ def healingPotion():
 				theResult = theResult + 1
 				DGText.printScan(DGText.rip + "You used up 1 advanced healing potion")
 				DGPlayer.Inventory.advancedHealingPotion = DGPlayer.Inventory.advancedHealingPotion - 1
-				heal(50)
+				DGPlayer.heal(50)
 				time.sleep(0.4)
 
 			else:

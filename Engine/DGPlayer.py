@@ -2,6 +2,19 @@
 coins = 0  # fucking poor cunt lmao.
 hp = 100
 
+def damage(value):
+	global hp
+	hp = hp - value
+	DGText.printScan(rip + ("You lost " + str(round(value)) + " health! \n"))
+	DGMain.isDead()
+
+
+def heal(value):
+	global hp
+	hp = hp + value
+	DGText.printScan(DGText.success + ("You gained " + str(value) + " health! \n"))
+	if hp > 100:
+		hp = 100
 
 class Inventory:
 	# You deal more damage with the better sword you have, for example,

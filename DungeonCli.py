@@ -203,21 +203,6 @@ def ask(funcQuestion, answer1, answer2):
 				  "{answer1} or {answer2}!\n".format(answer1=answer1, answer2=answer2))
 
 
-def damage(value):
-	global DGPlayer
-	DGPlayer.hp = DGPlayer.hp - value
-	DGText.printScan(rip + ("You lost " + str(round(value)) + " health! \n"))
-	DGMain.isDead()
-
-
-def heal(value):
-	global DGPlayer
-	DGPlayer.hp = DGPlayer.hp + value
-	DGText.printScan(DGText.success + ("You gained " + str(value) + " health! \n"))
-	if DGPlayer.hp > 100:
-		DGPlayer.hp = 100
-
-
 def bombTrapScene():
 	global Scene
 	global DGDialog
