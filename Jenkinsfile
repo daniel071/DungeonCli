@@ -17,7 +17,14 @@ pipeline {
 
         stage('Install on MacOS') {
           steps {
-            echo 'test'
+						agent {
+							label 'macos'
+						}
+						steps {
+							sh 'python3 -m venv env'
+							sh 'source env/bin/activate'
+							sh 'python3 -m pip install -r requirements.txt'
+							sh 'python3 -m pip install nuitka'
           }
         }
 
@@ -37,9 +44,13 @@ pipeline {
         }
 
         stage('Compile on MacOS') {
-          steps {
-            echo 'test2'
-          }
+					agent {
+						label 'macos'
+					}
+					steps {
+						sh './compile.sh'
+						archiveArtifacts 'DungeonCli_MacOS.zip'
+					}
         }
 
       }
