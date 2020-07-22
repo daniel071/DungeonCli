@@ -1304,7 +1304,7 @@ if __name__ == '__main__':
 					print(DGText.action + "Adding FFMPEG to Path - 3/3..." + Style.RESET_ALL)
 
 					print(DGText.action + "Installing dependencies..." + Style.RESET_ALL)
-					os.system('pip install pywin32')
+					os.system('python -m pip install pywin32')
 
 					print(DGText.action + "Adding to path..." + Style.RESET_ALL)
 					import win32com.shell.shell as shell
