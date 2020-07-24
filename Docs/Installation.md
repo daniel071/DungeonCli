@@ -10,7 +10,7 @@ DungeonCli.py**
 
 ##### There are 2 different places where you can download binaries.
 
-‎ | [Stable builds <br> <img src="./Images/Logos/stableTerminal.png" alt="Logo" width="150"/>](http://pavela.net:3000/Daniel/DungeonCli/releases)  | [Nightly builds <br> <img src="./Images/Logos/nightlyTerminal.png" alt="Logo" width="150"/>](http://pavela.net:8090/blue/organizations/jenkins/DungeonCI/activity) |
+‎| [Stable builds <br> <img src="http://pavela.net:3000/Daniel/DungeonCli/raw/branch/master/Images/Logos/stableTerminal.png" alt="Logo" width="150"/>](http://pavela.net:3000/Daniel/DungeonCli/releases)  | [Nightly builds <br> <img src="http://pavela.net:3000/Daniel/DungeonCli/raw/branch/master/Images/Logos/nightlyTerminal.png" alt="Logo" width="150"/>](http://pavela.net:8090/blue/organizations/jenkins/DungeonCI/activity) |
 ---            |         :-: |      :-:     |
 Stability      | ✔️           | ❌
 Latest Updates | ❌          | ✔️

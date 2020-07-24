@@ -11,10 +11,10 @@ have fun!
 ## Installation:
 
 For Installation instructions, look at
-[here](/Docs/Installation.md)
+[here](http://pavela.net:3000/Daniel/DungeonCli/src/branch/master/Docs/Installation.md)
 
 For Server setup, look at
-[here](/Docs/Servers.md)
+[here](http://pavela.net:3000/Daniel/DungeonCli/src/branch/master/Docs/Servers.md)
 
 
 ---
@@ -27,23 +27,23 @@ For Server setup, look at
 
 **The start screen**
 
-![The start screen](./Images/Screenshots/v0.3.1 Start Screen.png)
+![The start screen](http://pavela.net:3000/Daniel/DungeonCli/src/branch/master/Images/Screenshots/v0.3.1 Start Screen.png)
 
 **Common commands**
 
-![Common commands](./Images/Screenshots/v0.3.1 common commands.png)
+![Common commands](http://pavela.net:3000/Daniel/DungeonCli/src/branch/master/Images/Screenshots/v0.3.1 common commands.png)
 
 **Healing**
 
-![Healing](./Images/Screenshots/NewestHealingSystem.gif)
+![Healing](http://pavela.net:3000/Daniel/DungeonCli/src/branch/master/Images/Screenshots/NewestHealingSystem.gif)
 
 **The combat system**
 
-![The combat system](./Images/Screenshots/NewestCombatSystem.gif)
+![The combat system](http://pavela.net:3000/Daniel/DungeonCli/src/branch/master/Images/Screenshots/NewestCombatSystem.gif)
 
 **The Store**
 
-![The Store](./Images/Screenshots/v0.3.0 store.png)
+![The Store](http://pavela.net:3000/Daniel/DungeonCli/src/branch/master/Images/Screenshots/v0.3.0 store.png)
 </details>
 
 ---
