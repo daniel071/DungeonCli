@@ -14,6 +14,7 @@ action = Style.BRIGHT + Fore.YELLOW + "==> "
 quote = Style.BRIGHT + Fore.WHITE + '"'
 info = Style.BRIGHT + Fore.WHITE + "==> " + Style.RESET_ALL
 askPrompt = Style.BRIGHT + Fore.CYAN
+loading = Style.BRIGHT + Fore.BLUE + ":: " + Fore.WHITE
 
 def printScan(toPrint):
 	global printspeed

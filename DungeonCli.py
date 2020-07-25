@@ -1283,7 +1283,7 @@ if __name__ == '__main__':
 			theAnswer = prompt(questions)
 			theValue = theAnswer['userChoice']
 			if theValue == "Install FFMPEG":
-				if detect_system() == 'windows':
+				if operatingsystem == 'windows':
 					DGText.printScan("NOTE: This installation requires Administrative priviledges"
 					" because it needs to add ffmpeg to the path!\n")
 
