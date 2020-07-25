@@ -22,13 +22,20 @@ Linux Builds   | ✔️           | ✔️
 Download the Windows .zip file, extract it and run *DungeonCli.exe*
 ##### NOTE: Make sure to keep the exe file in the folder it came with otherwise it won't run!
 
-#### On Unix based systems:
-1. Download the binary for your operating system
-2. Give the binary executable permissions and run it
+#### On Linux:
+I have created an installation script that will automatically install DungeonCli.
+Simply Run:
 
-**On Linux/MacOS:**
-Give it priviledges with `chmod +X ./DungeonCli` then run it with
-`./DungeonCli_Linux`
+```bash
+/bin/bash -c "$(curl -fsSL http://pavela.net:3000/Daniel/DungeonCli/raw/branch/master/Scripts/install-linux.sh)"
+```
+###### **NOTE: Root priviledges will be requested in the script**
+As it is required to write to `/usr/share/applications/`
+
+#### On macOS:
+1. Download the binary for your operating system
+2. Give the binary executable permissions with `chmod +X ./DungeonCli`
+3. Run it with `./DungeonCli`
 
 <br>
 
