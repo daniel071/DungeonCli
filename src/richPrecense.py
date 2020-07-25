@@ -14,7 +14,7 @@ except:
 
 def init():
 	try:
-		RPC.update(state="Scene 0", details="A terminal-based dungeon game!", large_text="pavela.net:3000/Daniel/DungeonCli", large_image="epicterminal")  # Set the presence
+		RPC.update(state="Scene 0", details="A terminal-based dungeon game!", large_text="pavela.net/DungeonCli", large_image="epicterminal")  # Set the presence
 	except:
 		print(error + "There was an error while starting discord rich presence.")
 		print(Fore.WHITE + Style.BRIGHT + "Make sure you have discord open.")
