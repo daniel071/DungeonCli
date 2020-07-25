@@ -19,6 +19,7 @@ from Engine import *
 
 # What??? this import fixed my error???
 from Engine import DGSave
+from Engine import DGUpdate
 
 from sys import stdout
 from threading import Lock
@@ -1081,7 +1082,7 @@ def main():
 	global DGSave
 	global tempProgressCommand
 
-	detect_system()
+	operatingsystem = detect_system()
 	command = input(DGText.askPrompt + "[Action] " + Style.RESET_ALL)
 
 	if command in tempProgressCommand and command != "nil":
@@ -1246,13 +1247,15 @@ def main():
 	elif command in ("debug", "devDebug"):
 		print("Current scene:", DGScene.current)
 		print("Temp Progress Command:",  tempProgressCommand)
+	elif command in ("update", "new"):
+		DGUpdate.update()
 
 
 	else:
 		invalidCommand()
 
 
-detect_system()
+operatingsystem = detect_system()
 
 if __name__ == '__main__':
 	richPrecense.init()

@@ -24,9 +24,9 @@ all_processes = []
 def detect_system():
 	global operatingsystem
 	if platform == "linux" or platform == "linux2" or platform == "darwin":
-		operatingsystem = "unix"
+		return "unix"
 	else:
-		operatingsystem = "windows"
+		return "windows"
 
 detect_system()
 
