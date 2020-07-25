@@ -6,4 +6,4 @@ Type=Application
 Comment=A terminal-based dungeon crawler game
 Categories=Game;
 Icon=~/.dungeoncli/dungeoncli.png
-Exec=~/.dungeoncli/dungeoncli/DungeonCli-linux-v0.6.0/DungeonCli
+Exec=~/.dungeoncli/start_game.sh
