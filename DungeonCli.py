@@ -1287,11 +1287,11 @@ if __name__ == '__main__':
 					DGText.printScan("NOTE: This installation requires Administrative priviledges"
 					" because it needs to add ffmpeg to the path!\n")
 
-					print(DGText.action + "Creating directories - 1/3..." + Style.RESET_ALL)
+					print(DGText.loading + "Creating directories - 1/3..." + Style.RESET_ALL)
 					os.system('md "%userprofile%\\ffmpeg')
 
 					print(" ")
-					print(DGText.action + "Downloading FFMPEG - 2/3..." + Style.RESET_ALL)
+					print(DGText.loading + "Downloading FFMPEG - 2/3..." + Style.RESET_ALL)
 					print(DGText.action + "File 1 out of 3..." + Style.RESET_ALL)
 					os.system('certutil.exe -urlcache -split -f "https://github.com/daniel071/ffmpeg-builds/releases/download/v1.0.0/ffmpeg.exe" "%userprofile%\\ffmpeg\\ffmpeg.exe"')
 
@@ -1304,12 +1304,12 @@ if __name__ == '__main__':
 					os.system('certutil.exe -urlcache -split -f "https://github.com/daniel071/ffmpeg-builds/releases/download/v1.0.0/ffprobe.exe" "%userprofile%\\ffmpeg\\ffprobe.exe"')
 
 					print(" ")
-					print(DGText.action + "Adding FFMPEG to Path - 3/3..." + Style.RESET_ALL)
+					print(DGText.loading + "Adding FFMPEG to Path - 3/3..." + Style.RESET_ALL)
 
-					print(DGText.action + "Installing dependencies..." + Style.RESET_ALL)
+					print(DGText.loading + "Installing dependencies..." + Style.RESET_ALL)
 					os.system('python -m pip install pywin32')
 
-					print(DGText.action + "Adding to path..." + Style.RESET_ALL)
+					print(DGText.loading + "Adding to path..." + Style.RESET_ALL)
 					import win32com.shell.shell as shell
 					commands = 'setx path "%path%;%userprofile%\\ffmpeg\\"'
 					shell.ShellExecuteEx(lpVerb='runas', lpFile='cmd.exe', lpParameters='/c '+commands)
