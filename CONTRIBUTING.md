@@ -2,8 +2,9 @@
 Thanks for deciding to contribute to DungeonCli!
 
 ## Translations
-If you want to add translations, please open up an issue
-and we will implement it in.
+You can always help with translations, currently, they are not implemented
+but if you are interested in helping translate a language, we will implement
+that. If you want to translate, just let us know by opening up an issue.
 
 ## How to make a pull request
 You can create a fork of this, create changes to the fork and then open a

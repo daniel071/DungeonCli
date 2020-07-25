@@ -54,21 +54,8 @@ For Server setup, look at
 ## Usage:
 Type 'h' or 'help' to get a help screen
 
-<br>
-
 ## Contributing:
-If you would like to make a change to the code, you can fork this, make changes
-to it and then submit a pull request. @Xenthio and @Daniel can check your pull
-request and merge it if it's good.
-
-If you are experiencing a bug, you can open up an issue and we will try and help
-fix it.
-
-#### Don't know how to code?
-You can always help with translations, currently, they are not implemented
-but if you are interested in helping translate a language, we will implement
-that. If you want to translate, just let us know by opening up an issue.
-
+If you'd like to contribute, please read [our contributing guidelines.](http://pavela.net:3000/Daniel/DungeonCli/src/branch/master/CONTRIBUTING.md)
 <br>
 
 ## To Do!
