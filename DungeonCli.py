@@ -1082,7 +1082,6 @@ def main():
 	global DGSave
 	global tempProgressCommand
 
-	operatingsystem = detect_system()
 	command = input(DGText.askPrompt + "[Action] " + Style.RESET_ALL)
 
 	if command in tempProgressCommand and command != "nil":
@@ -1258,6 +1257,7 @@ def main():
 operatingsystem = detect_system()
 
 if __name__ == '__main__':
+
 	richPrecense.init()
 
 	# Play moosic
@@ -1283,7 +1283,7 @@ if __name__ == '__main__':
 			theAnswer = prompt(questions)
 			theValue = theAnswer['userChoice']
 			if theValue == "Install FFMPEG":
-				if operatingsystem == 'windows':
+				if detect_system() == 'windows':
 					DGText.printScan("NOTE: This installation requires Administrative priviledges"
 					" because it needs to add ffmpeg to the path!\n")
 

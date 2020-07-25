@@ -28,7 +28,7 @@ def detect_system():
 	else:
 		return "windows"
 
-detect_system()
+operatingsystem = detect_system()
 
 def endThreads():
 	for process in all_processes:
