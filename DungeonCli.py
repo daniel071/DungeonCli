@@ -1368,32 +1368,4 @@ if __name__ == '__main__':
 		raise
 
 
-# This is the end of the code!
-# Enjoy the meme corner below!
-
-# FUCK YOU WHORE, WE LIKE FORTNITE, WE LIKE FORTNIE
-# FUCK YOU WHORE, WE LIKE FORTNITE, WE LIKE FORTNIE
-# FUCK YOU WHORE, WE LIKE FORTNITE, WE LIKE FORTNIE
-# FUCK YOU WHORE, WE LIKE FORTNITE, WE LIKE FORTNIE
-# FUCK YOU WHORE, WE LIKE FORTNITE, WE LIKE FORTNIE
-# FUCK YOU WHORE, WE LIKE FORTNITE, WE LIKE FORTNIE
-# FUCK YOU WHORE, WE LIKE FORTNITE, WE LIKE FORTNIE
-# https://www.youtube.com/watch?v=GGmuA7PK-cc
-
-# Our code is so THICC (:
-# ░░░░░░░░░░▀▀▀██████▄▄▄░░░░░░░░░░
-# ░░░░░░░░░░░░░░░░░▀▀▀████▄░░░░░░░
-# ░░░░░░░░░░▄███████▀░░░▀███▄░░░░░
-# ░░░░░░░░▄███████▀░░░░░░░▀███▄░░░
-# ░░░░░░▄████████░░░░░░░░░░░███▄░░
-# ░░░░░██████████▄░░░░░░░░░░░███▌░
-# ░░░░░▀█████▀░▀███▄░░░░░░░░░▐███░
-# ░░░░░░░▀█▀░░░░░▀███▄░░░░░░░▐███░
-# ░░░░░░░░░░░░░░░░░▀███▄░░░░░███▌░
-# ░░░░▄██▄░░░░░░░░░░░▀███▄░░▐███░░
-# ░░▄██████▄░░░░░░░░░░░▀███▄███░░░
-# ░█████▀▀████▄▄░░░░░░░░▄█████░░░░
-# ░████▀░░░▀▀█████▄▄▄▄█████████▄░░
-# ░░▀▀░░░░░░░░░▀▀██████▀▀░░░▀▀██░░
-
-# what the fuck is the bottom of this document.
+# JOIN the discord server! https://discord.gg/eAUqKKe
