@@ -654,10 +654,14 @@ def start():
 				" prepare to move on.\n")
 
 
-		# elif Scene.current == 6:
+		elif Scene.current == 6:
+			DGText.printScan(DGText.action + "You open the door. It's a faceless, expresionless figure. Somehow, even with no mouth, it says")
+			time.sleep(2)
+			DGText.printScan(DGText.quote + "Install Debian.\"\n")
+			time.sleep(1)
 
 		else:
-			DGText.printScan(success + "Thanks for testing DungeonCli!" + Fore.WHITE)
+			DGText.printScan(DGText.success + "Thanks for testing DungeonCli!" + Fore.WHITE)
 			DGText.printScan("We haven't finished this scene.")
 			DGText.printScan("If you want to help us improve, feel free to send a screenshot or video of you")
 			DGText.printScan("playing the game, at the discord server:")

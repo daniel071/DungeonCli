@@ -2,7 +2,7 @@
 
 combatOverrideMusic = True
 canProgress = True
-current = 1 # The current scene
+current = 5 # The current scene
 surroundingsLit = False # bro idk but the wizard must be able to see in the dark or something.
 							# maybe the wizard drank a potion of night vision :)
 hasStore = False
