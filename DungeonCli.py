@@ -214,7 +214,7 @@ def bombTrapScene():
 	DGText.printScan(rip + "BANG!")
 	time.sleep(1)
 	DGText.printScan(DGDialog.randomDialog.bombExplodes())
-	damage(random.randint(5, 15) * DGPlayer.Inventory.absorbtion)
+	DGPlayer.damage(random.randint(5, 15) * DGPlayer.Inventory.absorbtion)
 	time.sleep(1)
 
 
