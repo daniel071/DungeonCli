@@ -1042,6 +1042,8 @@ def creditScreen():
 	DGText.printScan("Sound effects - Ethan \"Xenthio\" Cardwell".center(width,' '))
 	DGText.printScan("Music - Sine".center(width,' '))
 	DGText.printScan("Music - AsianPotato77".center(width,' '))
+	DGText.printScan("Testing - DenidollarSign - Helped bug test the game".center(width,' '))
+	DGText.printScan("Testing - MuffintehCustodian - Helped bug test the game".center(width,' '))
 	print("----".center(width, ' '))
 	DGText.printScan("Developers Note".center(width,' '))
 	DGText.printScan("Thanks so much Daniel for letting me help on this project!".center(width,' '))
