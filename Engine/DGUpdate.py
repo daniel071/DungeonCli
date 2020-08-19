@@ -18,7 +18,7 @@ def update():
 	else:
 		DGText.printScan(DGText.loading + "Downloading new update (1/2)")
 		print(Style.RESET_ALL)
-		os.system("wget -O ./dungeoncli.zip http://pavela.net:3000/attachments/9ba2e156-5732-4357-a641-269c25741f27")
+		os.system("wget -O ./dungeoncli.zip https://git.pavela.net/attachments/9ba2e156-5732-4357-a641-269c25741f27")
 
 		DGText.printScan(DGText.loading + "Extracting new update (2/2)")
 		print(Style.RESET_ALL)
