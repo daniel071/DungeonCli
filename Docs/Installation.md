@@ -10,7 +10,7 @@ DungeonCli.py**
 
 ##### There are 2 different places where you can download binaries.
 
-‎| [Stable builds <br> <img src="http://pavela.net:3000/Daniel/DungeonCli/raw/branch/master/Images/Logos/stableTerminal.png" alt="Logo" width="150"/>](http://pavela.net:3000/Daniel/DungeonCli/releases)  | [Nightly builds <br> <img src="http://pavela.net:3000/Daniel/DungeonCli/raw/branch/master/Images/Logos/nightlyTerminal.png" alt="Logo" width="150"/>](http://pavela.net:8090/blue/organizations/jenkins/DungeonCI/activity) |
+‎| [Stable builds <br> <img src="https://git.pavela.net/Daniel/DungeonCli/raw/branch/master/Images/Logos/stableTerminal.png" alt="Logo" width="150"/>](https://git.pavela.net/Daniel/DungeonCli/releases)  | [Nightly builds <br> <img src="https://git.pavela.net/Daniel/DungeonCli/raw/branch/master/Images/Logos/nightlyTerminal.png" alt="Logo" width="150"/>](http://pavela.net:8090/blue/organizations/jenkins/DungeonCI/activity) |
 ---            |         :-: |      :-:     |
 Stability      | ✔️           | ❌
 Latest Updates | ❌          | ✔️
@@ -27,7 +27,7 @@ I have created an installation script that will automatically install DungeonCli
 Simply Run:
 
 ```bash
-/bin/bash -c "$(curl -fsSL http://pavela.net:3000/Daniel/DungeonCli/raw/branch/master/Scripts/install-linux.sh)"
+/bin/bash -c "$(curl -fsSL https://git.pavela.net/Daniel/DungeonCli/raw/branch/master/Scripts/install-linux.sh)"
 ```
 ###### **NOTE: Root priviledges will be requested in the script**
 As it is required to write to `/usr/share/applications/`

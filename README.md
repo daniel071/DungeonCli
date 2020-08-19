@@ -14,10 +14,10 @@ have fun!
 ## Installation:
 
 For Installation instructions, look at
-[here](http://pavela.net:3000/Daniel/DungeonCli/src/branch/master/Docs/Installation.md)
+[here](https://git.pavela.net/Daniel/DungeonCli/src/branch/master/Docs/Installation.md)
 
 For Server setup, look at
-[here](http://pavela.net:3000/Daniel/DungeonCli/src/branch/master/Docs/Servers.md)
+[here](https://git.pavela.net/Daniel/DungeonCli/src/branch/master/Docs/Servers.md)
 
 
 ---
@@ -30,23 +30,23 @@ For Server setup, look at
 
 **The start screen**
 
-![The start screen](http://pavela.net:3000/Daniel/DungeonCli/raw/branch/master/Images/Screenshots/v0.3.1%20Start%20Screen.png)
+![The start screen](https://git.pavela.net/Daniel/DungeonCli/raw/branch/master/Images/Screenshots/v0.3.1%20Start%20Screen.png)
 
 **Common commands**
 
-![Common commands](http://pavela.net:3000/Daniel/DungeonCli/raw/branch/master/Images/Screenshots/v0.3.1%20common%20commands.png)
+![Common commands](https://git.pavela.net/Daniel/DungeonCli/raw/branch/master/Images/Screenshots/v0.3.1%20common%20commands.png)
 
 **Healing**
 
-![Healing](http://pavela.net:3000/Daniel/DungeonCli/raw/branch/master/Images/Screenshots/NewestHealingSystem.gif)
+![Healing](https://git.pavela.net/Daniel/DungeonCli/raw/branch/master/Images/Screenshots/NewestHealingSystem.gif)
 
 **The combat system**
 
-![The combat system](http://pavela.net:3000/Daniel/DungeonCli/raw/branch/master/Images/Screenshots/NewestCombatSystem.gif)
+![The combat system](https://git.pavela.net/Daniel/DungeonCli/raw/branch/master/Images/Screenshots/NewestCombatSystem.gif)
 
 **The Store**
 
-![The Store](http://pavela.net:3000/Daniel/DungeonCli/raw/branch/master/Images/Screenshots/v0.3.0%20store.png)
+![The Store](https://git.pavela.net/Daniel/DungeonCli/raw/branch/master/Images/Screenshots/v0.3.0%20store.png)
 </details>
 
 ---
@@ -55,7 +55,7 @@ For Server setup, look at
 Type 'h' or 'help' to get a help screen
 
 ## Contributing:
-If you'd like to contribute, please read [our contributing guidelines.](http://pavela.net:3000/Daniel/DungeonCli/src/branch/master/CONTRIBUTING.md)
+If you'd like to contribute, please read [our contributing guidelines.](https://git.pavela.net/Daniel/DungeonCli/src/branch/master/CONTRIBUTING.md)
 <br>
 
 ## To Do!

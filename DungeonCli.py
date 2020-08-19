@@ -1007,7 +1007,7 @@ def endScreen():
 	print("Made by the awesome DungeonCli team!".center(width,' '))
 	print(("Join the discord! " + Fore.CYAN + "https://discord.gg/eAUqKKe" + Style.RESET_ALL).center(b,' '))
 	print(" ")
-	print((Fore.CYAN + "http://pavela.net:3000/Daniel/DungeonCli" + Style.RESET_ALL).center(b - 1,' '))
+	print((Fore.CYAN + "https://git.pavela.net/Daniel/DungeonCli" + Style.RESET_ALL).center(b - 1,' '))
 	print(" ")
 	print("-".center(width,'-'))
 	print(" ")
@@ -1368,7 +1368,7 @@ if __name__ == '__main__':
 		time.sleep(0.3)
 		DGText.printScan("Please copy this error and open up a new issue on Gitea!")
 		time.sleep(0.3)
-		DGText.printScan(Fore.BLUE + "Here: http://pavela.net:3000/Daniel/DungeonCli")
+		DGText.printScan(Fore.BLUE + "Here: https://git.pavela.net/Daniel/DungeonCli")
 		time.sleep(0.3)
 		print(Style.RESET_ALL + Fore.RED)
 		raise
