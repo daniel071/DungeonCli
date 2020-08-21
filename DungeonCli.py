@@ -42,7 +42,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 # --------------------------
 # |		Version!		|
 # --------------------------
-version = "Development Version 0.6.4"
+version = "Development Version 0.6.5"
 # --------------------------
 
 # Define variables here:
@@ -234,7 +234,7 @@ def bossBattle():
 	DGText.printScan(quote + "Nothing eh? You're too weak to defeat me,"
 	" and there's nothing that can stop me.\"\n")
 
-	DGText.printspeed = 0.65
+	DGText.printspeed = 0.66
 	print(Style.BRIGHT + Fore.WHITE)
 	DGText.printScan("\"goodbye.\"\n")
 	DGText.printspeed = 0.013
@@ -256,7 +256,7 @@ def bossBattle():
 			time.sleep(1)
 
 		endThreads()
-		DGMain.playSound("Music/bossBattle.ogg", True)
+		DGMain.playSound("Music/finalboss.ogg", True)
 
 
 def bossSuccess():
