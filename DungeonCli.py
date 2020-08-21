@@ -51,7 +51,7 @@ all_processes = []
 
 # Used to prevent cheating:
 devPassword = "hackerman"
-developer = 0
+isDeveloper = False
 
 invalidCommands = 0
 mainLoop = 1
@@ -141,7 +141,8 @@ def useBrick():  # temp function called when in a specific room
 
 
 def passwordPrompt():
-	if developer == 0:
+	global isDeveloper
+	if isDeveloper is False:
 		DGText.printScan(Style.BRIGHT + Fore.YELLOW + "This is a developer command!"
 			  " Please input the developer password!" + Style.RESET_ALL)
 		questions = [
@@ -155,13 +156,13 @@ def passwordPrompt():
 		answers = prompt(questions)
 		userInput = answers['password']
 		if userInput == devPassword:
+			isDeveloper = True
 			DGText.printScan(DGText.success + "Access granted!\n" + Style.RESET_ALL)
 			return "granted"
 		else:
 			DGText.printScan(rip + "Incorrect password!\n")
 			return "denied"
 	else:
-		DGText.printScan(DGText.success + "you have already use the dev password, so you're still logged in.")
 		return "granted"
 
 
@@ -234,7 +235,7 @@ def bossBattle():
 	DGText.printScan(quote + "Nothing eh? You're too weak to defeat me,"
 	" and there's nothing that can stop me.\"\n")
 
-	DGText.printspeed = 0.66
+	DGText.printspeed = 0.652
 	print(Style.BRIGHT + Fore.WHITE)
 	DGText.printScan("\"goodbye.\"\n")
 	DGText.printspeed = 0.013
