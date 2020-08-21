@@ -224,7 +224,7 @@ def bossBattle():
 	global DGText
 	endThreads()
 	DGClear()
-
+	DGMain.playSound("Music/finalbossintro.ogg", True)
 	DGText.printspeed = 0.05
 
 	DGText.printScan(action + "The door behind you closes. There is no escape.")
@@ -234,12 +234,13 @@ def bossBattle():
 	DGText.printScan(quote + "Nothing eh? You're too weak to defeat me,"
 	" and there's nothing that can stop me.\"\n")
 
-	DGMain.playSound("Music/bossBattle.ogg", True)
-
-	DGText.printspeed = 0.7
+	DGText.printspeed = 0.65
 	print(Style.BRIGHT + Fore.WHITE)
 	DGText.printScan("\"goodbye.\"\n")
 	DGText.printspeed = 0.013
+
+	endThreads()
+	DGMain.playSound("Music/finalboss.ogg", True)
 
 	Scene.combatOverrideMusic = False
 	bossLoop = True

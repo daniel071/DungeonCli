@@ -140,4 +140,4 @@ def gameover():
 	time.sleep(4)
 	DGClear()
 	endThreads()
-	sys.exit()
+	os._exit(1)
