@@ -1109,6 +1109,7 @@ def main():
 	elif command in ("h", "help", "umm", "asdfghjkl", "qwertyuiop"):
 		DGText.printScan(Fore.BLUE + Style.BRIGHT + "Thanks for testing DungeonCli!")
 		DGText.printScan(Fore.GREEN + "Here are some common commands:")
+		DGText.printspeed = 0.006
 		DGText.printScan(Style.RESET_ALL + "\n--------\n" + Style.BRIGHT)
 
 		DGText.printScan(Fore.BLUE + "hp: " + Fore.WHITE + "Checks your current health")
@@ -1122,6 +1123,8 @@ def main():
 		DGText.printScan(Fore.BLUE + "about: " + Fore.WHITE + "About the game")
 
 		DGText.printScan(Style.RESET_ALL + "\n--------\n" + Style.BRIGHT)
+
+		DGText.printspeed = 0.013
 
 	elif command in ("e", "exit", "close", "alt-f4"):
 		DGExit()
