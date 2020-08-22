@@ -88,7 +88,7 @@ def hpCheck():
 			DGText.action + "You have {hp} out of {max} HP! \n".format(hp=DGPlayer.hp, max=100))
 
 	else:
-		DGText.printScan(rip + "You have {hp} out of {max} HP! \n".format(hp=DGPlayer.hp, max=100))
+		DGText.printScan(DGText.rip + "You have {hp} out of {max} HP! \n".format(hp=DGPlayer.hp, max=100))
 
 def addCoins(add):
 	global DGPLayer
