@@ -14,7 +14,7 @@ except:
 
 def init():
 	try:
-		RPC.update(state="Scene 0", details="A terminal-based dungeon game!", large_text="pavela.net/DungeonCli", large_image="epicterminal")  # Set the presence
+		RPC.update(state="Scene 0", details="A terminal-based dungeon game!", large_text="git.pavela.net/Daniel/DungeonCli", large_image="epicterminal")  # Set the presence
 	except:
 		print(error + "There was an error while starting discord rich presence.")
 		print(Fore.WHITE + Style.BRIGHT + "Make sure you have discord open.")
@@ -23,6 +23,6 @@ def init():
 def present(sceneNumber):
 	try:
 		global RPC
-		RPC.update(large_image="epicterminal", state="Scene {scene}".format(scene=sceneNumber), details="A terminal-based dungeon game!", large_text="pavela.net:3000/Daniel/DungeonCli",)  # Set the presence
+		RPC.update(large_image="epicterminal", state="Scene {scene}".format(scene=sceneNumber), details="A terminal-based dungeon game!", large_text="git.pavela.net/Daniel/DungeonCli",)  # Set the presence
 	except:
 		pass
