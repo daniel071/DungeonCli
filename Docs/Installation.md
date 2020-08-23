@@ -10,7 +10,7 @@ DungeonCli.py**
 
 ##### There are 2 different places where you can download binaries.
 
-‎| [Stable builds <br> <img src="https://git.pavela.net/Daniel/DungeonCli/raw/branch/master/Images/Logos/stableTerminal.png" alt="Logo" width="150"/>](https://git.pavela.net/Daniel/DungeonCli/releases)  | [Nightly builds <br> <img src="https://git.pavela.net/Daniel/DungeonCli/raw/branch/master/Images/Logos/nightlyTerminal.png" alt="Logo" width="150"/>](http://pavela.net:8090/blue/organizations/jenkins/DungeonCI/activity) |
+‎| [Stable builds <br> <img src="https://git.pavela.net/Daniel/DungeonCli/raw/branch/master/Images/Logos/stableTerminal.png" alt="Logo" width="150"/>](https://git.pavela.net/Daniel/DungeonCli/releases)  | [Nightly builds <br> <img src="https://git.pavela.net/Daniel/DungeonCli/raw/branch/master/Images/Logos/nightlyTerminal.png" alt="Logo" width="150"/>](https://jenkins.pavela.net/blue/organizations/jenkins/DungeonCI/activity) |
 ---            |         :-: |      :-:     |
 Stability      | ✔️           | ❌
 Latest Updates | ❌          | ✔️
@@ -47,7 +47,7 @@ As it is required to write to `/usr/share/applications/`
 ##### How to install DungeonCli:
 1. Download the .zip file and extract it or type
 
-	`git clone http://119.17.132.38:3000/Daniel/DungeonCli.git`
+	`git clone https://git.pavela.net/Daniel/DungeonCli.git`
 2. Make sure you have Python 3.8.2 installed. If you don't, you
 can install it from https://www.python.org
 3. Make sure you have the dependencies installed with `pip install -r requirements.txt`
@@ -63,7 +63,7 @@ can install it from https://www.python.org
 
 1. Download the .zip file and extract it or type
 
-	`git clone http://119.17.132.38:3000/Daniel/DungeonCli.git`
+	`git clone https://git.pavela.net/Daniel/DungeonCli.git`
 2. Make sure you have the dependencies installed. These include:
 - [Python 3.8.2](https://www.python.org/downloads/)
 - [Nuitka](https://nuitka.net/pages/download.html)
