@@ -2,7 +2,7 @@
 # DungeonCli
 [![Build Status](http://pavela.net:8090/buildStatus/icon?job=DungeonCI%2Fmaster)](http://pavela.net:8090/blue/organizations/jenkins/DungeonCI/branches)
 [![Website pavela.net](https://img.shields.io/website-up-down-green-red/http/pavela.net)](http://pavela.net/DungeonCli/index.html)
-[![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html)
+[![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://git.pavela.net/Daniel/DungeonCli/src/branch/master/LICENSE)
 
 
 **What is it?**
