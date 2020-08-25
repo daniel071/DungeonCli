@@ -1,6 +1,6 @@
 "In need of coins, eh? I mean i could let you have some of my precious coins, but ya gotta know the secret code" - Money Grinch
 # DungeonCli
-[![Build Status](http://pavela.net:8090/buildStatus/icon?job=DungeonCI%2Fmaster)](http://pavela.net:8090/blue/organizations/jenkins/DungeonCI/branches)
+[![Build Status](https://jenkins.pavela.net/buildStatus/icon?job=DungeonCI%2Fmaster)](https://jenkins.pavela.net/blue/organizations/jenkins/DungeonCI/branches)
 [![Website pavela.net](https://img.shields.io/website-up-down-green-red/http/pavela.net)](http://pavela.net/DungeonCli/)
 [![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://git.pavela.net/Daniel/DungeonCli/src/branch/master/LICENSE)
 
