@@ -2,7 +2,7 @@
 # DungeonCli
 [![Build Status](https://jenkins.pavela.net/buildStatus/icon?job=DungeonCI%2Fmaster)](https://jenkins.pavela.net/blue/organizations/jenkins/DungeonCI/branches)
 [![Website pavela.net](https://img.shields.io/website-up-down-green-red/http/pavela.net)](http://pavela.net/DungeonCli/)
-[![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://git.pavela.net/Daniel/DungeonCli/src/branch/master/LICENSE)
+[![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/daniel071/DungeonCli/blob/master/LICENSE)
 
 
 **What is it?**
@@ -14,10 +14,10 @@ have fun!
 ## Installation:
 
 For Installation instructions, look at
-[here](https://git.pavela.net/Daniel/DungeonCli/src/branch/master/Docs/Installation.md)
+[here](https://github.com/daniel071/DungeonCli/blob/master/Docs/Installation.md)
 
 For Server setup, look at
-[here](https://git.pavela.net/Daniel/DungeonCli/src/branch/master/Docs/Servers.md)
+[here](https://github.com/daniel071/DungeonCli/blob/master/Docs/Servers.md)
 
 
 ---
@@ -30,23 +30,23 @@ For Server setup, look at
 
 **The start screen**
 
-![The start screen](https://git.pavela.net/Daniel/DungeonCli/raw/branch/master/Images/Screenshots/v0.3.1%20Start%20Screen.png)
+![The start screen](https://github.com/daniel071/DungeonCli/blob/master/Images/Screenshots/v0.3.1%20Start%20Screen.png)
 
 **Common commands**
 
-![Common commands](https://git.pavela.net/Daniel/DungeonCli/raw/branch/master/Images/Screenshots/v0.3.1%20common%20commands.png)
+![Common commands](https://github.com/daniel071/DungeonCli/blob/master/Images/Screenshots/v0.3.1%20common%20commands.png)
 
 **Healing**
 
-![Healing](https://git.pavela.net/Daniel/DungeonCli/raw/branch/master/Images/Screenshots/NewestHealingSystem.gif)
+![Healing](https://github.com/daniel071/DungeonCli/blob/master/Images/Screenshots/NewestHealingSystem.gif)
 
 **The combat system**
 
-![The combat system](https://git.pavela.net/Daniel/DungeonCli/raw/branch/master/Images/Screenshots/NewestCombatSystem.gif)
+![The combat system](https://github.com/daniel071/DungeonCli/blob/master/Images/Screenshots/NewestCombatSystem.gif)
 
 **The Store**
 
-![The Store](https://git.pavela.net/Daniel/DungeonCli/raw/branch/master/Images/Screenshots/v0.3.0%20store.png)
+![The Store](https://github.com/daniel071/DungeonCli/blob/master/Images/Screenshots/v0.3.0%20store.png)
 </details>
 
 ---
@@ -55,7 +55,7 @@ For Server setup, look at
 Type 'h' or 'help' to get a help screen
 
 ## Contributing:
-If you'd like to contribute, please read [our contributing guidelines.](https://git.pavela.net/Daniel/DungeonCli/src/branch/master/CONTRIBUTING.md)
+If you'd like to contribute, please read [our contributing guidelines.](https://github.com/daniel071/DungeonCli/blob/master/CONTRIBUTING.md)
 <br>
 
 ## To Do!
