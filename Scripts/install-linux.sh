@@ -39,15 +39,20 @@ wget -q --show-progress -O ~/.dungeoncli/dungeoncli_old.desktop https://raw.gith
 
 # Setup binary
 echo -e "\n${BLUE}${BOLD}::${NC} Setting up binary${RESET}"
+echo -e "${YELLOW}${BOLD} ->${RESET} Unzipping file"
 unzip -q ~/.dungeoncli/dungeoncli.zip -d ~/.dungeoncli/dungeoncli
+echo -e "${YELLOW}${BOLD} ->${RESET} Adding executable permission"
 chmod +x ~/.dungeoncli/dungeoncli/DungeonCli-linux-v0.6.0/DungeonCli
+echo -e "${YELLOW}${BOLD} ->${RESET} Removing old .desktop file if it exists"
 rm ~/.dungeoncli/dungeonCli.desktop
 
 # Replace relative paths with absolute paths
+echo -e "\n${BLUE}${BOLD}::${NC} Setting up menu item${RESET}"
+echo -e "${YELLOW}${BOLD} ->${RESET} Replacing relative paths with absolute ones"
 sed "s|~|$HOME|g" ~/.dungeoncli/dungeoncli_old.desktop >> ~/.dungeoncli/dungeonCli.desktop
 
 # Add a menu item so user can easily find it
-echo -e "\n${YELLOW}${BOLD}::${NC} Password required to copy .desktop file${RESET}"
+echo -e "${YELLOW}${BOLD} ->${RESET} Installing .desktop file"
 sudo desktop-file-install ~/.dungeoncli/dungeonCli.desktop
 
 echo -e "\n${GREEN}${BOLD}Success!${RESET}"
