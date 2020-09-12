@@ -27,14 +27,13 @@ I have created an installation script that will automatically install DungeonCli
 Simply Run:
 
 ```bash
-/bin/bash -c "$(curl -fsSL https://github.com/daniel071/DungeonCli/blob/master/Scripts/install-linux.sh)"
+bash <(curl -s https://raw.githubusercontent.com/daniel071/DungeonCli/master/Scripts/install-linux.sh)
 ```
-###### **NOTE: Root priviledges will be requested in the script**
-As it is required to write to `/usr/share/applications/`
+###### **NOTE: Root priviledges will be requested in the script as it is required to write to /usr/share/applications**/
 
 #### On macOS:
 1. Download the binary for your operating system
-2. Give the binary executable permissions with `chmod +X ./DungeonCli`
+2. Give the binary executable permissions with `chmod +x ./DungeonCli`
 3. Run it with `./DungeonCli`
 
 <br>
