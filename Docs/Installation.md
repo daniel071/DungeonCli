@@ -27,7 +27,7 @@ I have created an installation script that will automatically install DungeonCli
 Simply Run:
 
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/daniel071/DungeonCli/master/Scripts/install-linux.sh)
+curl -s https://raw.githubusercontent.com/daniel071/DungeonCli/master/Scripts/install-linux.sh | sh
 ```
 ###### **NOTE: Root priviledges will be requested in the script as it is required to write to /usr/share/applications**/
 
