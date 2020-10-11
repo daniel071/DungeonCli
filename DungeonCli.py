@@ -55,6 +55,9 @@ developer = 0
 invalidCommands = 0
 mainLoop = 1
 tempProgressCommand = ["nil"]
+tempFunctionCommand = ["nil"]
+def tempFunction():
+	print("nil")
 
 # TODO: when 'wizardThatWantsToKillYou' is done, add it here
 events = ["store", "store", "store", "randomFight", "none", "none", "bombTrap",
@@ -336,13 +339,19 @@ def checkCoins():
 		DGMain.addCoins(10)
 		time.sleep(0.7)
 
+def openStatistics():
+	DGText.printScan(DGText.success + "Your damage inflicted multipler is {m}x".format(m=DGPlayer.Inventory.damage))
+	DGText.printScan(DGText.success + "Your damage taken multiplyer is {p}x".format(p=DGPlayer.Inventory.absorbtion))
+	DGText.printScan(DGText.success + "Your money multiplyer is {p}x\n".format(p=DGPlayer.Inventory.moneyMultiplyer))
 
 def openInventory():
 	DGText.printScan(DGText.success + "Inventory:")
 
-	DGText.printScan(DGText.success + "Your damage inflicted multipler is {m}x".format(m=DGPlayer.Inventory.damage))
-	DGText.printScan(DGText.success + "Your damage taken multiplyer is {p}x".format(p=DGPlayer.Inventory.absorbtion))
-	DGText.printScan(DGText.success + "Your money multiplyer is {p}x\n".format(p=DGPlayer.Inventory.moneyMultiplyer))
+	# moved stats into stats
+	DGText.printScan(DGText.success + "Type 'stats' for combat statistics.\n")
+	#DGText.printScan(DGText.success + "Your damage inflicted multipler is {m}x".format(m=DGPlayer.Inventory.damage))
+	#DGText.printScan(DGText.success + "Your damage taken multiplyer is {p}x".format(p=DGPlayer.Inventory.absorbtion))
+	#DGText.printScan(DGText.success + "Your money multiplyer is {p}x\n".format(p=DGPlayer.Inventory.moneyMultiplyer))
 
 	count = 0
 	if DGPlayer.Inventory.matches != 0:
@@ -519,10 +528,10 @@ def useMatch():
 		DGText.printScan("You Light a match, your surroundings fill up with light. "
 			  "you can now see!")
 		DGText.printScan(rip + "You used up one match. \n")
-		if Scene.current == 1:
+		if Scene.current == 0:
 			print("")
 			time.sleep(1)
-			start()
+			nextScene()
 
 def start():
 	global Scene
@@ -533,13 +542,14 @@ def start():
 	Scene.storeSelected = []
 
 	if Scene.surroundingsLit == False:
-		DGText.printScan(DGText.action + "You are lying down, the cold, wet floor pressed"
+		Scene.current = 0
+		DGText.printScan("You are lying down, the cold, wet floor pressed"
 		" against your face..." + Style.RESET_ALL + "\nWhere are you?\n")
-		Scene.description = "It is extremely dark and cold \n(however that could be because of your wet clothes), but despite that you can't see a single thing..."
+		Scene.description = "It's extremely dark and cold \n(however that could be because of your wet clothes), but despite that you can't see a single thing..."
 		time.sleep(1)
 
-		DGText.printScan(DGText.action + "You get up, your footsteps echo through out the room. It's Extremely dark.")
-		DGText.printScan(Style.RESET_ALL + "Check your Inventory, you might have something to improve your vision...\n")
+		DGText.printScan("You get up, your footsteps echo through out the room. It's extremely dark.")
+		DGText.printScan(hint + "Check your Inventory, you might have something to improve your vision...\n" + Style.RESET_ALL)
 		time.sleep(1)
 		if DGPlayer.Inventory.matches < 1:
 			DGText.printScan(rip + "You don't have any matches left!")
@@ -559,21 +569,22 @@ def start():
 
 
 		elif Scene.current == 2:
-			DGText.printScan(DGText.action + "You start to take a small wander and look around.")
+			DGText.printScan("You start to take a small wander and look around.")
 			time.sleep(0.75)
-			DGText.printScan(DGText.action + "After wandering around for some time, something shiny catches your attention.\n")
+			DGText.printScan("After wandering around for some time, something shiny catches your attention.\n")
 			time.sleep(0.75)
 
 			DGText.printScan(Style.RESET_ALL + "It's a lock, it hangs losely on a chest. It's extremely "
-			"rusted to the point where the fact that\nit's shine caught your eye is astounding.\n")
+			"rusted, \nmuch to the point where the fact that it's shine caught your eye is astounding.\n")
 			tempProgressCommand = ["break lock", "attempt to open", "open",
 			"open chest", "unlock", "unlock chest", "pick", "pick lock"]
 			time.sleep(1)
 
 		elif Scene.current == 3:
-			DGText.printScan(DGText.action + "The lock snaps off. you gently lift up the lid and take what is inside.")
+			DGText.printScan("The lock being so rusted, snaps off without trying. you gently lift up the lid and take what is inside.")
 			DGText.printScan(success + "You pickup a basic healing potion and"
 			" a wooden sword.")
+			DGMain.playSound("Music/intro.ogg", True)
 			DGPlayer.Inventory.basicHealingPotion = DGPlayer.Inventory.basicHealingPotion + 1
 			DGPlayer.Inventory.damage = 1.2
 			DGPlayer.Inventory.sword = 1
@@ -586,8 +597,8 @@ def start():
 		elif Scene.current == 4:
 			DGText.printScan(DGText.action + "You carefully proceed into the next room...")
 			time.sleep(1)
-			DGText.printScan(Style.RESET_ALL + "It is completely empty. There is no sound except"
-			" the water dripping...\n")
+			DGText.printScan(Style.RESET_ALL + "It's completely empty. The water trickling down the wall"
+			"fills your ears...\n")
 			time.sleep(1)
 			DGText.printScan(DGText.rip + "Suddenly, a goblin bursts through"
 			" the other door!")
@@ -619,38 +630,40 @@ def start():
 			DGText.printspeed = 0.013
 
 			time.sleep(1)
-			DGText.printScan(DGText.action + "Suddenly, some sort of 'creature'"
-			" comes up to you. It can't speak English, but it's pointing towards"
-			" a trapdoor.")
+			DGText.printScan(DGText.action + "Suddenly, something scurries down a dug out hole in the ground,"
+			" slamming a trapdoor shut behind them.")
 
-			questions = [
-				{
-					'type': 'confirm',
-					'name': 'promptChoice',
-					'message': 'Will you climb down onto the trapdoor?',
-				}
-			]
+			tempFunctionCommand = ["trapdoor", "open trapdoor", "enter trapdoor", "climb", "climb down"]
 
-			print(Style.RESET_ALL)
-			theAnswer = prompt(questions)
-			theSelection = theAnswer['promptChoice']
-			if theSelection is True:
-				DGText.printScan(DGText.success + "You climb down onto the trapdoor."
-				" Once you reach the bottom, you found a key!")
-				DGText.printScan(DGText.action + "You don't know what this key is for,"
-				" but you take it anyway.\n")
-				DGPlayer.Inventory.secretKey = 1
+			
+			# questions = [
+			# 	{
+			# 		'type': 'confirm',
+			# 		'name': 'promptChoice',
+			# 		'message': 'Will you climb down the trapdoor?',
+			# 	}
+			# ]
 
-				time.sleep(2)
+			# print(Style.RESET_ALL)
+			# theAnswer = prompt(questions)
+			# theSelection = theAnswer['promptChoice']
+			def tempFunction():
+			 	DGText.printScan(DGText.success + "You climb down onto the trapdoor."
+			 	" Once you reach the bottom, you found a key!")
+			 	DGText.printScan(DGText.action + "You don't know what this key is for,"
+			 	" but you take it anyway.\n")
+			 	DGPlayer.Inventory.secretKey = 1
 
-				DGText.printScan(Style.RESET_ALL + "As you begin to exit the trapdoor...\n")
+			 	time.sleep(2)
 
-				bombTrapScene()
+			 	DGText.printScan(Style.RESET_ALL + "As you begin to exit the trapdoor...\n")
+
+			 	bombTrapScene()
 
 
-			else:
-				DGText.printScan(DGText.action + "You decide it is too risky and"
-				" prepare to move on.\n")
+			#else:
+				#DGText.printScan(DGText.action + "You decide it is too risky and"
+				#" prepare to move on.\n")
 
 
 		# elif Scene.current == 6:
@@ -1041,7 +1054,7 @@ def creditScreen():
 	DGText.printScan("Developers Note".center(width,' '))
 	DGText.printScan("Thanks so much Daniel for letting me help on this project!".center(width,' '))
 	DGText.printScan("it was a blast to make. a great way for me to get back into python".center(width,' '))
-	DGText.printScan("(I still prefer swift hahaha)".center(width,' '))
+	DGText.printScan("(I still prefer swift and c hahaha)".center(width,' '))
 	DGText.printScan("Thank you so much - Ethan".center(width,' '))
 
 
@@ -1056,6 +1069,7 @@ def creditScreen():
 	# Daniel - The artists made the song and I think if people are interested
 	# Daniel - in listening to their music they can visit it,
 	# Daniel - Also why are we talking in comments?
+	# Ethan - cuz :)
 
 	print("-".center(width,'-'))
 	DGText.printScan(" ")
@@ -1084,6 +1098,9 @@ def main():
 	detect_system()
 	command = input(DGText.askPrompt + "[Action] " + Style.RESET_ALL)
 
+	if command in tempFunctionCommand and command != "nil":
+		tempProgressCommand = ["nil"]
+		tempFunction()
 	if command in tempProgressCommand and command != "nil":
 		richPrecense.present(Scene.current)
 		tempProgressCommand = ["nil"]
@@ -1094,6 +1111,9 @@ def main():
 
 	elif command in ("open inventory", "open inv", "inventory", "inv", "i", "check inventory", "check inv", "pockets", "check pocket", "check pockets", "search pockets", "search pocket", "open pockets", "open pocket", "look in pocket", "look in pockets"):
 		openInventory()
+
+	elif command in ("open statistics", "open stats", "statistics", "stats", "st", "check statistics", "check stats", "check stat", "stat", "look at stats"):
+		openStatistics()
 
 	elif command in ("use match", "strike match", "match", "light match", "use matches", "matches", "m"):
 		useMatch()
@@ -1259,7 +1279,7 @@ if __name__ == '__main__':
 
 	# Play moosic
 	try:
-		DGMain.playSound("Music/intro.ogg", True)
+		DGMain.playSound("Sounds/bg_ambience.ogg", True)
 	except:
 		DGClear()
 		DGText.printScan(DGText.error + "You need to have a ffmpeg installed for the music to work!")

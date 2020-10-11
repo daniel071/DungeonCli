@@ -45,15 +45,16 @@ def EndScreen():
 
 def playSound(path, ifLoop):
 	global all_process
-	if DGMain.playMusic == True:
-		if ifLoop is True:
-			playback = _play_with_simpleaudio(pydub.AudioSegment.from_ogg(path) * 20)
-		else:
-			playback = _play_with_simpleaudio(pydub.AudioSegment.from_ogg(path))
+	if "-mute" not in sys.argv:
+		if DGMain.playMusic == True:
+			if ifLoop is True:
+				playback = _play_with_simpleaudio(pydub.AudioSegment.from_ogg(path) * 20)
+			else:
+				playback = _play_with_simpleaudio(pydub.AudioSegment.from_ogg(path))
 
-		all_processes.append(playback)
-	else:
-		return "No music played"
+			all_processes.append(playback)
+		else:
+			return "No music played"
 
 def DGExit():
 	global mainLoop
