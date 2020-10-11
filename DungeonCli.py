@@ -19,6 +19,7 @@ from Engine import *
 
 # What??? this import fixed my error???
 from Engine import DGSave
+from Engine import DGUpdate
 
 from sys import stdout
 from threading import Lock
@@ -41,7 +42,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 # --------------------------
 # |		Version!		|
 # --------------------------
-version = "Development Version 0.6.4"
+version = "Development Version 0.6.5"
 # --------------------------
 
 # Define variables here:
@@ -50,7 +51,7 @@ all_processes = []
 
 # Used to prevent cheating:
 devPassword = "hackerman"
-developer = 0
+isDeveloper = False
 
 invalidCommands = 0
 mainLoop = 1
@@ -143,7 +144,8 @@ def useBrick():  # temp function called when in a specific room
 
 
 def passwordPrompt():
-	if developer == 0:
+	global isDeveloper
+	if isDeveloper is False:
 		DGText.printScan(Style.BRIGHT + Fore.YELLOW + "This is a developer command!"
 			  " Please input the developer password!" + Style.RESET_ALL)
 		questions = [
@@ -157,13 +159,13 @@ def passwordPrompt():
 		answers = prompt(questions)
 		userInput = answers['password']
 		if userInput == devPassword:
+			isDeveloper = True
 			DGText.printScan(DGText.success + "Access granted!\n" + Style.RESET_ALL)
 			return "granted"
 		else:
 			DGText.printScan(rip + "Incorrect password!\n")
 			return "denied"
 	else:
-		DGText.printScan(DGText.success + "you have already use the dev password, so you're still logged in.")
 		return "granted"
 
 
@@ -216,7 +218,7 @@ def bombTrapScene():
 	DGText.printScan(rip + "BANG!")
 	time.sleep(1)
 	DGText.printScan(DGDialog.randomDialog.bombExplodes())
-	damage(random.randint(5, 15) * DGPlayer.Inventory.absorbtion)
+	DGPlayer.damage(random.randint(5, 15) * DGPlayer.Inventory.absorbtion)
 	time.sleep(1)
 
 
@@ -226,7 +228,7 @@ def bossBattle():
 	global DGText
 	endThreads()
 	DGClear()
-
+	DGMain.playSound("Music/finalbossintro.ogg", True)
 	DGText.printspeed = 0.05
 
 	DGText.printScan(action + "The door behind you closes. There is no escape.")
@@ -236,12 +238,13 @@ def bossBattle():
 	DGText.printScan(quote + "Nothing eh? You're too weak to defeat me,"
 	" and there's nothing that can stop me.\"\n")
 
-	DGMain.playSound("Music/bossBattle.ogg", True)
-
-	DGText.printspeed = 0.7
+	DGText.printspeed = 0.652
 	print(Style.BRIGHT + Fore.WHITE)
 	DGText.printScan("\"goodbye.\"\n")
 	DGText.printspeed = 0.013
+
+	endThreads()
+	DGMain.playSound("Music/finalboss.ogg", True)
 
 	Scene.combatOverrideMusic = False
 	bossLoop = True
@@ -257,7 +260,7 @@ def bossBattle():
 			time.sleep(1)
 
 		endThreads()
-		DGMain.playSound("Music/bossBattle.ogg", True)
+		DGMain.playSound("Music/finalboss.ogg", True)
 
 
 def bossSuccess():
@@ -666,10 +669,14 @@ def start():
 				#" prepare to move on.\n")
 
 
-		# elif Scene.current == 6:
+		elif Scene.current == 6:
+			DGText.printScan(DGText.action + "You open the door. It's a faceless, expresionless figure. Somehow, even with no mouth, it says")
+			time.sleep(2)
+			DGText.printScan(DGText.quote + "Install Debian.\"\n")
+			time.sleep(1)
 
 		else:
-			DGText.printScan(success + "Thanks for testing DungeonCli!" + Fore.WHITE)
+			DGText.printScan(DGText.success + "Thanks for testing DungeonCli!" + Fore.WHITE)
 			DGText.printScan("We haven't finished this scene.")
 			DGText.printScan("If you want to help us improve, feel free to send a screenshot or video of you")
 			DGText.printScan("playing the game, at the discord server:")
@@ -1015,7 +1022,7 @@ def endScreen():
 	print("Made by the awesome DungeonCli team!".center(width,' '))
 	print(("Join the discord! " + Fore.CYAN + "https://discord.gg/eAUqKKe" + Style.RESET_ALL).center(b,' '))
 	print(" ")
-	print((Fore.CYAN + "http://pavela.net:3000/Daniel/DungeonCli" + Style.RESET_ALL).center(b - 1,' '))
+	print((Fore.CYAN + "https://github.com/daniel071/DungeonCli" + Style.RESET_ALL).center(b - 1,' '))
 	print(" ")
 	print("-".center(width,'-'))
 	print(" ")
@@ -1050,6 +1057,8 @@ def creditScreen():
 	DGText.printScan("Sound effects - Ethan \"Xenthio\" Cardwell".center(width,' '))
 	DGText.printScan("Music - Sine".center(width,' '))
 	DGText.printScan("Music - AsianPotato77".center(width,' '))
+	DGText.printScan("Testing - DenidollarSign - Helped bug test the game".center(width,' '))
+	DGText.printScan("Testing - MuffintehCustodian - Helped bug test the game".center(width,' '))
 	print("----".center(width, ' '))
 	DGText.printScan("Developers Note".center(width,' '))
 	DGText.printScan("Thanks so much Daniel for letting me help on this project!".center(width,' '))
@@ -1095,7 +1104,6 @@ def main():
 	global DGSave
 	global tempProgressCommand
 
-	detect_system()
 	command = input(DGText.askPrompt + "[Action] " + Style.RESET_ALL)
 
 	if command in tempFunctionCommand and command != "nil":
@@ -1121,6 +1129,7 @@ def main():
 	elif command in ("h", "help", "umm", "asdfghjkl", "qwertyuiop"):
 		DGText.printScan(Fore.BLUE + Style.BRIGHT + "Thanks for testing DungeonCli!")
 		DGText.printScan(Fore.GREEN + "Here are some common commands:")
+		DGText.printspeed = 0.006
 		DGText.printScan(Style.RESET_ALL + "\n--------\n" + Style.BRIGHT)
 
 		DGText.printScan(Fore.BLUE + "hp: " + Fore.WHITE + "Checks your current health")
@@ -1134,6 +1143,8 @@ def main():
 		DGText.printScan(Fore.BLUE + "about: " + Fore.WHITE + "About the game")
 
 		DGText.printScan(Style.RESET_ALL + "\n--------\n" + Style.BRIGHT)
+
+		DGText.printspeed = 0.013
 
 	elif command in ("e", "exit", "close", "alt-f4"):
 		DGExit()
@@ -1266,15 +1277,18 @@ def main():
 	elif command in ("debug", "devDebug"):
 		print("Current scene:", DGScene.current)
 		print("Temp Progress Command:",  tempProgressCommand)
+	elif command in ("update", "new"):
+		DGUpdate.update()
 
 
 	else:
 		invalidCommand()
 
 
-detect_system()
+operatingsystem = detect_system()
 
 if __name__ == '__main__':
+
 	richPrecense.init()
 
 	# Play moosic
@@ -1304,11 +1318,11 @@ if __name__ == '__main__':
 					DGText.printScan("NOTE: This installation requires Administrative priviledges"
 					" because it needs to add ffmpeg to the path!\n")
 
-					print(DGText.action + "Creating directories - 1/3..." + Style.RESET_ALL)
+					print(DGText.loading + "Creating directories - 1/3..." + Style.RESET_ALL)
 					os.system('md "%userprofile%\\ffmpeg')
 
 					print(" ")
-					print(DGText.action + "Downloading FFMPEG - 2/3..." + Style.RESET_ALL)
+					print(DGText.loading + "Downloading FFMPEG - 2/3..." + Style.RESET_ALL)
 					print(DGText.action + "File 1 out of 3..." + Style.RESET_ALL)
 					os.system('certutil.exe -urlcache -split -f "https://github.com/daniel071/ffmpeg-builds/releases/download/v1.0.0/ffmpeg.exe" "%userprofile%\\ffmpeg\\ffmpeg.exe"')
 
@@ -1321,12 +1335,12 @@ if __name__ == '__main__':
 					os.system('certutil.exe -urlcache -split -f "https://github.com/daniel071/ffmpeg-builds/releases/download/v1.0.0/ffprobe.exe" "%userprofile%\\ffmpeg\\ffprobe.exe"')
 
 					print(" ")
-					print(DGText.action + "Adding FFMPEG to Path - 3/3..." + Style.RESET_ALL)
+					print(DGText.loading + "Adding FFMPEG to Path - 3/3..." + Style.RESET_ALL)
 
-					print(DGText.action + "Installing dependencies..." + Style.RESET_ALL)
-					os.system('pip install pywin32')
+					print(DGText.loading + "Installing dependencies..." + Style.RESET_ALL)
+					os.system('python -m pip install pywin32')
 
-					print(DGText.action + "Adding to path..." + Style.RESET_ALL)
+					print(DGText.loading + "Adding to path..." + Style.RESET_ALL)
 					import win32com.shell.shell as shell
 					commands = 'setx path "%path%;%userprofile%\\ffmpeg\\"'
 					shell.ShellExecuteEx(lpVerb='runas', lpFile='cmd.exe', lpParameters='/c '+commands)
@@ -1379,38 +1393,10 @@ if __name__ == '__main__':
 		time.sleep(0.3)
 		DGText.printScan("Please copy this error and open up a new issue on Gitea!")
 		time.sleep(0.3)
-		DGText.printScan(Fore.BLUE + "Here: http://pavela.net:3000/Daniel/DungeonCli")
+		DGText.printScan(Fore.BLUE + "Here: https://github.com/daniel071/DungeonCli")
 		time.sleep(0.3)
 		print(Style.RESET_ALL + Fore.RED)
 		raise
 
 
-# This is the end of the code!
-# Enjoy the meme corner below!
-
-# FUCK YOU WHORE, WE LIKE FORTNITE, WE LIKE FORTNIE
-# FUCK YOU WHORE, WE LIKE FORTNITE, WE LIKE FORTNIE
-# FUCK YOU WHORE, WE LIKE FORTNITE, WE LIKE FORTNIE
-# FUCK YOU WHORE, WE LIKE FORTNITE, WE LIKE FORTNIE
-# FUCK YOU WHORE, WE LIKE FORTNITE, WE LIKE FORTNIE
-# FUCK YOU WHORE, WE LIKE FORTNITE, WE LIKE FORTNIE
-# FUCK YOU WHORE, WE LIKE FORTNITE, WE LIKE FORTNIE
-# https://www.youtube.com/watch?v=GGmuA7PK-cc
-
-# Our code is so THICC (:
-# ░░░░░░░░░░▀▀▀██████▄▄▄░░░░░░░░░░
-# ░░░░░░░░░░░░░░░░░▀▀▀████▄░░░░░░░
-# ░░░░░░░░░░▄███████▀░░░▀███▄░░░░░
-# ░░░░░░░░▄███████▀░░░░░░░▀███▄░░░
-# ░░░░░░▄████████░░░░░░░░░░░███▄░░
-# ░░░░░██████████▄░░░░░░░░░░░███▌░
-# ░░░░░▀█████▀░▀███▄░░░░░░░░░▐███░
-# ░░░░░░░▀█▀░░░░░▀███▄░░░░░░░▐███░
-# ░░░░░░░░░░░░░░░░░▀███▄░░░░░███▌░
-# ░░░░▄██▄░░░░░░░░░░░▀███▄░░▐███░░
-# ░░▄██████▄░░░░░░░░░░░▀███▄███░░░
-# ░█████▀▀████▄▄░░░░░░░░▄█████░░░░
-# ░████▀░░░▀▀█████▄▄▄▄█████████▄░░
-# ░░▀▀░░░░░░░░░▀▀██████▀▀░░░▀▀██░░
-
-# what the fuck is the bottom of this document.
+# JOIN the discord server! https://discord.gg/eAUqKKe

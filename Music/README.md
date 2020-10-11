@@ -6,7 +6,9 @@ artists before using these.
 **Made by Sine:**
 
 quest.ogg
-gameOver.mp3
+gameOver.ogg
+finalbossintro.ogg
+finalboss.ogg
 
 **Made by AsianPotato77:**
 

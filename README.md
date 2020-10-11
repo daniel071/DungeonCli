@@ -1,6 +1,9 @@
 "In need of coins, eh? I mean i could let you have some of my precious coins, but ya gotta know the secret code" - Money Grinch
 # DungeonCli
-[![Build Status](http://pavela.net:8090/buildStatus/icon?job=DungeonCI%2Fmaster)](http://pavela.net:8090/blue/organizations/jenkins/DungeonCI/branches)
+[![Build Status](https://jenkins.pavela.net/buildStatus/icon?job=DungeonCI%2Fmaster)](https://jenkins.pavela.net/blue/organizations/jenkins/DungeonCI/branches)
+[![Website pavela.net](https://img.shields.io/website-up-down-green-red/http/pavela.net)](http://pavela.net/DungeonCli/)
+[![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/daniel071/DungeonCli/blob/master/LICENSE)
+
 
 **What is it?**
 
@@ -11,10 +14,10 @@ have fun!
 ## Installation:
 
 For Installation instructions, look at
-[here](http://pavela.net:3000/Daniel/DungeonCli/src/branch/master/Docs/Installation.md)
+[here](https://github.com/daniel071/DungeonCli/blob/master/Docs/Installation.md)
 
 For Server setup, look at
-[here](http://pavela.net:3000/Daniel/DungeonCli/src/branch/master/Docs/Servers.md)
+[here](https://github.com/daniel071/DungeonCli/blob/master/Docs/Servers.md)
 
 
 ---
@@ -27,23 +30,23 @@ For Server setup, look at
 
 **The start screen**
 
-![The start screen](http://pavela.net:3000/Daniel/DungeonCli/raw/branch/master/Images/Screenshots/v0.3.1%20Start%20Screen.png)
+![The start screen](https://github.com/daniel071/DungeonCli/blob/master/Images/Screenshots/v0.3.1%20Start%20Screen.png)
 
 **Common commands**
 
-![Common commands](http://pavela.net:3000/Daniel/DungeonCli/raw/branch/master/Images/Screenshots/v0.3.1%20common%20commands.png)
+![Common commands](https://github.com/daniel071/DungeonCli/blob/master/Images/Screenshots/v0.3.1%20common%20commands.png)
 
 **Healing**
 
-![Healing](http://pavela.net:3000/Daniel/DungeonCli/raw/branch/master/Images/Screenshots/NewestHealingSystem.gif)
+![Healing](https://github.com/daniel071/DungeonCli/blob/master/Images/Screenshots/NewestHealingSystem.gif)
 
 **The combat system**
 
-![The combat system](http://pavela.net:3000/Daniel/DungeonCli/raw/branch/master/Images/Screenshots/NewestCombatSystem.gif)
+![The combat system](https://github.com/daniel071/DungeonCli/blob/master/Images/Screenshots/NewestCombatSystem.gif)
 
 **The Store**
 
-![The Store](http://pavela.net:3000/Daniel/DungeonCli/raw/branch/master/Images/Screenshots/v0.3.0%20store.png)
+![The Store](https://github.com/daniel071/DungeonCli/blob/master/Images/Screenshots/v0.3.0%20store.png)
 </details>
 
 ---
@@ -51,21 +54,8 @@ For Server setup, look at
 ## Usage:
 Type 'h' or 'help' to get a help screen
 
-<br>
-
 ## Contributing:
-If you would like to make a change to the code, you can fork this, make changes
-to it and then submit a pull request. @Xenthio and @Daniel can check your pull
-request and merge it if it's good.
-
-If you are experiencing a bug, you can open up an issue and we will try and help
-fix it.
-
-#### Don't know how to code?
-You can always help with translations, currently, they are not implemented
-but if you are interested in helping translate a language, we will implement
-that. If you want to translate, just let us know by opening up an issue.
-
+If you'd like to contribute, please read [our contributing guidelines.](https://github.com/daniel071/DungeonCli/blob/master/CONTRIBUTING.md)
 <br>
 
 ## To Do!

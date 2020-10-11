@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Name=DungeonCli
+Type=Application
+Comment=A terminal-based dungeon crawler game
+Categories=Game;
+Icon=/home/daniel/.dungeoncli/dungeoncli.png
+Exec=/home/daniel/.dungeoncli/dungeoncli/start_game.sh

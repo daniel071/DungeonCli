@@ -24,11 +24,11 @@ all_processes = []
 def detect_system():
 	global operatingsystem
 	if platform == "linux" or platform == "linux2" or platform == "darwin":
-		operatingsystem = "unix"
+		return "unix"
 	else:
-		operatingsystem = "windows"
+		return "windows"
 
-detect_system()
+operatingsystem = detect_system()
 
 def endThreads():
 	for process in all_processes:
@@ -89,7 +89,7 @@ def hpCheck():
 			DGText.action + "You have {hp} out of {max} HP! \n".format(hp=DGPlayer.hp, max=100))
 
 	else:
-		DGText.printScan(rip + "You have {hp} out of {max} HP! \n".format(hp=DGPlayer.hp, max=100))
+		DGText.printScan(DGText.rip + "You have {hp} out of {max} HP! \n".format(hp=DGPlayer.hp, max=100))
 
 def addCoins(add):
 	global DGPLayer
@@ -141,4 +141,4 @@ def gameover():
 	time.sleep(4)
 	DGClear()
 	endThreads()
-	sys.exit()
+	os._exit(1)
