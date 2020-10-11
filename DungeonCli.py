@@ -552,7 +552,7 @@ def start():
 		time.sleep(1)
 
 		DGText.printScan("You get up, your footsteps echo through out the room. It's extremely dark.")
-		DGText.printScan(hint + "Check your Inventory, you might have something to improve your vision...\n" + Style.RESET_ALL)
+		DGText.printScan(hint + "Check your Inventory, you might have something to improve your vision...)\n" + Style.RESET_ALL)
 		time.sleep(1)
 		if DGPlayer.Inventory.matches < 1:
 			DGText.printScan(rip + "You don't have any matches left!")
@@ -638,7 +638,7 @@ def start():
 
 			tempFunctionCommand = ["trapdoor", "open trapdoor", "enter trapdoor", "climb", "climb down"]
 
-			
+
 			# questions = [
 			# 	{
 			# 		'type': 'confirm',
