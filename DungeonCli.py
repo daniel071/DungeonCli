@@ -587,6 +587,7 @@ def start():
 			DGText.printScan("The lock being so rusted, snaps off without trying. you gently lift up the lid and take what is inside.")
 			DGText.printScan(success + "You pickup a basic healing potion and"
 			" a wooden sword.")
+			endThreads()
 			DGMain.playSound("Music/intro.ogg", True)
 			DGPlayer.Inventory.basicHealingPotion = DGPlayer.Inventory.basicHealingPotion + 1
 			DGPlayer.Inventory.damage = 1.2
