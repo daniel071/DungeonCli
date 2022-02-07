@@ -13,7 +13,6 @@ import time
 import random
 import os
 import sys
-import readline
 from src import richPrecense
 from src import multiplayer
 from Game.Engine import *
@@ -40,6 +39,12 @@ from threading import Lock
 
 
 from colorama import init  # type: ignore
+operatingsystem = detect_system()
+
+# TODO: Improve requirements.txt to include all depends
+# Simpleaudio requires visual studio on windows?
+if not operatingsystem == 'windows':
+	import readline
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
@@ -1304,9 +1309,6 @@ def main():
 		callScene(Scenes.SceneExample)
 	else:
 		invalidCommand()
-
-
-operatingsystem = detect_system()
 
 if __name__ == '__main__':
 
