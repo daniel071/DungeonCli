@@ -6,3 +6,4 @@ simpleaudio==1.0.4
 pydub==0.23.1
 pypresence==4.0.0
 rethinkdb==2.4.7
+readline==6.2.4

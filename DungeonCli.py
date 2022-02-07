@@ -13,6 +13,7 @@ import time
 import random
 import os
 import sys
+import readline
 from src import richPrecense
 from src import multiplayer
 from Game.Engine import *
@@ -1099,7 +1100,6 @@ def nextScene():
 		DGText.printScan("Progress through where? there are no visible exits!")
 		DGText.printScan(hint + "maybe try 'look' and see what you find...)\n" + Style.RESET_ALL)
 
-
 def main():
 	global DGPlayer
 	global DGSave
@@ -1233,7 +1233,7 @@ def main():
 		if passwordPrompt() == "granted":
 			DGMain.gameover()
 
-	elif command in ("o", "options"):
+	elif command in ("o", "options", "settings", "set", "music"):
 		options()
 
 	elif command in ("create torch", "make torch"):
