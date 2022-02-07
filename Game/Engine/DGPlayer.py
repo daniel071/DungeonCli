@@ -20,6 +20,11 @@ def heal(value):
 	if hp > 100:
 		hp = 100
 
+class Item:
+	def __init__(self, name, count):
+		self.name = name
+		self.count = count
+
 class Inventory:
 	# You deal more damage with the better sword you have, for example,
 	# having a stone sword deals 40% more damage then no sword.
@@ -73,3 +78,7 @@ class Inventory:
 
 	# ????
 	secretKey = 0
+
+	#miscallenous items, yknow cause why not
+	
+	miscItems = []

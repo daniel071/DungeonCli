@@ -15,11 +15,12 @@ import os
 import sys
 from src import richPrecense
 from src import multiplayer
-from Engine import *
+from Game.Engine import *
+import Game.Enemies as Enemies
 
 # What??? this import fixed my error???
-from Engine import DGSave
-from Engine import DGUpdate
+from Game.Engine import DGSave
+from Game.Engine import DGUpdate
 
 from sys import stdout
 from threading import Lock
@@ -909,24 +910,6 @@ def initStore():
 		storeOptions = removeFromList(storeOptions, theChosenOne)
 
 
-class Enemy:
-	def __init__(self, name, health, minDamage, maxDamage):
-		self.health = health
-		self.name = name
-		self.minDamage = minDamage
-		self.maxDamage = maxDamage
-
-	def takeDamage(self, damage):
-		self.health -= damage
-		if (self.health <= 0):
-			self.die()
-
-	def die(self):
-		del self
-
-	def startBattle(self):
-		DGCombat.combat(self.name, self.health, self.minDamage, self.maxDamage)
-
 
 
 def randomEnemy():
@@ -935,10 +918,9 @@ def randomEnemy():
 	# names = [["Unidentified", 25, 5, 10], ["Wizard", 40, 10, 20],
 	#		 ["Giant Spider", 25, 5, 15], ["Bob", 100, 1, 1]]
 
-	enemies = [Enemy("Unidentified", 25, 5, 10), Enemy("Wizard", 40, 7, 15),
-	Enemy("Dark Wizard", 5, 25, 40), Enemy("Small Spider", 10, 4, 7)]
+	
 
-	enemy = random.choice(enemies)
+	enemy = random.choice(Enemies.listCommon)
 	enemy.startBattle()
 	#combat(decision[0], decision[1], decision[2], decision[3])
 
@@ -1280,7 +1262,8 @@ def main():
 		print("Temp Progress Command:",  tempProgressCommand)
 	elif command in ("update", "new"):
 		DGUpdate.update()
-
+	elif command in ("plsfight", "cl_fightme"):
+		randomEnemy()
 
 	else:
 		invalidCommand()
