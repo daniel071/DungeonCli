@@ -4,7 +4,7 @@ from colorama import init
 from . import DGCombat
 from .DGMain import *
 from . import DGPlayer
-from . import DGScene
+from . import DGScene as 
 from .DGText import *
 from . import DGTypes
 
