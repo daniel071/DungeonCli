@@ -43,7 +43,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 # --------------------------
 # |		Version!		|
 # --------------------------
-version = "Development Version 0.6.6"
+version = "Development Version 0.6.7"
 # --------------------------
 
 # Define variables here:
@@ -918,7 +918,7 @@ def randomEnemy():
 	# names = [["Unidentified", 25, 5, 10], ["Wizard", 40, 10, 20],
 	#		 ["Giant Spider", 25, 5, 15], ["Bob", 100, 1, 1]]
 
-	
+
 
 	enemy = random.choice(Enemies.listCommon)
 	enemy.startBattle()
@@ -1104,7 +1104,7 @@ def main():
 		openInventory()
 
 	elif command in ("open statistics", "open stats", "statistics", "stats", "st", "check statistics", "check stats", "check stat", "stat", "look at stats"):
-		openStatistics()
+		`openStatistics`()
 
 	elif command in ("use match", "strike match", "match", "light match", "use matches", "matches", "m"):
 		useMatch()
@@ -1115,15 +1115,16 @@ def main():
 		DGText.printspeed = 0.006
 		DGText.printScan(Style.RESET_ALL + "\n--------\n" + Style.BRIGHT)
 
+		DGText.printScan(Fore.BLUE + "start: " + Fore.WHITE + "Proceeds to next scene")
 		DGText.printScan(Fore.BLUE + "hp: " + Fore.WHITE + "Checks your current health")
 		DGText.printScan(Fore.BLUE + "coins: " + Fore.WHITE + "Checks your current balance")
-		DGText.printScan(Fore.BLUE + "start: " + Fore.WHITE + "Proceeds to next scene")
 		DGText.printScan(Fore.BLUE + "inventory: " + Fore.WHITE + "Shows your stats in inventory")
 		DGText.printScan(Fore.BLUE + "potion: " + Fore.WHITE + "Lets you use a healing potion")
-		DGText.printScan(Fore.BLUE + "hp: " + Fore.WHITE + "Checks your current health")
 		DGText.printScan(Fore.BLUE + "quests: " + Fore.WHITE + "Shows your current quests")
+		DGText.printScan(Fore.BLUE + "stats: " + Fore.WHITE + "Shows your current statistics")
 		DGText.printScan(Fore.BLUE + "credits: " + Fore.WHITE + "Info about the developers")
 		DGText.printScan(Fore.BLUE + "about: " + Fore.WHITE + "About the game")
+		DGText.printScan(Fore.BLUE + "exit: " + Fore.WHITE + "Exit the game")
 
 		DGText.printScan(Style.RESET_ALL + "\n--------\n" + Style.BRIGHT)
 
@@ -1299,6 +1300,9 @@ if __name__ == '__main__':
 			theValue = theAnswer['userChoice']
 			if theValue == "Install FFMPEG":
 				if operatingsystem == 'windows':
+					# TODO: Compiled versions don't require python, which can result
+					#       in installing dependencies failing if python isn't installed
+					#       Make script check for python
 					DGText.printScan("NOTE: This installation requires Administrative priviledges"
 					" because it needs to add ffmpeg to the path!\n")
 
@@ -1334,7 +1338,7 @@ if __name__ == '__main__':
 					" so that the path would update!")
 				else:
 					DGText.printScan(DGText.error + "This script is not made for unix systems,"
-					" if you have issues with music, please open an issue on gitea.")
+					" if you have issues with music, please open an issue on github.")
 					time.sleep(1)
 					DGText.printScan(DGText.hint + "MacOS and most linux distros have FFMPEG pre-installed.\n")
 
@@ -1375,7 +1379,7 @@ if __name__ == '__main__':
 		DGText.printScan(DGText.error + "An error has occured!")
 		print(Fore.WHITE)
 		time.sleep(0.3)
-		DGText.printScan("Please copy this error and open up a new issue on Gitea!")
+		DGText.printScan("Please copy this error and open up a new issue on Github!")
 		time.sleep(0.3)
 		DGText.printScan(Fore.BLUE + "Here: https://github.com/daniel071/DungeonCli")
 		time.sleep(0.3)
