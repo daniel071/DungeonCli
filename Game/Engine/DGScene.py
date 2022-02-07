@@ -1,3 +1,4 @@
+
 # All the info about the scene
 
 combatOverrideMusic = True
@@ -10,6 +11,17 @@ hasStore = False
 hasCoins = False
 hasVault = False
 storeSelected = []
-	# description of current room, called by observe and look around
+# description of current room, called by observe and look around
 description = "Description"
+
 soundDescription = "Sound Description"
+
+tempProgressCommand = []
+tempFunctionCommand = []
+
+def startScene():
+	print("Unitialized scene!")
+	
+def tempFunction():
+	print("Unitialized function!")
+

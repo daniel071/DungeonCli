@@ -1,12 +1,16 @@
-import DGScene
-import DGText
+import Game.Engine.DGScene as DGScene
+import Game.Engine.DGText as DGText
 # example of how i want scenes to work, this code isn't actually doing anything right now
 
-self = DGScene()
 
 description = "basic room, it has a floor, walls, ceiling, a button and an exit door. It's quite cosy!"
-tempProgressCommands = ["use exit", "exit", "door", "walk through door", "walk through exit"]
-tempFunctionCommands = ["use button", "button", "press button"]
+tempProgressCommand = ["use exit", "exit", "door", "walk through door", "walk through exit"]
+tempFunctionCommand = ["use button", "button", "press button"]
+
+def startScene():
+    #there is a button in this room
+    DGText.printScan(DGText.action + "A very basic room, you notice there is a button in this room.")
+    DGText.printScan(DGText.action + "You can press it.")
 
 def tempFunction():
     #you pressed the button, nothing happens

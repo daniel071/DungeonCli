@@ -18,6 +18,8 @@ from src import richPrecense
 from src import multiplayer
 from Game.Engine import *
 import Game.Enemies as Enemies
+from Game.Scenes import *
+import Game.Scenes as Scenes
 
 # What??? this import fixed my error???
 from Game.Engine import DGSave
@@ -102,6 +104,18 @@ class quest:
 
 printspeed = 0.013
 defprntspd = 0.013
+
+def callScene(scene):
+	global tempFunctionCommand
+	global tempProgressCommand
+	global tempFunction
+	print("calling scene")
+	tempProgressCommand = scene.tempProgressCommand
+	tempFunctionCommand = scene.tempFunctionCommand
+	Scene.description = scene.description
+	def tempFunction():
+		scene.tempFunction()
+	scene.startScene()
 
 def initRandomRoom():
 	global DGDialog
@@ -623,10 +637,10 @@ def start():
 
 
 		elif Scene.current == 5:
+			Scene.description = "An ancient civilisation, spanning thousands of years. It appears to have ended here."
 			# TODO: This scene is pretty garbage tbh, too much being introduced
 			#       in a poor way, and that poem is complete garbage.
 			#       todo, fix
-			Scene.description = "An ancient civilisation, spanning thousands of years. It appears to have ended here."
 			DGText.printScan(DGText.action + "You find a small outpost here. There are unknown creatures"
 			" scattered across the place")
 			DGText.printScan(Style.RESET_ALL + "The outpost seems to be in ruins,"
@@ -688,6 +702,9 @@ def start():
 			time.sleep(2)
 			DGText.printScan(DGText.quote + "Install Debian.\"\n")
 			time.sleep(1)
+		elif Scene.current == 7:
+			SceneExample.startScene()
+
 
 		else:
 			# Multilines in vars are scuffed, I know.
@@ -1283,7 +1300,8 @@ def main():
 		DGUpdate.update()
 	elif command in ("plsfight", "cl_fightme"):
 		randomEnemy()
-
+	elif command in ("plsscene", "cl_sceneexample"):
+		callScene(Scenes.SceneExample)
 	else:
 		invalidCommand()
 
@@ -1399,11 +1417,11 @@ if __name__ == '__main__':
 	except Exception:
 		DGText.printScan(DGText.error + "An error has occured!")
 		print(Fore.WHITE)
-		time.sleep(0.3)
+		time.sleep(0.01)
 		DGText.printScan("Please copy this error and open up a new issue on Github!")
-		time.sleep(0.3)
+		time.sleep(0.01)
 		DGText.printScan(Fore.BLUE + "Here: https://github.com/daniel071/DungeonCli")
-		time.sleep(0.3)
+		time.sleep(0.01)
 		print(Style.RESET_ALL + Fore.RED)
 		raise
 
