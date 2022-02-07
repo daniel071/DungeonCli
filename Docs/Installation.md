@@ -15,7 +15,7 @@ DungeonCli.py**
 Stability      | ✔️           | ❌
 Latest Updates | ❌          | ✔️
 Windows Builds | ✔️           | ❌
-MacOS Builds   | ✔️           | ✔️
+MacOS Builds   | ✔️           | ❌
 Linux Builds   | ✔️           | ✔️
 
 #### On Windows:
