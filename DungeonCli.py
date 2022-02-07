@@ -545,6 +545,8 @@ def start():
 
 	Scene.storeSelected = []
 
+	## GAME SCENES
+
 	if Scene.surroundingsLit == False:
 		Scene.current = 0
 		DGText.printScan("You are lying down, the cold, wet floor pressed"
@@ -565,6 +567,7 @@ def start():
 
 	else:
 		if Scene.current == 1:
+			Scene.description = DGDialog.randomDialog.roomDescription()
 			DGText.printScan(Style.RESET_ALL + "The Light is bright enough to "
 			"see where you are walking, no walls are nearby.")
 			DGText.printScan(action + "While being scared, you think it is "
@@ -573,6 +576,7 @@ def start():
 
 
 		elif Scene.current == 2:
+			Scene.description = "The chest is locked. It is made out of a fine wood material. You question what lies within it."
 			DGText.printScan("You start to take a small wander and look around.")
 			time.sleep(0.75)
 			DGText.printScan("After wandering around for some time, something shiny catches your attention.\n")
@@ -585,6 +589,7 @@ def start():
 			time.sleep(1)
 
 		elif Scene.current == 3:
+			Scene.description = DGDialog.randomDialog.roomDescription()
 			DGText.printScan("The lock being so rusted, snaps off without trying. you gently lift up the lid and take what is inside.")
 			DGText.printScan(success + "You pickup a basic healing potion and"
 			" a wooden sword.")
@@ -600,6 +605,7 @@ def start():
 
 
 		elif Scene.current == 4:
+			Scene.description = DGDialog.randomDialog.roomDescription()
 			DGText.printScan(DGText.action + "You carefully proceed into the next room...")
 			time.sleep(1)
 			DGText.printScan(Style.RESET_ALL + "It's completely empty. The water trickling down the wall"
@@ -616,6 +622,10 @@ def start():
 
 
 		elif Scene.current == 5:
+			# TODO: This scene is pretty garbage tbh, too much being introduced
+			#       in a poor way, and that poem is complete garbage.
+			#       todo, fix
+			Scene.description = "An ancient civilisation, spanning thousands of years. It appears to have ended here."
 			DGText.printScan(DGText.action + "You find a small outpost here. There are unknown creatures"
 			" scattered across the place")
 			DGText.printScan(Style.RESET_ALL + "The outpost seems to be in ruins,"
@@ -672,12 +682,19 @@ def start():
 
 
 		elif Scene.current == 6:
+			Scene.description = "The faceless figure continues to stare at you."
 			DGText.printScan(DGText.action + "You open the door. It's a faceless, expresionless figure. Somehow, even with no mouth, it says")
 			time.sleep(2)
 			DGText.printScan(DGText.quote + "Install Debian.\"\n")
 			time.sleep(1)
 
 		else:
+			# Multilines in vars are scuffed, I know.
+			Scene.description = """\
+The room is empty. Two chairs lie in the room
+A man sits in one, and prompts you to take a seat.
+He appears to be the main developer of the game.
+"Join the discord server", he says."""
 			DGText.printScan(DGText.success + "Thanks for testing DungeonCli!" + Fore.WHITE)
 			DGText.printScan("We haven't finished this scene.")
 			DGText.printScan("If you want to help us improve, feel free to send a screenshot or video of you")
@@ -957,6 +974,7 @@ def skipIntro():
 	DGPlayer.Inventory.basicHealingPotion = DGPlayer.Inventory.basicHealingPotion + 1
 	DGPlayer.Inventory.damage = 1.2
 	DGPlayer.Inventory.sword = 1
+	# Garbage name wtf
 	quest.add("Obtain the Great Stone of Knowledge.")
 
 def useSticks():
@@ -1104,7 +1122,7 @@ def main():
 		openInventory()
 
 	elif command in ("open statistics", "open stats", "statistics", "stats", "st", "check statistics", "check stats", "check stat", "stat", "look at stats"):
-		`openStatistics`()
+		openStatistics()
 
 	elif command in ("use match", "strike match", "match", "light match", "use matches", "matches", "m"):
 		useMatch()
@@ -1375,7 +1393,10 @@ if __name__ == '__main__':
 	try:
 		while mainLoop == 1:
 			main()
-	except:
+	except KeyboardInterrupt:
+		print()
+		DGExit()
+	except Exception:
 		DGText.printScan(DGText.error + "An error has occured!")
 		print(Fore.WHITE)
 		time.sleep(0.3)
