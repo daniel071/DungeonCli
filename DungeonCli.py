@@ -89,6 +89,7 @@ hasSeenAStore = False
 # Some useful stuff
 
 Scene = DGScene
+Scene.description = "The room is dark. You only hear the droplets of water in the distance."
 
 class quest:
 	quests = []
@@ -107,6 +108,7 @@ class quest:
 		print(Style.RESET_ALL)
 
 
+# TODO: Make printspeed configurable by user
 printspeed = 0.013
 defprntspd = 0.013
 
@@ -122,6 +124,7 @@ def callScene(scene):
 		scene.tempFunction()
 	scene.startScene()
 
+# Unused function?
 def initRandomRoom():
 	global DGDialog
 	# Not my code but what I think it does is
@@ -233,7 +236,7 @@ def bombTrapScene():
 	global Scene
 	global DGDialog
 
-	Scene.description = "The room looked very charred after the explosion. you should probably proceed."
+	Scene.description = "The walls are charred, the room is full of smoke. You probably should get out of here."
 
 	DGMain.playSound("Sounds/explosion.ogg", False)
 	DGText.printScan(rip + "BANG!")
@@ -709,20 +712,22 @@ def start():
 			time.sleep(1)
 		elif Scene.current == 7:
 			SceneExample.startScene()
-
-
 		else:
-			# Multilines in vars are scuffed, I know.
-			Scene.description = """\
+			# TODO: Replace random events with actual scenes, leaving this in for now
+			if len(events) > 0:
+				randomEvent()
+			else:
+				# Multilines in vars are scuffed, I know.
+				Scene.description = """\
 The room is empty. Two chairs lie in the room
 A man sits in one, and prompts you to take a seat.
 He appears to be the main developer of the game.
 "Join the discord server", he says."""
-			DGText.printScan(DGText.success + "Thanks for testing DungeonCli!" + Fore.WHITE)
-			DGText.printScan("We haven't finished this scene.")
-			DGText.printScan("If you want to help us improve, feel free to send a screenshot or video of you")
-			DGText.printScan("playing the game, at the discord server:")
-			DGText.printScan(Style.BRIGHT + Fore.BLUE + "https://discord.gg/eAUqKKe\n")
+				DGText.printScan(DGText.success + "Thanks for testing DungeonCli!" + Fore.WHITE)
+				DGText.printScan("We haven't finished this scene.")
+				DGText.printScan("If you want to help us improve, feel free to send a screenshot or video of you")
+				DGText.printScan("playing the game, at the discord server:")
+				DGText.printScan(Style.BRIGHT + Fore.BLUE + "https://discord.gg/eAUqKKe\n")
 
 
 def randomEvent():
@@ -782,6 +787,7 @@ def randomEvent():
 				DGText.printScan(DGText.action + "This seems too risky... you prepare to leave...\n")
 
 		elif selection == "randomFight":
+			Scene.description = DGDialog.randomDialog.roomDescription()
 			DGText.printScan(DGText.action + "You hear a movement -- you freeze")
 			time.sleep(0.6)
 			DGText.printScan(DGText.action + "Someone is trying to attack you,")
@@ -791,10 +797,12 @@ def randomEvent():
 			randomEnemy()
 
 		elif selection == "none":
+			Scene.description = "Nothing to see here."
 			DGText.printScan(action + "You find absolutely nothing in this room...\n")
 
 
 		elif selection == "bombTrap":
+			# Scene description set in bombTrapScene()
 			DGText.printScan(action + "It is odly quiet here... you begin to look around... \n")
 			time.sleep(2)
 			bombTrapScene()
@@ -806,7 +814,6 @@ def randomEvent():
 			pass
 
 		elif selection == "treasure":
-
 			DGText.printScan(DGText.action + "A massive Vault stands in this room.")
 			time.sleep(1)
 			DGText.printScan(DGText.action + "Something useful might be in it...")
@@ -828,10 +835,12 @@ def randomEvent():
 			if theDecision is False:
 				print("")
 				DGText.printScan(DGText.action + "You think this is too risky and proceed to move on.\n")
+				Scene.description = "The vault remains unopen. What lies within nobody will know."
 			else:
 				Scene.hasVault = True
 				openVault()
 				Scene.hasVault = False
+				Scene.description = "You wonder whether you are alone. Whether or not someone is watching."
 
 
 		elif selection == "unknownCrate":
@@ -854,10 +863,13 @@ def randomEvent():
 			if theDecision is False:
 				print("")
 				DGText.printScan(DGText.action + "You think this is too risky and proceed to move on.\n")
+				Scene.description = "An unknown figure watches you from above. You do not know what to think about this."
 
 			else:
 				areYaLucky = random.randint(1, 5)
 				if areYaLucky == 1:
+					Scene.description = "You got what you wanted. But at what cost?"
+
 					# You get free loot
 					lootGoodies = ["Stone sword", "Iron armour"]
 					chosenGoodies = random.choice(lootGoodies)
@@ -880,11 +892,13 @@ def randomEvent():
 							DGPlayer.Inventory.absorbtion = 0.6
 
 				elif areYaLucky == 2:
+					Scene.description = "You got what you wanted. But at what cost?"
 					# You get free gold
 					DGText.printScan(DGText.success + "You open the chest and you find free gold!")
 					DGMain.addCoins(random.randint(100, 120))
 
 				elif areYaLucky == 3:
+					Scene.description = "Perhaps you were trolled. Who set this up, you do not know."
 					# You get nothing
 					DGText.printScan(DGText.rip + "You open the chest and find nothing.")
 					DGText.printScan(DGText.action + "You move on...\n")
