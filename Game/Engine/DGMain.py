@@ -23,10 +23,14 @@ all_processes = []
 
 def detect_system():
 	global operatingsystem
-	if platform == "linux" or platform == "linux2" or platform == "darwin":
-		return "unix"
-	else:
+	if platform == "linux" or platform == "linux2":
+		return "linux"
+	elif platform == "darin":
+		return "darwin"
+	elif platfrom == "windows":
 		return "windows"
+	else:
+		return "nerd"
 
 operatingsystem = detect_system()
 
@@ -35,7 +39,7 @@ def endThreads():
 		process.stop()
 
 def DGClear():
-	if operatingsystem == "unix":
+	if operatingsystem == "linux" or operatingsystem == "darwin":
 		_ = os.system('clear')
 	else:
 		_ = os.system('cls')
