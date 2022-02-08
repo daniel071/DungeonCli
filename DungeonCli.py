@@ -155,7 +155,7 @@ def invalidCommand():
 def useBrick():  # temp function called when in a specific room
 	global Scene
 	if Scene.current == 8:
-		DGText.printScan(action + "You pull out the brick however, quickly drop it as a massive spider lay on it.")
+		DGText.printScan(DGText.action + "You pull out the brick however, quickly drop it as a massive spider lay on it.")
 		time.sleep(0.7)
 		DGText.printScan("You hear a latch go *click!* and the sound of Bricks on Bricks"
 		" fill the room... A massive door lays upon your sight.\n")
@@ -164,7 +164,7 @@ def useBrick():  # temp function called when in a specific room
 		Scene.description = "A massive door is upon your sight. You should probably check it out"
 		Scene.canProgress = True
 	else:
-		DGText.printScan(error + "There are no bricks nearby!\n")
+		DGText.printScan(DGText.error + "There are no bricks nearby!\n")
 
 
 def passwordPrompt():
@@ -190,6 +190,8 @@ def passwordPrompt():
 			DGText.printScan(rip + "Incorrect password!\n")
 			return "denied"
 	else:
+		# yes, the print is on purpose
+		print(DGText.success + "Developer mode granted.")
 		return "granted"
 
 
@@ -262,10 +264,12 @@ def bossBattle():
 	DGText.printScan(quote + "Nothing eh? You're too weak to defeat me,"
 	" and there's nothing that can stop me.\"\n")
 
-	DGText.printspeed = 0.652
+	DGText.printspeed = 0.65
 	print(Style.BRIGHT + Fore.WHITE)
 	DGText.printScan("\"goodbye.\"\n")
 	DGText.printspeed = 0.013
+
+	time.sleep(1.5)
 
 	endThreads()
 	DGMain.playSound("Music/finalboss.ogg", True)
