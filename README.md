@@ -59,16 +59,26 @@ If you'd like to contribute, please read [our contributing guidelines.](https://
 <br>
 
 ## To Do!
-- [ ] Neat and text based engine.
-- [x] Make text easy to read by having it scan in.
-- [x] Convince Daniel to use threads (Edit: After we switched to pydub, everything works flawlessly!)
+<!--  - [ ] Neat and text based engine ???? --->
+Top: Highest priority
 - [ ] Write more story
-- [x] Basic Gameplay mechanics
-- [x] Real 'bin' format save files. not the fake stuff. (Save system works, but its not real binary yet)
-- [x] Overhaul the combat system, add sparing and using items
-- [x] Fix combat system dealing no damage
+- [ ] Implement proper packaging and building system
+- [ ] Fix requirements.txt for new installs
+- [ ] Make printspeed configurable by user
+- [ ] Backend improvements and clean up
 - [ ] Make extra swords that deal extra damage
 - [ ] Add more Armour which absorbs a percentage of damage
+- [ ] Fix clicking on text
+- [ ] Fix simpleaudio needing VS on Windows (look in code for TODO)
+- [ ] Improve FFMPEG installation on Windows (look in code for TODO)
+- [x] Neat and text based engine
+- [x] Make text easy to read by having it scan in.
+- [x] Convince Daniel to use threads (Edit: After we switched to pydub, everything works flawlessly!)
+- [x] Basic Gameplay mechanics
+- [x] Real 'bin' format save files. not the fake stuff. (Save system works, but its not real binary yet)
+<!-- New save system is not real binary. --->
+- [x] Overhaul the combat system, add sparing and using items
+- [x] Fix combat system dealing no damage
 - [x] Fix bug where if you die while in combat, the combat function persists
 - [x] Add critical shots, where there is a chance that you can get double the damage
 
