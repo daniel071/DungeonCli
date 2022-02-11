@@ -1,7 +1,13 @@
 #!/bin/bash
 
+# TODO: setup nightly/stable option to actually work
+# TODO: Fix hardcoded stuff
+
+TYPE='null'
+
 # Colours!!!
 BLUE='\e[34m'
+RED='\e[31m'
 BOLD='\e[1m'
 RESET='\033[0m'
 NC='\e[39m'
@@ -13,14 +19,33 @@ if [ ! "~/.dungeoncli/" == "" ]; then
 	# Directory exists
 
 	echo -e "${BLUE}${BOLD}::${NC} Directory already exists!${RESET}"
-	read -p "Do a clean install? (y/N) " -n 1 -r
+	echo -e -n "${BOLD}[${YELLOW}?${NC}]${RESET} Do a clean install? (y/N) "
+	read -p "" -n 1 -r
 	echo    # (optional) move to a new line
 	if [[ $REPLY =~ ^[Yy]$ ]]
 	then
 		rm -rf ~/.dungeoncli/
 	fi
-mkdir ~/.dungeoncli/
+mkdir -p ~/.dungeoncli/
 fi
+
+while [ $TYPE == 'null' ]
+do
+	echo -e -n "${BOLD}[${YELLOW}?${NC}]${RESET} Install stable or nightly builds? (s/n) "
+	read -p "" -n 1 -r
+	if [[ $REPLY =~ ^[Ss]$ ]]
+	then
+		TYPE='stable'
+	elif [[ $REPLY =~ ^[Nn]$ ]]
+	then
+		TYPE='nightly'
+	else
+		echo
+		echo -e "${BOLD}[${RED}!${NC}]${RESET} Select an option!"
+	fi
+done
+
+echo
 
 # Automatically fetch latest release - does not work yet!
 # URL=$( curl -s "https://api.github.com/repos/daniel071/DungeonCli/releases/latest" \

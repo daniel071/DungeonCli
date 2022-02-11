@@ -1,5 +1,5 @@
 # Manages in-built updating of DungeonCli
-
+# TODO: Improve to include update checks, nightly and stable updates and windows&mac support
 import time
 import os
 from colorama import Fore, Back, Style
