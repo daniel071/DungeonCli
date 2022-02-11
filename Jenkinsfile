@@ -1,7 +1,8 @@
 pipeline {
   agent {
           label 'linux'
-        }
+  }
+
 	stages {
 	  stage('Install Dependencies') {
       stage('Install on Linux') {

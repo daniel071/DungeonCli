@@ -191,7 +191,7 @@ def passwordPrompt():
 			return "denied"
 	else:
 		# yes, the print is on purpose
-		print(DGText.success + "Developer mode granted.")
+		print(DGText.success + "Developer mode granted." + Style.RESET_ALL)
 		return "granted"
 
 
