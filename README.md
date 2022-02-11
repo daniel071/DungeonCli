@@ -64,6 +64,7 @@ Top: Highest priority
 - [ ] Write more story
 - [ ] Implement proper packaging and building system
 - [ ] Improve linux install script
+- [ ] Implement automatic checking and updating for nightly and stable builds for all platforms
 - [ ] Make printspeed configurable by user
 - [ ] Backend improvements and clean up
 - [ ] Make extra swords that deal extra damage
