@@ -8,3 +8,4 @@ builds
 .Builds/DungeonCli_osx
 __pycache__
 projectfile
+test-env/
