@@ -3,7 +3,28 @@ You **MUST** have ffmpeg installed in order for the music to work. On MacOS and 
 I have created an installation script that will do install it for you. It is built in to
 DungeonCli.py**
 
-<br>
+### Updating
+Already have DungeonCli installed? Check out [update instructions.](Updating.md)
+
+### Installation methods
+**Recommended methods in bold**
+
+|                 | [**Download and run binary**](#from-binaries) | [**Install script**](#on-linux) | [Using python](#with-python) | [Compiling manually](#compiling) |
+| --------------- | --------------------------------------------- | ------------------------------- | ---------------------------- | -------------------------------- |
+| Stable version  | ✔️                                           | ✔️                              | ❌                           | ❌                              |
+| Nightly version | ✔️                                           | ❌**                            | ✔️                           | ✔️                              |
+| Windows support | ❌*                                          | ❌                              | ✔️                           | ✔️                              |
+| MacOS support   | ❌*                                          | ❌***                           | ✔️                           | ✔️                              |
+| Linux support   | ✔️                                           | ✔️                              | ✔️                           | ✔️                              |
+| Easy install    | ✔️                                           | ✔️                              | ❌                           | ❌                              |
+| Quick install   | ✔️                                           | ✔️                              | ✔️                           | ❌                              |
+| Source editing  | ❌                                           | ❌                              | ✔️                           | ✔️                              |
+
+*builds will be available soon
+
+**nightly support for script availble soon
+
+\*\*\*macOS support will be added in the near future
 
 ### From binaries
 **(Recommended method)**
@@ -11,9 +32,9 @@ DungeonCli.py**
 ##### There are 2 different places where you can download binaries.
 
 ‎| [Stable builds <br> <img src="https://raw.githubusercontent.com/daniel071/DungeonCli/master/Images/Logos/stableTerminal.png" alt="Logo" width="150"/>](https://github.com/daniel071/DungeonCli/releases)  | [Nightly builds <br> <img src="https://raw.githubusercontent.com/daniel071/DungeonCli/master/Images/Logos/nightlyTerminal.png" alt="Logo" width="150"/>](https://jenkins.pavela.net/blue/organizations/jenkins/DungeonCI/activity) |
----            |         :-: |      :-:     |
+               |      :-:      |      :-:     |
 Stability      | ✔️           | ❌
-Latest Updates | ❌          | ✔️
+Latest Updates | ❌           | ✔️
 Windows Builds | ✔️           | ❌
 MacOS Builds   | ✔️           | ❌
 Linux Builds   | ✔️           | ✔️
