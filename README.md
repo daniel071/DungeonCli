@@ -1,4 +1,6 @@
-# DungeonCli
+# ___Now obselete, use `master` branch___
+
+## DungeonCli
 **What is it?**
 
 DungeonCli is a terminal based program where you get to explore
