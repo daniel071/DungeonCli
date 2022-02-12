@@ -1,5 +1,6 @@
 # Multiplayer
 
+
 ## Getting started:
 1. Install RethinkDB from [here](https://rethinkdb.com/docs/install/)
 2. Run RethinkDB and create a new table called `chat`
