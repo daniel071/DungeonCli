@@ -26,7 +26,7 @@ pipeline {
           discordSend description: "Jenkins Pipeline Build", footer: "DungeonCli",
           link: env.BUILD_URL, result: currentBuild.currentResult, title: JOB_NAME,
           thumbnail: "https://raw.githubusercontent.com/daniel071/DungeonCli/master/Images/Logos/nightlyTerminal.png",
-          webhookURL: ${SECRET}
+          webhookURL: "${SECRET}"
         }
       }
     }
