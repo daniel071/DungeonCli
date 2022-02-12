@@ -1,7 +1,7 @@
 "In need of coins, eh? I mean i could let you have some of my precious coins, but ya gotta know the secret code" - Money Grinch
 # DungeonCli
-[![Build Status](https://jenkins.pavela.net/job/DungeonCli/badge/icon)](https://jenkins.pavela.net/blue/organizations/jenkins/DungeonCli/)
-[![Website pavela.net](https://img.shields.io/website-up-down-green-red/https/pavela.net)](https://pavela.net/DungeonCli/)
+[![Build Status](https://jenkins.pavela.net/buildStatus/icon?job=DungeonCI%2Fmaster)](https://jenkins.pavela.net/blue/organizations/jenkins/DungeonCI/branches)
+[![Website pavela.net](https://img.shields.io/website-up-down-green-red/http/pavela.net)](http://pavela.net/DungeonCli/)
 [![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/daniel071/DungeonCli/blob/master/LICENSE)
 
 
@@ -14,10 +14,10 @@ have fun!
 ## Installation:
 
 For Installation instructions, look at
-[here](https://github.com/daniel071/DungeonCli/blob/master/Docs/Installation.md)
+[here](Docs/Installation.md)
 
 For Server setup, look at
-[here](https://github.com/daniel071/DungeonCli/blob/master/Docs/Servers.md)
+[here](Docs/Servers.md)
 
 
 ---
@@ -55,7 +55,7 @@ For Server setup, look at
 Type 'h' or 'help' to get a help screen
 
 ## Contributing:
-If you'd like to contribute, please read [our contributing guidelines.](https://github.com/daniel071/DungeonCli/blob/master/CONTRIBUTING.md)
+If you'd like to contribute, please read [our contributing guidelines.](CONTRIBUTING.md)
 <br>
 
 ## To Do!
@@ -63,8 +63,7 @@ If you'd like to contribute, please read [our contributing guidelines.](https://
 Top: Highest priority
 - [ ] Write more story
 - [ ] Implement proper packaging and building system
-- [ ] Improve linux install script
-- [ ] Implement automatic checking and updating for nightly and stable builds for all platforms
+- [ ] Fix requirements.txt for new installs
 - [ ] Make printspeed configurable by user
 - [ ] Backend improvements and clean up
 - [ ] Make extra swords that deal extra damage
@@ -72,17 +71,16 @@ Top: Highest priority
 - [ ] Fix clicking on text
 - [ ] Fix simpleaudio needing VS on Windows (look in code for TODO)
 - [ ] Improve FFMPEG installation on Windows (look in code for TODO)
-- [x] Fix requirements.txt for new installs
 - [x] Neat and text based engine
 - [x] Make text easy to read by having it scan in.
 - [x] Convince Daniel to use threads (Edit: After we switched to pydub, everything works flawlessly!)
 - [x] Basic Gameplay mechanics
 - [x] Real 'bin' format save files. not the fake stuff. (Save system works, but its not real binary yet)
+<!-- New save system is not real binary. --->
 - [x] Overhaul the combat system, add sparing and using items
 - [x] Fix combat system dealing no damage
 - [x] Fix bug where if you die while in combat, the combat function persists
 - [x] Add critical shots, where there is a chance that you can get double the damage
-<!-- New save system is not real binary. --->
 
 <br>
 
