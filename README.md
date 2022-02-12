@@ -16,9 +16,14 @@ have fun!
 For Installation instructions, look at
 [here](Docs/Installation.md)
 
+For Updating instructions, look at
+[here](Docs/Updating.md)
+
 For Server setup, look at
 [here](Docs/Servers.md)
 
+For Contributing instructions, look at
+[here](CONTRIBUTING.md)
 
 ---
 

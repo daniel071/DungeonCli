@@ -39,6 +39,8 @@ Already have DungeonCli installed? Check out [update instructions.](Updating.md)
 | MacOS Builds   | ✔️           | ❌
 | Linux Builds   | ✔️           | ✔️
 
+---
+
 #### On Windows:
 Download the Windows .zip file, extract it and run *DungeonCli.exe*
 ##### NOTE: Make sure to keep the exe file in the folder it came with otherwise it won't run!
@@ -93,3 +95,5 @@ can install it from https://www.python.org
 	If you're on Linux / Unix, make sure to give compile.sh executable
 priviledges with `chmod +X ./compile.sh` then run it with `./compile.sh`
 If you're on Windows, run `compilewindows.bat`
+
+---

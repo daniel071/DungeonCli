@@ -1321,6 +1321,8 @@ def main():
 		print("Temp Progress Command:",  tempProgressCommand)
 	elif command in ("update", "new"):
 		DGUpdate.update()
+	elif command in ("check", "check for update", "update check"):
+		DGUpdate.check()
 	elif command in ("plsfight", "cl_fightme"):
 		randomEnemy()
 	elif command in ("plsscene", "cl_sceneexample"):

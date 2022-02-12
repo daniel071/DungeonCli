@@ -14,13 +14,13 @@ def check():
 
 def update():
 	if currentOS == "windows":
-		DGText.printScan(DGText.rip + "Currently, only Linux and macOS support the automatic updater.\n")
+		DGText.printScan(DGText.rip + "Currently, only Linux supports the automatic updater.\n")
 	elif currentOS == "darwin":
 		DGText.printScan(DGText.rip + "macOS support is coming soon.\n")
 	else:
 		DGText.printScan(DGText.loading + "Downloading new update (1/2)")
 		print(Style.RESET_ALL)
-		os.system("wget -O ./dungeoncli.zip https://github.com/daniel071/DungeonCli/releases/download/v0.6.0-beta/DungeonCli-linux.zip")
+		os.system("wget -q --show-progress -O ./dungeoncli.zip https://github.com/daniel071/DungeonCli/releases/download/v0.6.0-beta/DungeonCli-linux.zip")
 
 		DGText.printScan(DGText.loading + "Extracting new update (2/2)")
 		print(Style.RESET_ALL)
