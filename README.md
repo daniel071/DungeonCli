@@ -76,6 +76,8 @@ Top: Highest priority
 - [ ] Fix clicking on text
 - [ ] Fix simpleaudio needing VS on Windows (look in code for TODO)
 - [ ] Improve FFMPEG installation on Windows (look in code for TODO)
+- [ ] Move store functions and files to DGStore.py
+
 - [x] Neat and text based engine
 - [x] Make text easy to read by having it scan in.
 - [x] Convince Daniel to use threads (Edit: After we switched to pydub, everything works flawlessly!)

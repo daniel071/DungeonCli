@@ -1,4 +1,3 @@
-
 # All the info about the scene
 
 combatOverrideMusic = True

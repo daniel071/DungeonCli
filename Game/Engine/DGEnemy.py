@@ -1,3 +1,6 @@
+# Where enemies are defined to be used in the game.
+# Currently unused by the game
+
 from . import DGCombat
 class Enemy:
 	def __init__(self, name, health, minDamage, maxDamage):
