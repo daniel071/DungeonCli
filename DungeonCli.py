@@ -51,7 +51,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 # --------------------------
 # |		Version!		|
 # --------------------------
-version = "Development Version 0.6.8"
+version = "Development Version 0.6.9" #nice
 # --------------------------
 
 # Define variables here:
@@ -509,7 +509,7 @@ def openStore():
 			'name': 'itemChoice',
 					'choices': [(Scene.storeSelected[0])[0],
 								(Scene.storeSelected[1])[0],
-								(Scene.storeSelected[2])[0], 'Exit'],
+								(Scene.storeSelected[2])[0], 'Check stats', 'Exit'],
 			'message': 'Which item would you like to purchase?',
 		}
 	]
@@ -525,7 +525,9 @@ def openStore():
 			askLoop = 0
 			DGText.printScan(action + "You left the store.\n")
 			Scene.storeSelected = []
-
+		elif userInput == "Check stats":
+			DGMain.hpCheck()
+			checkCoins()
 		elif userInput == Scene.storeSelected[0][0]:
 			purchase(Scene.storeSelected, 0)
 
@@ -776,6 +778,7 @@ def randomEvent():
 					DGCombat.combat("Snake", 20, 5, 15)
 
 				else:
+					Scene.hasStore = True
 					DGText.printScan(DGText.action + 'You knock on the door and ask to enter...')
 					time.sleep(2)
 
@@ -1191,11 +1194,14 @@ def main():
 	elif command in ("e", "exit", "close", "alt-f4"):
 		DGExit()
 
-	elif command in ("hp", "health", "health points"):
+	elif command in ("hp", "health", "health points", "check hp", "check health"):
 		DGMain.hpCheck()
 
 	elif command in ("goto shop", "goto store", "store", "shop"):
-		openStore()
+		if Scene.hasStore:
+			openStore()
+		else:
+			DGText.printScan(DGText.rip + "There is no store here.\n")
 
 	elif command in ("s", "start", "next", "proceed", "next room", "forth", "enter door", "go through door", "n"):
 		if tempProgressCommand[0] == "nil":

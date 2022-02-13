@@ -9,7 +9,7 @@ hp = 100
 def damage(value):
 	global hp
 	hp = hp - value
-	DGText.printScan(rip + ("You lost " + str(round(value)) + " health! \n"))
+	DGText.printScan(DGText.rip + ("You lost " + str(round(value)) + " health! \n"))
 	DGMain.isDead()
 
 
@@ -79,6 +79,6 @@ class Inventory:
 	# ????
 	secretKey = 0
 
-	#miscallenous items, yknow cause why not
-	
+	#miscellaneous items, yknow cause why not
+
 	miscItems = []
