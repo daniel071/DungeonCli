@@ -524,7 +524,6 @@ def openStore():
 		if userInput == "Exit":
 			askLoop = 0
 			DGText.printScan(action + "You left the store.\n")
-			Scene.storeSelected = []
 		elif userInput == "Check stats":
 			DGMain.hpCheck()
 			checkCoins()
@@ -961,14 +960,15 @@ def openVault():
 
 def initStore():
 	global Scene
-	storeOptions = CSSOptions.copy()
-	i = 0
-	while i < 3:
-		i += 1
-		theChosenOne = random.choice(storeOptions)
+	if not Scene.storeSelected:
+		storeOptions = CSSOptions.copy()
+		i = 0
+		while i < 3:
+			i += 1
+			theChosenOne = random.choice(storeOptions)
 
-		Scene.storeSelected.append(theChosenOne)
-		storeOptions = removeFromList(storeOptions, theChosenOne)
+			Scene.storeSelected.append(theChosenOne)
+			storeOptions = removeFromList(storeOptions, theChosenOne)
 
 
 
@@ -1138,6 +1138,7 @@ def nextScene():
 	if Scene.canProgress == True:
 		Scene.hasStore = False
 		Scene.current = Scene.current + 1
+		Scene.storeSelected = []
 		start()
 	else:
 		DGText.printScan("Progress through where? there are no visible exits!")
@@ -1191,7 +1192,7 @@ def main():
 
 		DGText.printspeed = 0.013
 
-	elif command in ("e", "exit", "close", "alt-f4"):
+	elif command in ("e", "exit", "close", "alt-f4", "stop"):
 		DGExit()
 
 	elif command in ("hp", "health", "health points", "check hp", "check health"):

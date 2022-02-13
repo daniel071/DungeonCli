@@ -18,10 +18,10 @@ soundDescription = "Sound Description"
 
 tempProgressCommand = []
 tempFunctionCommand = []
+sceneStoreSelection = []
 
 def startScene():
 	print("Unitialized scene!")
-	
+
 def tempFunction():
 	print("Unitialized function!")
-
