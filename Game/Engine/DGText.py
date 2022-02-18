@@ -10,6 +10,7 @@ rip = Style.BRIGHT + Fore.RED + "==> "
 question = Style.BRIGHT + Fore.YELLOW + "[?] "
 error = Style.BRIGHT + Fore.RED + "[!] "
 hint = Style.DIM + Fore.WHITE + "(hint: "
+quiet = Style.DIM + Fore.WHITE
 action = Style.BRIGHT + Fore.YELLOW + "==> "
 quote = Style.BRIGHT + Fore.WHITE + '"'
 info = Style.BRIGHT + Fore.WHITE + "==> " + Style.RESET_ALL
