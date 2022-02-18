@@ -77,13 +77,11 @@ Top: Highest priority
 - [ ] Fix simpleaudio needing VS on Windows (look in code for TODO)
 - [ ] Improve FFMPEG installation on Windows (look in code for TODO)
 - [ ] Move store functions and files to DGStore.py
-
 - [x] Neat and text based engine
 - [x] Make text easy to read by having it scan in.
 - [x] Convince Daniel to use threads (Edit: After we switched to pydub, everything works flawlessly!)
 - [x] Basic Gameplay mechanics
-- [x] Real 'bin' format save files. not the fake stuff. (Save system works, but its not real binary yet)
-<!-- New save system is not real binary. --->
+- [x] Real 'bin' format save files. not the fake stuff. (Save system works, but its not real binary yet) <!-- New save system is not real binary. --->
 - [x] Overhaul the combat system, add sparing and using items
 - [x] Fix combat system dealing no damage
 - [x] Fix bug where if you die while in combat, the combat function persists
