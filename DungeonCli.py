@@ -1339,7 +1339,13 @@ def main():
 
 if __name__ == '__main__':
 
-	richPrecense.init()
+	if "--nodiscord" in sys.argv:
+		print("Discord rich presence disabled")
+	else:
+		richPrecense.init()
+
+	if "--nomusic" in sys.argv:
+		DGMain.playMusic = False
 
 	# Play moosic
 	try:
