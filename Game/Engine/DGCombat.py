@@ -11,7 +11,9 @@ from PyInquirer import prompt, print_json
 import time
 import random
 
-battleSongs = ["Music/Ambient_fight_1.ogg", "Music/interstellar_space_dryer_2.ogg"]
+# Music/Toward_the_Distant_past.ogg will probably be used as a quest/scene song.
+# this will stay here temporarily
+battleSongs = ["Music/Ambient_fight_1.ogg", "Music/interstellar_space_dryer_2.ogg", "Music/Toward_the_Distant_past.ogg"]
 Scene = DGScene
 
 def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
