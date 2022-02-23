@@ -1,7 +1,13 @@
 #!/bin/bash
 
+export USE_CCACHE=1
+export CCACHE_EXEC=/usr/bin/ccache
+ccache -M 10G
+# uncomment if you have localisation errors
+# export LC_ALL=C
+
 mkdir bin.build
-python3 -m nuitka --standalone --remove-output --show-progress --show-scons --output-dir=bin.build --file-reference-choice=runtime DungeonCli.py
+python3 -m nuitka --standalone --remove-output --show-progress --output-dir=bin.build --file-reference-choice=runtime DungeonCli.py
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	cp ./DungeonCli.bin ./bin.build/DungeonCli_osx
 	sudo codesign -f -s - ./bin.build/DungeonCli.dist/Python

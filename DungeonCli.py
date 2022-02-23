@@ -51,7 +51,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 # --------------------------
 # |		Version!		|
 # --------------------------
-version = "Development Version 0.6.9" #nice
+version = "Development Version 0.6.10"
 # --------------------------
 
 # Define variables here:
@@ -1339,13 +1339,15 @@ def main():
 
 if __name__ == '__main__':
 
+	DGClear()
+
 	if "--nodiscord" in sys.argv:
-		print(DGText.quiet + "Discord rich presence disabled" + DGText.reset)
+		print(DGText.quiet + "Discord rich presence disabled" + Style.RESET_ALL)
 	else:
 		richPrecense.init()
 
 	if "--nomusic" in sys.argv:
-		print(DGText.quiet + "Music disabled" + DGText.reset)
+		print(DGText.quiet + "Music disabled" + Style.RESET_ALL)
 		DGMain.playMusic = False
 
 	# Play moosic
@@ -1417,7 +1419,7 @@ if __name__ == '__main__':
 			elif theValue == "Disable Music":
 				DGMain.playMusic = False
 				askLoop = False
-				DGText.printScan(DGText.success + "Successfully disabled music.")
+				DGText.printScan(DGText.success + "Successfully disabled music." + Style.RESET_ALL)
 
 			elif theValue == "Exit":
 				askLoop = False
@@ -1426,7 +1428,6 @@ if __name__ == '__main__':
 
 
 	print("\r")
-	DGClear()
 	try:
 		width = int(os.get_terminal_size().columns)
 	except:
