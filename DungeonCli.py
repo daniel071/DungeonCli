@@ -345,14 +345,7 @@ def options():
 			DGText.printScan(action + "You exited the options menu\n")
 
 		elif userInput == "Toggle Music":
-			DGMain.playMusic = not DGMain.playMusic
-			if DGMain.playMusic is False:
-				endThreads()
-			else:
-				if Scene.current > 2:
-					DGMain.playSound("Music/quest.ogg", True)
-				else:
-					DGMain.playSound("Music/intro.ogg", True)
+			DGMain.toggleSound()
 
 			DGText.printScan("You toggled music to {value}\n".format(value=DGMain.playMusic))
 
@@ -1279,6 +1272,15 @@ def main():
 	elif command in ("plsdie", "plskill"):
 		if passwordPrompt() == "granted":
 			DGMain.gameover()
+
+	elif command in ("toggle sound", "sound toggle", "toggle music", "music toggle"):
+		DGMain.toggleSound()
+
+	elif command in ("sound on", "enable sound", "music on", "enable music", "music enable"):
+		DGMain.enableSound()
+
+	elif command in ("sound off", "disable sound", "music off", "disable music", "music disable"):
+		DGMain.disableSound()
 
 	elif command in ("o", "options", "settings", "set", "music"):
 		options()

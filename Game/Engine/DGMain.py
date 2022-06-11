@@ -17,8 +17,10 @@ from . import DGText
 from . import DGMain
 from . import DGPlayer
 from . import DGDialog
+from . import DGScene
 
 playMusic = True
+soundPlaying = True
 all_processes = []
 
 def detect_system():
@@ -59,6 +61,33 @@ def playSound(path, ifLoop):
 			all_processes.append(playback)
 		else:
 			return "No music played"
+
+def toggleSound():
+	global playMusic
+
+	playMusic = not playMusic
+	if playMusic is False:
+		disableSound()
+	else:
+		enableSound()
+
+def enableSound():
+	# Currently does not account for scene 0 and scene 1, will be fixed in
+	# a future sound update
+
+	global soundPlaying
+	if soundPlaying == False:
+		if DGScene.current > 2:
+			DGMain.playSound("Music/quest.ogg", True)
+		else:
+			DGMain.playSound("Music/intro.ogg", True)
+		soundPlaying = True
+
+def disableSound():
+	global soundPlaying
+	endThreads()
+	soundPlaying = False
+
 
 def DGExit():
 	global mainLoop
