@@ -51,7 +51,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 # --------------------------
 # |		Version!		|
 # --------------------------
-version = "Development Version 0.6.10"
+version = "Development Version 0.6.11"
 # --------------------------
 
 # Define variables here:
@@ -1323,7 +1323,10 @@ def main():
 		if passwordPrompt() == "granted":
 			bossSuccess()
 	elif command in ("chat", "multiplayer"):
-		multiplayer.runMe()
+		try:
+			multiplayer.runMe()
+		except EOFError:
+			pass
 
 	elif command in ("debug", "devDebug"):
 		print("Current scene:", DGScene.current)
@@ -1340,6 +1343,20 @@ def main():
 		invalidCommand()
 
 if __name__ == '__main__':
+
+	if "--help" in sys.argv:
+		helpMsg = """
+		DungeonCli, a terminal-based dungeon crawler game.
+		version: {ver}
+		Usage:  DungeonCli [option]
+		Options:
+				--help       Display the help menu
+				--nodiscord  Disable discord rich precense
+				--nomusic    Disable sound effects and music
+		""".format(ver=version)
+		print(helpMsg)
+		endThreads()
+		os._exit(1)
 
 	DGClear()
 
