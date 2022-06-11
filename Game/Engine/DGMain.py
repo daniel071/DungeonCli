@@ -125,6 +125,8 @@ def hpCheck():
 		DGText.printScan(DGText.rip + "You have {hp} out of {max} HP! \n".format(hp=DGPlayer.hp, max=100))
 
 def addCoins(add):
+	DGMain.playSound("Sounds/coin.ogg", False)
+
 	global DGPLayer
 	toAdd = add * DGPlayer.Inventory.moneyMultiplyer
 

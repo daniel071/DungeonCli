@@ -54,6 +54,9 @@ def runMe():
 		print(DGText.error + "Server connection failed!\n")
 		return
 
+	if r.table("clients").filter({"client": yourUserName}).count().run() > 0:
+		print(DGText.error + "That username is already taken!")
+		return
 
 	def checkMessages():
 		r2 = rdb.RethinkDB()
@@ -94,7 +97,14 @@ def runMe():
 		},
 	]
 
-	r.table('clients').insert([{"client":yourUserName}]).run()
+	try:
+		r.table('clients').insert([{"client":yourUserName}]).run()
+	except r.errors.ReqlOpFailedError:
+		print(DGText.error + "Server is not setup correctly!\n")
+		checkThread.terminate()
+		checkPlayersThread.terminate()
+		return
+
 
 	print(DGText.loading + "Welcome to the lobby!")
 	print(DGText.loading + "Run /help for instructions and /start to begin.")
@@ -113,7 +123,10 @@ def runMe():
 		elif yourMessage.lower() == "/help":
 			print("Commands: /exit, /help, /players, /start")
 		elif yourMessage.lower() == "/players" or yourMessage.lower() == "/list":
-			print(r.table("clients").run())
+			print(DGText.playerEvent + " Players: ", end = "")
+			for i in r.table("clients").run():
+				print(i['client'], end=", ")
+			print()
 		elif yourMessage.lower() == "/start":
 			# add starting functions here
 			pass

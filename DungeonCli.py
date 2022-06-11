@@ -1445,8 +1445,8 @@ if __name__ == '__main__':
 				DGExit()
 				os._exit(1)
 
-
-	print("\r")
+	DGClear()
+	#print("\r")
 	try:
 		width = int(os.get_terminal_size().columns)
 	except:

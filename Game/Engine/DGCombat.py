@@ -33,12 +33,25 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 	def enemyDealDamage(multiplyer):
 		global DGPlayer
 		isMiss = random.randint(1,6)
+		isCritical = random.randint(1, 5)
+
 		if isMiss == 5:
+			DGMain.playSound("Sounds/swoosh.ogg", False)
 			DGText.printScan(DGText.action + "{name} missed!".format(name=enemy))
 			DGText.printScan(DGText.success + "You took no damage!\n")
 		else:
 			enemyDamage = random.randint(enemyMinDamage, enemyMaxDamage) * DGPlayer.Inventory.absorbtion * multiplyer
 			DGPlayer.hp = DGPlayer.hp - enemyDamage
+
+			if isCritical == 1:
+				DGMain.playSound("Sounds/criticalHitTaken.ogg", False)
+
+				DGText.printScan(DGText.rip + "Critical hit!")
+				DGText.printScan(DGText.rip + "{name} deals double damage!\n".format(name=enemy))
+				enemyDamage = enemyDamage * 2
+			else:
+				DGMain.playSound("Sounds/hitTaken.ogg", False)
+
 
 			DGText.printScan(DGText.rip + "{name} deals {damage} damage!"
 			.format(damage=round(enemyDamage), name=enemy))
@@ -60,6 +73,7 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 		isMiss = random.randint(1,7)
 		isCritical = random.randint(1, 5)
 		if isMiss == 1:
+			DGMain.playSound("Sounds/swoosh.ogg", False)
 			DGText.printScan(DGText.action + "You missed!")
 			DGText.printScan(DGText.rip + "You dealt no damage!")
 
@@ -70,9 +84,14 @@ def combat(enemy, enemyHP, enemyMinDamage, enemyMaxDamage):
 			enemyHP = enemyHP - playerDamage
 
 			if isCritical == 1:
+				DGMain.playSound("Sounds/criticalHitTaken.ogg", False)
+
 				DGText.printScan(DGText.success + "Critical hit!")
 				DGText.printScan(DGText.success + "You deal double damage!\n")
 				playerDamage = playerDamage * 2
+			else:
+				DGMain.playSound("Sounds/hitTaken.ogg", False)
+
 
 			DGText.printScan(DGText.success + "You deal {damage} damage!".format(damage=round(playerDamage)))
 			time.sleep(0.2)
