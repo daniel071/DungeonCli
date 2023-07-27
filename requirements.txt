@@ -2,7 +2,7 @@ colorama==0.4.4
 prompt-toolkit==1.0.14
 pydub==0.23.1 # Do NOT update pydub beyond 0.23.1, >0.24.0 contains
               # very distorted sound!
-Pygments==2.11.2
+Pygments==2.15.0
 PyInquirer==1.0.3
 pypresence==4.2.1
 readchar==3.0.5
